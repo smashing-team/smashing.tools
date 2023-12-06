@@ -7,14 +7,19 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx,.astro .",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx,.astro ."
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
     "@astrojs/mdx": "^1.1.5",
     "@astrojs/rss": "^3.0.0",
     "@astrojs/sitemap": "^3.0.3",
+    "@typescript-eslint/parser": "^6.13.2",
     "astro": "^3.6.4",
+    "eslint": "^8.55.0",
+    "eslint-plugin-astro": "^0.30.0",
     "typescript": "^5.3.2"
   }
 }
