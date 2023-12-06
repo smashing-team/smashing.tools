@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "biome format --write .",
+    "check": "biome check ./"
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
@@ -16,5 +18,8 @@
     "@astrojs/sitemap": "^3.0.3",
     "astro": "^3.6.4",
     "typescript": "^5.3.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.4.1"
   }
 }
