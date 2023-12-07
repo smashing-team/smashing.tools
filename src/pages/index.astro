@@ -1,64 +1,57 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import AppLayout from "../layouts/AppLayout.astro";
+
+const posts = (await getCollection("code")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
-  <body>
-    <Header title={SITE_TITLE} />
-    <main>
-      <h1>🧑‍🚀 Hello, Astronaut!</h1>
-      <p>
-        Welcome to the official <a href="https://astro.build/">Astro</a> blog
-        starter template. This template serves as a lightweight,
-        minimally-styled starting point for anyone looking to build a personal
-        website, blog, or portfolio with Astro.
-      </p>
-      <p>
-        This template comes with a few integrations already configured in your
-        <code>astro.config.mjs</code> file. You can customize your setup with
-        <a href="https://astro.build/integrations">Astro Integrations</a> to add
-        tools like Tailwind, React, or Vue to your project.
-      </p>
-      <p>Here are a few ideas on how to get started with the template:</p>
-      <ul>
-        <li>Edit this page in <code>src/pages/index.astro</code></li>
-        <li>
-          Edit the site header items in <code>src/components/Header.astro</code>
-        </li>
-        <li>
-          Add your name to the footer in <code>src/components/Footer.astro</code
+<AppLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <div class="flex items-start justify-between mb-8">
+    <div>
+      <h1 class="text-xl font-semibold">Smashing Tools</h1>
+      <p class="text-gray-9">{SITE_DESCRIPTION}</p>
+    </div>
+    <div>right nav</div>
+  </div>
+
+  <ul
+    role="list"
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+  >
+    {
+      posts.map((post) => (
+        <li class="col-span-1 divide-y divide-gray-2 border rounded-lg bg-gray-1 hover:bg-gray-2">
+          <a
+            href={`/blog/${post.slug}/`}
+            class="flex w-full items-center justify-between space-x-4 p-2"
           >
+            <img
+              class="h-14 w-14 flex-shrink-0 bg-gray-300"
+              src={post.data.heroImage}
+              alt={post.data.title}
+            />
+            <div class="flex-1 truncate">
+              <div class="flex items-center space-x-3">
+                <h3 class="truncate text-md font-medium text-gray-900">
+                  {post.data.title}
+                </h3>
+                <span class="inline-flex flex-shrink-0 items-center rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                  Design
+                </span>
+              </div>
+              <p
+                class="mt-1 truncate text-sm text-gray-500"
+                title={post.data.description}
+              >
+                {post.data.description}
+              </p>
+            </div>
+          </a>
         </li>
-        <li>
-          Check out the included blog posts in <code>src/pages/blog/</code>
-        </li>
-        <li>
-          Customize the blog post page layout in <code
-            >src/layouts/BlogPost.astro</code
-          >
-        </li>
-      </ul>
-      <p>
-        Have fun! If you get stuck, remember to <a
-          href="https://docs.astro.build/"
-          >read the docs
-        </a> or <a href="https://astro.build/chat">join us on Discord</a> to ask
-        questions.
-      </p>
-      <p>
-        Looking for a blog template with a bit more personality? Check out <a
-          href="https://github.com/Charca/astro-blog-template"
-          >astro-blog-template
-        </a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-      </p>
-    </main>
-    <Footer />
-  </body>
-</html>
+      ))
+    }
+  </ul>
+</AppLayout>
