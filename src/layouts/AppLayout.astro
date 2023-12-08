@@ -8,6 +8,8 @@ import BaseHead from "../components/BaseHead.astro";
 // import Footer from "../components/Footer.astro";
 // import FormattedDate from "../components/FormattedDate.astro";
 
+export const prerender = false;
+
 type Props = {
   title: string;
   description: string;
@@ -32,19 +34,49 @@ const { title, description } = Astro.props;
             <div>search</div>
           </div>
         </div>
-        <div class="flex flex-col flex-shrink flex-grow overflow-y-auto mb-0.5">
+        <div
+          class="flex flex-col flex-shrink flex-grow overflow-y-auto mb-0.5"
+          transition:persist
+        >
           <div class="SCROLL-AREA">
             <div class="px-5">filters</div>
-            <button onclick="window.location.search = '?language=en';"
-              >en</button
-            >
-            <button onclick="window.location.search = '?language=tr';"
-              >tr</button
-            >
+            <select>
+              <option value=""></option>
+              <option value="?language=tr">tr</option>
+              <option value="?language=en">en</option>
+            </select>
           </div>
         </div>
       </div>
-      <div class="flex grow flex-col px-6 py-4"><slot /></div>
+      <div class="flex grow flex-col px-6 py-4">
+        <slot />
+      </div>
     </main>
+    <script>
+      import { navigate } from "astro:transitions/client";
+
+      // Navigate to the selected option automatically.
+      /*       document.querySelector("select").onchange = (ev) => {
+        let href = ev.target.value;
+        console.log(href);
+        navigate(href);
+      }; */
+
+      document.addEventListener("astro:page-load", () => {
+        document.querySelector("select").addEventListener("change", (ev) => {
+          let href = ev.target.value;
+          console.log(href);
+          navigate(href);
+        });
+      });
+
+      /* document.addEventListener("astro:after-swap", () => {
+        document.querySelector("select").addEventListener("change", (ev) => {
+          let href = ev.target.value;
+          console.log(href);
+          navigate(href);
+        });
+      }); */
+    </script>
   </body>
 </html>

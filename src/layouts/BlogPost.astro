@@ -4,9 +4,10 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 
-type Props = CollectionEntry<"code">["data"];
+type Props = CollectionEntry<"code">["data"] & { slug: string };
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, slug } =
+  Astro.props;
 ---
 
 <html lang="en">
@@ -20,7 +21,13 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         <div class="hero-image">
           {
             heroImage && (
-              <img width={1020} height={510} src={heroImage} alt="" />
+              <img
+                transition:name={`image-${slug}`}
+                width={1020}
+                height={510}
+                src={heroImage}
+                alt=""
+              />
             )
           }
         </div>
@@ -36,7 +43,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
                 )
               }
             </div>
-            <h1>{title}</h1>
+            <h1 transition:name={`title-${slug}`}>{title}</h1>
             <hr />
           </div>
           <slot />
