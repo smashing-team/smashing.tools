@@ -2,6 +2,7 @@
 title: 'Second post'
 description: 'Lorem ipsum dolor sit amet'
 pubDate: 'Jul 22 2022'
+language: 'en'
 heroImage: '/blog-placeholder-4.jpg'
 ---
 

@@ -1,0 +1,45 @@
+---
+import "@fontsource-variable/inter";
+import "../styles/global.css";
+
+import BaseHead from "../components/BaseHead.astro";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
+
+type Props = CollectionEntry<"code">["data"];
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body>
+    <main class="flex h-screen w-full text-sm">
+      <article>
+        <div class="hero-image">
+          {
+            heroImage && (
+              <img width={1020} height={510} src={heroImage} alt={title} />
+            )
+          }
+        </div>
+        <h1>{title}</h1>
+        <div class="date">
+          <FormattedDate date={pubDate} />
+          {
+            updatedDate && (
+              <div class="last-updated-on">
+                Last updated on <FormattedDate date={updatedDate} />
+              </div>
+            )
+          }
+        </div>
+        <hr />
+        <slot />
+      </article>
+    </main>
+  </body>
+</html>
