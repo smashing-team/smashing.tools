@@ -5,6 +5,7 @@ const code = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
+		language: z.string().optional().default('en'),
 		// Transform string to Date object
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),

@@ -35,6 +35,12 @@ const { title, description } = Astro.props;
         <div class="flex flex-col flex-shrink flex-grow overflow-y-auto mb-0.5">
           <div class="SCROLL-AREA">
             <div class="px-5">filters</div>
+            <button onclick="window.location.search = '?language=en';"
+              >en</button
+            >
+            <button onclick="window.location.search = '?language=tr';"
+              >tr</button
+            >
           </div>
         </div>
       </div>

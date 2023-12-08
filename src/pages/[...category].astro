@@ -1,11 +1,18 @@
 ---
+export const prerender = false;
+
 import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import AppLayout from "../layouts/AppLayout.astro";
 
-const posts = (await getCollection("code")).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-);
+const category = Astro.url.pathname.split("/")[1];
+console.log(category);
+
+const language = Astro.url.searchParams.get("language");
+
+const posts = (
+  await getCollection("code", (post) => post.data.language === language)
+).sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
 ---
 
 <AppLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
