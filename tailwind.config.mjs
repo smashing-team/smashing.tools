@@ -1,30 +1,33 @@
-import * as defaultTheme from "tailwindcss/defaultTheme";
-import * as radixColors from "@radix-ui/colors";
-import createPlugin from "windy-radix-palette";
+import * as defaultTheme from 'tailwindcss/defaultTheme';
+import * as radixColors from '@radix-ui/colors';
+import tailwindTypeography from '@tailwindcss/typography';
+import createPlugin from 'windy-radix-palette';
 
 const colors = createPlugin({
   colors: {
     gray: radixColors.gray,
-    red: radixColors.red,
-    yellow: radixColors.yellow,
-    green: radixColors.green,
+    grayA: radixColors.grayA,
     blue: radixColors.blue,
-    indigo: radixColors.indigo,
-    violet: radixColors.violet,
+    blueA: radixColors.blueA,
+    white: radixColors.whiteA,
+    black: radixColors.blackA,
   },
 });
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
-  // darkMode: "class",
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
   theme: {
-    // colors: {},
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+    },
     extend: {
       fontFamily: {
-        sans: ["InterVariable", "Inter", ...defaultTheme.fontFamily.sans],
+        sans: ['InterVariable', 'Inter', ...defaultTheme.fontFamily.sans],
       },
     },
   },
-  plugins: [colors.plugin],
+  plugins: [colors.plugin, tailwindTypeography],
 };

@@ -5,3 +5,9 @@
 :root {
   font-family: "Inter Variable", sans-serif;
 }
+
+@layer base {
+  * {
+    @apply border-grayA-4
+  }
+}
