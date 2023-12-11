@@ -15,7 +15,7 @@ Smashing.Tools is an open-source platform designed for individuals to share thei
 - Clone the repository: `git clone git@github.com:smashing-team/smashing.tools.git 'smashing-tools'`
 - Navigate to the project directory: `cd smashing-tools`
 - Install the required packages using Bun: `bun install`
-- Start the project: `bun start`
+- Start the project: `bun run dev`
 
 ### **Contributing**
 
