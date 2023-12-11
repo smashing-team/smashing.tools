@@ -17,16 +17,101 @@ if (!activeCategory) return Astro.redirect('/404');
 let items = [
   ...(await getCollection('code')),
   ...(await getCollection('design')),
-].sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+].sort(
+  (a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf(),
+);
 
 if (activeCategory.category) {
   items = items.filter((item) => item.collection === category);
 }
 
+// let's generate facets based on the items
+/**
+ * example:
+ * 
+ * export const FACETS = {
+  pricing: [
+    { value: 'free', label: 'Free', count: 0 },
+    { value: 'subscription', label: 'Subscription', count: 0 },
+    { value: 'one-time-fee', label: 'One-time fee', count: 0 },
+  ],
+  language: [
+    { value: 'javascript', label: 'JavaScript', count: 0 },
+    { value: 'typescript', label: 'TypeScript', count: 0 },
+    { value: 'python', label: 'Python', count: 0 },
+    { value: 'ruby', label: 'Ruby', count: 0 },
+    { value: 'go', label: 'Go', count: 0 },
+    { value: 'c-sharp', label: 'C#', count: 0 },
+    { value: 'java', label: 'Java', count: 0 },
+    { value: 'rust', label: 'Rust', count: 0 },
+  ],
+};
+ */
+
+const facetKeys = [
+  'pricing',
+  'runtime',
+  'api',
+  'database',
+  'framework',
+  'language',
+  'style',
+  'testing',
+  'uiKit',
+  'uiLibrary',
+  'componentCount',
+  'pageExampleCount',
+  'features',
+  'compatibility',
+] as const;
+
+const facets = items.reduce((acc, item) => {
+  facetKeys.forEach((key) => {
+    const data = item.data as any;
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+
+    if (data[key]) {
+      // check if it is array
+      if (Array.isArray(data[key])) {
+        data[key].forEach((value: any) => {
+          if (!acc[key].find((pr: any) => pr.value === value)) {
+            acc[key].push({ value, count: 1 });
+          } else {
+            // eslint-disable-next-line no-plusplus
+            acc[key].find((pr: any) => pr.value === value).count++;
+          }
+        });
+      } else {
+        const value = data[key] as string;
+        if (!acc[key].find((pr: any) => pr.value === value)) {
+          acc[key].push({ value, count: 1 });
+        } else {
+          // eslint-disable-next-line no-plusplus
+          acc[key].find((pr: any) => pr.value === value).count++;
+        }
+      }
+    }
+  });
+
+  // pricing.map((p) => {
+  //   if (!acc.pricing.find((pr) => pr.value === p)) {
+  //     acc.pricing.push({ value: p, label: p, count: 1 });
+  //   } else {
+  //     acc.pricing.find((pr) => pr.value === p).count++;
+  //   }
+  // });
+
+  return acc;
+}, {} as any);
+
+console.log(facets);
 export type AllItems = typeof items;
 ---
 
-<AppLayout activeCategory={activeCategory.slug}>
-  <Header transition:persist />
+<AppLayout facets={facets} activeCategory={activeCategory.slug}>
+  <Header />
   <GridList items={items} />
 </AppLayout>

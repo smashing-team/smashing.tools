@@ -6,12 +6,12 @@ import BaseHead from '../components/BaseHead.astro';
 
 type Props = CollectionEntry<'code'>['data'] & { slug: string };
 
-const { title, description, logo, slug } = Astro.props;
+const { name, headline, logo, slug } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={name} description={headline} />
   </head>
 
   <body>
@@ -23,12 +23,12 @@ const { title, description, logo, slug } = Astro.props;
             width={400}
             height={400}
             src={logo}
-            alt={title}
+            alt={name}
             class="mx-auto"
           />
         </div>
         <h3 class="truncate font-medium" transition:name={`title-${slug}`}>
-          {title}
+          {name}
         </h3>
         <hr />
         <slot />

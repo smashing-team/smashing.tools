@@ -8,9 +8,10 @@ export const prerender = false;
 
 interface Props {
   activeCategory: '/' | '/code' | '/design';
+  facets: any; // TODO: type this
 }
 
-const { activeCategory = '/' } = Astro.props;
+const { activeCategory = '/', facets } = Astro.props;
 ---
 
 <html lang="en">
@@ -20,7 +21,7 @@ const { activeCategory = '/' } = Astro.props;
 
   <body transition:animate="none">
     <main class="flex h-screen w-full overflow-y-hidden text-sm">
-      <Sidebar activeCategory={activeCategory} transition:persist client:load />
+      <Sidebar facets={facets} activeCategory={activeCategory} client:load />
       <div class="flex grow flex-col px-6 py-4">
         <slot />
       </div>
