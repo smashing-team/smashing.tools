@@ -1,82 +1,29 @@
 ---
-import "@fontsource-variable/inter";
-import "../styles/global.css";
+import { Sidebar } from '@/components/react/Sidebar';
 
-// import type { CollectionEntry } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-// import Header from "../components/Header.astro";
-// import Footer from "../components/Footer.astro";
-// import FormattedDate from "../components/FormattedDate.astro";
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 export const prerender = false;
 
-type Props = {
-  title: string;
-  description: string;
-};
+interface Props {
+  activeCategory: '/' | '/code' | '/design';
+}
 
-const { title, description } = Astro.props;
+const { activeCategory = '/' } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
 
-  <body>
+  <body transition:animate="none">
     <main class="flex h-screen w-full overflow-y-hidden text-sm">
-      <div
-        class="absolute z-50 inset-0 transform duration-300 lg:relative lg:translate-x-0 bg-gray-2 flex flex-col flex-shrink-0 w-56 border-r border-frame dark:border-frame lg:shadow-none justify-items-start -translate-x-full shadow-none"
-      >
-        <div class="flex flex-col flex-grow-0 flex-shrink-0 px-5 py-3 mb-3">
-          <div class="flex items-center justify-between">
-            <div>logo</div>
-            <div>search</div>
-          </div>
-        </div>
-        <div
-          class="flex flex-col flex-shrink flex-grow overflow-y-auto mb-0.5"
-          transition:persist
-        >
-          <div class="SCROLL-AREA">
-            <div class="px-5">filters</div>
-            <select>
-              <option value=""></option>
-              <option value="?language=tr">tr</option>
-              <option value="?language=en">en</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      <Sidebar activeCategory={activeCategory} transition:persist client:load />
       <div class="flex grow flex-col px-6 py-4">
         <slot />
       </div>
     </main>
-    <script>
-      import { navigate } from "astro:transitions/client";
-
-      // Navigate to the selected option automatically.
-      /*       document.querySelector("select").onchange = (ev) => {
-        let href = ev.target.value;
-        console.log(href);
-        navigate(href);
-      }; */
-
-      document.addEventListener("astro:page-load", () => {
-        document.querySelector("select").addEventListener("change", (ev) => {
-          let href = ev.target.value;
-          console.log(href);
-          navigate(href);
-        });
-      });
-
-      /* document.addEventListener("astro:after-swap", () => {
-        document.querySelector("select").addEventListener("change", (ev) => {
-          let href = ev.target.value;
-          console.log(href);
-          navigate(href);
-        });
-      }); */
-    </script>
   </body>
 </html>

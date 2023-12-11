@@ -1,10 +1,9 @@
-## **Smashing.Tools**
+# **Smashing.Tools**
 
 Smashing.Tools is an open-source platform designed for individuals to share their developed products and UI libraries. The project allows contributors to open pull requests by adding new markdown files while sharing their creations.
 
 ## **Technologies**
 
-- **Bun:** A modern application bundler for JavaScript and TypeScript.
 - **Astro:** A tool used for building modern web applications through static site generation.
 - **Tailwind CSS:** A utility-first CSS framework used to create customizable UI components quickly.
 - **React:** A popular JavaScript library for building user interfaces.

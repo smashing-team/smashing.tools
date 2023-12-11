@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+import BaseHead from '../components/BaseHead.astro';
+
+type Props = CollectionEntry<'design'>['data'] & { slug: string };
+
+const { title, description, logo, slug } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+
+  <body>
+    <main class="prose mx-auto flex w-full max-w-lg text-sm">
+      <article class="pb-12">
+        <div>
+          <Image
+            transition:name={`image-${slug}`}
+            width={400}
+            height={400}
+            src={logo}
+            alt={title}
+            class="mx-auto"
+          />
+        </div>
+        <h3 class="truncate font-medium" transition:name={`title-${slug}`}>
+          {title}
+        </h3>
+        <hr />
+        <slot />
+      </article>
+    </main>
+  </body>
+</html>

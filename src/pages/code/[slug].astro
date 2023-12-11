@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+import CodeLayout from '../../layouts/CodeLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('code');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<'code'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<CodeLayout {...post.data} slug={post.slug}>
+  <Content />
+</CodeLayout>
