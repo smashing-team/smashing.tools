@@ -28,7 +28,7 @@ const { items } = Astro.props;
             transition:name={`image-${item.slug}`}
             class="h-14 w-14 shrink-0 rounded bg-gray-3"
             src={item.data.logo}
-            alt={item.data.title}
+            alt={item.data.name}
           />
           <div class="flex-1 truncate">
             <div class="flex items-center space-x-3">
@@ -36,7 +36,7 @@ const { items } = Astro.props;
                 class="truncate font-medium"
                 transition:name={`title-${item.slug}`}
               >
-                {item.data.title}
+                {item.data.name}
               </h1>
               <span class="inline-flex shrink-0 items-center rounded-full bg-blue-5 px-1.5 py-0.5 text-xs font-medium capitalize text-blueA-11 ring-1 ring-inset ring-blue-6">
                 {item.collection}
@@ -44,9 +44,9 @@ const { items } = Astro.props;
             </div>
             <p
               class="mt-1 truncate text-sm text-gray-11"
-              title={item.data.description}
+              title={item.data.headline}
             >
-              {item.data.description}
+              {item.data.headline}
             </p>
           </div>
         </a>
