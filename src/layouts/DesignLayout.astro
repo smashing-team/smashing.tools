@@ -6,7 +6,7 @@ import BaseHead from '../components/BaseHead.astro';
 
 type Props = CollectionEntry<'design'>['data'] & { slug: string };
 
-const { name, headline, logo, slug } = Astro.props;
+const { name, headline, logo } = Astro.props;
 ---
 
 <html lang="en">
@@ -15,23 +15,21 @@ const { name, headline, logo, slug } = Astro.props;
   </head>
 
   <body>
-    <main class="prose mx-auto flex w-full max-w-lg text-sm">
-      <article class="pb-12">
+    <main class="mx-auto flex w-full max-w-lg">
+      <article class="py-12">
         <div>
-          <Image
-            transition:name={`image-${slug}`}
-            width={400}
-            height={400}
-            src={logo}
-            alt={name}
-            class="mx-auto"
-          />
+          <Image width={80} height={80} src={logo} alt={name} class="rounded" />
         </div>
-        <h3 class="truncate font-medium" transition:name={`title-${slug}`}>
+        <h1 class="mb-1 mt-4 truncate text-2xl font-semibold">
           {name}
-        </h3>
+        </h1>
+        <p class="mb-4 text-gray-12">
+          {headline}
+        </p>
         <hr />
-        <slot />
+        <div class="prose pt-4">
+          <slot />
+        </div>
       </article>
     </main>
   </body>

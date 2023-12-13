@@ -27,6 +27,9 @@ export default {
       fontFamily: {
         sans: ['InterVariable', 'Inter', ...defaultTheme.fontFamily.sans],
       },
+      screens: {
+        '3xl': '2000px',
+      },
     },
   },
   plugins: [colors.plugin, tailwindTypeography],
