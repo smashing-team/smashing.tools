@@ -12,33 +12,24 @@ const { items } = Astro.props;
 
 <ul
   role="list"
-  class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+  class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
 >
   {
     items.map((item) => (
-      <li
-        transition:animate="slide"
-        class="col-span-1 divide-y divide-gray-2 rounded-lg border bg-gray-1 hover:bg-gray-2"
-      >
+      <li class="col-span-1 divide-y divide-gray-2 rounded-lg border bg-gray-1 hover:bg-gray-2">
         <a
           href={`/${item.collection}/${item.slug}/`}
           class="flex w-full items-center justify-between space-x-4 p-2"
         >
           <Image
-            transition:name={`image-${item.slug}`}
-            class="h-14 w-14 shrink-0 rounded bg-gray-3"
+            class="h-14 w-14 shrink-0 rounded"
             src={item.data.logo}
             alt={item.data.name}
           />
           <div class="flex-1 truncate">
             <div class="flex items-center space-x-3">
-              <h1
-                class="truncate font-medium"
-                transition:name={`title-${item.slug}`}
-              >
-                {item.data.name}
-              </h1>
-              <span class="inline-flex shrink-0 items-center rounded-full bg-blue-5 px-1.5 py-0.5 text-xs font-medium capitalize text-blueA-11 ring-1 ring-inset ring-blue-6">
+              <h1 class="truncate font-medium">{item.data.name}</h1>
+              <span class="inline-flex items-center rounded-md bg-gray-4 px-2 py-1 text-xs font-medium capitalize text-gray-11">
                 {item.collection}
               </span>
             </div>
