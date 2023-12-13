@@ -3,7 +3,7 @@ import React from 'react';
 
 import CategorySwitcher from '@/components/react/CategorySwitcher';
 import { ScrollArea } from '@/components/react/ScrollArea';
-import { useQuery } from '@/utils/hooks/useQuery';
+import Query from '@/utils/query';
 
 export function Sidebar({
   activeCategory = '/',
@@ -12,8 +12,6 @@ export function Sidebar({
   activeCategory: '/' | '/code' | '/design';
   facets: any; // TODO: type this
 }): React.ReactElement {
-  const { queryObject, setQueryObject } = useQuery();
-
   return (
     <div className="absolute inset-0 z-50 flex w-56 shrink-0 -translate-x-full flex-col justify-items-start border-r bg-gray-2 shadow-none duration-300 lg:relative lg:translate-x-0 lg:shadow-none">
       <div className="mb-3 flex shrink-0 grow-0 flex-col px-4 py-3">
@@ -78,12 +76,10 @@ export function Sidebar({
                     <input
                       type="checkbox"
                       className="mr-2"
-                      onChange={() => {
-                        setQueryObject('pricing', facet.value);
-                      }}
-                      checked={queryObject?.pricing?.includes(facet.value)}
+                      onChange={() => Query.set('pricing', facet.value)}
+                      checked={facet.checked}
                     />
-                    {facet.value}
+                    {facet.value} ({facet.count})
                   </label>
                 </div>
               ))}
