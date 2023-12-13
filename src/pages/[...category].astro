@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 
 import GridList from '@/components/GridList.astro';
 import Header from '@/components/Header.astro';
+import MyQueryString from '@/utils/myQueryString';
 
 import { CATEGORIES } from '../consts';
 import AppLayout from '../layouts/AppLayout.astro';
@@ -10,19 +11,35 @@ import AppLayout from '../layouts/AppLayout.astro';
 export const prerender = false;
 
 const { category } = Astro.params;
+const { search } = Astro.url;
+const searchParam = MyQueryString.parse(search);
 
 const activeCategory = CATEGORIES.find((cat) => cat.category === category);
 if (!activeCategory) return Astro.redirect('/404');
 
-let items = [
+const allItems = [
   ...(await getCollection('code')),
   ...(await getCollection('design')),
-].sort(
+];
+
+let items = allItems.sort(
   (a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf(),
 );
 
 if (activeCategory.category) {
   items = items.filter((item) => item.collection === category);
+}
+
+if (searchParam) {
+  Object.keys(searchParam).forEach((key) => {
+    items = items.filter((item) =>
+      searchParam[key]?.some((el) => {
+        // TODO: type error
+        // @ts-ignore
+        return item.data[key]?.includes(el);
+      }),
+    );
+  });
 }
 
 // let's generate facets based on the items
@@ -65,7 +82,7 @@ const facetKeys = [
   'compatibility',
 ] as const;
 
-const facets = items.reduce((acc, item) => {
+const facets = allItems.reduce((acc, item) => {
   facetKeys.forEach((key) => {
     const data = item.data as any;
 
@@ -107,7 +124,6 @@ const facets = items.reduce((acc, item) => {
   return acc;
 }, {} as any);
 
-console.log(facets);
 export type AllItems = typeof items;
 ---
 
