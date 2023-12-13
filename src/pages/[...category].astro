@@ -2,7 +2,6 @@
 import { getCollection } from 'astro:content';
 
 import GridList from '@/components/GridList.astro';
-import Header from '@/components/Header.astro';
 import MyQueryString from '@/utils/myQueryString';
 
 import { CATEGORIES } from '../consts';
@@ -67,18 +66,18 @@ if (searchParam) {
 
 const facetKeys = [
   'pricing',
+  'features',
+  'language',
+  'framework',
   'runtime',
   'api',
   'database',
-  'framework',
-  'language',
   'style',
   'testing',
   'uiKit',
   'uiLibrary',
   'componentCount',
   'pageExampleCount',
-  'features',
   'compatibility',
 ] as const;
 
@@ -128,6 +127,6 @@ export type AllItems = typeof items;
 ---
 
 <AppLayout facets={facets} activeCategory={activeCategory.slug}>
-  <Header />
+  <!-- <Header /> -->
   <GridList items={items} />
 </AppLayout>

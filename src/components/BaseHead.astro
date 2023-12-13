@@ -1,7 +1,7 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-// import '@fontsource-variable/inter';
+import '@fontsource-variable/inter';
 import '@fontsource/pitagon-sans-mono';
 import '../styles/global.css';
 
@@ -21,11 +21,13 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/smashing.tools-logo.svg" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="mask-icon" href="/favicon.svg" color="#E9A23B" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+<meta name="theme-color" content="#E9A23B" />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

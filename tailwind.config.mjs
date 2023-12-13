@@ -21,7 +21,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Satoshi-Variable', 'Inter', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter Variable', 'Inter', ...defaultTheme.fontFamily.sans],
         mono: ['Pitagon Sans Mono', ...defaultTheme.fontFamily.mono],
       },
       screens: {
