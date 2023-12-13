@@ -84,7 +84,7 @@ const CategorySwitcher = ({
                 clipRule="evenodd"
               ></path>
             </svg>
-            <span className=" sm:ml-2 sm:block">Design</span>
+            <span className="ml-2 block">Design</span>
           </a>
         </li>
       </ul>
