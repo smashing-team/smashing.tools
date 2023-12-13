@@ -1,5 +1,6 @@
 import { defineCollection, type ImageFunction, z } from 'astro:content';
 
+// const _emptyLogo = await getImage(emptyLogo);
 // TODO: add publisher
 
 const CreativeWork = (image: ImageFunction) =>
@@ -21,6 +22,8 @@ const CreativeWork = (image: ImageFunction) =>
       .refine((img) => img.width <= 512, {
         message: 'Logo must be at most 512 pixels wide!',
       })
+      .optional()
+      .default('../github-mark.svg' as any) // TODO: create an issue for this?
       .describe('Logo of the CreativeWork'),
     url: z.string().url().optional().describe('URL of the CreativeWork'),
     pricing: z
@@ -61,7 +64,16 @@ const code = defineCollection({
         .optional()
         .describe('Runtime of the code'),
       database: z
-        .array(z.enum(['MySQL', 'MongoDB', 'PostgreSQL', 'SQLite']))
+        .array(
+          z.enum([
+            'Prisma',
+            'Drizzle',
+            'MySQL',
+            'MongoDB',
+            'PostgreSQL',
+            'SQLite',
+          ]),
+        )
         .optional()
         .default([])
         .describe('Database used by the code'),
@@ -105,7 +117,9 @@ const code = defineCollection({
             'Material UI',
             'Ant Design',
             'Tamagui',
-            'Radix',
+            'Radix Primitives',
+            'Radix Themes',
+            'Headless UI',
             'shadcn/ui',
           ]),
         )
