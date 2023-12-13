@@ -1,5 +1,6 @@
 ---
 import { Sidebar } from '@/components/react/Sidebar';
+import TailwindIndicator from '@/components/TailwindIndicator.astro';
 
 import BaseHead from '../components/BaseHead.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
@@ -19,12 +20,13 @@ const { activeCategory = '/', facets } = Astro.props;
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
 
-  <body transition:animate="none">
+  <body>
     <main class="flex h-screen w-full overflow-y-hidden text-sm">
       <Sidebar facets={facets} activeCategory={activeCategory} client:load />
       <div class="flex grow flex-col px-6 py-4">
         <slot />
       </div>
     </main>
+    <TailwindIndicator />
   </body>
 </html>
