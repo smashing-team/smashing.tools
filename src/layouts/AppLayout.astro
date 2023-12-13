@@ -1,7 +1,10 @@
 ---
-import { Sidebar } from '@/components/react/Sidebar';
+// import { Sidebar } from '@/components/react/Sidebar';
+import { AllFacets } from '@/components/react/AllFacets';
+import CategorySwitcher from '@/components/react/CategorySwitcher';
 import TailwindIndicator from '@/components/TailwindIndicator.astro';
 
+import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
@@ -15,18 +18,70 @@ interface Props {
 const { activeCategory = '/', facets } = Astro.props;
 ---
 
-<html lang="en">
+<html lang="en" class="h-full bg-white antialiased">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
 
-  <body>
-    <main class="flex h-screen w-full overflow-y-hidden text-sm">
-      <Sidebar facets={facets} activeCategory={activeCategory} client:load />
-      <div class="flex grow flex-col px-6 py-4">
-        <slot />
-      </div>
-    </main>
+  <body class="flex min-h-full">
+    <div class="w-full">
+      <header
+        class="bg-slate-50 px-4 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-96 lg:items-start lg:overflow-y-auto lg:px-0 xl:w-96"
+      >
+        <div
+          class="hidden h-full lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:pt-6 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]"
+        >
+          <img
+            class="h-10 w-10"
+            src={smashingLogo.src}
+            alt=""
+            sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+          />
+          <span class="mt-2 font-mono font-extrabold text-slate-500"
+            >smashing.<strong class="text-slate-900">tools</strong></span
+          >
+        </div>
+        <div
+          class="relative z-10 mx-auto pb-1 pt-10 lg:sticky lg:top-0 lg:min-h-full lg:max-w-2xl lg:flex-auto lg:border-x lg:border-slate-200 lg:pt-6"
+        >
+          <div class="mb-6 text-center sm:hidden lg:px-4 lg:text-left">
+            <p class="font-mono text-3xl font-bold text-slate-900">
+              <a href="/"><span class="text-slate-500">smashing</span>.tools</a>
+            </p>
+          </div>
+          <div class="lg:px-4">
+            <button
+              type="button"
+              class="ui-not-focus-visible:outline-none mx-auto flex h-10 w-full max-w-md items-center gap-2 rounded-xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20 dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20"
+              ><svg
+                viewBox="0 0 20 20"
+                fill="none"
+                aria-hidden="true"
+                class="h-5 w-5 stroke-current"
+                ><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12.01 12a4.25 4.25 0 1 0-6.02-6 4.25 4.25 0 0 0 6.02 6Zm0 0 3.24 3.25"
+                ></path></svg
+              >Search tools...<kbd
+                class="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                ><kbd class="font-sans">⌘</kbd><kbd class="font-sans">F</kbd
+                ></kbd
+              ></button
+            >
+            <CategorySwitcher activeCategory={activeCategory} />
+          </div>
+          <AllFacets client:load facets={facets} />
+        </div>
+      </header>
+      <main
+        class="border-t border-slate-200 lg:relative lg:mb-10 lg:ml-96 lg:border-t-0 xl:ml-96"
+      >
+        <div class="relative">
+          <slot />
+        </div>
+      </main>
+    </div>
     <TailwindIndicator />
   </body>
 </html>

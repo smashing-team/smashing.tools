@@ -12,35 +12,30 @@ const { items } = Astro.props;
 
 <ul
   role="list"
-  class="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
+  class="grid grid-cols-1 gap-4 p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:p-6 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
 >
   {
     items.map((item) => (
-      <li class="col-span-1 divide-y divide-gray-2 rounded-lg border bg-gray-1 hover:bg-gray-2">
-        <a
-          href={`/${item.collection}/${item.slug}/`}
-          class="flex w-full items-center justify-between space-x-4 p-2"
-        >
-          <Image
-            class="h-14 w-14 shrink-0 rounded"
-            src={item.data.logo}
-            alt={item.data.name}
-          />
-          <div class="flex-1 truncate">
-            <div class="flex items-center space-x-3">
-              <h1 class="truncate font-medium">{item.data.name}</h1>
-              <span class="inline-flex items-center rounded-md bg-gray-4 px-2 py-1 text-xs font-medium capitalize text-gray-11">
-                {item.collection}
-              </span>
-            </div>
-            <p
-              class="mt-1 truncate text-sm text-gray-11"
-              title={item.data.headline}
-            >
+      <li class="col-span-1">
+        <div class="group relative rounded-xl border border-slate-200 dark:border-slate-800">
+          <div class="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.stone.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.stone.400),theme(colors.slate.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.slate.800)]" />
+          <div class="relative overflow-hidden rounded-xl p-6">
+            <Image
+              class="h-8 w-8 shrink-0 rounded"
+              src={item.data.logo}
+              alt={item.data.name}
+            />
+            <h2 class="mt-4 font-mono text-base text-slate-900 dark:text-white">
+              <a href={`/${item.collection}/${item.slug}/`} class="">
+                <span class="absolute -inset-px rounded-xl" />
+                {item.data.name}
+              </a>
+            </h2>
+            <p class="mt-1 truncate text-sm text-slate-700 dark:text-slate-400">
               {item.data.headline}
             </p>
           </div>
-        </a>
+        </div>
       </li>
     ))
   }
