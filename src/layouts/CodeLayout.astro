@@ -20,16 +20,15 @@ const { name, headline, logo, slug } = Astro.props;
         <div>
           <Image
             transition:name={`image-${slug}`}
-            width={400}
-            height={400}
+            width={80}
+            height={80}
             src={logo}
             alt={name}
-            class="mx-auto"
           />
         </div>
-        <h3 class="truncate font-medium" transition:name={`title-${slug}`}>
+        <h1 class="truncate font-medium" transition:name={`title-${slug}`}>
           {name}
-        </h3>
+        </h1>
         <hr />
         <slot />
       </article>
