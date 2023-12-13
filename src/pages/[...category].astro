@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 
 import GridList from '@/components/GridList.astro';
-import MyQueryString from '@/utils/myQueryString';
+import Query from '@/utils/query';
 
 import { CATEGORIES } from '../consts';
 import AppLayout from '../layouts/AppLayout.astro';
@@ -11,7 +11,7 @@ export const prerender = false;
 
 const { category } = Astro.params;
 const { search } = Astro.url;
-const searchParam = MyQueryString.parse(search);
+const searchParam = Query.parseSearchParam(search);
 
 const activeCategory = CATEGORIES.find((cat) => cat.category === category);
 if (!activeCategory) return Astro.redirect('/404');
@@ -94,7 +94,11 @@ const facets = allItems.reduce((acc, item) => {
       if (Array.isArray(data[key])) {
         data[key].forEach((value: any) => {
           if (!acc[key].find((pr: any) => pr.value === value)) {
-            acc[key].push({ value, count: 1 });
+            acc[key].push({
+              value,
+              count: 1,
+              checked: Boolean(searchParam[key]?.includes(value)),
+            });
           } else {
             // eslint-disable-next-line no-plusplus
             acc[key].find((pr: any) => pr.value === value).count++;
@@ -103,7 +107,11 @@ const facets = allItems.reduce((acc, item) => {
       } else {
         const value = data[key] as string;
         if (!acc[key].find((pr: any) => pr.value === value)) {
-          acc[key].push({ value, count: 1 });
+          acc[key].push({
+            value,
+            count: 1,
+            checked: Boolean(searchParam[key]?.includes(value)),
+          });
         } else {
           // eslint-disable-next-line no-plusplus
           acc[key].find((pr: any) => pr.value === value).count++;
