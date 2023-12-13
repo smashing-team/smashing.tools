@@ -1,8 +1,7 @@
 ---
 // import { Sidebar } from '@/components/react/Sidebar';
+import { AllFacets } from '@/components/react/AllFacets';
 import CategorySwitcher from '@/components/react/CategorySwitcher';
-import Facet from '@/components/react/Facet';
-import FacetSection from '@/components/react/FacetSection';
 import TailwindIndicator from '@/components/TailwindIndicator.astro';
 
 import smashingLogo from '../../public/logo.svg';
@@ -30,7 +29,7 @@ const { activeCategory = '/', facets } = Astro.props;
         class="bg-slate-50 px-4 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-96 lg:items-start lg:overflow-y-auto lg:px-0 xl:w-96"
       >
         <div
-          class="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:pt-6 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]"
+          class="hidden h-full lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:pt-6 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]"
         >
           <img
             class="h-10 w-10"
@@ -38,7 +37,7 @@ const { activeCategory = '/', facets } = Astro.props;
             alt=""
             sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
           />
-          <span class="mt-2 font-mono font-extrabold text-amber-500"
+          <span class="mt-2 font-mono font-extrabold text-slate-500"
             >smashing.<strong class="text-slate-900">tools</strong></span
           >
         </div>
@@ -47,7 +46,7 @@ const { activeCategory = '/', facets } = Astro.props;
         >
           <div class="mb-6 text-center sm:hidden lg:px-4 lg:text-left">
             <p class="font-mono text-3xl font-bold text-slate-900">
-              <a href="/"><span class="text-amber-500">smashing</span>.tools</a>
+              <a href="/"><span class="text-slate-500">smashing</span>.tools</a>
             </p>
           </div>
           <div class="lg:px-4">
@@ -72,21 +71,11 @@ const { activeCategory = '/', facets } = Astro.props;
             >
             <CategorySwitcher activeCategory={activeCategory} />
           </div>
-          <div class="mt-2 hidden border-t bg-white px-4 pb-8 lg:block">
-            {
-              Object.entries(facets || {}).map(([facet, values]: any) => (
-                <FacetSection title={facet}>
-                  {values?.map((f: any) => (
-                    <Facet title={f.value} count={f.count} />
-                  ))}
-                </FacetSection>
-              ))
-            }
-          </div>
+          <AllFacets client:load facets={facets} />
         </div>
       </header>
       <main
-        class="border-t border-slate-200 lg:relative lg:mb-28 lg:ml-96 lg:border-t-0 xl:ml-96"
+        class="border-t border-slate-200 lg:relative lg:mb-10 lg:ml-96 lg:border-t-0 xl:ml-96"
       >
         <div class="relative">
           <slot />

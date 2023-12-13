@@ -25,6 +25,7 @@ const CreativeWork = (image: ImageFunction) =>
       .optional()
       .default('../github-mark.svg' as any) // TODO: create an issue for this?
       .describe('Logo of the CreativeWork'),
+    logoPadding: z.boolean().optional().default(true),
     url: z.string().url().optional().describe('URL of the CreativeWork'),
     pricing: z
       .array(z.enum(['free', 'subscription', 'one-time-fee']))

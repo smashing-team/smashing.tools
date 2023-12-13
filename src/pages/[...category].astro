@@ -32,7 +32,7 @@ if (activeCategory.category) {
 if (searchParam) {
   Object.keys(searchParam).forEach((key) => {
     items = items.filter((item) =>
-      searchParam[key]?.some((el) => {
+      searchParam[key]?.every((el) => {
         // TODO: type error
         // @ts-ignore
         return item.data[key]?.includes(el);
@@ -81,7 +81,7 @@ const facetKeys = [
   'compatibility',
 ] as const;
 
-const facets = allItems.reduce((acc, item) => {
+const facets = items.reduce((acc, item) => {
   facetKeys.forEach((key) => {
     const data = item.data as any;
 

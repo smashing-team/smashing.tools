@@ -5,17 +5,20 @@ const Facet = ({
   title,
   count,
   selected = false,
+  onClick,
 }: {
   title: string;
   count: number;
   selected?: boolean;
+  onClick?: () => void;
 }) => {
   return (
     <li className="group relative flex" data-active={selected && 'on'}>
       <button
+        onClick={onClick}
         className={twMerge(
           'inline-flex items-center rounded-full bg-white px-4 py-1  ring-1 ring-inset ring-slate-200',
-          selected && 'text-blue-600 ring-blue-600',
+          selected && 'text-slate-600 ring-slate-600',
         )}
       >
         <span className="text-sm font-normal">{title}</span>

@@ -10,4 +10,8 @@
   * {
     @apply border-grayA-4
   }
+
+  .prose img {
+    @apply inline-block
+  }
 }

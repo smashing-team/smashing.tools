@@ -16,7 +16,7 @@ const CategorySwitcher = ({
           className="group relative flex pr-1"
           data-active={activeCategory === '/' && 'on'}
         >
-          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-black/5 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
+          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-slate-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
           <a
             href="/"
             className="flex items-center rounded-lg px-2"
@@ -41,7 +41,7 @@ const CategorySwitcher = ({
           className="group relative flex pr-1"
           data-active={activeCategory === '/code' && 'on'}
         >
-          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-sky-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
+          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-slate-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
           <a
             href="/code"
             className="group flex items-center px-2"
@@ -66,7 +66,7 @@ const CategorySwitcher = ({
           className="group relative flex pr-1"
           data-active={activeCategory === '/design' && 'on'}
         >
-          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-amber-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
+          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-slate-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
           <a
             href="/design"
             className="group flex items-center px-2"
