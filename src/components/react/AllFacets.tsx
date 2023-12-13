@@ -15,6 +15,7 @@ export function AllFacets({
         <FacetSection title={facet}>
           {values?.map((f: any) => (
             <Facet
+              key={f.value}
               title={f.value}
               count={f.count}
               selected={f.checked}
