@@ -85,12 +85,8 @@ const CommandMenu = () => {
               &quot;
             </CommandEmpty>
           ) : (
-            results?.map((res: any) => (
-              <CommandItem
-                className="flex flex-col items-start"
-                key={res.href}
-                onClick={() => setOpen(false)}
-              >
+            results?.map((res, index) => (
+              <CommandItem className="flex flex-col items-start" key={index}>
                 <p className="font-bold">{res.meta.title}</p>
                 <span dangerouslySetInnerHTML={{ __html: res.excerpt }}></span>
               </CommandItem>
