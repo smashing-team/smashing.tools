@@ -36,11 +36,11 @@ if (Object.values(searchParam).length) {
     for (const key in searchParam) {
       // TODO: type error
       // @ts-ignore
-      if (searchParam[key]?.some((el) => item.data[key]?.includes(el))) {
-        return true;
+      if (!searchParam[key]?.every((el) => item.data[key]?.includes(el))) {
+        return false;
       }
     }
-    return false;
+    return true;
   });
 }
 

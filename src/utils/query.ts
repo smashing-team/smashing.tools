@@ -30,18 +30,21 @@ class Query {
     return queryString.stringify(object, { arrayFormat: 'comma', ...options });
   }
 
-  static set = (key: string, value: string) => {
-    const queryObj = Query.parseSearchParam(window.location.search);
+  static toggle = (key: string, value: string) => {
+    const queryObj = this.parseSearchParam(window.location.search);
     if (queryObj[key]?.includes(value)) {
       queryObj[key] = queryObj[key]?.filter((val) => val !== value) || [];
     } else {
       queryObj[key] = [...(queryObj[key] || []), value];
     }
-    const newQuery = Query.stringifySearchParam(queryObj);
-    const urlQuery = newQuery
-      ? `?${newQuery}`
-      : window.location.href.split('?')[0] || '/';
-    navigate(urlQuery);
+    const newQuery = this.stringifySearchParam(queryObj);
+
+    if (newQuery) navigate(`?${newQuery}`);
+    else this.clear();
+  };
+
+  static clear = () => {
+    navigate(window.location.href.split('?')[0] || '/');
   };
 }
 
