@@ -24,20 +24,23 @@ const allItems = [
 let items = allItems.sort(
   (a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf(),
 );
+let itemsForFilter = [...allItems];
 
 if (activeCategory.category) {
   items = items.filter((item) => item.collection === category);
+  itemsForFilter = [...items];
 }
 
-if (searchParam) {
-  Object.keys(searchParam).forEach((key) => {
-    items = items.filter((item) =>
-      searchParam[key]?.every((el) => {
-        // TODO: type error
-        // @ts-ignore
-        return item.data[key]?.includes(el);
-      }),
-    );
+if (Object.values(searchParam).length) {
+  items = items.filter((item) => {
+    for (const key in searchParam) {
+      // TODO: type error
+      // @ts-ignore
+      if (searchParam[key]?.some((el) => item.data[key]?.includes(el))) {
+        return true;
+      }
+    }
+    return false;
   });
 }
 
@@ -64,25 +67,36 @@ if (searchParam) {
 };
  */
 
-const facetKeys = [
-  'pricing',
-  'features',
-  'language',
-  'framework',
-  'runtime',
-  'api',
-  'database',
-  'style',
-  'testing',
-  'uiKit',
-  'uiLibrary',
-  'componentCount',
-  'pageExampleCount',
-  'compatibility',
-] as const;
+const getFacetKeysByCategory = (selectedCategory?: 'code' | 'design') => {
+  const codeKeys = [
+    'pricing',
+    'features',
+    'language',
+    'framework',
+    'runtime',
+    'api',
+    'database',
+    'style',
+    'testing',
+    'uiKit',
+    'uiLibrary',
+    'componentCount',
+    'pageExampleCount',
+    'compatibility',
+  ] as const;
+  const designKeys = [] as const;
+  switch (selectedCategory) {
+    case 'code':
+      return codeKeys;
+    case 'design':
+      return designKeys;
+    default:
+      return codeKeys;
+  }
+};
 
-const facets = items.reduce((acc, item) => {
-  facetKeys.forEach((key) => {
+const facets = itemsForFilter.reduce((acc, item) => {
+  getFacetKeysByCategory(activeCategory.category).forEach((key) => {
     const data = item.data as any;
 
     if (!acc[key]) {
