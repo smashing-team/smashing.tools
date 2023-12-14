@@ -38,7 +38,9 @@ class Query {
       queryObj[key] = [...(queryObj[key] || []), value];
     }
     const newQuery = Query.stringifySearchParam(queryObj);
-    const urlQuery = newQuery ? `?${newQuery}` : '/';
+    const urlQuery = newQuery
+      ? `?${newQuery}`
+      : window.location.href.split('?')[0] || '/';
     navigate(urlQuery);
   };
 }

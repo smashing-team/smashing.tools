@@ -17,7 +17,7 @@ const Facet = ({
       <button
         onClick={onClick}
         className={twMerge(
-          'inline-flex items-center rounded-full bg-white px-4 py-1  ring-1 ring-inset ring-slate-200',
+          'inline-flex items-center rounded-full bg-white px-4 py-1 ring-1 ring-inset ring-slate-200 transition hover:translate-y-[-1px]',
           selected && 'text-slate-600 ring-slate-600',
         )}
       >
