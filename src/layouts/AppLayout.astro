@@ -2,6 +2,7 @@
 // import { Sidebar } from '@/components/react/Sidebar';
 import { AllFacets } from '@/components/react/AllFacets';
 import CategorySwitcher from '@/components/react/CategorySwitcher';
+import CommandMenu from '@/components/react/CommandMenu';
 import TailwindIndicator from '@/components/TailwindIndicator.astro';
 
 import smashingLogo from '../../public/logo.svg';
@@ -18,7 +19,7 @@ interface Props {
 const { activeCategory = '/', facets } = Astro.props;
 ---
 
-<html lang="en" class="h-full bg-white antialiased">
+<html lang="en" class="bg-white h-full antialiased">
   <head>
     <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
   </head>
@@ -50,25 +51,7 @@ const { activeCategory = '/', facets } = Astro.props;
             </p>
           </div>
           <div class="lg:px-4">
-            <button
-              type="button"
-              class="ui-not-focus-visible:outline-none mx-auto flex h-10 w-full max-w-md items-center gap-2 rounded-xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20 dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20"
-              ><svg
-                viewBox="0 0 20 20"
-                fill="none"
-                aria-hidden="true"
-                class="h-5 w-5 stroke-current"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12.01 12a4.25 4.25 0 1 0-6.02-6 4.25 4.25 0 0 0 6.02 6Zm0 0 3.24 3.25"
-                ></path></svg
-              >Search tools...<kbd
-                class="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
-                ><kbd class="font-sans">⌘</kbd><kbd class="font-sans">F</kbd
-                ></kbd
-              ></button
-            >
+            <CommandMenu client:load />
             <CategorySwitcher activeCategory={activeCategory} />
           </div>
           <AllFacets client:load facets={facets} />
