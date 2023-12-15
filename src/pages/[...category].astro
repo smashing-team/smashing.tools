@@ -148,17 +148,17 @@ const facets = allItems.reduce((acc, item) => {
       // check if it is array
       if (Array.isArray(data[key])) {
         data[key].forEach((value: any) => {
-          const face = acc[key].find((pr: any) => pr.value === value);
-          const faceInFiltered = facetsInFiltered[key]?.find(
+          const facet = acc[key].find((pr: any) => pr.value === value);
+          const facetInFiltered = facetsInFiltered[key]?.find(
             (i: any) => i.value === value,
           );
 
-          if (face) {
-            if (faceInFiltered && face.count < faceInFiltered.count) {
+          if (facet) {
+            if (facetInFiltered && facet.count < facetInFiltered.count) {
               // eslint-disable-next-line no-plusplus
-              face.count++;
+              facet.count++;
             }
-          } else if (faceInFiltered) {
+          } else if (facetInFiltered) {
             acc[key].push({
               value,
               count: 1,
@@ -175,17 +175,17 @@ const facets = allItems.reduce((acc, item) => {
         });
       } else {
         const value = data[key] as string;
-        const face = acc[key].find((pr: any) => pr.value === value);
-        const faceInFiltered = facetsInFiltered[key]?.find(
+        const facet = acc[key].find((pr: any) => pr.value === value);
+        const facetInFiltered = facetsInFiltered[key]?.find(
           (i: any) => i.value === value,
         );
 
-        if (face) {
-          if (faceInFiltered && face.count < faceInFiltered.count) {
+        if (facet) {
+          if (facetInFiltered && facet.count < facetInFiltered.count) {
             // eslint-disable-next-line no-plusplus
-            face.count++;
+            facet.count++;
           }
-        } else if (faceInFiltered) {
+        } else if (facetInFiltered) {
           acc[key].push({
             value,
             count: 1,
