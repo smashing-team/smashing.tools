@@ -24,11 +24,9 @@ const allItems = [
 let items = allItems.sort(
   (a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf(),
 );
-let itemsForFilter = [...allItems];
 
 if (activeCategory.category) {
   items = items.filter((item) => item.collection === category);
-  itemsForFilter = [...items];
 }
 
 if (Object.values(searchParam).length) {
@@ -95,7 +93,7 @@ const getFacetKeysByCategory = (selectedCategory?: 'code' | 'design') => {
   }
 };
 
-const facets = itemsForFilter.reduce((acc, item) => {
+const facetsInFiltered = items.reduce((acc, item) => {
   getFacetKeysByCategory(activeCategory.category).forEach((key) => {
     const data = item.data as any;
 
@@ -120,6 +118,7 @@ const facets = itemsForFilter.reduce((acc, item) => {
         });
       } else {
         const value = data[key] as string;
+
         if (!acc[key].find((pr: any) => pr.value === value)) {
           acc[key].push({
             value,
@@ -129,6 +128,76 @@ const facets = itemsForFilter.reduce((acc, item) => {
         } else {
           // eslint-disable-next-line no-plusplus
           acc[key].find((pr: any) => pr.value === value).count++;
+        }
+      }
+    }
+  });
+
+  return acc;
+}, {} as any);
+
+const facets = allItems.reduce((acc, item) => {
+  getFacetKeysByCategory(activeCategory.category).forEach((key) => {
+    const data = item.data as any;
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+
+    if (data[key]) {
+      // check if it is array
+      if (Array.isArray(data[key])) {
+        data[key].forEach((value: any) => {
+          const face = acc[key].find((pr: any) => pr.value === value);
+          const faceInFiltered = facetsInFiltered[key]?.find(
+            (i: any) => i.value === value,
+          );
+
+          if (face) {
+            if (faceInFiltered && face.count < faceInFiltered.count) {
+              // eslint-disable-next-line no-plusplus
+              face.count++;
+            }
+          } else if (faceInFiltered) {
+            acc[key].push({
+              value,
+              count: 1,
+              checked: Boolean(searchParam[key]?.includes(value)),
+            });
+          } else {
+            acc[key].push({
+              value,
+              count: 0,
+              checked: Boolean(searchParam[key]?.includes(value)),
+              disabled: true,
+            });
+          }
+        });
+      } else {
+        const value = data[key] as string;
+        const face = acc[key].find((pr: any) => pr.value === value);
+        const faceInFiltered = facetsInFiltered[key]?.find(
+          (i: any) => i.value === value,
+        );
+
+        if (face) {
+          if (faceInFiltered && face.count < faceInFiltered.count) {
+            // eslint-disable-next-line no-plusplus
+            face.count++;
+          }
+        } else if (faceInFiltered) {
+          acc[key].push({
+            value,
+            count: 1,
+            checked: Boolean(searchParam[key]?.includes(value)),
+          });
+        } else {
+          acc[key].push({
+            value,
+            count: 0,
+            checked: Boolean(searchParam[key]?.includes(value)),
+            disabled: true,
+          });
         }
       }
     }

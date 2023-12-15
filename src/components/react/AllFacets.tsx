@@ -23,7 +23,7 @@ export function AllFacets({
           <button
             onClick={Query.clear}
             className={twMerge(
-              'absolute right-0 top-4 ml-auto inline-flex items-center rounded-full bg-white px-4 py-1 shadow-md ring-1 ring-inset ring-slate-200 transition hover:translate-y-[-1px]',
+              'absolute right-0 top-4 ml-auto inline-flex items-center rounded-full bg-white px-4 py-1 shadow-sm ring-1 ring-inset ring-slate-200 transition hover:translate-y-[-1px]',
             )}
           >
             <TrashIcon color="red" />
@@ -38,6 +38,7 @@ export function AllFacets({
               title={f.value}
               count={f.count}
               selected={f.checked}
+              disabled={f.disabled}
               onClick={() => {
                 Query.toggle(facet, f.value);
               }}

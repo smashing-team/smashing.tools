@@ -1,4 +1,5 @@
 ---
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import type { CollectionEntry } from 'astro:content';
 import { twMerge } from 'tailwind-merge';
 
@@ -36,6 +37,13 @@ const { name, headline, logo, logoPadding } = Astro.props;
         <div
           class="relative z-10 mx-auto px-4 pb-4 pt-10 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-slate-200 lg:p-6 xl:px-12"
         >
+          <button
+            class="absolute left-3 top-3 flex h-6 w-6 items-center justify-center rounded-full border border-slate-500"
+            onclick="window.history.back()"
+          >
+            <ArrowLeftIcon className="text-slate-500" />
+          </button>
+
           <div
             class="relative mx-auto block w-48 overflow-hidden rounded-lg bg-white shadow-xl shadow-slate-200 sm:w-64 sm:rounded-xl lg:w-auto lg:rounded-2xl"
             aria-label="Homepage"
