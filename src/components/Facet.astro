@@ -1,0 +1,54 @@
+---
+import { twMerge } from 'tailwind-merge';
+
+interface Props {
+  key: string;
+  title: string;
+  count: number;
+  selected?: boolean;
+  disabled?: boolean;
+  onClick?: () => void;
+}
+
+const { key, title, count, selected = false, disabled = false } = Astro.props;
+---
+
+<li class="group relative flex">
+  <button
+    data-facet={key}
+    data-value={title}
+    disabled={disabled}
+    class={twMerge(
+      'inline-flex items-center rounded-full bg-white px-3 py-1 ring-1 ring-inset ring-zinc-200 hover:bg-zinc-100 dark:bg-transparent dark:text-zinc-200 dark:ring-zinc-800 dark:hover:bg-zinc-800',
+      selected &&
+        'bg-zinc-100 text-zinc-600 ring-zinc-300 dark:bg-zinc-800 dark:ring-zinc-700',
+      disabled && 'cursor-not-allowed opacity-20',
+      'facet-button',
+    )}
+  >
+    <span class="text-sm font-normal">{title}</span>
+    <span class="ml-2 h-3.5 w-px bg-zinc-600/20"></span>
+    <span
+      class="ml-2 font-mono text-xs text-zinc-400 dark:text-zinc-500"
+      aria-hidden="true"
+    >
+      {count}
+    </span>
+  </button>
+</li>
+
+<script>
+  import Query from '@/utils/query';
+
+  document.addEventListener('astro:page-load', () => {
+    const facetButtons = document.getElementsByClassName('facet-button');
+
+    Array.from(facetButtons).forEach((button) =>
+      button.addEventListener('click', (e) => {
+        const b = e.currentTarget as HTMLButtonElement;
+        if (b.dataset.facet && b.dataset.value)
+          Query.toggle(b.dataset.facet, b.dataset.value);
+      }),
+    );
+  });
+</script>

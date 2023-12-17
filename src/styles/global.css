@@ -6,17 +6,21 @@
   font-family: "Inter Variable", sans-serif;
 }
 
+html.dark {
+  background: black;
+}
+
 @layer base {
   * {
-    @apply border-stone-200 dark:border-stone-800;
+    @apply border-zinc-200 dark:border-zinc-800;
   }
 
   html, body {
-    @apply h-full bg-white antialiased dark:bg-black;
+    @apply h-full min-h-full bg-white antialiased dark:bg-black;
   }
 
   body {
-    @apply flex min-h-full dark:text-stone-50;
+    @apply flex dark:text-zinc-50;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 

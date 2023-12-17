@@ -1,9 +1,9 @@
 import {
   GitHubLogoIcon,
-  InstagramLogoIcon,
   MagnifyingGlassIcon,
   TwitterLogoIcon,
 } from '@radix-ui/react-icons';
+import { navigate } from 'astro:transitions/client';
 import * as React from 'react';
 
 import {
@@ -13,7 +13,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
+} from '@/components/react/ui/command';
 
 const CommandMenu = () => {
   const [open, setOpen] = React.useState(false);
@@ -73,7 +73,7 @@ const CommandMenu = () => {
         <CommandInput
           value={search}
           onValueChange={setSearch}
-          placeholder="Type a command or search..."
+          placeholder="Search tool..."
         />
         <CommandList>
           {results.length === 0 ? (
@@ -84,7 +84,14 @@ const CommandMenu = () => {
             </CommandEmpty>
           ) : (
             results?.map((res, index) => (
-              <CommandItem className="flex flex-col items-start" key={index}>
+              <CommandItem
+                className="flex flex-col items-start"
+                key={index}
+                onSelect={() => {
+                  // console.log('abow search result', res);
+                  navigate(res.url);
+                }}
+              >
                 <p className="font-bold">{res.meta.title}</p>
                 <span dangerouslySetInnerHTML={{ __html: res.excerpt }}></span>
               </CommandItem>
@@ -92,18 +99,25 @@ const CommandMenu = () => {
           )}
           {search.length === 0 && (
             <React.Fragment>
-              <CommandGroup heading="Socials" className="mb-1">
-                <CommandItem>
+              <CommandGroup heading="Socials">
+                <CommandItem
+                  onSelect={() => {
+                    window.open('https://twitter.com/smashingtools', '_blank');
+                  }}
+                >
                   <TwitterLogoIcon className="mr-2 h-4 w-4" />
                   <span>Twitter</span>
                 </CommandItem>
-                <CommandItem>
+                <CommandItem
+                  onSelect={() => {
+                    window.open(
+                      'https://github.com/smashing-team/smashing.tools',
+                      '_blank',
+                    );
+                  }}
+                >
                   <GitHubLogoIcon className="mr-2 h-4 w-4" />
                   <span>Github</span>
-                </CommandItem>
-                <CommandItem>
-                  <InstagramLogoIcon className="mr-2 h-4 w-4" />
-                  <span>Instagram</span>
                 </CommandItem>
               </CommandGroup>
             </React.Fragment>

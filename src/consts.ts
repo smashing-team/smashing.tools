@@ -1,9 +1,6 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
-
 export const SITE_TITLE = 'smashing.tools';
 export const SITE_DESCRIPTION =
-  'Curated list of tools for designers and developers';
+  'Curated list of starter tools for your next project';
 export const CATEGORIES = [
   {
     category: undefined,
@@ -21,3 +18,5 @@ export const CATEGORIES = [
     title: 'Design tools',
   },
 ] as const;
+
+export type CategorySlugs = '/' | '/code' | '/design';
