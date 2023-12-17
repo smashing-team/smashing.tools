@@ -1,19 +1,18 @@
 ---
-import { AllFacets } from '@/components/react/AllFacets';
-import CategorySwitcher from '@/components/react/CategorySwitcher';
-import CommandMenu from '@/components/react/CommandMenu';
-import { ThemeToggle } from '@/components/react/ThemeToggle';
+import AllFacets from '@/components/AllFacets.astro';
+import LeftBar from '@/components/LeftBar.astro';
 import TailwindIndicator from '@/components/TailwindIndicator.astro';
+import TopNav from '@/components/TopNav.astro';
+import type { Facets } from '@/utils/facets';
 
-import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { type CategorySlugs, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
 export const prerender = false;
 
 interface Props {
-  activeCategory: '/' | '/code' | '/design';
-  facets: any; // TODO: type this
+  activeCategory: CategorySlugs;
+  facets: Facets;
 }
 
 const { activeCategory = '/', facets } = Astro.props;
@@ -27,42 +26,20 @@ const { activeCategory = '/', facets } = Astro.props;
   <body>
     <div class="w-full">
       <header
-        class="bg-stone-50 px-4 dark:bg-zinc-900 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-96 lg:items-start lg:overflow-y-auto lg:px-0 xl:w-96"
+        class="bg-zinc-50 px-4 dark:bg-zinc-900 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-96 lg:items-start lg:overflow-y-auto lg:px-0 xl:w-96"
       >
+        <LeftBar />
         <div
-          class="hidden h-full pb-4 lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:pt-6 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]"
+          class="relative z-10 mx-auto pb-1 pt-6 lg:sticky lg:top-0 lg:min-h-full lg:max-w-2xl lg:flex-auto lg:border-x lg:border-zinc-200 lg:pt-6 dark:lg:border-zinc-800"
         >
-          <img
-            class="h-10 w-10"
-            src={smashingLogo.src}
-            alt=""
-            sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
-          />
-          <span class="mt-2 font-mono font-extrabold text-zinc-500"
-            >smashing.<strong class="text-zinc-900 dark:text-zinc-400"
-              >tools</strong
-            ></span
-          >
-          <div class="flex grow"></div>
-          <ThemeToggle client:only />
-        </div>
-        <div
-          class="relative z-10 mx-auto pb-1 pt-10 lg:sticky lg:top-0 lg:min-h-full lg:max-w-2xl lg:flex-auto lg:border-x lg:border-stone-200 lg:pt-6 dark:lg:border-stone-800"
-        >
-          <div class="mb-6 text-center sm:hidden lg:px-4 lg:text-left">
-            <p class="font-mono text-3xl font-bold text-stone-900">
-              <a href="/"><span class="text-stone-500">smashing</span>.tools</a>
-            </p>
+          <TopNav activeCategory={activeCategory} />
+          <div class="h-full">
+            <AllFacets facets={facets} />
           </div>
-          <div class="lg:px-4">
-            <CommandMenu client:load />
-            <CategorySwitcher activeCategory={activeCategory} />
-          </div>
-          <AllFacets client:load facets={facets} />
         </div>
       </header>
       <main
-        class="border-t border-stone-200 lg:relative lg:mb-10 lg:ml-96 lg:border-t-0 xl:ml-96"
+        class="border-t border-zinc-200 dark:border-zinc-700 lg:relative lg:mb-10 lg:ml-96 lg:border-t-0 xl:ml-96"
       >
         <div class="relative">
           <slot />
@@ -70,5 +47,24 @@ const { activeCategory = '/', facets } = Astro.props;
       </main>
     </div>
     <TailwindIndicator />
+    <script is:inline>
+      // TODO: re-enable this when we have a better solution for scroll restoration
+      // document.addEventListener('astro:before-swap', () => {
+      //   const header = document.querySelector('header');
+      //   localStorage.setItem(
+      //     'headerScrollPosition',
+      //     header.scrollTop.toString(),
+      //   );
+      // });
+      // document.addEventListener('astro:after-swap', () => {
+      //   const header = document.querySelector('header');
+      //   const scrollPosition = localStorage.getItem('headerScrollPosition');
+      //   header.scrollTo({
+      //     left: 0,
+      //     top: Number(scrollPosition),
+      //     behavior: 'instant',
+      //   });
+      // });
+    </script>
   </body>
 </html>

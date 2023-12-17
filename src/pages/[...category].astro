@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 
 import GridList from '@/components/GridList.astro';
+import { getFacets } from '@/utils/facets';
 import Query from '@/utils/query';
 
 import { CATEGORIES } from '../consts';
@@ -16,10 +17,9 @@ const searchParam = Query.parseSearchParam(search);
 const activeCategory = CATEGORIES.find((cat) => cat.category === category);
 if (!activeCategory) return Astro.redirect('/404');
 
-const allItems = [
-  ...(await getCollection('code')),
-  ...(await getCollection('design')),
-];
+const codeItems = await getCollection('code');
+const designItems = await getCollection('design');
+const allItems = [...codeItems, ...designItems];
 
 let items = allItems.sort(
   (a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf(),
@@ -42,182 +42,22 @@ if (Object.values(searchParam).length) {
   });
 }
 
-// let's generate facets based on the items
-/**
- * example:
- * 
- * export const FACETS = {
-  pricing: [
-    { value: 'free', label: 'Free', count: 0 },
-    { value: 'subscription', label: 'Subscription', count: 0 },
-    { value: 'one-time-fee', label: 'One-time fee', count: 0 },
-  ],
-  language: [
-    { value: 'javascript', label: 'JavaScript', count: 0 },
-    { value: 'typescript', label: 'TypeScript', count: 0 },
-    { value: 'python', label: 'Python', count: 0 },
-    { value: 'ruby', label: 'Ruby', count: 0 },
-    { value: 'go', label: 'Go', count: 0 },
-    { value: 'c-sharp', label: 'C#', count: 0 },
-    { value: 'java', label: 'Java', count: 0 },
-    { value: 'rust', label: 'Rust', count: 0 },
-  ],
-};
- */
-
-const getFacetKeysByCategory = (selectedCategory?: 'code' | 'design') => {
-  const codeKeys = [
-    'pricing',
-    'features',
-    'language',
-    'framework',
-    'runtime',
-    'api',
-    'database',
-    'style',
-    'testing',
-    'uiKit',
-    'uiLibrary',
-    'componentCount',
-    'pageExampleCount',
-    'compatibility',
-  ] as const;
-  const designKeys = [] as const;
-  switch (selectedCategory) {
-    case 'code':
-      return codeKeys;
-    case 'design':
-      return designKeys;
-    default:
-      return codeKeys;
-  }
-};
-
-const facetsInFiltered = items.reduce((acc, item) => {
-  getFacetKeysByCategory(activeCategory.category).forEach((key) => {
-    const data = item.data as any;
-
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-
-    if (data[key]) {
-      // check if it is array
-      if (Array.isArray(data[key])) {
-        data[key].forEach((value: any) => {
-          if (!acc[key].find((pr: any) => pr.value === value)) {
-            acc[key].push({
-              value,
-              count: 1,
-              checked: Boolean(searchParam[key]?.includes(value)),
-            });
-          } else {
-            // eslint-disable-next-line no-plusplus
-            acc[key].find((pr: any) => pr.value === value).count++;
-          }
-        });
-      } else {
-        const value = data[key] as string;
-
-        if (!acc[key].find((pr: any) => pr.value === value)) {
-          acc[key].push({
-            value,
-            count: 1,
-            checked: Boolean(searchParam[key]?.includes(value)),
-          });
-        } else {
-          // eslint-disable-next-line no-plusplus
-          acc[key].find((pr: any) => pr.value === value).count++;
-        }
-      }
-    }
-  });
-
-  return acc;
-}, {} as any);
-
-const facets = allItems.reduce((acc, item) => {
-  getFacetKeysByCategory(activeCategory.category).forEach((key) => {
-    const data = item.data as any;
-
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-
-    if (data[key]) {
-      // check if it is array
-      if (Array.isArray(data[key])) {
-        data[key].forEach((value: any) => {
-          const facet = acc[key].find((pr: any) => pr.value === value);
-          const facetInFiltered = facetsInFiltered[key]?.find(
-            (i: any) => i.value === value,
-          );
-
-          if (facet) {
-            if (facetInFiltered && facet.count < facetInFiltered.count) {
-              // eslint-disable-next-line no-plusplus
-              facet.count++;
-            }
-          } else if (facetInFiltered) {
-            acc[key].push({
-              value,
-              count: 1,
-              checked: Boolean(searchParam[key]?.includes(value)),
-            });
-          } else {
-            acc[key].push({
-              value,
-              count: 0,
-              checked: Boolean(searchParam[key]?.includes(value)),
-              disabled: true,
-            });
-          }
-        });
-      } else {
-        const value = data[key] as string;
-        const facet = acc[key].find((pr: any) => pr.value === value);
-        const facetInFiltered = facetsInFiltered[key]?.find(
-          (i: any) => i.value === value,
-        );
-
-        if (facet) {
-          if (facetInFiltered && facet.count < facetInFiltered.count) {
-            // eslint-disable-next-line no-plusplus
-            facet.count++;
-          }
-        } else if (facetInFiltered) {
-          acc[key].push({
-            value,
-            count: 1,
-            checked: Boolean(searchParam[key]?.includes(value)),
-          });
-        } else {
-          acc[key].push({
-            value,
-            count: 0,
-            checked: Boolean(searchParam[key]?.includes(value)),
-            disabled: true,
-          });
-        }
-      }
-    }
-  });
-
-  // pricing.map((p) => {
-  //   if (!acc.pricing.find((pr) => pr.value === p)) {
-  //     acc.pricing.push({ value: p, label: p, count: 1 });
-  //   } else {
-  //     acc.pricing.find((pr) => pr.value === p).count++;
-  //   }
-  // });
-
-  return acc;
-}, {} as any);
+const filteredFacets = getFacets(items, activeCategory.slug);
+const facets = getFacets(
+  // eslint-disable-next-line no-nested-ternary
+  activeCategory.slug === '/'
+    ? allItems
+    : activeCategory.category === 'code'
+      ? codeItems
+      : designItems,
+  activeCategory.slug,
+  filteredFacets,
+  searchParam,
+);
 
 export type AllItems = typeof items;
 ---
 
 <AppLayout facets={facets} activeCategory={activeCategory.slug}>
-  <!-- <Header /> -->
   <GridList items={items} />
 </AppLayout>
