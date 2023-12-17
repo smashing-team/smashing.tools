@@ -8,7 +8,16 @@
 
 @layer base {
   * {
-    @apply border-grayA-4
+    @apply border-stone-200 dark:border-stone-800;
+  }
+
+  html, body {
+    @apply h-full bg-white antialiased dark:bg-black;
+  }
+
+  body {
+    @apply flex min-h-full dark:text-stone-50;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 
   .prose img {

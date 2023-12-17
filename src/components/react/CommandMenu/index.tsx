@@ -13,13 +13,12 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
 } from '@/components/ui/command';
 
 const CommandMenu = () => {
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
-  const [results, setResults] = React.useState([]);
+  const [results, setResults] = React.useState<any[]>([]);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -56,7 +55,7 @@ const CommandMenu = () => {
     <>
       <button
         type="button"
-        className="ui-not-focus-visible:outline-none mx-auto flex h-10 w-full max-w-md items-center gap-2 rounded-xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 transition hover:ring-zinc-900/20 dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20"
+        className="ui-not-focus-visible:outline-none mx-auto flex h-10 w-full max-w-md items-center gap-2 rounded-xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 hover:ring-zinc-900/20 dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20"
         onClick={handleToggle}
       >
         <MagnifyingGlassIcon className="h-4 w-4" />
@@ -77,7 +76,6 @@ const CommandMenu = () => {
           placeholder="Type a command or search..."
         />
         <CommandList>
-          <CommandSeparator />
           {results.length === 0 ? (
             <CommandEmpty>
               No results for &quot;
@@ -94,7 +92,7 @@ const CommandMenu = () => {
           )}
           {search.length === 0 && (
             <React.Fragment>
-              <CommandGroup heading="Socials">
+              <CommandGroup heading="Socials" className="mb-1">
                 <CommandItem>
                   <TwitterLogoIcon className="mr-2 h-4 w-4" />
                   <span>Twitter</span>
@@ -105,7 +103,7 @@ const CommandMenu = () => {
                 </CommandItem>
                 <CommandItem>
                   <InstagramLogoIcon className="mr-2 h-4 w-4" />
-                  <span>İnstagram</span>
+                  <span>Instagram</span>
                 </CommandItem>
               </CommandGroup>
             </React.Fragment>
