@@ -6,7 +6,7 @@ const CategorySwitcher = ({
   activeCategory: '/' | '/code' | '/design';
 }) => {
   return (
-    <section className="mt-4">
+    <section className="mt-4 flex justify-center">
       <div className="h-px bg-gradient-to-r from-zinc-200/0 via-zinc-200 to-zinc-200/0 lg:hidden"></div>
       <ul
         role="list"

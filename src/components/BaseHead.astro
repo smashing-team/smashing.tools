@@ -47,6 +47,14 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Pagefind -->
+<script is:inline>
+  (async () => {
+    const pagefind = await import('/pagefind/pagefind.js');
+    window.pagefind = pagefind;
+  })();
+</script>
 <ViewTransitions />
 <script is:inline>
   const theme = () => {

@@ -117,6 +117,7 @@
         "extraFileExtensions": [".astro"]
       },
       "rules": {
+        "no-restricted-syntax": "off",
         "consistent-return": "off", // Astro doesn't support return in .astro files
         "prettier/prettier": [
           "error",
