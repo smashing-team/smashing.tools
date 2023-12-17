@@ -6,10 +6,8 @@
   path.bottom { stroke: #3F3F46; }
   path.middle { stroke: #D9D9D9; fill: #D9D9D9; }
   path.top { stroke: #3F3F46; fill: #3F3F46; }
-  html.dark {
-    path.bottom { stroke: #fff; }
-    path.middle { stroke: #D2D3D3; fill: #D2D3D3; }
-    path.top { stroke: #202124; fill: #202124; }
-  }
+  .dark path.bottom { stroke: #fff; }
+  .dark path.middle { stroke: #D2D3D3; fill: #D2D3D3; }
+  .dark path.top { stroke: #202124; fill: #202124; }
 </style>
 </svg>

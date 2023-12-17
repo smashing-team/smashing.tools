@@ -9,7 +9,7 @@ const FacetSection = ({
 }) => {
   return (
     <section className="mt-4">
-      <h2 className="flex items-center font-sans text-sm font-medium capitalize leading-7 text-slate-900 ">
+      <h2 className="flex items-center font-sans text-sm font-medium capitalize leading-7">
         <span>{title}</span>
       </h2>
       <ul

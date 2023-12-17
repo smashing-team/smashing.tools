@@ -7,23 +7,23 @@ const CategorySwitcher = ({
 }) => {
   return (
     <section className="mt-4">
-      <div className="h-px bg-gradient-to-r from-slate-200/0 via-slate-200 to-slate-200/0 lg:hidden"></div>
+      <div className="h-px bg-gradient-to-r from-zinc-200/0 via-zinc-200 to-zinc-200/0 lg:hidden"></div>
       <ul
         role="list"
-        className="mt-1 flex justify-center gap-10 text-sm font-medium leading-7 text-slate-700 sm:gap-8 lg:flex-row lg:justify-start lg:gap-2"
+        className="mt-1 flex justify-center gap-10 text-sm font-medium leading-7 sm:gap-8 lg:flex-row lg:justify-start lg:gap-2"
       >
         <li
           className="group relative flex pr-1"
           data-active={activeCategory === '/' && 'on'}
         >
-          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-slate-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
+          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"></span>
           <a
             href="/"
             className="flex items-center rounded-lg px-2"
             aria-label="All tools"
           >
             <svg
-              className="h-4 w-4 fill-slate-400 group-hover:fill-slate-600 group-data-[active='on']:fill-slate-600"
+              className="h-4 w-4 fill-zinc-400 group-hover:fill-zinc-600 group-data-[active='on']:fill-zinc-600"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -41,14 +41,14 @@ const CategorySwitcher = ({
           className="group relative flex pr-1"
           data-active={activeCategory === '/code' && 'on'}
         >
-          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-slate-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
+          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
           <a
             href="/code"
             className="group flex items-center px-2"
             aria-label="Code tools"
           >
             <svg
-              className="h-4 w-4 fill-slate-400 group-hover:fill-slate-600 group-data-[active='on']:fill-slate-600"
+              className="h-4 w-4 fill-zinc-400 group-hover:fill-zinc-600 group-data-[active='on']:fill-zinc-600"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -66,14 +66,14 @@ const CategorySwitcher = ({
           className="group relative flex pr-1"
           data-active={activeCategory === '/design' && 'on'}
         >
-          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-slate-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
+          <span className="absolute inset-0 -z-10 scale-75 rounded-lg bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"></span>
           <a
             href="/design"
             className="group flex items-center px-2"
             aria-label="Design tools"
           >
             <svg
-              className="h-4 w-4 fill-slate-400 group-hover:fill-slate-600 group-data-[active='on']:fill-slate-600"
+              className="h-4 w-4 fill-zinc-400 group-hover:fill-zinc-600 group-data-[active='on']:fill-zinc-600"
               viewBox="0 0 15 15"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
