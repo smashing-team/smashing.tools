@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { twMerge } from 'tailwind-merge';
 
 import type { AllItems } from '@/pages/[...category].astro';
 
@@ -21,7 +22,11 @@ const { items } = Astro.props;
           <div class="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.zinc.400),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]" />
           <div class="relative overflow-hidden rounded-xl p-6">
             <Image
-              class="h-8 w-8 shrink-0 rounded"
+              class={twMerge(
+                'h-8 w-8 shrink-0',
+                item.data.logoRounded && 'rounded',
+              )}
+              transition:name={`logo-${item.slug}`}
               src={item.data.logo}
               alt={item.data.name}
             />

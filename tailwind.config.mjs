@@ -1,18 +1,5 @@
 import * as defaultTheme from 'tailwindcss/defaultTheme';
-import * as radixColors from '@radix-ui/colors';
 import tailwindTypeography from '@tailwindcss/typography';
-import createPlugin from 'windy-radix-palette';
-
-const colors = createPlugin({
-  colors: {
-    gray: radixColors.gray,
-    grayA: radixColors.grayA,
-    blue: radixColors.blue,
-    blueA: radixColors.blueA,
-    // white: radixColors.whiteA,
-    // black: radixColors.blackA,
-  },
-});
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -34,5 +21,5 @@ export default {
       },
     },
   },
-  plugins: [colors.plugin, tailwindTypeography],
+  plugins: [tailwindTypeography],
 };
