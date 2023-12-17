@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+
+import type { AllItems } from '@/pages/[...category].astro';
+
+interface Props {
+  items: AllItems;
+}
+
+const { items } = Astro.props;
+---
+
+<ul
+  role="list"
+  class="grid grid-cols-1 gap-4 p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:p-6 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
+>
+  {
+    items.map((item) => (
+      <li class="col-span-1">
+        <div class="group relative rounded-xl border border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900">
+          <div class="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.zinc.400),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]" />
+          <div class="relative overflow-hidden rounded-xl p-6">
+            <Image
+              class="h-8 w-8 shrink-0 rounded"
+              src={item.data.logo}
+              alt={item.data.name}
+            />
+            <h2 class="mt-4 font-mono text-base text-zinc-900 dark:text-white">
+              <a href={`/${item.collection}/${item.slug}/`} class="">
+                <span class="absolute -inset-px rounded-xl" />
+                {item.data.name}
+              </a>
+            </h2>
+            <p class="mt-1 truncate text-sm text-zinc-700 dark:text-zinc-400">
+              {item.data.headline}
+            </p>
+          </div>
+        </div>
+      </li>
+    ))
+  }
+</ul>

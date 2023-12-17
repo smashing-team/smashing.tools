@@ -1,8 +1,11 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
+import '@fontsource-variable/inter';
+import '@fontsource/pitagon-sans-mono';
+import '../styles/global.css';
 
-import { ViewTransitions } from "astro:transitions";
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -12,17 +15,19 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
+const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="mask-icon" href="/favicon.svg" color="#E9A23B" />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+<meta name="theme-color" content="#E9A23B" />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -42,4 +47,39 @@ const { title, description, image = "/blog-placeholder-1.jpg" } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Pagefind -->
+<script is:inline>
+  (async () => {
+    const pagefind = await import('/pagefind/pagefind.js');
+    window.pagefind = pagefind;
+  })();
+</script>
 <ViewTransitions />
+<script is:inline>
+  const theme = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  };
+
+  if (theme() === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
+  }
+
+  document.addEventListener('astro:after-swap', (ev) => {
+    // Pass the incoming document to set the theme on it
+    if (theme() === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  });
+  // window.localStorage.setItem('theme', theme);
+</script>

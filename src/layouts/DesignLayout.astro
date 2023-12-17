@@ -1,0 +1,125 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { twMerge } from 'tailwind-merge';
+
+import smashingLogo from '../../public/logo.svg';
+import BaseHead from '../components/BaseHead.astro';
+
+type Props = CollectionEntry<'design'>['data'] & { slug: string };
+
+const { name, headline, logo, logoPadding } = Astro.props;
+---
+
+<html lang="en" class="h-full bg-white antialiased">
+  <head>
+    <BaseHead title={name} description={headline} />
+  </head>
+
+  <body class="flex min-h-full">
+    <div class="w-full">
+      <header
+        class="bg-slate-50 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-112 lg:items-start lg:overflow-y-auto xl:w-120"
+      >
+        <div
+          class="hidden lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:pt-6 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]"
+        >
+          <img
+            class="h-10 w-10"
+            src={smashingLogo.src}
+            alt=""
+            sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+          />
+          <span class="mt-2 font-mono font-extrabold text-slate-500"
+            >smashing.<strong class="text-slate-900">tools</strong></span
+          >
+        </div>
+        <div
+          class="relative z-10 mx-auto px-4 pb-4 pt-10 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-slate-200 lg:p-6 xl:px-12"
+        >
+          <div
+            class="relative mx-auto block w-48 overflow-hidden rounded-lg bg-white shadow-xl shadow-slate-200 sm:w-64 sm:rounded-xl lg:w-auto lg:rounded-2xl"
+            aria-label="Homepage"
+          >
+            <img
+              class={twMerge('w-full', logoPadding && 'p-4')}
+              src={logo.src}
+              alt=""
+              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+            />
+            <div
+              class="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10 sm:rounded-xl lg:rounded-2xl"
+            >
+            </div>
+          </div>
+          <div class="mt-10 text-center lg:mt-12 lg:text-left">
+            <p class="text-xl font-bold text-slate-900">
+              {name}
+            </p>
+            <p class="mt-3 text-lg font-medium leading-8 text-slate-700">
+              {headline}
+            </p>
+          </div>
+          <!-- <AboutSection class="mt-12 hidden lg:block" /> -->
+          <section class="mt-10 lg:mt-12">
+            <div
+              class="h-px bg-gradient-to-r from-slate-200/0 via-slate-200 to-slate-200/0 lg:hidden"
+            >
+            </div>
+            <ul
+              role="list"
+              class="mt-4 flex justify-center gap-10 text-base font-medium leading-7 text-slate-700 sm:gap-8 lg:justify-start lg:gap-4"
+            >
+              <li>
+                <a
+                  href="https://tailwindui.com/templates/syntax/download"
+                  class="inline-flex justify-center rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-700"
+                  ><span
+                    ><span class="flex items-center"
+                      ><svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="relative -left-0.5 mr-1.5 h-5 w-5 stroke-slate-400"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        ><path stroke="none" d="M0 0h24v24H0z" fill="none"
+                        ></path><path
+                          d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
+                        ></path><path d="M11 13l9 -9"></path><path d="M15 4h5v5"
+                        ></path></svg
+                      >Website</span
+                    ></span
+                  ></a
+                >
+              </li>
+            </ul>
+
+            <div class="mt-6 border-t border-gray-100">
+              <dl class="divide-y divide-gray-100">
+                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                  <dt class="text-sm font-medium leading-6 text-gray-900">
+                    Full name
+                  </dt>
+                  <dd
+                    class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0"
+                  >
+                    Margot Foster
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </section>
+        </div>
+      </header>
+      <main
+        class="border-t border-slate-200 lg:relative lg:mb-10 lg:ml-96 lg:border-t-0 xl:ml-120"
+      >
+        <article class="prose relative mx-auto max-w-full p-8">
+          <slot />
+        </article>
+      </main>
+    </div>
+  </body>
+</html>

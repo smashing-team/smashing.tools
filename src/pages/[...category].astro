@@ -1,69 +1,223 @@
 ---
+import { getCollection } from 'astro:content';
+
+import GridList from '@/components/GridList.astro';
+import Query from '@/utils/query';
+
+import { CATEGORIES } from '../consts';
+import AppLayout from '../layouts/AppLayout.astro';
+
 export const prerender = false;
 
-import { getCollection } from "astro:content";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import AppLayout from "../layouts/AppLayout.astro";
+const { category } = Astro.params;
+const { search } = Astro.url;
+const searchParam = Query.parseSearchParam(search);
 
-const category = Astro.url.pathname.split("/")[1];
-console.log(category);
+const activeCategory = CATEGORIES.find((cat) => cat.category === category);
+if (!activeCategory) return Astro.redirect('/404');
 
-const language = Astro.url.searchParams.get("language");
+const allItems = [
+  ...(await getCollection('code')),
+  ...(await getCollection('design')),
+];
 
-const posts = (
-  await getCollection("code", (post) => post.data.language === language)
-).sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf());
+let items = allItems.sort(
+  (a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf(),
+);
+
+if (activeCategory.category) {
+  items = items.filter((item) => item.collection === category);
+}
+
+if (Object.values(searchParam).length) {
+  items = items.filter((item) => {
+    for (const key in searchParam) {
+      // TODO: type error
+      // @ts-ignore
+      if (!searchParam[key]?.every((el) => item.data[key]?.includes(el))) {
+        return false;
+      }
+    }
+    return true;
+  });
+}
+
+// let's generate facets based on the items
+/**
+ * example:
+ * 
+ * export const FACETS = {
+  pricing: [
+    { value: 'free', label: 'Free', count: 0 },
+    { value: 'subscription', label: 'Subscription', count: 0 },
+    { value: 'one-time-fee', label: 'One-time fee', count: 0 },
+  ],
+  language: [
+    { value: 'javascript', label: 'JavaScript', count: 0 },
+    { value: 'typescript', label: 'TypeScript', count: 0 },
+    { value: 'python', label: 'Python', count: 0 },
+    { value: 'ruby', label: 'Ruby', count: 0 },
+    { value: 'go', label: 'Go', count: 0 },
+    { value: 'c-sharp', label: 'C#', count: 0 },
+    { value: 'java', label: 'Java', count: 0 },
+    { value: 'rust', label: 'Rust', count: 0 },
+  ],
+};
+ */
+
+const getFacetKeysByCategory = (selectedCategory?: 'code' | 'design') => {
+  const codeKeys = [
+    'pricing',
+    'features',
+    'language',
+    'framework',
+    'runtime',
+    'api',
+    'database',
+    'style',
+    'testing',
+    'uiKit',
+    'uiLibrary',
+    'componentCount',
+    'pageExampleCount',
+    'compatibility',
+  ] as const;
+  const designKeys = [] as const;
+  switch (selectedCategory) {
+    case 'code':
+      return codeKeys;
+    case 'design':
+      return designKeys;
+    default:
+      return codeKeys;
+  }
+};
+
+const facetsInFiltered = items.reduce((acc, item) => {
+  getFacetKeysByCategory(activeCategory.category).forEach((key) => {
+    const data = item.data as any;
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+
+    if (data[key]) {
+      // check if it is array
+      if (Array.isArray(data[key])) {
+        data[key].forEach((value: any) => {
+          if (!acc[key].find((pr: any) => pr.value === value)) {
+            acc[key].push({
+              value,
+              count: 1,
+              checked: Boolean(searchParam[key]?.includes(value)),
+            });
+          } else {
+            // eslint-disable-next-line no-plusplus
+            acc[key].find((pr: any) => pr.value === value).count++;
+          }
+        });
+      } else {
+        const value = data[key] as string;
+
+        if (!acc[key].find((pr: any) => pr.value === value)) {
+          acc[key].push({
+            value,
+            count: 1,
+            checked: Boolean(searchParam[key]?.includes(value)),
+          });
+        } else {
+          // eslint-disable-next-line no-plusplus
+          acc[key].find((pr: any) => pr.value === value).count++;
+        }
+      }
+    }
+  });
+
+  return acc;
+}, {} as any);
+
+const facets = allItems.reduce((acc, item) => {
+  getFacetKeysByCategory(activeCategory.category).forEach((key) => {
+    const data = item.data as any;
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+
+    if (data[key]) {
+      // check if it is array
+      if (Array.isArray(data[key])) {
+        data[key].forEach((value: any) => {
+          const facet = acc[key].find((pr: any) => pr.value === value);
+          const facetInFiltered = facetsInFiltered[key]?.find(
+            (i: any) => i.value === value,
+          );
+
+          if (facet) {
+            if (facetInFiltered && facet.count < facetInFiltered.count) {
+              // eslint-disable-next-line no-plusplus
+              facet.count++;
+            }
+          } else if (facetInFiltered) {
+            acc[key].push({
+              value,
+              count: 1,
+              checked: Boolean(searchParam[key]?.includes(value)),
+            });
+          } else {
+            acc[key].push({
+              value,
+              count: 0,
+              checked: Boolean(searchParam[key]?.includes(value)),
+              disabled: true,
+            });
+          }
+        });
+      } else {
+        const value = data[key] as string;
+        const facet = acc[key].find((pr: any) => pr.value === value);
+        const facetInFiltered = facetsInFiltered[key]?.find(
+          (i: any) => i.value === value,
+        );
+
+        if (facet) {
+          if (facetInFiltered && facet.count < facetInFiltered.count) {
+            // eslint-disable-next-line no-plusplus
+            facet.count++;
+          }
+        } else if (facetInFiltered) {
+          acc[key].push({
+            value,
+            count: 1,
+            checked: Boolean(searchParam[key]?.includes(value)),
+          });
+        } else {
+          acc[key].push({
+            value,
+            count: 0,
+            checked: Boolean(searchParam[key]?.includes(value)),
+            disabled: true,
+          });
+        }
+      }
+    }
+  });
+
+  // pricing.map((p) => {
+  //   if (!acc.pricing.find((pr) => pr.value === p)) {
+  //     acc.pricing.push({ value: p, label: p, count: 1 });
+  //   } else {
+  //     acc.pricing.find((pr) => pr.value === p).count++;
+  //   }
+  // });
+
+  return acc;
+}, {} as any);
+
+export type AllItems = typeof items;
 ---
 
-<AppLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <div class="flex items-start justify-between mb-8">
-    <div>
-      <h1 class="text-xl font-semibold">Smashing Tools</h1>
-      <p class="text-gray-9">{SITE_DESCRIPTION}</p>
-    </div>
-    <div>right nav</div>
-  </div>
-
-  <ul
-    role="list"
-    class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-  >
-    {
-      posts.map((post) => (
-        <li class="col-span-1 divide-y divide-gray-2 border rounded-lg bg-gray-1 hover:bg-gray-2">
-          <a
-            href={`/code/${post.slug}/`}
-            class="flex w-full items-center justify-between space-x-4 p-2"
-          >
-            <img
-              transition:animate="slide"
-              transition:name={`image-${post.slug}`}
-              class="h-14 w-14 flex-shrink-0 bg-gray-300"
-              src={post.data.heroImage}
-              alt={post.data.title}
-            />
-            <div class="flex-1 truncate">
-              <div class="flex items-center space-x-3">
-                <h3
-                  class="truncate text-md font-medium text-gray-900"
-                  transition:name={`title-${post.slug}`}
-                >
-                  {post.data.title}
-                </h3>
-                <span class="inline-flex flex-shrink-0 items-center rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                  Design
-                </span>
-              </div>
-              <p
-                class="mt-1 truncate text-sm text-gray-500"
-                title={post.data.description}
-              >
-                {post.data.description}
-              </p>
-            </div>
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+<AppLayout facets={facets} activeCategory={activeCategory.slug}>
+  <!-- <Header /> -->
+  <GridList items={items} />
 </AppLayout>
