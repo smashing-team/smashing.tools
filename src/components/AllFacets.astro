@@ -41,6 +41,26 @@ const filtered = facetEntries.some(([_, values]) =>
             stroke-linecap="round"
             stroke-linejoin="round"
           >
+            <path d="M12 5l0 14" />
+            <>
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M5 12l14 0" />
+            </>
+          </svg>
+        </button>
+        <button class="flex h-11 w-11 items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <>
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
@@ -78,8 +98,8 @@ const filtered = facetEntries.some(([_, values]) =>
     filtered && (
       <div class="relative flex">
         <button
-          id="clear-filters"
           class={twMerge(
+            'clear-filters',
             'absolute right-0 z-40 dark:bg-zinc-900 top-3.5 ml-auto inline-flex items-center rounded-full px-2.5 py-1 text-xs shadow-sm ring-1 ring-inset ring-zinc-200 hover:bg-zinc-600/5 dark:ring-zinc-800 dark:hover:bg-zinc-800/50',
           )}
         >
@@ -124,17 +144,21 @@ const filtered = facetEntries.some(([_, values]) =>
   import Query from '@/utils/query';
 
   document.addEventListener('astro:page-load', () => {
-    const clearFilters = document.getElementById('clear-filters');
-    const button = document.getElementById('mobile-menu-close-button');
+    const clearFilterButtons = Array.from(
+      document.getElementsByClassName('clear-filters'),
+    );
+    const closeMenu = document.getElementById('mobile-menu-close-button');
     const wrapper = document.getElementById('mobile-menu-wrapper');
 
-    button?.addEventListener('click', () => {
+    closeMenu?.addEventListener('click', () => {
       wrapper?.setAttribute('data-active', 'off');
       document.body.style.overflow = 'auto';
     });
 
-    clearFilters?.addEventListener('click', () => {
-      Query.clear();
+    clearFilterButtons.forEach((clearFilterButton) => {
+      clearFilterButton?.addEventListener('click', () => {
+        Query.clear();
+      });
     });
   });
 </script>
