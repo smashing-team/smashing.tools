@@ -1,9 +1,14 @@
 ---
-if (process.env.NODE_ENV === 'production') return null;
+import { twMerge } from 'tailwind-merge';
+
+const isProd = import.meta.env.PROD;
 ---
 
 <div
-  class="fixed bottom-1 right-1 z-50 flex h-6 w-6 items-center justify-center rounded-full p-3 font-mono text-xs"
+  class={twMerge(
+    'fixed bottom-1 right-1 z-50 flex h-6 w-6 items-center justify-center rounded-full p-3 font-mono text-xs',
+    isProd && 'hidden',
+  )}
 >
   <div class="block sm:hidden">xs</div>
   <div

@@ -1,0 +1,60 @@
+---
+import AllFacets from '@/components/AllFacets.astro';
+import type { Facets } from '@/utils/facets';
+
+interface Props {
+  facets: Facets;
+}
+
+const { facets } = Astro.props;
+---
+
+<div id="mobile-menu-wrapper" class="group" data-active="off">
+  <button
+    id="mobile-menu-button"
+    class="flex h-11 w-11 items-center justify-center"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M4 6l16 0"></path>
+      <path d="M4 12l16 0"></path>
+      <path d="M4 18l16 0"></path>
+    </svg>
+  </button>
+  <div
+    id="mobile-menu"
+    class="absolute inset-0 z-[200] h-screen w-full shrink-0 select-none overflow-y-auto border-r bg-zinc-50 transition-transform duration-300 group-data-[active='off']:-translate-x-full group-data-[active='on']:translate-x-0 group-data-[active='on']:shadow-2xl dark:bg-zinc-900"
+  >
+    <div class="pb-8">
+      <AllFacets mobile facets={facets} />
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const button = document.getElementById('mobile-menu-button');
+    const wrapper = document.getElementById('mobile-menu-wrapper');
+
+    button?.addEventListener('click', () => {
+      wrapper?.setAttribute(
+        'data-active',
+        wrapper.dataset.active === 'on' ? 'off' : 'on',
+      );
+      if (wrapper?.dataset.active === 'on') {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
+</script>
