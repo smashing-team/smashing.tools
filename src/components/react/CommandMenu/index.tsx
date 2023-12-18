@@ -107,22 +107,14 @@ const CommandMenu = () => {
             <React.Fragment>
               <CommandGroup heading="Socials">
                 <CommandItem
-                  className="!p-0"
                   onSelect={() =>
                     window.open('https://twitter.com/smashingtools', '_blank')
                   }
                 >
-                  <a
-                    className="flex w-full px-2 py-3"
-                    target="_blank"
-                    href="https://twitter.com/smashingtools"
-                  >
-                    <TwitterLogoIcon className="mr-2 h-4 w-4" />
-                    <span>Twitter</span>
-                  </a>
+                  <TwitterLogoIcon className="mr-2 h-4 w-4" />
+                  <span>Twitter</span>
                 </CommandItem>
                 <CommandItem
-                  className="!p-0"
                   onSelect={() =>
                     window.open(
                       'https://github.com/smashing-team/smashing.tools',
@@ -130,14 +122,8 @@ const CommandMenu = () => {
                     )
                   }
                 >
-                  <a
-                    className="flex w-full px-2 py-3"
-                    target="_blank"
-                    href="https://github.com/smashing-team/smashing.tools"
-                  >
-                    <GitHubLogoIcon className="mr-2 h-4 w-4" />
-                    <span>Github</span>
-                  </a>
+                  <GitHubLogoIcon className="mr-2 h-4 w-4" />
+                  <span>Github</span>
                 </CommandItem>
               </CommandGroup>
             </React.Fragment>
