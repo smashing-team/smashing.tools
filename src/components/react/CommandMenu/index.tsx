@@ -15,11 +15,12 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command';
+import type { PagefindSearchFragment } from '@/types/global';
 
 const CommandMenu = () => {
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
-  const [results, setResults] = React.useState([]);
+  const [results, setResults] = React.useState<PagefindSearchFragment[]>([]);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -37,12 +38,8 @@ const CommandMenu = () => {
 
   React.useEffect(() => {
     const pagefind = async () => {
-      // TODO: type support for pagefind will be added to the window object.
-      // @ts-ignore
       const searches = await window.pagefind.search(search);
-      // @ts-ignore
       const searchesResult = await Promise.all(
-        // @ts-ignore
         searches.results.map((r) => r.data()),
       );
 
@@ -86,26 +83,44 @@ const CommandMenu = () => {
             </CommandEmpty>
           ) : (
             results?.map((res, index) => (
-              <CommandItem className="flex flex-col items-start" key={index}>
-                <p className="font-bold">{res.meta.title}</p>
-                <span dangerouslySetInnerHTML={{ __html: res.excerpt }}></span>
+              <CommandItem key={index}>
+                <a className="flex w-full flex-col items-start" href={res.url}>
+                  <p className="font-bold">{res.meta.title}</p>
+                  <span
+                    dangerouslySetInnerHTML={{ __html: res.excerpt }}
+                  ></span>
+                </a>
               </CommandItem>
             ))
           )}
           {search.length === 0 && (
             <React.Fragment>
               <CommandGroup heading="Socials">
-                <CommandItem>
-                  <TwitterLogoIcon className="mr-2 h-4 w-4" />
-                  <span>Twitter</span>
+                <CommandItem className="!p-0">
+                  <a
+                    className="flex w-full px-2 py-3"
+                    target="_blank"
+                    href="https://twitter.com/smashingtools"
+                  >
+                    <TwitterLogoIcon className="mr-2 h-4 w-4" />
+                    <span>Twitter</span>
+                  </a>
                 </CommandItem>
-                <CommandItem>
-                  <GitHubLogoIcon className="mr-2 h-4 w-4" />
-                  <span>Github</span>
+                <CommandItem className="!p-0">
+                  <a
+                    className="flex w-full px-2 py-3"
+                    target="_blank"
+                    href="https://github.com/smashing-team/smashing.tools"
+                  >
+                    <GitHubLogoIcon className="mr-2 h-4 w-4" />
+                    <span>Github</span>
+                  </a>
                 </CommandItem>
-                <CommandItem>
-                  <InstagramLogoIcon className="mr-2 h-4 w-4" />
-                  <span>İnstagram</span>
+                <CommandItem className="!p-0">
+                  <a className="flex w-full px-2 py-3" href="#" target="_blank">
+                    <InstagramLogoIcon className="mr-2 h-4 w-4" />
+                    <span>İnstagram</span>
+                  </a>
                 </CommandItem>
               </CommandGroup>
             </React.Fragment>
