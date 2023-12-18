@@ -9,7 +9,7 @@ interface Props {
 const { facets } = Astro.props;
 ---
 
-<div id="mobile-menu-wrapper" class="group h-full" data-active="off">
+<div id="mobile-menu-wrapper" class="group" data-active="off">
   <button
     id="mobile-menu-button"
     class="flex h-11 w-11 items-center justify-center"
@@ -32,20 +32,29 @@ const { facets } = Astro.props;
     </svg>
   </button>
   <div
-    class="absolute inset-0 z-[200] h-full w-full shrink-0 select-none overflow-y-auto border-r bg-zinc-50 transition-transform duration-300 group-data-[active='off']:-translate-x-full group-data-[active='on']:translate-x-0 group-data-[active='on']:shadow-2xl dark:bg-zinc-900"
+    id="mobile-menu"
+    class="absolute inset-0 z-[200] h-screen w-full shrink-0 select-none overflow-y-auto border-r bg-zinc-50 transition-transform duration-300 group-data-[active='off']:-translate-x-full group-data-[active='on']:translate-x-0 group-data-[active='on']:shadow-2xl dark:bg-zinc-900"
   >
-    <AllFacets mobile facets={facets} />
+    <div class="pb-8">
+      <AllFacets mobile facets={facets} />
+    </div>
   </div>
 </div>
 <script>
   document.addEventListener('astro:page-load', () => {
     const button = document.getElementById('mobile-menu-button');
     const wrapper = document.getElementById('mobile-menu-wrapper');
+
     button?.addEventListener('click', () => {
       wrapper?.setAttribute(
         'data-active',
         wrapper.dataset.active === 'on' ? 'off' : 'on',
       );
+      if (wrapper?.dataset.active === 'on') {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
     });
   });
 </script>

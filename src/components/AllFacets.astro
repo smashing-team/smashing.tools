@@ -22,12 +22,31 @@ const filtered = facetEntries.some(([_, values]) =>
 <div
   class={twMerge(
     'static mt-2 hidden h-full border-t px-4 pb-8 lg:block',
-    mobile && 'block border-t-0 pb-24',
+    mobile && 'block border-t-0 !pb-16 h-full',
   )}
 >
   {
     mobile && (
-      <div class="flex justify-end p-1 px-2">
+      <div class="sticky top-2 z-[988] flex justify-end rounded-lg bg-black/5 p-1 px-2 opacity-0 backdrop-blur-sm transition-opacity duration-1000 group-data-[active='on']:opacity-100 dark:bg-black/50">
+        <button class="flex h-11 w-11 items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <>
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
+            </>
+          </svg>
+        </button>
         <ThemeToggle client:only />
         <button
           id="mobile-menu-close-button"
@@ -45,10 +64,10 @@ const filtered = facetEntries.some(([_, values]) =>
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M10 10l4 4m0 -4l-4 4" />
+            <path d="M18 6l-12 12" />
             <>
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+              <path d="M6 6l12 12" />
             </>
           </svg>
         </button>
@@ -57,7 +76,7 @@ const filtered = facetEntries.some(([_, values]) =>
   }
   {
     filtered && (
-      <div class="group relative flex">
+      <div class="relative flex">
         <button
           id="clear-filters"
           class={twMerge(
@@ -111,6 +130,7 @@ const filtered = facetEntries.some(([_, values]) =>
 
     button?.addEventListener('click', () => {
       wrapper?.setAttribute('data-active', 'off');
+      document.body.style.overflow = 'auto';
     });
 
     clearFilters?.addEventListener('click', () => {
