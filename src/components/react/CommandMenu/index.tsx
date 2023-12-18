@@ -47,6 +47,14 @@ const CommandMenu = () => {
     pagefind();
   }, [search]);
 
+  const handleClose = () => {
+    if (search === '') {
+      setOpen(false);
+    } else {
+      setSearch('');
+    }
+  };
+
   return (
     <>
       <button
@@ -65,6 +73,7 @@ const CommandMenu = () => {
         commandProps={{ shouldFilter: false }}
         open={open}
         onOpenChange={setOpen}
+        onClose={handleClose}
       >
         <CommandInput
           value={search}
