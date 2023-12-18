@@ -3,7 +3,6 @@ import {
   MagnifyingGlassIcon,
   TwitterLogoIcon,
 } from '@radix-ui/react-icons';
-import { navigate } from 'astro:transitions/client';
 import * as React from 'react';
 
 import {
@@ -14,11 +13,12 @@ import {
   CommandItem,
   CommandList,
 } from '@/components/react/ui/command';
+import type { PagefindSearchFragment } from '@/types/global';
 
 const CommandMenu = () => {
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = React.useState('');
-  const [results, setResults] = React.useState<any[]>([]);
+  const [results, setResults] = React.useState<PagefindSearchFragment[]>([]);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -36,12 +36,8 @@ const CommandMenu = () => {
 
   React.useEffect(() => {
     const pagefind = async () => {
-      // TODO: type support for pagefind will be added to the window object.
-      // @ts-ignore
       const searches = await window.pagefind.search(search);
-      // @ts-ignore
       const searchesResult = await Promise.all(
-        // @ts-ignore
         searches.results.map((r) => r.data()),
       );
 
@@ -50,6 +46,14 @@ const CommandMenu = () => {
 
     pagefind();
   }, [search]);
+
+  const handleClose = () => {
+    if (search === '') {
+      setOpen(false);
+    } else {
+      setSearch('');
+    }
+  };
 
   return (
     <>
@@ -66,9 +70,11 @@ const CommandMenu = () => {
         </kbd>
       </button>
       <CommandDialog
+        className="!top-1/3"
         commandProps={{ shouldFilter: false }}
         open={open}
         onOpenChange={setOpen}
+        onClose={handleClose}
       >
         <CommandInput
           value={search}
@@ -85,15 +91,15 @@ const CommandMenu = () => {
           ) : (
             results?.map((res, index) => (
               <CommandItem
-                className="flex flex-col items-start"
                 key={index}
-                onSelect={() => {
-                  // console.log('abow search result', res);
-                  navigate(res.url);
-                }}
+                onSelect={() => window.open(res.url, '_blank')}
               >
-                <p className="font-bold">{res.meta.title}</p>
-                <span dangerouslySetInnerHTML={{ __html: res.excerpt }}></span>
+                <a className="flex w-full flex-col items-start" href={res.url}>
+                  <p className="font-bold">{res.meta.title}</p>
+                  <span
+                    dangerouslySetInnerHTML={{ __html: res.excerpt }}
+                  ></span>
+                </a>
               </CommandItem>
             ))
           )}
@@ -101,20 +107,20 @@ const CommandMenu = () => {
             <React.Fragment>
               <CommandGroup heading="Socials">
                 <CommandItem
-                  onSelect={() => {
-                    window.open('https://twitter.com/smashingtools', '_blank');
-                  }}
+                  onSelect={() =>
+                    window.open('https://twitter.com/smashingtools', '_blank')
+                  }
                 >
                   <TwitterLogoIcon className="mr-2 h-4 w-4" />
                   <span>Twitter</span>
                 </CommandItem>
                 <CommandItem
-                  onSelect={() => {
+                  onSelect={() =>
                     window.open(
                       'https://github.com/smashing-team/smashing.tools',
                       '_blank',
-                    );
-                  }}
+                    )
+                  }
                 >
                   <GitHubLogoIcon className="mr-2 h-4 w-4" />
                   <span>Github</span>
