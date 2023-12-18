@@ -12,8 +12,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-} from '@/components/ui/command';
+} from '@/components/react/ui/command';
 import type { PagefindSearchFragment } from '@/types/global';
 
 const CommandMenu = () => {
@@ -112,12 +111,6 @@ const CommandMenu = () => {
                   >
                     <GitHubLogoIcon className="mr-2 h-4 w-4" />
                     <span>Github</span>
-                  </a>
-                </CommandItem>
-                <CommandItem className="!p-0">
-                  <a className="flex w-full px-2 py-3" href="#" target="_blank">
-                    <InstagramLogoIcon className="mr-2 h-4 w-4" />
-                    <span>İnstagram</span>
                   </a>
                 </CommandItem>
               </CommandGroup>
