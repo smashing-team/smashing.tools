@@ -64,13 +64,13 @@ const CommandMenu = () => {
       >
         <MagnifyingGlassIcon className="h-4 w-4" />
         Search tools...
-        <kbd className="ml-auto text-xs text-zinc-400 dark:text-zinc-500">
-          <kbd className="font-sans">⌘</kbd>
-          <kbd className="font-sans">F</kbd>
+        <kbd className="ml-auto hidden text-xs font-semibold text-zinc-400 dark:text-zinc-500 lg:block">
+          <kbd className="mr-0.5">⌘</kbd>
+          <kbd>F</kbd>
         </kbd>
       </button>
       <CommandDialog
-        className="!top-1/3"
+        className="!fixed !top-1/3"
         commandProps={{ shouldFilter: false }}
         open={open}
         onOpenChange={setOpen}

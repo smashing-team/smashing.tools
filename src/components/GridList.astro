@@ -26,11 +26,10 @@ const { items } = Astro.props;
                 'h-8 w-8 shrink-0',
                 item.data.logoRounded && 'rounded',
               )}
-              transition:name={`logo-${item.slug}`}
               src={item.data.logo}
               alt={item.data.name}
             />
-            <h2 class="mt-4 font-mono text-base text-zinc-900 dark:text-white">
+            <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
               <a href={`/${item.collection}/${item.slug}/`} class="">
                 <span class="absolute -inset-px rounded-xl" />
                 {item.data.name}
