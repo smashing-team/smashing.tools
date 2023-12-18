@@ -105,7 +105,12 @@ const CommandMenu = () => {
           {search.length === 0 && (
             <React.Fragment>
               <CommandGroup heading="Socials">
-                <CommandItem className="!p-0">
+                <CommandItem
+                  className="!p-0"
+                  onSelect={() =>
+                    window.open('https://twitter.com/smashingtools', '_blank')
+                  }
+                >
                   <a
                     className="flex w-full px-2 py-3"
                     target="_blank"
@@ -115,7 +120,15 @@ const CommandMenu = () => {
                     <span>Twitter</span>
                   </a>
                 </CommandItem>
-                <CommandItem className="!p-0">
+                <CommandItem
+                  className="!p-0"
+                  onSelect={() =>
+                    window.open(
+                      'https://github.com/smashing-team/smashing.tools',
+                      '_blank',
+                    )
+                  }
+                >
                   <a
                     className="flex w-full px-2 py-3"
                     target="_blank"
