@@ -89,7 +89,10 @@ const CommandMenu = () => {
             </CommandEmpty>
           ) : (
             results?.map((res, index) => (
-              <CommandItem key={index}>
+              <CommandItem
+                key={index}
+                onSelect={() => window.open(res.url, '_blank')}
+              >
                 <a className="flex w-full flex-col items-start" href={res.url}>
                   <p className="font-bold">{res.meta.title}</p>
                   <span
