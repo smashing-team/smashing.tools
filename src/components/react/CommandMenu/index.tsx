@@ -70,6 +70,7 @@ const CommandMenu = () => {
         </kbd>
       </button>
       <CommandDialog
+        className="!top-1/3"
         commandProps={{ shouldFilter: false }}
         open={open}
         onOpenChange={setOpen}

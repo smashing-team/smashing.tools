@@ -24,19 +24,21 @@ Command.displayName = CommandPrimitive.displayName;
 interface CommandDialogProps extends DialogProps {
   commandProps?: React.ComponentProps<typeof Command>;
   onClose?: () => void;
+  className?: string;
 }
 
 const CommandDialog = ({
   children,
   commandProps,
   onClose,
+  className,
   ...props
 }: CommandDialogProps) => {
   return (
     <Dialog {...props}>
       <DialogContent
-        className="overflow-hidden p-0 shadow-lg"
-        onClose={onClose}
+        className={cn('overflow-hidden p-0 shadow-lg', className)}
+        onClose={() => onClose?.()}
       >
         <Command
           {...commandProps}
