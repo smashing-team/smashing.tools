@@ -3,13 +3,15 @@ import { twMerge } from 'tailwind-merge';
 
 import Facet from '@/components/Facet.astro';
 import FacetSection from '@/components/FacetSection.astro';
+import { ThemeToggle } from '@/components/react/ThemeToggle';
 import type { Facets } from '@/utils/facets';
 
 interface Props {
   facets: Facets;
+  mobile?: boolean;
 }
 
-const { facets } = Astro.props;
+const { facets, mobile } = Astro.props;
 
 const facetEntries = Object.entries(facets || {});
 const filtered = facetEntries.some(([_, values]) =>
@@ -17,7 +19,42 @@ const filtered = facetEntries.some(([_, values]) =>
 );
 ---
 
-<div class="static mt-2 hidden h-full border-t px-4 pb-8 lg:block">
+<div
+  class={twMerge(
+    'static mt-2 hidden h-full border-t px-4 pb-8 lg:block',
+    mobile && 'block border-t-0 pb-24',
+  )}
+>
+  {
+    mobile && (
+      <div class="flex justify-end p-1 px-2">
+        <ThemeToggle client:only />
+        <button
+          id="mobile-menu-close-button"
+          class="flex h-11 w-11 items-center justify-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M10 10l4 4m0 -4l-4 4" />
+            <>
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+            </>
+          </svg>
+        </button>
+      </div>
+    )
+  }
   {
     filtered && (
       <div class="group relative flex">
@@ -69,6 +106,13 @@ const filtered = facetEntries.some(([_, values]) =>
 
   document.addEventListener('astro:page-load', () => {
     const clearFilters = document.getElementById('clear-filters');
+    const button = document.getElementById('mobile-menu-close-button');
+    const wrapper = document.getElementById('mobile-menu-wrapper');
+
+    button?.addEventListener('click', () => {
+      wrapper?.setAttribute('data-active', 'off');
+    });
+
     clearFilters?.addEventListener('click', () => {
       Query.clear();
     });

@@ -1,10 +1,12 @@
 ---
 import AllFacets from '@/components/AllFacets.astro';
 import LeftBar from '@/components/LeftBar.astro';
+import MobileMenu from '@/components/MobileMenu.astro';
 import TailwindIndicator from '@/components/TailwindIndicator.astro';
 import TopNav from '@/components/TopNav.astro';
 import type { Facets } from '@/utils/facets';
 
+import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
 import { type CategorySlugs, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
@@ -28,9 +30,23 @@ const { activeCategory = '/', facets } = Astro.props;
       <header
         class="bg-zinc-50 px-4 dark:bg-zinc-900 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-96 lg:items-start lg:overflow-y-auto lg:px-0 xl:w-96"
       >
+        <div class="-mx-4 flex items-center gap-3 border-b p-3 px-6 lg:hidden">
+          <a href="/" class="absolute z-[975]">
+            <img
+              class="mx-auto h-8 w-8 dark:text-white"
+              src={smashingLogo.src}
+              alt="smashing.tools"
+              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+            /></a
+          >
+          <div class="grow"></div>
+          <div class="flex items-center gap-3">
+            <MobileMenu facets={facets} />
+          </div>
+        </div>
         <LeftBar />
         <div
-          class="relative z-10 mx-auto pb-1 pt-6 lg:sticky lg:top-0 lg:min-h-full lg:max-w-2xl lg:flex-auto lg:border-x lg:border-zinc-200 lg:pt-6 dark:lg:border-zinc-800"
+          class="relative z-10 mx-auto pb-1 pt-4 lg:sticky lg:top-0 lg:min-h-full lg:max-w-2xl lg:flex-auto lg:border-x lg:border-zinc-200 lg:pt-6 dark:lg:border-zinc-800"
         >
           <TopNav activeCategory={activeCategory} />
           <div class="h-full">

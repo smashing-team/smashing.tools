@@ -26,7 +26,6 @@ const { items } = Astro.props;
                 'h-8 w-8 shrink-0',
                 item.data.logoRounded && 'rounded',
               )}
-              transition:name={`logo-${item.slug}`}
               src={item.data.logo}
               alt={item.data.name}
             />

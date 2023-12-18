@@ -24,9 +24,7 @@ export function ThemeToggle() {
       {theme === 'light' ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4"
-          width="24"
-          height="24"
+          className="h-6 w-6"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
@@ -44,9 +42,7 @@ export function ThemeToggle() {
       ) : (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4"
-          width="24"
-          height="24"
+          className="h-6 w-6"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
