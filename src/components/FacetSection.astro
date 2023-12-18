@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  children: any;
+}
+
+const { title } = Astro.props;
+---
+
+<section class="mt-4">
+  <div class="relative">
+    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+      <div class="w-full border-t border-zinc-100 dark:border-zinc-600/10">
+      </div>
+    </div>
+    <div class="relative flex justify-start">
+      <span
+        class="bg-zinc-50 pr-2 text-sm capitalize text-zinc-500 dark:bg-zinc-900"
+        >{title}</span
+      >
+    </div>
+  </div>
+  <ul
+    role="list"
+    class="mt-1 flex flex-wrap gap-0.5 text-base font-medium leading-7 text-slate-700 lg:flex-row"
+  >
+    <slot />
+  </ul>
+</section>

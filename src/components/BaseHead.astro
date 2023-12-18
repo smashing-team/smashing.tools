@@ -1,6 +1,4 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
 import '@fontsource-variable/inter';
 import '@fontsource/pitagon-sans-mono';
 import '../styles/global.css';
@@ -15,6 +13,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
+// TODO: replace placeholder image with actual image
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 ---
 
@@ -56,3 +55,28 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
   })();
 </script>
 <ViewTransitions />
+<script is:inline>
+  const theme = () => {
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme');
+    }
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  };
+
+  if (theme() === 'light') {
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
+  }
+
+  document.addEventListener('astro:after-swap', (ev) => {
+    if (theme() === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  });
+</script>

@@ -1,0 +1,24 @@
+---
+import { ThemeToggle } from '@/components/react/ThemeToggle';
+
+import smashingLogo from '../../public/logo.svg';
+---
+
+<div
+  class="hidden h-full pb-2 lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:pt-6 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]"
+>
+  <a class="flex items-center" href="/">
+    <img
+      class="h-10 w-10"
+      src={smashingLogo.src}
+      alt="smashing.tools"
+      sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+    />
+    <span class="mt-2 font-mono font-semibold text-zinc-500"
+      >smashing.<strong class="text-zinc-900 dark:text-zinc-400">tools</strong
+      ></span
+    >
+  </a>
+  <div class="flex grow"></div>
+  <ThemeToggle client:only />
+</div>

@@ -7,10 +7,14 @@ import react from '@astrojs/react';
 import netlify from '@astrojs/netlify/functions';
 import pagefind from './src/plugins/pagefind.ts';
 
-// https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
-  site: 'https://example.com',
+  site: 'https://smashing.tools',
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/noop',
+    },
+  },
   integrations: [
     mdx(),
     sitemap(),
