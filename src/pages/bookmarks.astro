@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+
+import GridList from '@/components/GridList.astro';
+import EmptyLayout from '@/layouts/EmptyLayout.astro';
+import type { IBookmark } from '@/types/global';
+
+const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
+
+const codeItems = await getCollection('code');
+const designItems = await getCollection('design');
+const allItems = [...codeItems, ...designItems];
+
+const items = allItems.filter((item) =>
+  bookmarks.some((bookmark) => bookmark.id === item.id),
+);
+---
+
+<EmptyLayout>
+  <GridList items={items} />
+</EmptyLayout>
