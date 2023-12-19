@@ -58,6 +58,7 @@ const CommandMenu = () => {
   return (
     <>
       <button
+        data-pagefind-ignore
         type="button"
         className="ui-not-focus-visible:outline-none mx-auto flex h-10 w-full max-w-md items-center gap-2 rounded-2xl bg-white pl-2 pr-3 text-sm text-zinc-500 ring-1 ring-zinc-900/10 hover:ring-zinc-900/20 dark:bg-white/5 dark:text-zinc-400 dark:ring-inset dark:ring-white/10 dark:hover:ring-white/20"
         onClick={handleToggle}
@@ -70,7 +71,7 @@ const CommandMenu = () => {
         </kbd>
       </button>
       <CommandDialog
-        className="!fixed !top-1/3"
+        className="!fixed"
         commandProps={{ shouldFilter: false }}
         open={open}
         onOpenChange={setOpen}
@@ -94,8 +95,15 @@ const CommandMenu = () => {
                 key={index}
                 onSelect={() => window.open(res.url, '_blank')}
               >
-                <a className="flex w-full flex-col items-start" href={res.url}>
-                  <p className="font-bold">{res.meta.title}</p>
+                <a
+                  className="flex w-full flex-col items-start overflow-hidden px-2"
+                  href={res.url}
+                >
+                  <p className="font-bold">{res.meta.title} </p>
+                  <div className="mb-1.5 w-full truncate opacity-80">
+                    {res.meta.headline}
+                  </div>
+
                   <span
                     dangerouslySetInnerHTML={{ __html: res.excerpt }}
                   ></span>

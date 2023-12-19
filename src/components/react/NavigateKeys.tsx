@@ -20,6 +20,7 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
 
   return (
     <div
+      data-pagefind-ignore
       className={twMerge(
         'fixed bottom-4 left-1/2 hidden -translate-x-1/2 lg:block',
         !prevHref && !nextHref && 'hidden',
