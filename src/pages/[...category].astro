@@ -22,7 +22,7 @@ const designItems = await getCollection('design');
 const allItems = [...codeItems, ...designItems];
 
 let items = allItems.sort(
-  (a, b) => a.data.datePublished.valueOf() - b.data.datePublished.valueOf(),
+  (a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf(),
 );
 
 if (activeCategory.category) {
