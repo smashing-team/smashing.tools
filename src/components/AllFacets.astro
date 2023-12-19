@@ -21,13 +21,13 @@ const filtered = facetEntries.some(([_, values]) =>
 
 <div
   class={twMerge(
-    'static mt-2 hidden h-full border-t px-4 pb-8 lg:block',
-    mobile && 'block border-t-0 !pb-16 h-full',
+    'static hidden h-full px-4 pb-8 lg:block',
+    mobile && 'block !pb-16 h-full',
   )}
 >
   {
     mobile && (
-      <div class="sticky top-2 z-[988] flex justify-end rounded-lg bg-black/5 p-1 px-2 opacity-0 backdrop-blur-sm transition-opacity duration-1000 group-data-[active='on']:opacity-100 dark:bg-black/50">
+      <div class="sticky top-2 z-[988] flex justify-end rounded-3xl bg-zinc-600/5 p-1 px-2 opacity-0 backdrop-blur-sm transition-opacity duration-1000 group-data-[active='on']:opacity-100 dark:bg-zinc-200/5">
         <button class="flex h-11 w-11 items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -4,19 +4,36 @@
 
 :root {
   font-family: "Inter Variable", sans-serif;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+ -webkit-tap-highlight-color: transparent;
+ -webkit-user-select: none;
+ -khtml-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+  user-select: none;
 }
 
-html.dark {
-  background: black;
-}
+
 
 @layer base {
   * {
     @apply border-zinc-200 dark:border-zinc-800;
   }
 
+  mark {
+    @apply bg-transparent dark:text-yellow-50 border-b-2 font-medium border-yellow-400 dark:border-yellow-50;
+  }
+
   html, body {
-    @apply h-full min-h-full bg-white antialiased dark:bg-black;
+    @apply h-full min-h-full  antialiased;
+  }
+
+  html {
+    @apply bg-white;
+  }
+
+  html.dark {
+    @apply bg-zinc-950;
   }
 
   body {
