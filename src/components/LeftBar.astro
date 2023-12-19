@@ -5,11 +5,11 @@ import smashingLogo from '../../public/logo.svg';
 ---
 
 <div
-  class="hidden h-full pb-2 lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-none lg:items-center lg:whitespace-nowrap lg:pt-6 lg:text-sm lg:leading-7 lg:[writing-mode:vertical-rl]"
+  class="hidden h-full shrink-0 pb-2 lg:sticky lg:top-0 lg:flex lg:w-16 lg:flex-col lg:items-center lg:whitespace-nowrap lg:pt-6 lg:text-sm lg:leading-7"
 >
-  <a class="flex items-center" href="/">
+  <a class="flex items-center lg:[writing-mode:vertical-rl]" href="/">
     <img
-      class="h-10 w-10"
+      class="h-8 w-8"
       src={smashingLogo.src}
       alt="smashing.tools"
       sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
@@ -20,5 +20,41 @@ import smashingLogo from '../../public/logo.svg';
     >
   </a>
   <div class="flex grow"></div>
+  <button class="flex h-11 w-11 items-center justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+        d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg
+    >
+  </button>
+  <button class="flex h-11 w-11 items-center justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <>
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z"
+        ></path>
+      </>
+    </svg>
+  </button>
   <ThemeToggle client:only />
 </div>

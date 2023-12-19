@@ -3,8 +3,6 @@ import CategorySwitcher from '@/components/CategorySwitcher.astro';
 import CommandMenu from '@/components/react/CommandMenu';
 import type { CategorySlugs } from '@/consts';
 
-import smashingLogo from '../../public/logo.svg';
-
 interface Props {
   activeCategory: CategorySlugs;
 }
@@ -12,18 +10,6 @@ interface Props {
 const { activeCategory } = Astro.props;
 ---
 
-<div class="mb-6 block text-center lg:hidden lg:px-4 lg:text-left">
-  <p class="font-mono text-2xl font-normal text-zinc-500">
-    <a href="/">
-      <img
-        class="mx-auto mb-2 h-14 w-14 dark:text-white"
-        src={smashingLogo.src}
-        alt="smashing.tools"
-        sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
-      /></a
-    >
-  </p>
-</div>
 <div class="pb-2 lg:px-4">
   <CommandMenu client:idle />
   <CategorySwitcher activeCategory={activeCategory} />
