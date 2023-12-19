@@ -5,15 +5,30 @@ import { twMerge } from 'tailwind-merge';
 
 import LeftBar from '@/components/LeftBar.astro';
 import CommandMenu from '@/components/react/CommandMenu';
+import { NavigateKeys } from '@/components/react/NavigateKeys';
 
 import BaseHead from '../components/BaseHead.astro';
 
 type Props = (
   | CollectionEntry<'code'>['data']
   | CollectionEntry<'design'>['data']
-) & { slug: string };
+) & {
+  slug: string;
+  collection: string;
+  prevSlug?: string;
+  nextSlug?: string;
+};
 
-const { name, headline, logo, logoPadding, slug } = Astro.props;
+const {
+  name,
+  headline,
+  logo,
+  logoPadding,
+  slug,
+  collection,
+  prevSlug,
+  nextSlug,
+} = Astro.props;
 ---
 
 <html lang="en">
@@ -131,6 +146,11 @@ const { name, headline, logo, logoPadding, slug } = Astro.props;
           class="prose prose-zinc relative mx-auto h-full max-w-full p-8 dark:prose-invert"
         >
           <slot />
+          <NavigateKeys
+            client:load
+            prevHref={prevSlug && `/${collection}/${prevSlug}`}
+            nextHref={nextSlug && `/${collection}/${nextSlug}`}
+          />
         </article>
       </main>
     </div>

@@ -5,17 +5,30 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('design');
-  return posts.map((post) => ({
+  return posts.map((post, index) => ({
     params: { slug: post.slug },
-    props: post,
+    props: {
+      ...post,
+      prevSlug: posts[index - 1]?.slug,
+      nextSlug: posts[index + 1]?.slug,
+    },
   }));
 }
-type Props = CollectionEntry<'design'>;
+type Props = CollectionEntry<'design'> & {
+  prevSlug: CollectionEntry<'design'>['slug'];
+  nextSlug: CollectionEntry<'design'>['slug'];
+};
 
 const post = Astro.props;
 const { Content } = await post.render();
 ---
 
-<ToolLayout {...post.data} slug={post.slug}>
+<ToolLayout
+  {...post.data}
+  collection="design"
+  slug={post.slug}
+  prevSlug={post.prevSlug}
+  nextSlug={post.nextSlug}
+>
   <Content />
 </ToolLayout>
