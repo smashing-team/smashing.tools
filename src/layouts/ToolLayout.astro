@@ -1,8 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { twMerge } from 'tailwind-merge';
 
-import LeftBar from '@/components/LeftBar.astro';
 import CommandMenu from '@/components/react/CommandMenu';
 import { NavigateKeys } from '@/components/react/NavigateKeys';
 import { ThemeToggle } from '@/components/react/ThemeToggle';
@@ -19,8 +17,7 @@ type Props = (
   nextSlug?: string;
 };
 
-const { name, headline, logo, logoPadding, collection, prevSlug, nextSlug } =
-  Astro.props;
+const { name, headline, logo, collection, prevSlug, nextSlug } = Astro.props;
 ---
 
 <html lang="en">
@@ -29,12 +26,13 @@ const { name, headline, logo, logoPadding, collection, prevSlug, nextSlug } =
   </head>
 
   <body>
-    <div class="h-full w-full">
-      <header
-        class="bg-zinc-50 px-4 dark:bg-zinc-900 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-96 lg:items-start lg:overflow-y-auto lg:px-0"
+    <div class="mx-auto h-full max-w-xl">
+      <div
+        id="tool-layout-header"
+        class="fixed left-0 top-0 z-50 w-full p-2 px-4"
       >
         <div
-          class="fixed top-0 z-50 -mx-4 flex w-full items-center gap-3 bg-black/5 p-3 px-6 shadow-md backdrop-blur-sm dark:bg-black/50 lg:hidden"
+          class="mx-auto flex w-full max-w-xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
         >
           <a href="/" class="absolute z-[975]">
             <img
@@ -45,32 +43,18 @@ const { name, headline, logo, logoPadding, collection, prevSlug, nextSlug } =
             /></a
           >
           <div class="grow"></div>
-          <div class="flex items-center gap-3">
-            <ThemeToggle client:only />
-          </div>
+          <ThemeToggle client:only />
         </div>
-        <LeftBar />
+      </div>
+      <header class="px-4">
         <div class="hidden">
           <CommandMenu client:idle />
         </div>
-        <div
-          class="relative z-10 mx-auto px-4 pb-4 pt-24 sm:px-6 md:max-w-2xl md:px-4 lg:min-h-full lg:flex-auto lg:border-x lg:border-zinc-200 lg:p-6 dark:lg:border-zinc-800"
-        >
-          <div
-            class="relative mx-auto block w-48 overflow-hidden rounded-lg bg-white shadow-xl shadow-zinc-200 dark:bg-black dark:shadow-zinc-800/20 sm:w-64 sm:rounded-xl lg:w-auto lg:rounded-2xl"
-          >
-            <img
-              class={twMerge('w-full', logoPadding && 'p-4')}
-              src={logo.src}
-              alt={name}
-              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
-            />
-            <div
-              class="absolute inset-0 rounded-lg ring-1 ring-inset ring-black/10 dark:ring-black/70 sm:rounded-xl lg:rounded-2xl"
-            >
-            </div>
+        <div class="relative z-10 mx-auto px-4 pb-4 pt-24">
+          <div class="relative block w-24 overflow-hidden">
+            <img class="w-full" src={logo.src} alt={name} />
           </div>
-          <div class="mt-10 text-center lg:mt-12 lg:text-left">
+          <div class="mt-6 text-left">
             <p class="text-2xl font-medium text-zinc-900 dark:text-zinc-50">
               {name}
             </p>
@@ -80,24 +64,20 @@ const { name, headline, logo, logoPadding, collection, prevSlug, nextSlug } =
               {headline}
             </p>
           </div>
-          <section class="mt-10 lg:mt-12">
-            <div
-              class="h-px bg-gradient-to-r from-zinc-200/0 via-zinc-200 to-zinc-200/0 dark:via-zinc-700 lg:hidden"
-            >
-            </div>
+          <section class="mt-10">
             <ul
               role="list"
-              class="mt-4 flex justify-center gap-10 text-base font-medium leading-7 text-zinc-700 sm:gap-8 lg:justify-start lg:gap-4"
+              class="mt-4 flex gap-10 text-base font-medium leading-7 text-zinc-700"
             >
               <li>
                 <a
                   href="/"
-                  class="flex rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:bg-white/10 dark:text-white dark:ring-zinc-700 dark:hover:bg-white/5"
+                  class="flex rounded-3xl bg-white px-4 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
                   ><span
                     ><span class="flex items-center"
                       ><svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="relative -left-0.5 mr-1.5 h-5 w-5 stroke-zinc-400"
+                        class="relative -left-0.5 mr-1.5 h-5 w-5 stroke-zinc-400 dark:stroke-zinc-800"
                         viewBox="0 0 24 24"
                         stroke-width="1.5"
                         stroke="currentColor"
@@ -115,31 +95,10 @@ const { name, headline, logo, logoPadding, collection, prevSlug, nextSlug } =
                 >
               </li>
             </ul>
-
-            <div class="mt-4">
-              <div
-                class="h-px bg-gradient-to-r from-zinc-200/0 via-zinc-200 to-zinc-200/0 dark:via-zinc-700 lg:hidden"
-              >
-              </div>
-              <dl class="divide-y divide-zinc-100 dark:divide-zinc-600">
-                <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt
-                    class="text-sm font-medium leading-6 text-zinc-900 dark:text-zinc-400"
-                  >
-                    Full name
-                  </dt>
-                  <dd
-                    class="mt-1 text-sm leading-6 text-zinc-600 dark:text-zinc-500 sm:col-span-2 sm:mt-0"
-                  >
-                    Margot Foster
-                  </dd>
-                </div>
-              </dl>
-            </div>
           </section>
         </div>
       </header>
-      <main class="border-t lg:relative lg:mb-10 lg:ml-96 lg:border-t-0">
+      <main>
         <article
           class="prose prose-zinc relative mx-auto h-full max-w-full p-8 dark:prose-invert"
         >

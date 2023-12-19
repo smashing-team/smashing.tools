@@ -19,13 +19,18 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
   }, []);
 
   return (
-    <div className="fixed bottom-4 left-1/2 hidden lg:block ">
+    <div
+      className={twMerge(
+        'fixed bottom-4 left-1/2 hidden -translate-x-1/2 lg:block',
+        !prevHref && !nextHref && 'hidden',
+      )}
+    >
       <div className="flex h-8 items-center space-x-1.5 rounded-lg border bg-zinc-50 px-2 text-xs text-gray-500 dark:bg-white/10">
-        <div className="text-zinc-600 dark:text-zinc-500">Use the</div>
+        <div className="text-zinc-600 dark:text-zinc-500">Prev</div>
 
         <div className="flex items-center space-x-0.5">
           <a
-            href={prevHref && prevHref}
+            href={prevHref || '#'}
             className={twMerge(
               'flex h-5 w-5 items-center justify-center rounded border bg-white text-zinc-900 shadow dark:bg-zinc-900 dark:text-zinc-200',
               !prevHref && 'opacity-50',
@@ -35,7 +40,7 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
           </a>
 
           <a
-            href={nextHref && nextHref}
+            href={nextHref || '#'}
             className={twMerge(
               'flex h-5 w-5 items-center justify-center rounded border bg-white text-zinc-900 shadow dark:bg-zinc-900 dark:text-zinc-200',
               !nextHref && 'opacity-50',
@@ -45,7 +50,7 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
           </a>
         </div>
 
-        <div className="text-zinc-600 dark:text-zinc-500">keys to navigate</div>
+        <div className="text-zinc-600 dark:text-zinc-500">Next</div>
       </div>
     </div>
   );

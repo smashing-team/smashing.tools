@@ -20,11 +20,11 @@ const { activeCategory = '/' } = Astro.props;
       data-active={activeCategory === '/' && 'on'}
     >
       <span
-        class="absolute inset-0 -z-10 scale-75 rounded-lg bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
+        class="absolute inset-0 -z-10 scale-75 rounded-3xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
       ></span>
       <a
         href="/"
-        class="flex items-center rounded-lg px-2"
+        class="flex items-center rounded-3xl px-2"
         aria-label="All tools"
       >
         <svg
@@ -46,7 +46,7 @@ const { activeCategory = '/' } = Astro.props;
       data-active={activeCategory === '/code' && 'on'}
     >
       <span
-        class="absolute inset-0 -z-10 scale-75 rounded-lg bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"
+        class="absolute inset-0 -z-10 scale-75 rounded-3xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"
       ></span>
       <a
         href="/code"
@@ -72,7 +72,7 @@ const { activeCategory = '/' } = Astro.props;
       data-active={activeCategory === '/design' && 'on'}
     >
       <span
-        class="absolute inset-0 -z-10 scale-75 rounded-lg bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"
+        class="absolute inset-0 -z-10 scale-75 rounded-3xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"
       ></span>
       <a
         href="/design"
