@@ -47,6 +47,10 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
+<script
+  defer
+  data-domain="smashing.tools"
+  src="https://plausible.io/js/script.js"></script>
 <!-- Pagefind -->
 <script is:inline>
   (async () => {
