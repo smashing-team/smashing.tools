@@ -4,12 +4,15 @@ import { twMerge } from 'tailwind-merge';
 
 import BookmarkIcon from '@/components/icons/bookmark.astro';
 import type { AllItems } from '@/pages/[...category].astro';
+import type { IBookmark } from '@/types/global';
 
 interface Props {
   items: AllItems;
 }
 
 const { items } = Astro.props;
+
+const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 ---
 
 <ul
@@ -23,8 +26,11 @@ const { items } = Astro.props;
           <div class="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.zinc.400),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]" />
           <button
             data-value={item.id}
+            data-checked={bookmarks
+              .some((bookmark) => bookmark.id === item.id)
+              .toString()}
             id="bookmark-button"
-            class="absolute right-3 top-3 z-50 hidden text-zinc-500 group-hover:block dark:text-zinc-400"
+            class="group absolute right-3 top-3 z-50 hidden text-zinc-500 group-hover:block dark:text-zinc-400"
           >
             <BookmarkIcon />
           </button>
@@ -83,14 +89,18 @@ const { items } = Astro.props;
               (item) => item.id !== id,
             );
 
+            targetElement.dataset.checked = 'false';
+
             setCookie('bookmarks', JSON.stringify(filteredBookmarks));
 
             if (hasBookmarkPage) {
               targetElement.closest('#tool-item')!.remove();
               document.querySelector('#bookmark-count')!.textContent =
-                filteredBookmarks.length.toString();
+                '(' + filteredBookmarks.length + ')';
             }
           } else {
+            targetElement.dataset.checked = 'true';
+
             setCookie(
               'bookmarks',
               JSON.stringify([...parsedBookmarks, bookmark]),

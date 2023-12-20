@@ -14,6 +14,8 @@ const allItems = [...codeItems, ...designItems];
 const items = allItems.filter((item) =>
   bookmarks.some((bookmark) => bookmark.id === item.id),
 );
+
+export const prerender = false;
 ---
 
 <EmptyLayout>
