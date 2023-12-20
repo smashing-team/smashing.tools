@@ -1,11 +1,12 @@
 {
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
-    "jsx": "react",
-    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "baseUrl": "/Users/needim/projects/smashing-team/smashing.tools",
     "paths": {
       "@/*": ["src/*"]
     },
-    "exactOptionalPropertyTypes": false
+    "exactOptionalPropertyTypes": false,
+    "jsxImportSource": "react"
   }
 }
