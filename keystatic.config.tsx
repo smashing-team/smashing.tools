@@ -2,29 +2,32 @@ import { collection, config, fields } from '@keystatic/core';
 
 const baseSchema = {
   name: fields.slug({
-    name: { label: 'Name', validation: { length: { min: 1, max: 100 } } },
+    name: {
+      label: 'Name',
+      description: 'Tool name',
+      validation: { length: { min: 1, max: 100 } },
+    },
   }),
   headline: fields.text({
     label: 'Headline',
-    description: 'Short description that summarizes a CreativeWork',
+    description: 'Short description that summarizes the tool',
     validation: { length: { min: 1, max: 200 } },
   }),
   datePublished: fields.datetime({
     label: 'Published date',
-    description: 'The date and time of the event',
-  }),
-  logo: fields.image({
-    label: 'Logo',
-    directory: 'public/logos',
-    description: 'Logo of the tool',
+    description: 'Tool will be available on the smashing.tools after this date',
     validation: {
       isRequired: true,
     },
   }),
-  promo: fields.image({
-    label: 'Promo',
-    directory: 'public/promos',
-    description: 'Promo image',
+  logo: fields.image({
+    label: 'Logo',
+    directory: 'public/logo',
+    description:
+      'Logo of the tool. The image should be 1:1 ratio (e.g. 500x500) for best results.',
+    validation: {
+      isRequired: true,
+    },
   }),
   url: fields.url({
     label: 'URL',
@@ -42,18 +45,42 @@ const baseSchema = {
       { label: 'One-time fee', value: 'One-time fee' },
     ],
   }),
+  heroSlider: fields.blocks(
+    {
+      heroSlider: {
+        label: 'Hero Slider Image',
+        schema: fields.object({
+          image: fields.image({
+            label:
+              'Choose an image. The image should be 16:10 ratio (e.g. 1600x1000) for best results.',
+            directory: 'public/hero',
+          }),
+        }),
+      },
+    },
+    {
+      label: 'Hero Slider',
+      validation: { length: { min: 1, max: 5 } },
+    },
+  ),
   content: fields.document({
     label: 'Content',
     formatting: true,
     dividers: true,
     links: true,
     images: undefined,
+    tables: true,
+    description: 'This is the main content of the tool',
   }),
 };
+
 export default config({
   ui: {
     brand: {
       name: 'smashing.tools',
+      mark: () => {
+        return <img src="/logo.svg" height={24} />;
+      },
     },
   },
   storage: {
@@ -67,7 +94,7 @@ export default config({
       label: 'Code',
       slugField: 'name',
       path: 'src/content/code/*',
-      entryLayout: 'content',
+      entryLayout: 'form',
       format: { contentField: 'content' },
       schema: {
         ...baseSchema,
@@ -229,14 +256,15 @@ export default config({
     design: collection({
       label: 'Design',
       slugField: 'name',
-      entryLayout: 'content',
+      entryLayout: 'form',
       path: 'src/content/design/*',
       format: { contentField: 'content' },
       schema: {
         ...baseSchema,
         compatibility: fields.multiselect({
           label: 'Compatibility',
-          description: 'Compatibility',
+          description:
+            'Which design tools/features are compatible with the tool?',
           options: [
             { label: 'Figma', value: 'Figma' },
             { label: 'Figma Styles', value: 'Figma Styles' },
@@ -249,7 +277,7 @@ export default config({
         }),
         componentCount: fields.multiselect({
           label: 'Component Count',
-          description: 'Component Count',
+          description: 'How many components are included?',
           options: [
             { label: '0-10', value: '0-10' },
             { label: '11-50', value: '11-50' },
@@ -263,7 +291,7 @@ export default config({
         }),
         pageExampleCount: fields.multiselect({
           label: 'Page Example Count',
-          description: 'Page Example Count',
+          description: 'How many page examples are included?',
           options: [
             { label: '0-10', value: '0-10' },
             { label: '11-50', value: '11-50' },

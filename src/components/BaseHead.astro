@@ -13,8 +13,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// TODO: replace placeholder image with actual image
-const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+const { title, description, image = '/og.png' } = Astro.props;
 ---
 
 <!-- Global Metadata -->

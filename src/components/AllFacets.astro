@@ -29,7 +29,11 @@ const filtered = facetEntries.some(([_, values]) =>
   {
     mobile && (
       <div class="sticky top-2 z-[988] flex justify-end rounded-3xl bg-zinc-600/5 p-1 px-2 opacity-0 backdrop-blur-sm transition-opacity duration-1000 group-data-[active='on']:opacity-100 dark:bg-zinc-200/5">
-        <button class="flex h-11 w-11 items-center justify-center">
+        <a
+          href="/keystatic"
+          data-astro-prefetch="false"
+          class="flex h-11 w-11 items-center justify-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -48,7 +52,7 @@ const filtered = facetEntries.some(([_, values]) =>
               <path d="M5 12l14 0" />
             </>
           </svg>
-        </button>
+        </a>
         <a href="/bookmarks" class="flex h-11 w-11 items-center justify-center">
           <BookmarkIcon />
         </a>

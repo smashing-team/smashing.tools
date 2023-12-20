@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { twMerge } from 'tailwind-merge';
 
 import BookmarkIcon from '@/components/icons/bookmark.astro';
 import type { AllItems } from '@/pages/[...category].astro';
@@ -7,16 +8,20 @@ import type { IBookmark } from '@/types/global';
 
 interface Props {
   items: AllItems;
+  withoutPadding?: boolean;
 }
 
-const { items } = Astro.props;
+const { items, withoutPadding = false } = Astro.props;
 
 const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 ---
 
 <ul
   role="list"
-  class="grid grid-cols-1 gap-4 p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:p-4 xl:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4"
+  class={twMerge(
+    'grid grid-cols-1 gap-4 p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:p-4 xl:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4',
+    withoutPadding && 'p-0  lg:p-0',
+  )}
 >
   {
     items.map((item) => (
@@ -29,20 +34,20 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
               .some((bookmark) => bookmark.id === item.id)
               .toString()}
             id="bookmark-button"
-            class="group absolute right-0 top-4 z-50 hidden h-11 w-11 text-zinc-500 group-hover:block data-[checked=true]:block dark:text-zinc-400"
+            class="group absolute right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-3xl text-zinc-500 opacity-0 transition-all hover:scale-110 group-hover:opacity-100 data-[checked=true]:opacity-100 dark:text-zinc-400 "
           >
             <BookmarkIcon />
           </button>
           <div class="relative overflow-hidden rounded-3xl p-6">
             <Image
               class="h-12 w-12 shrink-0"
-              src={`/logos/${item.slug}/${item.data.logo}`}
+              src={`/logo/${item.slug}/${item.data.logo}`}
               alt={item.data.name}
               width={200}
               height={200}
             />
             <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
-              <a href={`/${item.collection}/${item.slug}/`} class="">
+              <a href={`/${item.collection}/${item.slug}/`} class="font-medium">
                 <span class="absolute -inset-px rounded-3xl" />
                 {item.data.name}
               </a>
