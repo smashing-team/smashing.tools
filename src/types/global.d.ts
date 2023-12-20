@@ -208,7 +208,7 @@ declare global {
       search: (
         term: string | null,
         options?: PagefindSearchOptions,
-      ) => PagefindSearchResults;
+      ) => Promise<PagefindSearchResults>;
     };
   }
 }

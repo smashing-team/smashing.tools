@@ -19,7 +19,7 @@ const { key, title, count, selected = false, disabled = false } = Astro.props;
     data-value={title}
     disabled={disabled}
     class={twMerge(
-      'inline-flex items-center rounded-full bg-white px-3 py-1 ring-1 ring-inset ring-zinc-200 hover:bg-zinc-100 dark:bg-transparent dark:text-zinc-200 dark:ring-zinc-800 dark:hover:bg-zinc-800',
+      'inline-flex items-center rounded-full bg-white px-3 py-1 ring-1 ring-inset ring-zinc-200 hover:bg-zinc-100 dark:bg-zinc-950/40 dark:text-zinc-200 dark:ring-zinc-800 dark:hover:bg-zinc-800',
       selected &&
         'bg-zinc-100 text-zinc-600 ring-zinc-300 dark:bg-zinc-800 dark:ring-zinc-700',
       disabled && 'cursor-not-allowed opacity-20',

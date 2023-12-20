@@ -7,13 +7,14 @@ import type { IBookmark } from '@/types/global';
 
 const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 
-const codeItems = await getCollection('code');
-const designItems = await getCollection('design');
-const allItems = [...codeItems, ...designItems];
-
-const items = allItems.filter((item) =>
+const codeItems = await getCollection('code', (item) =>
   bookmarks.some((bookmark) => bookmark.id === item.id),
 );
+const designItems = await getCollection('design', (item) =>
+  bookmarks.some((bookmark) => bookmark.id === item.id),
+);
+
+const allItems = [...codeItems, ...designItems];
 
 export const prerender = false;
 ---
@@ -23,9 +24,9 @@ export const prerender = false;
     <div>
       <span class="text-2xl font-bold">Bookmarks</span>
       <span class="text-sm text-gray-500" id="bookmark-count"
-        >({items.length})</span
+        >({allItems.length})</span
       >
     </div>
   </div>
-  <GridList items={items} />
+  <GridList items={allItems} />
 </EmptyLayout>

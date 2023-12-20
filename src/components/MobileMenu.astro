@@ -33,9 +33,9 @@ const { facets } = Astro.props;
   </button>
   <div
     id="mobile-menu"
-    class="absolute inset-0 z-[200] h-screen w-full shrink-0 select-none overflow-y-auto border-r bg-zinc-50 transition-transform duration-300 group-data-[active='off']:-translate-x-full group-data-[active='on']:translate-x-0 group-data-[active='on']:shadow-2xl dark:bg-zinc-900"
+    class="absolute inset-0 z-30 h-screen w-full shrink-0 select-none overflow-y-auto border-r bg-zinc-50 transition-transform duration-300 group-data-[active='off']:-translate-x-full group-data-[active='on']:translate-x-0 group-data-[active='on']:shadow-2xl dark:bg-zinc-900"
   >
-    <div class="pb-8">
+    <div class="pb-8 pt-2">
       <AllFacets mobile facets={facets} />
     </div>
   </div>

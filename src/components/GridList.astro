@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import { twMerge } from 'tailwind-merge';
 
 import BookmarkIcon from '@/components/icons/bookmark.astro';
 import type { AllItems } from '@/pages/[...category].astro';
@@ -17,39 +16,36 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 
 <ul
   role="list"
-  class="grid grid-cols-1 gap-4 p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:p-6 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5"
+  class="grid grid-cols-1 gap-4 p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:p-4 xl:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4"
 >
   {
     items.map((item) => (
-      <li id="tool-item" class="col-span-1">
-        <div class="group relative rounded-xl border border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900">
-          <div class="absolute -inset-px rounded-xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.zinc.400),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]" />
+      <li class="col-span-1">
+        <div class="group relative rounded-3xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+          <div class="absolute -inset-px rounded-3xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.zinc.400),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]" />
           <button
             data-value={item.id}
             data-checked={bookmarks
               .some((bookmark) => bookmark.id === item.id)
               .toString()}
             id="bookmark-button"
-            class="group absolute right-3 top-3 z-50 hidden text-zinc-500 group-hover:block dark:text-zinc-400"
+            class="group absolute right-0 top-4 z-50 hidden h-11 w-11 text-zinc-500 group-hover:block data-[checked=true]:block dark:text-zinc-400"
           >
             <BookmarkIcon />
           </button>
-          <div class="relative overflow-hidden rounded-xl p-6">
+          <div class="relative overflow-hidden rounded-3xl p-6">
             <Image
-              class={twMerge(
-                'h-8 w-8 shrink-0',
-                item.data.logoRounded && 'rounded',
-              )}
+              class="h-12 w-12 shrink-0"
               src={item.data.logo}
               alt={item.data.name}
             />
             <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
               <a href={`/${item.collection}/${item.slug}/`} class="">
-                <span class="absolute -inset-px rounded-xl" />
+                <span class="absolute -inset-px rounded-3xl" />
                 {item.data.name}
               </a>
             </h2>
-            <p class="mt-1 truncate text-sm text-zinc-700 dark:text-zinc-400">
+            <p class="mt-1 truncate text-sm text-zinc-700 dark:text-zinc-200">
               {item.data.headline}
             </p>
           </div>
@@ -62,11 +58,11 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 <script>
   import { getCookie, setCookie } from '@/utils/cookie';
   import type { IBookmark } from '@/types/global';
-  const url = new URL(window.location.href);
-
-  const hasBookmarkPage = url.pathname.includes('bookmarks');
+  import { navigate } from 'astro:transitions/client';
 
   document.addEventListener('astro:page-load', () => {
+    const url = new URL(window.location.href);
+    const hasBookmarkPage = url.pathname.includes('bookmarks');
     const bookmarkButtons = document.querySelectorAll('#bookmark-button');
 
     Array.from(bookmarkButtons).forEach((button) =>
@@ -94,9 +90,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
             setCookie('bookmarks', JSON.stringify(filteredBookmarks));
 
             if (hasBookmarkPage) {
-              targetElement.closest('#tool-item')!.remove();
-              document.querySelector('#bookmark-count')!.textContent =
-                '(' + filteredBookmarks.length + ')';
+              navigate('/bookmarks');
             }
           } else {
             targetElement.dataset.checked = 'true';
