@@ -2,7 +2,7 @@
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "baseUrl": "/Users/needim/projects/smashing-team/smashing.tools",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
