@@ -1,23 +1,27 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { Entry } from '@keystatic/core/reader';
+import { Image } from 'astro:assets';
 
 import CommandMenu from '@/components/react/CommandMenu';
 import { NavigateKeys } from '@/components/react/NavigateKeys';
 import { ThemeToggle } from '@/components/react/ThemeToggle';
 
+import type keystaticConfig from '../../keystatic.config';
 import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
 
-type Props = (
-  | CollectionEntry<'code'>['data']
-  | CollectionEntry<'design'>['data']
-) & {
+type CodeEntry = Entry<(typeof keystaticConfig)['collections']['code']>;
+type DesignEntry = Entry<(typeof keystaticConfig)['collections']['design']>;
+
+type Props = (CodeEntry | DesignEntry) & {
   collection: string;
+  slug?: string;
   prevSlug?: string;
   nextSlug?: string;
 };
 
-const { name, headline, logo, collection, prevSlug, nextSlug } = Astro.props;
+const { name, headline, logo, collection, prevSlug, nextSlug, slug } =
+  Astro.props;
 ---
 
 <html lang="en">
@@ -53,11 +57,13 @@ const { name, headline, logo, collection, prevSlug, nextSlug } = Astro.props;
         </div>
         <div class="relative z-10 mx-auto px-4 pb-4 pt-24">
           <div class="relative block w-24 overflow-hidden">
-            <img
+            <Image
               data-pagefind-meta="image[src], image_alt[alt]"
               class="w-full"
-              src={logo.src}
+              src={`/logos/${slug}/${logo}`}
               alt={name}
+              width={200}
+              height={200}
             />
           </div>
           <div class="mt-6 text-left">

@@ -36,8 +36,10 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
           <div class="relative overflow-hidden rounded-3xl p-6">
             <Image
               class="h-12 w-12 shrink-0"
-              src={item.data.logo}
+              src={`/logos/${item.slug}/${item.data.logo}`}
               alt={item.data.name}
+              width={200}
+              height={200}
             />
             <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
               <a href={`/${item.collection}/${item.slug}/`} class="">
