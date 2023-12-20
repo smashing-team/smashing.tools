@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 
 import Facet from '@/components/Facet.astro';
 import FacetSection from '@/components/FacetSection.astro';
+import BookmarkIcon from '@/components/icons/bookmark.astro';
 import { ThemeToggle } from '@/components/react/ThemeToggle';
 import type { Facets } from '@/utils/facets';
 
@@ -48,25 +49,9 @@ const filtered = facetEntries.some(([_, values]) =>
             </>
           </svg>
         </button>
-        <button class="flex h-11 w-11 items-center justify-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <>
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z" />
-            </>
-          </svg>
-        </button>
+        <a href="/bookmarks" class="flex h-11 w-11 items-center justify-center">
+          <BookmarkIcon />
+        </a>
         <ThemeToggle client:only />
         <button
           id="mobile-menu-close-button"

@@ -1,0 +1,43 @@
+---
+import LeftBar from '@/components/LeftBar.astro';
+
+import smashingLogo from '../../public/logo.svg';
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+export const prerender = false;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+
+  <body>
+    <div class="w-full">
+      <header
+        class="bg-zinc-50 px-4 dark:bg-zinc-900 lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:items-start lg:overflow-y-auto lg:px-0"
+      >
+        <div class="-mx-4 flex items-center gap-3 border-b p-3 px-6 lg:hidden">
+          <a href="/" class="absolute z-[975]">
+            <img
+              class="mx-auto h-8 w-8 dark:text-white"
+              src={smashingLogo.src}
+              alt="smashing.tools"
+              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+            /></a
+          >
+          <div class="grow"></div>
+        </div>
+        <LeftBar />
+      </header>
+      <main
+        class="mt-5 border-t border-zinc-200 dark:border-zinc-700 lg:relative lg:mb-10 lg:ml-28 lg:border-t-0 xl:ml-28"
+      >
+        <div class="relative">
+          <slot />
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,13 +1,17 @@
 ---
 import { Image } from 'astro:assets';
 
+import BookmarkIcon from '@/components/icons/bookmark.astro';
 import type { AllItems } from '@/pages/[...category].astro';
+import type { IBookmark } from '@/types/global';
 
 interface Props {
   items: AllItems;
 }
 
 const { items } = Astro.props;
+
+const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 ---
 
 <ul
@@ -19,6 +23,16 @@ const { items } = Astro.props;
       <li class="col-span-1">
         <div class="group relative rounded-3xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
           <div class="absolute -inset-px rounded-3xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.zinc.400),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]" />
+          <button
+            data-value={item.id}
+            data-checked={bookmarks
+              .some((bookmark) => bookmark.id === item.id)
+              .toString()}
+            id="bookmark-button"
+            class="group absolute right-0 top-4 z-50 hidden h-11 w-11 text-zinc-500 group-hover:block data-[checked=true]:block dark:text-zinc-400"
+          >
+            <BookmarkIcon />
+          </button>
           <div class="relative overflow-hidden rounded-3xl p-6">
             <Image
               class="h-12 w-12 shrink-0"
@@ -40,3 +54,56 @@ const { items } = Astro.props;
     ))
   }
 </ul>
+
+<script>
+  import { getCookie, setCookie } from '@/utils/cookie';
+  import type { IBookmark } from '@/types/global';
+  import { navigate } from 'astro:transitions/client';
+
+  document.addEventListener('astro:page-load', () => {
+    const url = new URL(window.location.href);
+    const hasBookmarkPage = url.pathname.includes('bookmarks');
+    const bookmarkButtons = document.querySelectorAll('#bookmark-button');
+
+    Array.from(bookmarkButtons).forEach((button) =>
+      button.addEventListener('click', (e) => {
+        const targetElement = e.currentTarget as HTMLButtonElement;
+        const id = targetElement.dataset.value;
+
+        const bookmarks = getCookie('bookmarks');
+
+        const bookmark = {
+          id,
+          date: new Date(),
+        };
+
+        if (bookmarks) {
+          const parsedBookmarks = JSON.parse(bookmarks) as IBookmark[];
+
+          if (parsedBookmarks.find((item) => item.id === id)) {
+            const filteredBookmarks = parsedBookmarks.filter(
+              (item) => item.id !== id,
+            );
+
+            targetElement.dataset.checked = 'false';
+
+            setCookie('bookmarks', JSON.stringify(filteredBookmarks));
+
+            if (hasBookmarkPage) {
+              navigate('/bookmarks');
+            }
+          } else {
+            targetElement.dataset.checked = 'true';
+
+            setCookie(
+              'bookmarks',
+              JSON.stringify([...parsedBookmarks, bookmark]),
+            );
+          }
+        } else {
+          setCookie('bookmarks', JSON.stringify([bookmark]));
+        }
+      }),
+    );
+  });
+</script>
