@@ -17,5 +17,13 @@ const items = allItems.filter((item) =>
 ---
 
 <EmptyLayout>
+  <div class="flex p-2 lg:p-6">
+    <div>
+      <span class="text-2xl font-bold">Bookmarks</span>
+      <span class="text-sm text-gray-500" id="bookmark-count"
+        >({items.length})</span
+      >
+    </div>
+  </div>
   <GridList items={items} />
 </EmptyLayout>

@@ -85,7 +85,11 @@ const { items } = Astro.props;
 
             setCookie('bookmarks', JSON.stringify(filteredBookmarks));
 
-            if (hasBookmarkPage) targetElement.closest('#tool-item')!.remove();
+            if (hasBookmarkPage) {
+              targetElement.closest('#tool-item')!.remove();
+              document.querySelector('#bookmark-count')!.textContent =
+                filteredBookmarks.length.toString();
+            }
           } else {
             setCookie(
               'bookmarks',
