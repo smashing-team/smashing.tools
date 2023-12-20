@@ -1,4 +1,5 @@
 ---
+import BookmarkIcon from '@/components/icons/bookmark.astro';
 import { ThemeToggle } from '@/components/react/ThemeToggle';
 
 import smashingLogo from '../../public/logo.svg';
@@ -20,7 +21,7 @@ import smashingLogo from '../../public/logo.svg';
     >
   </a>
   <div class="flex grow"></div>
-  <button class="flex h-11 w-11 items-center justify-center">
+  <a href="/keystatic" class="flex h-11 w-11 items-center justify-center">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="h-5 w-5"
@@ -35,26 +36,9 @@ import smashingLogo from '../../public/logo.svg';
       ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
         d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg
     >
-  </button>
-  <button class="flex h-11 w-11 items-center justify-center">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-5 w-5"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      stroke-width="2"
-      stroke="currentColor"
-      fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <>
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z"
-        ></path>
-      </>
-    </svg>
-  </button>
+  </a>
+  <a href="/bookmarks" class="flex h-11 w-11 items-center justify-center">
+    <BookmarkIcon />
+  </a>
   <ThemeToggle client:only />
 </div>

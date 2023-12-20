@@ -17,8 +17,9 @@ const searchParam = Query.parseSearchParam(search);
 const activeCategory = CATEGORIES.find((cat) => cat.category === category);
 if (!activeCategory) return Astro.redirect('/404');
 
-const codeItems = await getCollection('code');
-const designItems = await getCollection('design');
+const codeItems = (await getCollection('code')) || [];
+const designItems = (await getCollection('design')) || [];
+
 const allItems = [...codeItems, ...designItems];
 
 let items = allItems.sort(

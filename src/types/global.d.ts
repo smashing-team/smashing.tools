@@ -1,4 +1,7 @@
-export {};
+export interface IBookmark {
+  id: string;
+  date: string;
+}
 
 /** Global index options that can be passed to pagefind.options() */
 type PagefindIndexOptions = {

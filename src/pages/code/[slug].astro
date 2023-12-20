@@ -25,6 +25,7 @@ const { Content } = await post.render();
 
 <ToolLayout
   {...post.data}
+  slug={post.slug}
   collection="code"
   prevSlug={post.prevSlug}
   nextSlug={post.nextSlug}
