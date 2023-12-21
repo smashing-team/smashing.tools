@@ -1,8 +1,10 @@
 ---
 import type { Entry } from '@keystatic/core/reader';
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon';
 
 import CommandMenu from '@/components/react/CommandMenu';
+import { HeroSlider } from '@/components/react/HeroSlider';
 import { NavigateKeys } from '@/components/react/NavigateKeys';
 import { ThemeToggle } from '@/components/react/ThemeToggle';
 
@@ -10,18 +12,34 @@ import type keystaticConfig from '../../keystatic.config';
 import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
 
-type CodeEntry = Entry<(typeof keystaticConfig)['collections']['code']>;
-type DesignEntry = Entry<(typeof keystaticConfig)['collections']['design']>;
+type StarterKitEntry = Entry<
+  (typeof keystaticConfig)['collections']['starterKit']
+>;
+type UIKitEntry = Entry<(typeof keystaticConfig)['collections']['uiKit']>;
 
-type Props = (CodeEntry | DesignEntry) & {
-  collection: string;
+type Props = (StarterKitEntry | UIKitEntry) & {
+  collection: 'starter-kit' | 'ui-kit';
   slug?: string;
   prevSlug?: string;
   nextSlug?: string;
 };
 
-const { name, headline, logo, collection, prevSlug, nextSlug, slug } =
-  Astro.props;
+const {
+  name,
+  headline,
+  logo,
+  collection,
+  prevSlug,
+  nextSlug,
+  heroSlider,
+  slug,
+} = Astro.props;
+
+const heroSliderImages = (heroSlider || [])
+  ?.filter((image) => image.discriminant === 'heroSlider')
+  .map((slide) => {
+    return `/hero/${slug}/${slide.value.image}`;
+  });
 ---
 
 <html lang="en">
@@ -30,14 +48,14 @@ const { name, headline, logo, collection, prevSlug, nextSlug, slug } =
   </head>
 
   <body>
-    <div class="mx-auto h-full max-w-xl">
+    <div class="mx-auto h-full w-full max-w-xl">
       <div
         data-pagefind-ignore
         id="tool-layout-header"
         class="fixed left-0 top-0 z-50 w-full p-2 px-4"
       >
         <div
-          class="mx-auto flex w-full max-w-xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
+          class="mx-auto mt-2 flex w-full max-w-xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
         >
           <a href="/" class="absolute z-[975]">
             <img
@@ -60,7 +78,7 @@ const { name, headline, logo, collection, prevSlug, nextSlug, slug } =
             <Image
               data-pagefind-meta="image[src], image_alt[alt]"
               class="w-full"
-              src={`/logos/${slug}/${logo}`}
+              src={`/logo/${slug}/${logo}`}
               alt={name}
               width={200}
               height={200}
@@ -89,35 +107,27 @@ const { name, headline, logo, collection, prevSlug, nextSlug, slug } =
               <li>
                 <a
                   href="/"
-                  class="flex rounded-3xl bg-white px-4 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
-                  ><span
-                    ><span class="flex items-center"
-                      ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="relative -left-0.5 mr-1.5 h-5 w-5 stroke-zinc-400 dark:stroke-zinc-800"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path stroke="none" d="M0 0h24v24H0z" fill="none"
-                        ></path><path
-                          d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
-                        ></path><path d="M11 13l9 -9"></path><path d="M15 4h5v5"
-                        ></path></svg
-                      >Website</span
-                    ></span
-                  ></a
+                  class="flex items-center rounded-3xl bg-zinc-50 px-4 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
                 >
+                  <Icon
+                    name="tabler:external-link"
+                    class="relative -left-0.5 mr-1.5 h-5 w-5 text-zinc-400 dark:text-zinc-800"
+                  />
+                   Website
+                </a>
               </li>
             </ul>
           </section>
         </div>
       </header>
       <main>
+        {
+          heroSliderImages.length > 0 && (
+            <HeroSlider images={heroSliderImages} client:visible />
+          )
+        }
         <article
-          class="prose prose-zinc relative mx-auto h-full max-w-full p-8 dark:prose-invert"
+          class="prose prose-zinc relative mx-auto h-full w-full p-8 dark:prose-invert"
         >
           <slot data-pagefind-meta="content" />
           <NavigateKeys

@@ -17,6 +17,9 @@
     "typescriptreact",
     "astro"
   ],
+  "files.associations": {
+    "*.mdoc": "markdown"
+  },
   // Multiple language settings for json and jsonc files
   "[json][jsonc]": {
     "editor.formatOnSave": true,
