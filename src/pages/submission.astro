@@ -1,0 +1,27 @@
+---
+import { getEntry } from 'astro:content';
+
+import PageLayout from '@/layouts/PageLayout.astro';
+
+// @ts-ignore
+const post = await getEntry('pages', 'submission');
+// @ts-ignore
+const { Content } = await post.render();
+---
+
+<PageLayout>
+  <article
+    class="prose prose-zinc relative mx-auto h-full w-full dark:prose-invert"
+  >
+    <div class="mb-6 flex"><Content /></div>
+  </article>
+  <div class="mb-24 flex items-center">
+    <a
+      data-astro-prefetch="false"
+      href="/keystatic"
+      class="block w-full rounded-full bg-zinc-50 p-5 text-center text-2xl font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
+    >
+      Get started
+    </a>
+  </div>
+</PageLayout>

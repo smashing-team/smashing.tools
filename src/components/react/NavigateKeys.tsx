@@ -26,7 +26,7 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
         !prevHref && !nextHref && 'hidden',
       )}
     >
-      <div className="flex h-8 items-center space-x-1.5 rounded-lg border bg-zinc-50 px-2 text-xs text-gray-500 dark:bg-white/10">
+      <div className="flex h-8 items-center space-x-1.5 rounded-lg border bg-zinc-50 px-2 text-xs text-gray-500 dark:bg-zinc-900">
         <div className="text-zinc-600 dark:text-zinc-500">Prev</div>
 
         <div className="flex items-center space-x-0.5">

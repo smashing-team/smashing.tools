@@ -3,7 +3,7 @@ import type { CategorySlugs } from '@/consts';
 import type { AllItems } from '../pages/[...category].astro';
 
 const sharedFilters = ['pricing'] as const;
-const codeFilters = [
+const starterKitFilters = [
   'features',
   'language',
   'framework',
@@ -16,7 +16,7 @@ const codeFilters = [
   'uiLibrary',
 ] as const;
 
-const designFilters = [
+const uiKitFilters = [
   'compatibility',
   'componentCount',
   'pageExampleCount',
@@ -24,16 +24,16 @@ const designFilters = [
 
 const allFilters = [
   ...sharedFilters,
-  ...codeFilters,
-  ...designFilters,
+  ...starterKitFilters,
+  ...uiKitFilters,
 ] as const;
 
 const getFiltersByCategory = (selectedCategory: CategorySlugs) => {
   switch (selectedCategory) {
-    case '/code':
-      return [...sharedFilters, ...codeFilters];
-    case '/design':
-      return [...sharedFilters, ...designFilters];
+    case '/starter-kit':
+      return [...sharedFilters, ...starterKitFilters];
+    case '/ui-kit':
+      return [...sharedFilters, ...uiKitFilters];
     default:
       return allFilters;
   }

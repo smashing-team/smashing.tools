@@ -2,31 +2,36 @@
 import { getCollection } from 'astro:content';
 
 import GridList from '@/components/GridList.astro';
-import EmptyLayout from '@/layouts/EmptyLayout.astro';
+import PageLayout from '@/layouts/PageLayout.astro';
 import type { IBookmark } from '@/types/global';
 
 const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 
-const codeItems = await getCollection('code', (item) =>
-  bookmarks.some((bookmark) => bookmark.id === item.id),
-);
-const designItems = await getCollection('design', (item) =>
+const starterKitItems =
+  (await getCollection('starter-kit', (item) =>
+    bookmarks.some((bookmark) => bookmark.id === item.id),
+  )) || [];
+const uiKitItems = await getCollection('ui-kit', (item) =>
   bookmarks.some((bookmark) => bookmark.id === item.id),
 );
 
-const allItems = [...codeItems, ...designItems];
+const allItems = [...starterKitItems, ...uiKitItems];
 
 export const prerender = false;
 ---
 
-<EmptyLayout>
-  <div class="flex p-2 lg:p-6">
+<PageLayout>
+  <div class="mb-6 flex">
     <div>
-      <span class="text-2xl font-bold">Bookmarks</span>
+      <span class="text-2xl font-semibold">Bookmarks</span>
       <span class="text-sm text-gray-500" id="bookmark-count"
         >({allItems.length})</span
       >
+      <p class="mt-2 text-sm text-gray-500">
+        These are the bookmarks you've saved. Stored in your browser's 🍪
+        cookies.
+      </p>
     </div>
   </div>
-  <GridList items={allItems} />
-</EmptyLayout>
+  <GridList withoutPadding items={allItems} />
+</PageLayout>
