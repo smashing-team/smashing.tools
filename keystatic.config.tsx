@@ -20,6 +20,12 @@ const baseSchema = {
       isRequired: true,
     },
   }),
+  publisher: fields.relationship({
+    label: 'Publisher',
+    description: 'Publisher of the tool. If doesn’t exist, create a new one.',
+    collection: 'profile',
+    validation: { isRequired: true },
+  }),
   logo: fields.image({
     label: 'Logo',
     directory: 'public/logo',
@@ -84,6 +90,7 @@ export default config({
     },
     navigation: {
       Tools: ['starterKit', 'uiKit'],
+      People: ['profile'],
       ...(process.env.NODE_ENV !== 'production' && { Pages: ['submission'] }),
     },
   },
@@ -304,6 +311,30 @@ export default config({
             { label: '101-250', value: '101-250' },
             { label: '250+', value: '250+' },
           ],
+        }),
+      },
+    }),
+    profile: collection({
+      label: 'Profiles',
+      slugField: 'name',
+      path: 'src/content/profiles/**',
+      schema: {
+        name: fields.slug({
+          name: {
+            label: 'Name',
+            validation: {
+              length: { min: 1 },
+            },
+          },
+        }),
+        avatar: fields.image({
+          label: 'Avatar',
+          directory: 'public/avatar',
+          description:
+            'Avatar of the author. The image should be 1:1 ratio (e.g. 500x500) for best results.',
+          validation: {
+            isRequired: true,
+          },
         }),
       },
     }),
