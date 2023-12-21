@@ -1,17 +1,22 @@
+name: Auto PR - Submission
 on:
   push:
     branches:
-      - feature/*
+      - tool/*
 
 permissions:
   pull-requests: write
-
+  
 jobs:
   pull-request:
+    name: Open PR
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: pull-request
-        run: |
-          gh_pr_up() { gh pr create $* || gh pr edit $* }
-          gh_pr_up --title "New tool!" --body "Description"
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Open or update PR
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh_pr_up() { IFS=$'\n'; gh pr create $* || gh pr edit $*; }
+        gh_pr_up --title "Automatic PR" --body "New tool added." --label "needs-tool-review" --draft
