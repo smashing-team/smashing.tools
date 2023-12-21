@@ -8,12 +8,16 @@ import { ViewTransitions } from 'astro:transitions';
 interface Props {
   title: string;
   description: string;
-  image?: string;
+  slug?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/og.png' } = Astro.props;
+const { title, description, slug } = Astro.props;
+
+const image = slug
+  ? `${Astro.url.origin}/og/${slug}.png`
+  : `${Astro.url.origin}/og.png`;
 ---
 
 <!-- Global Metadata -->
@@ -37,14 +41,14 @@ const { title, description, image = '/og.png' } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={image} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={image} />
 
 <script
   defer
