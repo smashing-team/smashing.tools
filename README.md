@@ -37,14 +37,14 @@ smashing.tools/
 - **Tailwind CSS:** A utility-first CSS framework used to create customizable UI components quickly.
 - **React:** A popular JavaScript library for building user interfaces.
 - **Pagefind:** A simple and fast search engine for static websites.
-- **KeyStatic:** A static site generator focusing on simplicity and speed, ideal for building lightweight, fast-loading web pages.
-- **Netlify:** A cloud hosting service that automates web projects deployment, offering serverless functions and continuous integration.
+- **KeyStatic:** A simple static site generator ideal for lightweight and fast-loading web pages.
+- **Netlify:**: A cloud hosting service that automates deployment for web projects.
 
 ### **Getting Started**
 
 - Clone the repository: `git clone git@github.com:smashing-team/smashing.tools.git 'smashing-tools'`
 - Navigate to the project directory: `cd smashing-tools`
-- Install the required packages using Bun: `pnpm install`
+- Install the required packages using Pnpm: `pnpm install`
 - Start the project: `pnpm dev`
 
 ### **Contributing**
