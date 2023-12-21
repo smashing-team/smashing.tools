@@ -20,6 +20,12 @@ const baseSchema = {
       isRequired: true,
     },
   }),
+  publisher: fields.relationship({
+    label: 'Publisher',
+    description: 'Publisher of the tool. If doesn’t exist, create a new one.',
+    collection: 'profile',
+    validation: { isRequired: true },
+  }),
   logo: fields.image({
     label: 'Logo',
     directory: 'public/logo',
@@ -72,11 +78,6 @@ const baseSchema = {
     tables: true,
     description: 'This is the main content of the tool',
   }),
-  publisher: fields.relationship({
-    label: 'Publisher',
-    collection: 'profile',
-    validation: { isRequired: true },
-  }),
 };
 
 export default config({
@@ -88,7 +89,8 @@ export default config({
       },
     },
     navigation: {
-      Tools: ['starterKit', 'uiKit', 'profile'],
+      Tools: ['starterKit', 'uiKit'],
+      People: ['profile'],
       ...(process.env.NODE_ENV !== 'production' && { Pages: ['submission'] }),
     },
   },
