@@ -82,7 +82,10 @@ export default config({
         return <img src="/logo.svg" height={24} />;
       },
     },
-    navigation: { Tools: ['starterKit', 'uiKit'], Pages: ['submission'] },
+    navigation: {
+      Tools: ['starterKit', 'uiKit'],
+      ...(process.env.NODE_ENV !== 'production' && { Pages: ['submission'] }),
+    },
   },
   storage: {
     kind: process.env.NODE_ENV === 'production' ? 'cloud' : 'local',
