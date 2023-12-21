@@ -6,8 +6,11 @@ import react from '@astrojs/react';
 import netlify from '@astrojs/netlify/functions';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
+import robotsTxt from 'astro-robots-txt';
+import AstroPWA from '@vite-pwa/astro';
 import pagefind from './src/plugins/pagefind.ts';
 
+// https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
   site: 'https://smashing.tools',
@@ -26,6 +29,8 @@ export default defineConfig({
     pagefind(),
     markdoc(),
     keystatic(),
+    robotsTxt(),
+    AstroPWA(),
   ],
   devToolbar: {
     enabled: false,
