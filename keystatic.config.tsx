@@ -82,6 +82,7 @@ export default config({
         return <img src="/logo.svg" height={24} />;
       },
     },
+    navigation: { Tools: ['starterKit', 'uiKit'], Pages: ['submission'] },
   },
   storage: {
     kind: process.env.NODE_ENV === 'production' ? 'cloud' : 'local',
@@ -257,7 +258,7 @@ export default config({
       label: 'UI Kits',
       slugField: 'name',
       entryLayout: 'form',
-      path: 'src/content/uiKit/*',
+      path: 'src/content/ui-kit/*',
       format: { contentField: 'content' },
       schema: {
         ...baseSchema,
@@ -305,7 +306,8 @@ export default config({
   },
   singletons: {
     submission: singleton({
-      label: 'Submission Page',
+      previewUrl: '/submission',
+      label: 'Submission Guidelines',
       path: 'src/content/pages/submission',
       entryLayout: 'content',
       format: { contentField: 'content' },
