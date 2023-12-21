@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - feature/*
+      - tool/*
 
 permissions:
   pull-requests: write
