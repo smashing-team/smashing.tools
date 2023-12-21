@@ -1,6 +1,7 @@
 ---
 import type { Entry } from '@keystatic/core/reader';
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon';
 
 import CommandMenu from '@/components/react/CommandMenu';
 import { HeroSlider } from '@/components/react/HeroSlider';
@@ -11,11 +12,13 @@ import type keystaticConfig from '../../keystatic.config';
 import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
 
-type CodeEntry = Entry<(typeof keystaticConfig)['collections']['code']>;
-type DesignEntry = Entry<(typeof keystaticConfig)['collections']['design']>;
+type StarterKitEntry = Entry<
+  (typeof keystaticConfig)['collections']['starterKit']
+>;
+type UIKitEntry = Entry<(typeof keystaticConfig)['collections']['uiKit']>;
 
-type Props = (CodeEntry | DesignEntry) & {
-  collection: string;
+type Props = (StarterKitEntry | UIKitEntry) & {
+  collection: 'starter-kit' | 'ui-kit';
   slug?: string;
   prevSlug?: string;
   nextSlug?: string;
@@ -104,27 +107,14 @@ const heroSliderImages = (heroSlider || [])
               <li>
                 <a
                   href="/"
-                  class="flex rounded-3xl bg-white px-4 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
-                  ><span
-                    ><span class="flex items-center"
-                      ><svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="relative -left-0.5 mr-1.5 h-5 w-5 stroke-zinc-400 dark:stroke-zinc-800"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path stroke="none" d="M0 0h24v24H0z" fill="none"
-                        ></path><path
-                          d="M12 6h-6a2 2 0 0 0 -2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-6"
-                        ></path><path d="M11 13l9 -9"></path><path d="M15 4h5v5"
-                        ></path></svg
-                      >Website</span
-                    ></span
-                  ></a
+                  class="flex items-center rounded-3xl bg-zinc-50 px-4 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
                 >
+                  <Icon
+                    name="tabler:external-link"
+                    class="relative -left-0.5 mr-1.5 h-5 w-5 text-zinc-400 dark:text-zinc-800"
+                  />
+                   Website
+                </a>
               </li>
             </ul>
           </section>

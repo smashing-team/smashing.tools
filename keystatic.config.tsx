@@ -1,4 +1,4 @@
-import { collection, config, fields } from '@keystatic/core';
+import { collection, config, fields, singleton } from '@keystatic/core';
 
 const baseSchema = {
   name: fields.slug({
@@ -90,10 +90,10 @@ export default config({
     cloud: { project: 'smashing/tools' },
   }),
   collections: {
-    code: collection({
-      label: 'Code',
+    starterKit: collection({
+      label: 'Starter Kits',
       slugField: 'name',
-      path: 'src/content/code/*',
+      path: 'src/content/starter-kit/*',
       entryLayout: 'form',
       format: { contentField: 'content' },
       schema: {
@@ -128,7 +128,7 @@ export default config({
         }),
         database: fields.multiselect({
           label: 'Database',
-          description: 'Database used by the code',
+          description: 'Databases used by the kit',
           options: [
             { label: 'Prisma', value: 'Prisma' },
             { label: 'Drizzle', value: 'Drizzle' },
@@ -253,11 +253,11 @@ export default config({
         }),
       },
     }),
-    design: collection({
-      label: 'Design',
+    uiKit: collection({
+      label: 'UI Kits',
       slugField: 'name',
       entryLayout: 'form',
-      path: 'src/content/design/*',
+      path: 'src/content/uiKit/*',
       format: { contentField: 'content' },
       schema: {
         ...baseSchema,
@@ -299,6 +299,24 @@ export default config({
             { label: '101-250', value: '101-250' },
             { label: '250+', value: '250+' },
           ],
+        }),
+      },
+    }),
+  },
+  singletons: {
+    submission: singleton({
+      label: 'Submission Page',
+      path: 'src/content/pages/submission',
+      entryLayout: 'content',
+      format: { contentField: 'content' },
+      schema: {
+        content: fields.document({
+          label: 'Content',
+          formatting: true,
+          dividers: true,
+          links: true,
+          images: undefined,
+          tables: true,
         }),
       },
     }),

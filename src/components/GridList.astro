@@ -24,41 +24,45 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
   )}
 >
   {
-    items.map((item) => (
-      <li class="col-span-1">
-        <div class="group relative rounded-3xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
-          <div class="absolute -inset-px rounded-3xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.zinc.400),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]" />
-          <button
-            data-value={item.id}
-            data-checked={bookmarks
-              .some((bookmark) => bookmark.id === item.id)
-              .toString()}
-            id="bookmark-button"
-            class="group absolute right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-3xl text-zinc-500 opacity-0 transition-all hover:scale-110 group-hover:opacity-100 data-[checked=true]:opacity-100 dark:text-zinc-400 "
-          >
-            <BookmarkIcon />
-          </button>
-          <div class="relative overflow-hidden rounded-3xl p-6">
-            <Image
-              class="h-12 w-12 shrink-0"
-              src={`/logo/${item.slug}/${item.data.logo}`}
-              alt={item.data.name}
-              width={200}
-              height={200}
-            />
-            <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
-              <a href={`/${item.collection}/${item.slug}/`} class="font-medium">
-                <span class="absolute -inset-px rounded-3xl" />
-                {item.data.name}
-              </a>
-            </h2>
-            <p class="mt-1 truncate text-sm text-zinc-700 dark:text-zinc-200">
-              {item.data.headline}
-            </p>
+    items.map((item) => {
+      const isChecked = bookmarks.some((bookmark) => bookmark.id === item.id);
+      return (
+        <li class="col-span-1">
+          <div class="group relative rounded-3xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+            <div class="absolute -inset-px rounded-3xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.400),theme(colors.zinc.400),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]" />
+            <button
+              data-value={item.id}
+              data-checked={isChecked.toString()}
+              id="bookmark-button"
+              class="group absolute right-4 top-4 z-50 flex h-10 w-10 items-center justify-center rounded-3xl text-zinc-500 opacity-0 transition-all hover:scale-110 group-hover:opacity-100 data-[checked=true]:opacity-100 dark:text-zinc-400 "
+            >
+              <BookmarkIcon />
+            </button>
+            <div class="relative overflow-hidden rounded-3xl p-6">
+              <Image
+                class="h-12 w-12 shrink-0"
+                src={`/logo/${item.slug}/${item.data.logo}`}
+                alt={item.data.name}
+                width={200}
+                height={200}
+              />
+              <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
+                <a
+                  href={`/${item.collection}/${item.slug}`}
+                  class="font-medium"
+                >
+                  <span class="absolute -inset-px rounded-3xl" />
+                  {item.data.name}
+                </a>
+              </h2>
+              <p class="mt-1 truncate text-sm text-zinc-700 dark:text-zinc-200">
+                {item.data.headline}
+              </p>
+            </div>
           </div>
-        </div>
-      </li>
-    ))
+        </li>
+      );
+    })
   }
 </ul>
 

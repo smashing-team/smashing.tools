@@ -17,10 +17,10 @@ const searchParam = Query.parseSearchParam(search);
 const activeCategory = CATEGORIES.find((cat) => cat.category === category);
 if (!activeCategory) return Astro.redirect('/404');
 
-const codeItems = (await getCollection('code')) || [];
-const designItems = (await getCollection('design')) || [];
+const starterKitItems = (await getCollection('starter-kit')) || [];
+const uiKitItems = (await getCollection('ui-kit')) || [];
 
-const allItems = [...codeItems, ...designItems];
+const allItems = [...starterKitItems, ...uiKitItems];
 
 let items = allItems.sort(
   (a, b) => b.data.datePublished.valueOf() - a.data.datePublished.valueOf(),
@@ -48,9 +48,9 @@ const facets = getFacets(
   // eslint-disable-next-line no-nested-ternary
   activeCategory.slug === '/'
     ? allItems
-    : activeCategory.category === 'code'
-      ? codeItems
-      : designItems,
+    : activeCategory.category === 'starter-kit'
+      ? starterKitItems
+      : uiKitItems,
   activeCategory.slug,
   filteredFacets,
   searchParam,

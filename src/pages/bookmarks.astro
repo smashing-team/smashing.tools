@@ -7,14 +7,15 @@ import type { IBookmark } from '@/types/global';
 
 const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 
-const codeItems = await getCollection('code', (item) =>
-  bookmarks.some((bookmark) => bookmark.id === item.id),
-);
-const designItems = await getCollection('design', (item) =>
+const starterKitItems =
+  (await getCollection('starter-kit', (item) =>
+    bookmarks.some((bookmark) => bookmark.id === item.id),
+  )) || [];
+const uiKitItems = await getCollection('ui-kit', (item) =>
   bookmarks.some((bookmark) => bookmark.id === item.id),
 );
 
-const allItems = [...codeItems, ...designItems];
+const allItems = [...starterKitItems, ...uiKitItems];
 
 export const prerender = false;
 ---

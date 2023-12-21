@@ -8,15 +8,15 @@ export const CATEGORIES = [
     title: 'All tools',
   },
   {
-    category: 'code',
-    slug: '/code',
-    title: 'Code tools',
+    category: 'starter-kit',
+    slug: '/starter-kit',
+    title: 'Starter Kit',
   },
   {
-    category: 'design',
-    slug: '/design',
-    title: 'Design tools',
+    category: 'ui-kit',
+    slug: '/ui-kit',
+    title: 'UI Kit',
   },
 ] as const;
 
-export type CategorySlugs = '/' | '/code' | '/design';
+export type CategorySlugs = '/' | '/starter-kit' | '/ui-kit';
