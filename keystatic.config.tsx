@@ -86,6 +86,7 @@ export default config({
   },
   storage: {
     kind: process.env.NODE_ENV === 'production' ? 'cloud' : 'local',
+    branchPrefix: 'tool/',
   },
   ...(process.env.NODE_ENV === 'production' && {
     cloud: { project: 'smashing/tools' },
