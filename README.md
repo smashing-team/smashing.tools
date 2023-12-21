@@ -15,6 +15,15 @@
 
 Smashing.Tools is an open-source platform designed for individuals to share their developed products and UI libraries. The project allows contributors to open pull requests by adding new markdown files while sharing their creations.
 
+## **Technologies**
+
+- **Astro:** A tool used for building modern web applications through static site generation.
+- **Tailwind CSS:** A utility-first CSS framework used to create customizable UI components quickly.
+- **React:** A popular JavaScript library for building user interfaces.
+- **Pagefind:** A simple and fast search engine for static websites.
+- **KeyStatic:** A simple static site generator ideal for lightweight and fast-loading web pages.
+- **Netlify:**: A cloud hosting service that automates deployment for web projects.
+
 ## **Folder Structure**
 
 ```
@@ -30,15 +39,6 @@ smashing.tools/
     │   ├── types/ # TypeScript definitions for type safety and consistency.
     │   ├── utils/ # Utility functions and helpers for common functionality.
 ```
-
-## **Technologies**
-
-- **Astro:** A tool used for building modern web applications through static site generation.
-- **Tailwind CSS:** A utility-first CSS framework used to create customizable UI components quickly.
-- **React:** A popular JavaScript library for building user interfaces.
-- **Pagefind:** A simple and fast search engine for static websites.
-- **KeyStatic:** A simple static site generator ideal for lightweight and fast-loading web pages.
-- **Netlify:**: A cloud hosting service that automates deployment for web projects.
 
 ### **Getting Started**
 
