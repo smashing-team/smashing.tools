@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - tool/*
+
+permissions:
+  pull-requests: write
+  
 jobs:
   pull-request:
     name: Open PR to main
