@@ -20,6 +20,7 @@ export function ThemeToggle() {
     <button
       onClick={handleClick}
       className="flex h-11 w-11 items-center justify-center"
+      aria-label="Toggle theme"
     >
       {theme === 'light' ? (
         <svg
