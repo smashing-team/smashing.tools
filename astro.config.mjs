@@ -7,7 +7,6 @@ import netlify from '@astrojs/netlify/functions';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 import robotsTxt from 'astro-robots-txt';
-import AstroPWA from '@vite-pwa/astro';
 import pagefind from './src/plugins/pagefind.ts';
 
 // https://astro.build/config
@@ -30,7 +29,6 @@ export default defineConfig({
     markdoc(),
     keystatic(),
     robotsTxt(),
-    AstroPWA(),
   ],
   devToolbar: {
     enabled: false,
