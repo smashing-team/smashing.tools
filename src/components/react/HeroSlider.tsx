@@ -48,6 +48,7 @@ const Dots = ({
       {images.map((_, idx) => {
         return (
           <button
+            aria-label="Change image"
             key={idx}
             onClick={() => setImgIndex(idx)}
             className={`h-3 w-3 rounded-full transition-colors ${

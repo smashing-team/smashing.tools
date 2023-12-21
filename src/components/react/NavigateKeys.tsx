@@ -32,6 +32,7 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
         <div className="flex items-center space-x-0.5">
           <a
             href={prevHref || '#'}
+            aria-label="Previous tool"
             className={twMerge(
               'flex h-5 w-5 items-center justify-center rounded border bg-white text-zinc-900 shadow dark:bg-zinc-900 dark:text-zinc-200',
               !prevHref && 'opacity-50',
@@ -42,6 +43,7 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
 
           <a
             href={nextHref || '#'}
+            aria-label="Next tool"
             className={twMerge(
               'flex h-5 w-5 items-center justify-center rounded border bg-white text-zinc-900 shadow dark:bg-zinc-900 dark:text-zinc-200',
               !nextHref && 'opacity-50',
