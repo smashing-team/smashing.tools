@@ -5,7 +5,6 @@ import ToolLayout from '../../layouts/ToolLayout.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('starter-kit');
-  console.log('****oposs', posts);
   return posts.map((post, index) => ({
     params: { slug: post.slug },
     props: {
