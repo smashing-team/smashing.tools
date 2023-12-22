@@ -9,6 +9,11 @@ import keystatic from '@keystatic/astro';
 import robotsTxt from 'astro-robots-txt';
 import pagefind from './src/plugins/pagefind.ts';
 
+if (process.env.NODE_ENV !== 'development') {
+  // eslint-disable-next-line no-console
+  console.log('netlify env debug', process.env);
+}
+
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
