@@ -80,7 +80,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 
               <div class="mt-4 flex items-center gap-3 pt-2 text-xs text-zinc-700 dark:text-zinc-400">
                 <div class="font-medium">
-                  {item.collection === 'starter-kit' ? 'Starter kit' : 'UI Kit'}
+                  {item.collection === 'starter-kit' ? 'Starter Kit' : 'UI Kit'}
                 </div>
                 <div class="">
                   {item.data.attrs.pricing.map((p: string) => p).join(', ')}

@@ -34,6 +34,7 @@ const {
   prevSlug,
   nextSlug,
   heroSlider,
+  url,
   slug,
 } = Astro.props;
 
@@ -44,6 +45,8 @@ const heroSliderImages = (heroSlider || [])
   });
 
 const hasDarkLogo = !!logoDark;
+const fullUrl = new URL(url);
+fullUrl.searchParams.append('ref', 'smashing.tools');
 ---
 
 <html lang="en">
@@ -121,7 +124,7 @@ const hasDarkLogo = !!logoDark;
             >
               <li>
                 <a
-                  href="/"
+                  href={fullUrl.toString()}
                   class="flex items-center rounded-3xl bg-zinc-50 px-4 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
                 >
                   <Icon
