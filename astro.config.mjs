@@ -9,14 +9,9 @@ import keystatic from '@keystatic/astro';
 import robotsTxt from 'astro-robots-txt';
 import pagefind from './src/plugins/pagefind.ts';
 
-if (process.env.NODE_ENV !== 'development') {
-  // eslint-disable-next-line no-console
-  console.log('netlify env debug', process.env);
-}
-
 function getSiteUrl() {
-  if (process.env.DEPLOY_PRIME_URL) {
-    return process.env.DEPLOY_PRIME_URL;
+  if (process.env.URL) {
+    return process.env.URL;
   }
   if (process.env.NODE_ENV === 'development') {
     return 'http://localhost:4321';
