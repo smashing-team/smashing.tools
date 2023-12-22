@@ -24,6 +24,12 @@ const allItems = [...starterKitItems, ...uiKitItems];
 
 let items = allItems;
 
+items.sort((a, b) => {
+  const aDate = new Date(a.data.createdAt);
+  const bDate = new Date(b.data.createdAt);
+  return bDate.valueOf() - aDate.valueOf();
+});
+
 if (activeCategory.category) {
   items = items.filter((item) => item.collection === category);
 }

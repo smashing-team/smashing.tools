@@ -1,4 +1,5 @@
 import { collection, config, fields, singleton } from '@keystatic/core';
+import { createdAt } from 'custom-fields/createdAt';
 
 const baseSchema = {
   name: fields.slug({
@@ -13,6 +14,7 @@ const baseSchema = {
     description: 'Short description that summarizes the tool',
     validation: { length: { min: 1, max: 200 } },
   }),
+  createdAt: createdAt(),
   publisher: fields.relationship({
     label: 'Publisher',
     description: 'Publisher of the tool. If doesn’t exist, create a new one.',
@@ -59,7 +61,7 @@ const baseSchema = {
     },
     {
       label: 'Hero Slider',
-      validation: { length: { min: 1, max: 5 } },
+      validation: { length: { min: 0, max: 5 } },
     },
   ),
   content: fields.document({

@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url';
 
 import type { AstroIntegration } from 'astro';
 import { execSync } from 'child_process';
-import fs from 'fs';
 import sirv from 'sirv';
 
 export default function pagefind(): AstroIntegration {
@@ -27,24 +26,6 @@ export default function pagefind(): AstroIntegration {
           } else {
             next();
           }
-        });
-      },
-      'astro:build:start': async () => {
-        const paths = ['starter-kit', 'ui-kit'];
-        paths.forEach((path) => {
-          const kits = fs.readdirSync(`src/content/${path}`);
-
-          kits.forEach((kit) => {
-            const kitPath = `src/content/${path}/${kit}`;
-            const kitContent = fs.readFileSync(kitPath, 'utf8');
-            const createdAt = fs.statSync(kitPath).birthtime;
-            const splitted = kitContent.split('---');
-            if (!splitted[1]?.includes('createdAt')) {
-              splitted[1] += `createdAt: ${createdAt.toISOString()}\n`;
-              const modified = splitted.join('---');
-              fs.writeFileSync(kitPath, modified);
-            }
-          });
         });
       },
       'astro:build:done': () => {
