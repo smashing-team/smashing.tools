@@ -16,7 +16,7 @@ const { facets, mobile } = Astro.props;
 
 const facetEntries = Object.entries(facets || {});
 const filtered = facetEntries.some(([_, values]) =>
-  values.some((val) => val.checked),
+  values?.some((val) => val.checked),
 );
 ---
 
