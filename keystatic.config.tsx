@@ -25,10 +25,16 @@ const baseSchema = {
     label: 'Logo',
     directory: 'public/logo',
     description:
-      'Logo of the tool. The image should be 1:1 ratio (e.g. 500x500) for best results.',
+      'Logo of the tool. The image should be 1:1 ratio (e.g. 200x200) for best results.',
     validation: {
       isRequired: true,
     },
+  }),
+  logoDark: fields.image({
+    label: 'Logo for Dark mode',
+    directory: 'public/logo',
+    description:
+      'It will be used when the background is dark. The image should be 1:1 ratio (e.g. 200x200) for best results.',
   }),
   createdAt: createdAt(),
   url: fields.url({
@@ -64,7 +70,7 @@ const sliderSchema = fields.blocks(
       schema: fields.object({
         image: fields.image({
           label:
-            'Choose an image. The image should be 16:10 ratio (e.g. 1600x1000) for best results.',
+            'Choose an image. The image should be 16:10 ratio (e.g. 800x500) for best results.',
           directory: 'public/hero',
         }),
       }),

@@ -20,7 +20,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
   role="list"
   class={twMerge(
     'grid grid-cols-1 gap-4 p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:p-4 xl:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4',
-    withoutPadding && 'p-0  lg:p-0',
+    withoutPadding && 'p-0 lg:p-0',
   )}
 >
   {
@@ -42,8 +42,15 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 
             <div class="relative overflow-hidden rounded-3xl p-6">
               <Image
-                class="h-12 w-12 shrink-0"
+                class="block h-12 w-12 shrink-0 dark:hidden"
                 src={`/logo/${item.slug}/${item.data.logo}`}
+                alt={item.data.name}
+                width={200}
+                height={200}
+              />
+              <Image
+                class="hidden h-12 w-12 shrink-0 dark:block"
+                src={`/logo/${item.slug}/${item.data.logoDark}`}
                 alt={item.data.name}
                 width={200}
                 height={200}

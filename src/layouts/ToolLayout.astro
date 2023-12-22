@@ -28,6 +28,7 @@ const {
   name,
   headline,
   logo,
+  logoDark,
   collection,
   prevSlug,
   nextSlug,
@@ -77,8 +78,16 @@ const heroSliderImages = (heroSlider || [])
           <div class="relative block w-24 overflow-hidden">
             <Image
               data-pagefind-meta="image[src], image_alt[alt]"
-              class="w-full"
+              class="block w-full dark:hidden"
               src={`/logo/${slug}/${logo}`}
+              alt={name}
+              width={200}
+              height={200}
+            />
+            <Image
+              data-pagefind-meta="image[src], image_alt[alt]"
+              class="hidden w-full dark:block"
+              src={`/logo/${slug}/${logoDark}`}
               alt={name}
               width={200}
               height={200}
