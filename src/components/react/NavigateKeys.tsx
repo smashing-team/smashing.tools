@@ -1,6 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
 import { navigate } from 'astro:transitions/client';
-import React, { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type Props = {
@@ -9,14 +9,46 @@ type Props = {
 };
 
 export function NavigateKeys({ prevHref, nextHref }: Props) {
+  const prevLinkRef = useRef<HTMLAnchorElement>(null);
+  const nextLinkRef = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
     const keydownHandler = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft' && prevHref) navigate(prevHref);
-      else if (event.key === 'ArrowRight' && nextHref) navigate(nextHref);
+      if (event.key === 'ArrowLeft' && prevHref) {
+        prevLinkRef.current?.setAttribute('data-transitioning', 'true');
+        navigate(prevHref);
+      } else if (event.key === 'ArrowRight' && nextHref) {
+        nextLinkRef.current?.setAttribute('data-transitioning', 'true');
+        navigate(nextHref);
+      }
     };
     document.addEventListener('keydown', keydownHandler);
     return () => document.removeEventListener('keydown', keydownHandler);
   }, []);
+
+  const loadingIcon = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="hidden h-3 w-3 animate-spin group-data-[transitioning]:block"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 6l0 -3" />
+      <path d="M16.25 7.75l2.15 -2.15" />
+      <path d="M18 12l3 0" />
+      <path d="M16.25 16.25l2.15 2.15" />
+      <path d="M12 18l0 3" />
+      <path d="M7.75 16.25l-2.15 2.15" />
+      <path d="M6 12l-3 0" />
+      <path d="M7.75 7.75l-2.15 -2.15" />
+    </svg>
+  );
 
   return (
     <div
@@ -31,25 +63,35 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
 
         <div className="flex items-center space-x-0.5">
           <a
+            ref={prevLinkRef}
             href={prevHref || '#'}
             aria-label="Previous tool"
+            onClick={(event) => {
+              event.currentTarget.setAttribute('data-transitioning', 'true');
+            }}
             className={twMerge(
-              'flex h-5 w-5 items-center justify-center rounded border bg-white text-zinc-900 shadow dark:bg-zinc-900 dark:text-zinc-200',
+              'group flex h-5 w-5 items-center justify-center rounded border bg-white text-zinc-900 shadow dark:bg-zinc-900 dark:text-zinc-200',
               !prevHref && 'opacity-50',
             )}
           >
-            <ChevronLeftIcon />
+            <ChevronLeftIcon className="group-data-[transitioning]:hidden" />
+            {loadingIcon}
           </a>
 
           <a
+            ref={nextLinkRef}
             href={nextHref || '#'}
+            onClick={(event) => {
+              event.currentTarget.setAttribute('data-transitioning', 'true');
+            }}
             aria-label="Next tool"
             className={twMerge(
-              'flex h-5 w-5 items-center justify-center rounded border bg-white text-zinc-900 shadow dark:bg-zinc-900 dark:text-zinc-200',
+              'group flex h-5 w-5 items-center justify-center rounded border bg-white text-zinc-900 shadow dark:bg-zinc-900 dark:text-zinc-200',
               !nextHref && 'opacity-50',
             )}
           >
-            <ChevronRightIcon />
+            <ChevronRightIcon className="group-data-[transitioning]:hidden" />
+            {loadingIcon}
           </a>
         </div>
 

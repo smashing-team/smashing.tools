@@ -9,8 +9,8 @@ export async function getStaticPaths() {
     params: { slug: post.slug },
     props: {
       ...post,
-      prevSlug: posts[index - 1]?.slug,
-      nextSlug: posts[index + 1]?.slug,
+      prevSlug: posts[index - 1]?.slug || posts[posts.length - 1]?.slug,
+      nextSlug: posts[index + 1]?.slug || posts[0]?.slug,
     },
   }));
 }
@@ -26,7 +26,7 @@ const { Content } = await post.render();
 <ToolLayout
   {...post.data}
   slug={post.slug}
-  collection="starterKit"
+  collection="starter-kit"
   prevSlug={post.prevSlug}
   nextSlug={post.nextSlug}
 >
