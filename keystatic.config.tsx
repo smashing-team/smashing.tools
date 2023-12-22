@@ -103,6 +103,10 @@ export default config({
   }),
   collections: {
     starterKit: collection({
+      previewUrl:
+        process.env.NODE_ENV !== 'production'
+          ? '/starter-kit/{slug}'
+          : undefined,
       label: 'Starter Kits',
       slugField: 'name',
       path: 'src/content/starter-kit/*',
@@ -266,6 +270,8 @@ export default config({
       },
     }),
     uiKit: collection({
+      previewUrl:
+        process.env.NODE_ENV !== 'production' ? '/ui-kit/{slug}' : undefined,
       label: 'UI Kits',
       slugField: 'name',
       entryLayout: 'form',
