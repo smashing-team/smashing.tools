@@ -39,7 +39,9 @@ if (Object.values(searchParam).length) {
     for (const key in searchParam) {
       // TODO: type error
       // @ts-ignore
-      if (!searchParam[key]?.every((el) => item.data[key]?.includes(el))) {
+      if (
+        !searchParam[key]?.every((el) => item.data.attrs?.[key]?.includes(el))
+      ) {
         return false;
       }
     }

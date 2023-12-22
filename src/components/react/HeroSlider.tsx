@@ -26,7 +26,7 @@ const Images = ({
             animate={{
               scale: imgIndex === idx ? 1 : 0.75,
             }}
-            className="aspect-[16/10] w-full shrink-0 rounded-3xl bg-neutral-800 object-cover"
+            className="aspect-[16/10] w-full shrink-0 rounded-3xl  object-cover"
           />
         );
       })}

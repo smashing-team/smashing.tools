@@ -1,26 +1,11 @@
 import type { CategorySlugs } from '@/consts';
 
 import type { AllItems } from '../pages/[...category].astro';
+import { getStarterKitFilters, getUIKitFilters } from './reader';
 
+const starterKitFilters = getStarterKitFilters();
+const uiKitFilters = getUIKitFilters();
 const sharedFilters = ['pricing'] as const;
-const starterKitFilters = [
-  'features',
-  'language',
-  'framework',
-  'runtime',
-  'api',
-  'database',
-  'style',
-  'testing',
-  'uiKit',
-  'uiLibrary',
-] as const;
-
-const uiKitFilters = [
-  'compatibility',
-  'componentCount',
-  'pageExampleCount',
-] as const;
 
 const allFilters = [
   ...sharedFilters,
@@ -68,9 +53,9 @@ export function getFacets(
       if (!facets[key]) facets[key] = [];
 
       // @ts-ignore <-- this is fine and safe
-      if (item.data[key]) {
+      if (item.data.attrs?.[key]) {
         // @ts-ignore <-- this is fine and safe
-        const existingFilter = item.data[key];
+        const existingFilter = item.data.attrs[key];
         // array values
         if (Array.isArray(existingFilter)) {
           existingFilter.forEach((value) => {
