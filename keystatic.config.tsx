@@ -13,13 +13,6 @@ const baseSchema = {
     description: 'Short description that summarizes the tool',
     validation: { length: { min: 1, max: 200 } },
   }),
-  datePublished: fields.datetime({
-    label: 'Published date',
-    description: 'Tool will be available on the smashing.tools after this date',
-    validation: {
-      isRequired: true,
-    },
-  }),
   publisher: fields.relationship({
     label: 'Publisher',
     description: 'Publisher of the tool. If doesn’t exist, create a new one.',

@@ -14,10 +14,20 @@ if (process.env.NODE_ENV !== 'development') {
   console.log('netlify env debug', process.env);
 }
 
+function getSiteUrl() {
+  if (process.env.DEPLOY_PRIME_URL) {
+    return process.env.DEPLOY_PRIME_URL;
+  }
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:4321';
+  }
+  return 'https://smashing.tools';
+}
+
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
-  site: 'https://smashing.tools',
+  site: getSiteUrl(),
   image: {
     service: {
       entrypoint: 'astro/assets/services/noop',

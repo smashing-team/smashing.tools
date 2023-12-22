@@ -1,5 +1,4 @@
 ---
-import type { CollectionKey } from 'astro:content';
 import { getCollection } from 'astro:content';
 
 import GridList from '@/components/GridList.astro';
@@ -18,28 +17,12 @@ const searchParam = Query.parseSearchParam(search);
 const activeCategory = CATEGORIES.find((cat) => cat.category === category);
 if (!activeCategory) return Astro.redirect('/404');
 
-async function getItems(collectionName: CollectionKey) {
-  return (
-    (await getCollection(collectionName, ({ data }) => {
-      return (
-        (data.datePublished &&
-          new Date(data.datePublished).valueOf() <= Date.now()) ||
-        process.env.NODE_ENV === 'development'
-      );
-    })) || []
-  );
-}
-
-const starterKitItems = await getItems('starter-kit');
-const uiKitItems = await getItems('ui-kit');
+const starterKitItems = (await getCollection('starter-kit')) || [];
+const uiKitItems = (await getCollection('ui-kit')) || [];
 
 const allItems = [...starterKitItems, ...uiKitItems];
 
-let items = allItems.sort(
-  (a, b) =>
-    new Date(b.data.datePublished).valueOf() -
-    new Date(a.data.datePublished).valueOf(),
-);
+let items = allItems;
 
 if (activeCategory.category) {
   items = items.filter((item) => item.collection === category);
