@@ -26,6 +26,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
   {
     items.map((item) => {
       const isChecked = bookmarks.some((bookmark) => bookmark.id === item.id);
+      const hasDarkLogo = !!item.data.logoDark;
       return (
         <li class="col-span-1">
           <div class="group relative rounded-3xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
@@ -42,19 +43,24 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 
             <div class="relative overflow-hidden rounded-3xl p-6">
               <Image
-                class="block h-12 w-12 shrink-0 dark:hidden"
+                class={twMerge(
+                  'h-12 w-12 shrink-0',
+                  hasDarkLogo && 'block dark:hidden',
+                )}
                 src={`/logo/${item.slug}/${item.data.logo}`}
                 alt={item.data.name}
                 width={200}
                 height={200}
               />
-              <Image
-                class="hidden h-12 w-12 shrink-0 dark:block"
-                src={`/logo/${item.slug}/${item.data.logoDark}`}
-                alt={item.data.name}
-                width={200}
-                height={200}
-              />
+              {hasDarkLogo && (
+                <Image
+                  class="hidden h-12 w-12 shrink-0 dark:block"
+                  src={`/logo/${item.slug}/${item.data.logoDark}`}
+                  alt={item.data.name}
+                  width={200}
+                  height={200}
+                />
+              )}
 
               <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
                 <a

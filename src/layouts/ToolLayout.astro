@@ -2,6 +2,7 @@
 import type { Entry } from '@keystatic/core/reader';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon';
+import { twMerge } from 'tailwind-merge';
 
 import CommandMenu from '@/components/react/CommandMenu';
 import { HeroSlider } from '@/components/react/HeroSlider';
@@ -41,6 +42,8 @@ const heroSliderImages = (heroSlider || [])
   .map((slide) => {
     return `/hero/${slug}/${slide.value.image}`;
   });
+
+const hasDarkLogo = !!logoDark;
 ---
 
 <html lang="en">
@@ -78,20 +81,23 @@ const heroSliderImages = (heroSlider || [])
           <div class="relative block w-24 overflow-hidden">
             <Image
               data-pagefind-meta="image[src], image_alt[alt]"
-              class="block w-full dark:hidden"
+              class={twMerge('w-full', hasDarkLogo && 'block dark:hidden')}
               src={`/logo/${slug}/${logo}`}
               alt={name}
               width={200}
               height={200}
             />
-            <Image
-              data-pagefind-meta="image[src], image_alt[alt]"
-              class="hidden w-full dark:block"
-              src={`/logo/${slug}/${logoDark}`}
-              alt={name}
-              width={200}
-              height={200}
-            />
+            {
+              hasDarkLogo && (
+                <Image
+                  class="hidden w-full dark:block"
+                  src={`/logo/${slug}/${logoDark}`}
+                  alt={name}
+                  width={200}
+                  height={200}
+                />
+              )
+            }
           </div>
           <div class="mt-6 text-left">
             <p
