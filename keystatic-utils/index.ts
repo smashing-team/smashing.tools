@@ -69,7 +69,7 @@ export const compatibility = fields.multiselect({
 });
 
 export const componentCount = fields.multiselect({
-  label: 'Component Count',
+  label: 'Component count',
   description: 'How many components are included?',
   options: [
     { label: '0-10', value: '0-10' },
@@ -84,7 +84,7 @@ export const componentCount = fields.multiselect({
 });
 
 export const pageExampleCount = fields.multiselect({
-  label: 'Page Example Count',
+  label: 'Page example count',
   description: 'How many page examples are included?',
   options: [
     { label: '0-10', value: '0-10' },
@@ -159,8 +159,8 @@ export const runtime = fields.multiselect({
   label: 'Runtime',
   options: [
     { label: 'Node.js', value: 'Node.js' },
-    { label: 'Deno', value: 'Deno' },
     { label: 'Bun', value: 'Bun' },
+    { label: 'Deno', value: 'Deno' },
   ],
 });
 
@@ -201,8 +201,8 @@ export const features = fields.multiselect({
     { label: 'Testing', value: 'Testing' },
     { label: 'Notifications', value: 'Notifications' },
     {
-      label: 'Artificial Intelligence',
-      value: 'Artificial Intelligence',
+      label: 'AI',
+      value: 'AI',
     },
     { label: 'SaaS', value: 'SaaS' },
     { label: 'PWA', value: 'PWA' },
@@ -265,7 +265,7 @@ export const heroSlider = fields.blocks(
     },
   },
   {
-    label: 'Hero Slider',
+    label: 'Showroom Slider',
     description: 'Optional',
     validation: { length: { min: 0, max: 5 } },
   },
