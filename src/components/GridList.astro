@@ -69,7 +69,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
                   />
                 )}
                 <img
-                  class="absolute -bottom-2 -right-2 z-50 inline-block h-5 w-5 rounded-full bg-white ring-2 ring-white dark:bg-zinc-900 dark:ring-zinc-900 dark:group-hover:ring-zinc-800"
+                  class="absolute -bottom-2 -right-2 inline-block h-5 w-5 rounded-full bg-white ring-2 ring-white dark:bg-zinc-900 dark:ring-zinc-900 dark:group-hover:ring-zinc-800"
                   src={`/avatar/${maker.id}/${maker.data.avatar}`}
                   alt={maker.data.name}
                   width={18}
