@@ -15,8 +15,12 @@ const designKitItems =
   (await getCollection('design-kit', (item) =>
     bookmarks.some((bookmark) => bookmark.id === item.id),
   )) || [];
+const uiComponentItems =
+  (await getCollection('ui-component', (item) =>
+    bookmarks.some((bookmark) => bookmark.id === item.id),
+  )) || [];
 
-const allItems = [...starterKitItems, ...designKitItems];
+const allItems = [...starterKitItems, ...designKitItems, ...uiComponentItems];
 
 export const prerender = false;
 ---
