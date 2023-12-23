@@ -101,7 +101,7 @@ export const HeroSlider = ({ images = [] }: { images: string[] }) => {
 
   return (
     <MotionConfig transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}>
-      <div className="relative mt-4 overflow-hidden rounded-3xl bg-white dark:bg-neutral-950">
+      <div className="relative mx-2 mt-4 overflow-hidden rounded-3xl bg-white dark:bg-neutral-950 lg:mx-0">
         <motion.div
           drag="x"
           dragConstraints={{
