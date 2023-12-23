@@ -79,14 +79,14 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
               </p>
 
               <div class="mt-4 flex items-center gap-3 pt-2 text-xs text-zinc-700 dark:text-zinc-400">
-                <div class="font-medium">
+                <div class="whitespace-nowrap font-medium">
                   {item.collection === 'starter-kit' ? 'Starter Kit' : 'UI Kit'}
                 </div>
-                <div class="">
+                <div class="whitespace-nowrap">
                   {item.data.attrs.pricing.map((p: string) => p).join(', ')}
                 </div>
                 <div class="grow" />
-                <div>
+                <div class="shrink-0">
                   <img
                     class="inline-block h-6 w-6 rounded-full"
                     src={`/avatar/${publisher.id}/${publisher.data.avatar}`}
