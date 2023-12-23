@@ -1,6 +1,7 @@
 ---
 import type { Entry } from '@keystatic/core/reader';
 import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
 import { Icon } from 'astro-icon';
 import { twMerge } from 'tailwind-merge';
 
@@ -36,6 +37,9 @@ const {
   prevSlug,
   nextSlug,
   heroSlider,
+  publisher,
+  maker,
+  attrs,
   url,
   slug,
 } = Astro.props;
@@ -49,6 +53,8 @@ const heroSliderImages = (heroSlider || [])
 const hasDarkLogo = !!logoDark;
 const fullUrl = new URL(url);
 fullUrl.searchParams.append('ref', 'smashing.tools');
+const publisherData = await getEntry('profiles', publisher);
+const makerData = maker && (await getEntry('profiles', maker));
 ---
 
 <html lang="en">
@@ -117,8 +123,70 @@ fullUrl.searchParams.append('ref', 'smashing.tools');
             >
               {headline}
             </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {
+                Object.entries(attrs).map(([_, value]) => {
+                  return value.map((v: string) => {
+                    return (
+                      <span class="inline-flex items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
+                        {v}
+                      </span>
+                    );
+                  });
+                })
+              }
+            </div>
+
+            <div data-people class="flex items-center space-x-6">
+              {
+                makerData && (
+                  <div class="mt-6 flex items-center">
+                    <div>
+                      <img
+                        class="inline-block h-9 w-9 rounded-full"
+                        src={`/avatar/${makerData!.id}/${
+                          makerData!.data.avatar
+                        }`}
+                        alt={makerData!.data.name}
+                      />
+                    </div>
+                    <div class="ml-2">
+                      <p class="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-500">
+                        Created by
+                      </p>
+                      <p class="text-xs font-medium group-hover:text-zinc-900 dark:text-zinc-400">
+                        {makerData!.data.name}
+                      </p>
+                    </div>
+                  </div>
+                )
+              }
+              <div class="mt-6 flex items-center">
+                <div>
+                  <img
+                    class="inline-block h-7 w-7 rounded-full"
+                    src={`/avatar/${publisherData!.id}/${
+                      publisherData!.data.avatar
+                    }`}
+                    alt={publisherData!.data.name}
+                  />
+                </div>
+                <div class="ml-2">
+                  <p
+                    class="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-500"
+                  >
+                    Published by
+                  </p>
+                  <p
+                    class="text-xs font-medium group-hover:text-zinc-900 dark:text-zinc-400"
+                  >
+                    {publisherData!.data.name}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <section class="mt-10">
+          <section class="mt-8">
             <ul
               data-pagefind-ignore
               role="list"

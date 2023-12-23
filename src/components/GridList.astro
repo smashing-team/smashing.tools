@@ -32,6 +32,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
       const isChecked = bookmarks.some((bookmark) => bookmark.id === item.id);
       const hasDarkLogo = !!item.data.logoDark;
       const publisher = await getEntry('profiles', item.data.publisher);
+      const maker = await getEntry('profiles', item.data.maker);
 
       return (
         <li class="col-span-1">
@@ -48,33 +49,41 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
             </button>
 
             <div class="relative overflow-hidden rounded-3xl p-6">
-              <Image
-                class={twMerge(
-                  'h-12 w-12 shrink-0',
-                  hasDarkLogo && 'block dark:hidden',
-                )}
-                src={`/logo/${item.slug}/${item.data.logo}`}
-                alt={item.data.name}
-                width={200}
-                height={200}
-              />
-              {hasDarkLogo && (
+              <div class="relative inline-block">
                 <Image
-                  class="hidden h-12 w-12 shrink-0 dark:block"
-                  src={`/logo/${item.slug}/${item.data.logoDark}`}
+                  class={twMerge(
+                    'h-12 w-12 shrink-0',
+                    hasDarkLogo && 'block dark:hidden',
+                  )}
+                  src={`/logo/${item.slug}/${item.data.logo}`}
                   alt={item.data.name}
                   width={200}
                   height={200}
                 />
-              )}
-
+                {hasDarkLogo && (
+                  <Image
+                    class="hidden h-12 w-12 shrink-0 dark:block"
+                    src={`/logo/${item.slug}/${item.data.logoDark}`}
+                    alt={item.data.name}
+                    width={200}
+                    height={200}
+                  />
+                )}
+                <img
+                  class="absolute -bottom-2 -right-2 z-50 inline-block h-5 w-5 rounded-full bg-white ring-2 ring-white dark:bg-zinc-900 dark:ring-zinc-900 dark:group-hover:ring-zinc-800"
+                  src={`/avatar/${maker.id}/${maker.data.avatar}`}
+                  alt={maker.data.name}
+                  width={18}
+                  height={18}
+                />
+              </div>
               <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
                 <a
                   href={`/${item.collection}/${item.slug}`}
                   class="flex items-center space-x-2 font-medium"
                 >
                   <span class="absolute -inset-px rounded-3xl" />
-                  {item.data.name}{' '}
+                  {item.data.name}
                 </a>
               </h2>
               <p class="mt-1 truncate text-sm text-zinc-700 dark:text-zinc-200">
@@ -85,18 +94,9 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
                 <div class="whitespace-nowrap font-medium">
                   {getCategoryTitle(item.collection)}
                 </div>
+                <div class="grow" />
                 <div class="whitespace-nowrap">
                   {item.data.attrs.pricing.map((p: string) => p).join(', ')}
-                </div>
-                <div class="grow" />
-                <div class="shrink-0">
-                  <img
-                    class="inline-block h-4 w-4 rounded-full"
-                    src={`/avatar/${publisher.id}/${publisher.data.avatar}`}
-                    alt={publisher.data.name}
-                    width={18}
-                    height={18}
-                  />
                 </div>
               </div>
             </div>

@@ -20,6 +20,12 @@ export const baseSchema = {
     collection: 'profile',
     validation: { isRequired: true },
   }),
+  maker: fields.relationship({
+    label: 'Maker',
+    description: 'Maker of the tool. If doesn’t exist, create a new one.',
+    collection: 'profile',
+    validation: { isRequired: true },
+  }),
   logo: fields.image({
     label: 'Logo',
     directory: 'public/logo',
@@ -72,14 +78,14 @@ export const componentCount = fields.multiselect({
   label: 'Component count',
   description: 'How many components are included?',
   options: [
-    { label: '0-10', value: '0-10' },
-    { label: '11-50', value: '11-50' },
-    { label: '51-100', value: '51-100' },
-    { label: '101-250', value: '101-250' },
-    { label: '251-1000', value: '251-1000' },
-    { label: '1000+', value: '1000+' },
-    { label: '5000+', value: '5000+' },
-    { label: '10000+', value: '10000+' },
+    { label: '0-10 components', value: '0-10' },
+    { label: '11-50 components', value: '11-50' },
+    { label: '51-100 components', value: '51-100' },
+    { label: '101-250 components', value: '101-250' },
+    { label: '251-1000 components', value: '251-1000' },
+    { label: '1000+ components', value: '1000+' },
+    { label: '5000+ components', value: '5000+' },
+    { label: '10000+ components', value: '10000+' },
   ],
 });
 
@@ -87,11 +93,11 @@ export const pageExampleCount = fields.multiselect({
   label: 'Page example count',
   description: 'How many page examples are included?',
   options: [
-    { label: '0-10', value: '0-10' },
-    { label: '11-50', value: '11-50' },
-    { label: '51-100', value: '51-100' },
-    { label: '101-250', value: '101-250' },
-    { label: '250+', value: '250+' },
+    { label: '0-10 examples', value: '0-10' },
+    { label: '11-50 examples', value: '11-50' },
+    { label: '51-100 examples', value: '51-100' },
+    { label: '101-250 examples', value: '101-250' },
+    { label: '250+ examples', value: '250+' },
   ],
 });
 
