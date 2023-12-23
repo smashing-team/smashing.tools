@@ -35,3 +35,15 @@ export type CategorySlugs = 'starter-kit' | 'design-kit' | 'ui-component';
 export function getCategoryTitle(category: CategorySlugs) {
   return CATEGORIES.find((c) => c.category === category)?.title ?? '';
 }
+
+export function getFilterLabel(filterKey: string) {
+  const fixedLabels: { [key: string]: string } = {
+    componentCount: 'Component count',
+    pageExampleCount: 'Page example count',
+    uiComponents: 'UI Components',
+    uiLibrary: 'UI Library',
+    api: 'API',
+  };
+
+  return fixedLabels[filterKey] ?? filterKey;
+}

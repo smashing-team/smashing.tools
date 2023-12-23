@@ -31,7 +31,6 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
     items.map(async (item) => {
       const isChecked = bookmarks.some((bookmark) => bookmark.id === item.id);
       const hasDarkLogo = !!item.data.logoDark;
-      const publisher = await getEntry('profiles', item.data.publisher);
       const maker = await getEntry('profiles', item.data.maker);
 
       return (

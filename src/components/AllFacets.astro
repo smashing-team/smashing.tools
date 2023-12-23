@@ -75,7 +75,7 @@ const filtered = facetEntries.some(([_, values]) =>
         {values?.map((f: any) => (
           <Facet
             key={facet}
-            title={f.value}
+            value={f.value}
             count={f.count}
             selected={f.checked}
             disabled={f.disabled}

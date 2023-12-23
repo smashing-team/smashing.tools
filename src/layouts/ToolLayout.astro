@@ -9,6 +9,7 @@ import CommandMenu from '@/components/react/CommandMenu';
 import { HeroSlider } from '@/components/react/HeroSlider';
 import { NavigateKeys } from '@/components/react/NavigateKeys';
 import { ThemeToggle } from '@/components/react/ThemeToggle';
+import { getAllFilters } from '@/utils/reader';
 
 import type keystaticConfig from '../../keystatic.config';
 import smashingLogo from '../../public/logo.svg';
@@ -55,6 +56,7 @@ const fullUrl = new URL(url);
 fullUrl.searchParams.append('ref', 'smashing.tools');
 const publisherData = await getEntry('profiles', publisher);
 const makerData = maker && (await getEntry('profiles', maker));
+const allFilters = getAllFilters();
 ---
 
 <html lang="en">
@@ -125,11 +127,11 @@ const makerData = maker && (await getEntry('profiles', maker));
             </p>
             <div class="mt-4 flex flex-wrap gap-2">
               {
-                Object.entries(attrs).map(([_, value]) => {
+                Object.entries(attrs).map(([key, value]) => {
                   return value.map((v: string) => {
                     return (
                       <span class="inline-flex items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
-                        {v}
+                        {allFilters[`${key}|${v}`]}
                       </span>
                     );
                   });

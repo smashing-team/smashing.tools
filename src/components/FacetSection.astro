@@ -1,4 +1,6 @@
 ---
+import { getFilterLabel } from '@/consts';
+
 interface Props {
   title: string;
   children: any;
@@ -15,8 +17,8 @@ const { title } = Astro.props;
     </div>
     <div class="relative flex justify-start">
       <span
-        class="bg-zinc-50 pr-2 text-sm capitalize text-zinc-500 dark:bg-zinc-900 dark:text-zinc-400"
-        >{title}</span
+        class="bg-zinc-50 pr-2 text-sm text-zinc-500 first-letter:uppercase dark:bg-zinc-900 dark:text-zinc-400"
+        >{getFilterLabel(title)}</span
       >
     </div>
   </div>

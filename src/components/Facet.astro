@@ -3,20 +3,20 @@ import { twMerge } from 'tailwind-merge';
 
 interface Props {
   key: string;
-  title: string;
+  value: string;
   count: number;
   selected?: boolean;
   disabled?: boolean;
   onClick?: () => void;
 }
 
-const { key, title, count, selected = false, disabled = false } = Astro.props;
+const { key, value, count, selected = false, disabled = false } = Astro.props;
 ---
 
 <li class="group relative flex">
   <button
     data-facet={key}
-    data-value={title}
+    data-value={value}
     disabled={disabled}
     class={twMerge(
       'inline-flex items-center rounded-full bg-white px-3 py-1 ring-1 ring-inset ring-zinc-200 hover:bg-zinc-100 dark:bg-zinc-950/40 dark:text-zinc-200 dark:ring-zinc-800 dark:hover:bg-zinc-800',
@@ -26,7 +26,7 @@ const { key, title, count, selected = false, disabled = false } = Astro.props;
       'facet-button',
     )}
   >
-    <span class="text-sm font-normal">{title}</span>
+    <span class="text-sm font-normal">{value}</span>
     <span class="ml-2 h-3.5 w-px bg-zinc-600/20"></span>
     <span
       class="ml-2 font-mono text-xs text-zinc-400 dark:text-zinc-500"
