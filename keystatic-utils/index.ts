@@ -237,7 +237,7 @@ export const uiLibrary = fields.multiselect({
 });
 
 export const uiComponents = fields.multiselect({
-  label: 'UI Kit',
+  label: 'UI Components',
   options: [
     { label: 'shadcn/ui', value: 'shadcn/ui' },
     { label: 'Tailwind UI', value: 'Tailwind UI' },
