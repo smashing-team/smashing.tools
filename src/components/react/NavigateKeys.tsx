@@ -13,10 +13,18 @@ export function NavigateKeys({ prevHref, nextHref }: Props) {
   const nextLinkRef = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
     const keydownHandler = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowLeft' && prevHref) {
+      if (
+        event.key === 'ArrowLeft' &&
+        prevHref &&
+        !(event.metaKey || event.ctrlKey)
+      ) {
         prevLinkRef.current?.setAttribute('data-transitioning', 'true');
         navigate(prevHref);
-      } else if (event.key === 'ArrowRight' && nextHref) {
+      } else if (
+        event.key === 'ArrowRight' &&
+        nextHref &&
+        !(event.metaKey || event.ctrlKey)
+      ) {
         nextLinkRef.current?.setAttribute('data-transitioning', 'true');
         navigate(nextHref);
       }
