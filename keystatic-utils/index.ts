@@ -229,6 +229,7 @@ export const uiLibrary = fields.multiselect({
   options: [
     { label: 'React', value: 'React' },
     { label: 'Preact', value: 'Preact' },
+    { label: 'Solid', value: 'Solid' },
     { label: 'Vue', value: 'Vue' },
     { label: 'Svelte', value: 'Svelte' },
     { label: 'Angular', value: 'Angular' },
