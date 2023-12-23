@@ -107,8 +107,11 @@ export const pricing = fields.multiselect({
 export const styling = fields.multiselect({
   label: 'Styling',
   options: [
+    { label: 'Unstyled', value: 'Unstyled' },
     { label: 'Tailwind', value: 'Tailwind' },
     { label: 'CSS', value: 'CSS' },
+    { label: 'CSS Modules', value: 'CSS Modules' },
+    { label: 'Vanilla extract', value: 'Vanilla extract' },
     { label: 'Saas', value: 'Saas' },
     { label: 'Less', value: 'Less' },
     { label: 'Styled Components', value: 'Styled Components' },
@@ -190,7 +193,7 @@ export const features = fields.multiselect({
   label: 'Features',
   options: [
     { label: 'Emails', value: 'Emails' },
-    { label: 'Login', value: 'Login' },
+    { label: 'Authentication', value: 'Authentication' },
     { label: 'Multi-tenancy', value: 'Multi-tenancy' },
     { label: 'Single-tenancy', value: 'Single-tenancy' },
     { label: 'Payments', value: 'Payments' },
