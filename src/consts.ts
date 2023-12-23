@@ -13,10 +13,25 @@ export const CATEGORIES = [
     title: 'Starter Kit',
   },
   {
-    category: 'ui-kit',
-    slug: '/ui-kit',
-    title: 'UI Kit',
+    category: 'design-kit',
+    slug: '/design-kit',
+    title: 'Design Kit',
+  },
+  {
+    category: 'ui-component',
+    slug: '/ui-component',
+    title: 'UI Components',
   },
 ] as const;
 
-export type CategorySlugs = '/' | '/starter-kit' | '/ui-kit';
+export type CategoryPaths =
+  | '/'
+  | '/starter-kit'
+  | '/design-kit'
+  | '/ui-component';
+
+export type CategorySlugs = 'starter-kit' | 'design-kit' | 'ui-component';
+
+export function getCategoryTitle(category: CategorySlugs) {
+  return CATEGORIES.find((c) => c.category === category)?.title ?? '';
+}

@@ -4,15 +4,17 @@ import { getEntry } from 'astro:content';
 import { twMerge } from 'tailwind-merge';
 
 import BookmarkIcon from '@/components/icons/bookmark.astro';
+import { getCategoryTitle } from '@/consts';
 import type { AllItems } from '@/pages/[...category].astro';
 import type { IBookmark } from '@/types/global';
 
 interface Props {
   items: AllItems;
   withoutPadding?: boolean;
+  full?: boolean;
 }
 
-const { items, withoutPadding = false } = Astro.props;
+const { items, withoutPadding = false, full = false } = Astro.props;
 
 const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 ---
@@ -22,6 +24,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
   class={twMerge(
     'grid grid-cols-1 gap-4 p-2 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 lg:p-4 xl:grid-cols-2 2xl:grid-cols-3 3xl:grid-cols-4',
     withoutPadding && 'p-0 lg:p-0',
+    full && 'sm:grid-cols-1 md:grid-cols-2 2xl:grid-cols-2 3xl:grid-cols-2',
   )}
 >
   {
@@ -39,7 +42,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
               data-checked={isChecked.toString()}
               data-bookmark
               aria-label="Bookmark"
-              class="group absolute right-4 top-4 z-50 flex h-12 w-12 items-center justify-center rounded-3xl text-zinc-500 opacity-0 transition-all hover:scale-110 group-hover:opacity-100 data-[checked=true]:opacity-100 dark:text-zinc-400 "
+              class="group absolute right-2 top-2 z-50 flex h-12 w-12 items-center justify-center rounded-3xl text-zinc-500 opacity-100 transition-all hover:scale-110 group-hover:opacity-100 data-[checked=true]:opacity-100 dark:text-zinc-400 lg:opacity-0"
             >
               <BookmarkIcon />
             </button>
@@ -80,7 +83,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
 
               <div class="mt-4 flex items-center gap-3 pt-2 text-xs text-zinc-700 dark:text-zinc-400">
                 <div class="whitespace-nowrap font-medium">
-                  {item.collection === 'starter-kit' ? 'Starter Kit' : 'UI Kit'}
+                  {getCategoryTitle(item.collection)}
                 </div>
                 <div class="whitespace-nowrap">
                   {item.data.attrs.pricing.map((p: string) => p).join(', ')}
@@ -88,7 +91,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
                 <div class="grow" />
                 <div class="shrink-0">
                   <img
-                    class="inline-block h-6 w-6 rounded-full"
+                    class="inline-block h-4 w-4 rounded-full"
                     src={`/avatar/${publisher.id}/${publisher.data.avatar}`}
                     alt={publisher.data.name}
                     width={18}

@@ -1,12 +1,12 @@
 import { getCollection } from 'astro:content';
 import { OGImageRoute } from 'astro-og-canvas';
 
-const [starterKits, uiKits] = await Promise.all([
+const [starterKits, designKits] = await Promise.all([
   await getCollection('starter-kit'),
-  await getCollection('ui-kit'),
+  await getCollection('design-kit'),
 ]);
 
-const collectionEntries = [...starterKits, ...uiKits];
+const collectionEntries = [...starterKits, ...designKits];
 
 const pages = Object.fromEntries(
   collectionEntries.map(({ slug, data }) => [slug, data]),

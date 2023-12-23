@@ -11,12 +11,12 @@ const starterKitItems =
   (await getCollection('starter-kit', (item) =>
     bookmarks.some((bookmark) => bookmark.id === item.id),
   )) || [];
-const uiKitItems =
-  (await getCollection('ui-kit', (item) =>
+const designKitItems =
+  (await getCollection('design-kit', (item) =>
     bookmarks.some((bookmark) => bookmark.id === item.id),
   )) || [];
 
-const allItems = [...starterKitItems, ...uiKitItems];
+const allItems = [...starterKitItems, ...designKitItems];
 
 export const prerender = false;
 ---
@@ -34,5 +34,5 @@ export const prerender = false;
       </p>
     </div>
   </div>
-  <GridList withoutPadding items={allItems} />
+  <GridList full withoutPadding items={allItems} />
 </PageLayout>

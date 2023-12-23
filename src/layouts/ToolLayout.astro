@@ -16,10 +16,12 @@ import BaseHead from '../components/BaseHead.astro';
 type StarterKitEntry = Entry<
   (typeof keystaticConfig)['collections']['starterKit']
 >;
-type UIKitEntry = Entry<(typeof keystaticConfig)['collections']['uiKit']>;
+type DesignKitEntry = Entry<
+  (typeof keystaticConfig)['collections']['designKit']
+>;
 
-type Props = (StarterKitEntry | UIKitEntry) & {
-  collection: 'starter-kit' | 'ui-kit';
+type Props = (StarterKitEntry | DesignKitEntry) & {
+  collection: 'starter-kit' | 'design-kit';
   slug?: string;
   prevSlug?: string;
   nextSlug?: string;

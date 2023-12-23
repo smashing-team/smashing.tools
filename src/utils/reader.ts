@@ -5,23 +5,24 @@ import keystaticConfig from '../../keystatic.config';
 const reader = createReader(process.cwd(), keystaticConfig);
 
 export const getStarterKitFilters = () => {
-  // eslint-disable-next-line unused-imports/no-unused-vars
-  const { pricing, ...filters } =
-    keystaticConfig.collections.starterKit.schema.attrs.fields;
-  return Object.keys(filters);
+  return Object.keys(
+    keystaticConfig.collections.starterKit.schema.attrs.fields,
+  );
 };
-export const getUIKitFilters = () => {
-  // eslint-disable-next-line unused-imports/no-unused-vars
-  const { pricing, ...filters } =
-    keystaticConfig.collections.uiKit.schema.attrs.fields;
-  return Object.keys(filters);
+export const getDesignKitFilters = () => {
+  return Object.keys(keystaticConfig.collections.designKit.schema.attrs.fields);
+};
+export const getUIComponentFilters = () => {
+  return Object.keys(
+    keystaticConfig.collections.uiComponent.schema.attrs.fields,
+  );
 };
 
 export function getStarterKits() {
   return reader.collections.starterKit.all();
 }
-export function getUIKits() {
-  return reader.collections.uiKit.all();
+export function getDesignKits() {
+  return reader.collections.designKit.all();
 }
 export function getProfiles() {
   return reader.collections.profile.all();

@@ -1,26 +1,35 @@
-import type { CategorySlugs } from '@/consts';
+import type { CategoryPaths } from '@/consts';
 
 import type { AllItems } from '../pages/[...category].astro';
-import { getStarterKitFilters, getUIKitFilters } from './reader';
+import {
+  getDesignKitFilters,
+  getStarterKitFilters,
+  getUIComponentFilters,
+} from './reader';
 
 const starterKitFilters = getStarterKitFilters();
-const uiKitFilters = getUIKitFilters();
-const sharedFilters = ['pricing'] as const;
+const designKitFilters = getDesignKitFilters();
+const uiComponentFilters = getUIComponentFilters();
 
 const allFilters = [
-  ...sharedFilters,
   ...starterKitFilters,
-  ...uiKitFilters,
+  ...designKitFilters,
+  ...uiComponentFilters,
 ] as const;
 
-const getFiltersByCategory = (selectedCategory: CategorySlugs) => {
+// get unique filters from allFilters
+const uniqueFilters = [...new Set(allFilters)];
+
+const getFiltersByCategory = (selectedCategory: CategoryPaths) => {
   switch (selectedCategory) {
     case '/starter-kit':
-      return [...sharedFilters, ...starterKitFilters];
-    case '/ui-kit':
-      return [...sharedFilters, ...uiKitFilters];
+      return starterKitFilters;
+    case '/design-kit':
+      return designKitFilters;
+    case '/ui-component':
+      return uiComponentFilters;
     default:
-      return allFilters;
+      return uniqueFilters;
   }
 };
 
@@ -30,7 +39,7 @@ export const objKeys = <O extends object>(o: O): (keyof O)[] =>
 
 export type Facets = Partial<
   Record<
-    (typeof allFilters)[number],
+    (typeof uniqueFilters)[number],
     Array<{
       value: string;
       count: number;
@@ -42,7 +51,7 @@ export type Facets = Partial<
 
 export function getFacets(
   items: AllItems,
-  activeCategory: CategorySlugs,
+  activeCategory: CategoryPaths,
   filterredFacets?: Facets,
   searchParams: Record<string, (string | number)[]> = {},
 ) {

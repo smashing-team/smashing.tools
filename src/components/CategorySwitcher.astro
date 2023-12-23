@@ -1,51 +1,53 @@
 ---
 import { Icon } from 'astro-icon';
 
+import type { CategoryPaths } from '@/consts';
+
 interface Props {
-  activeCategory: '/' | '/starter-kit' | '/ui-kit';
+  activeCategory: CategoryPaths;
 }
 
 const { activeCategory = '/' } = Astro.props;
 ---
 
-<section class="mt-1 flex flex-col justify-center lg:mt-3 lg:flex-row">
+<section class="mt-1 lg:mt-3">
   <div
     class="mx-auto mb-2 h-px w-full max-w-md bg-gradient-to-r from-zinc-200/0 via-zinc-300 to-zinc-200/0 dark:via-zinc-700 lg:hidden"
   >
   </div>
   <ul
     role="list"
-    class="mt-1 flex justify-center gap-2 text-sm font-medium leading-7 lg:flex-row lg:justify-start"
+    class="mt-1 grid grid-cols-2 gap-2 text-sm font-medium leading-7 sm:grid-cols-4 lg:grid-cols-2"
   >
     <li
-      class="group relative flex pr-1"
+      class="group relative flex"
       data-active={activeCategory === '/' && 'on'}
     >
       <span
-        class="absolute inset-0 -z-10 scale-75 rounded-3xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
+        class="absolute inset-0 -z-10 scale-75 rounded-xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
       ></span>
       <a
         href="/"
-        class="flex items-center rounded-3xl px-2"
+        class="flex w-full items-center rounded-xl px-2"
         aria-label="All tools"
       >
         <Icon
           name="tabler:layout-grid"
           class="h-4 w-4 text-zinc-400 group-hover:text-zinc-600 group-data-[active='on']:text-zinc-600 dark:group-hover:text-zinc-100 dark:group-data-[active='on']:text-zinc-100"
         />
-        <span class="ml-2 block">All</span>
+        <span class="ml-2 block">All tools</span>
       </a>
     </li>
     <li
-      class="group relative flex pr-1"
+      class="group relative flex"
       data-active={activeCategory === '/starter-kit' && 'on'}
     >
       <span
-        class="absolute inset-0 -z-10 scale-75 rounded-3xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"
+        class="absolute inset-0 -z-10 scale-75 rounded-xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
       ></span>
       <a
         href="/starter-kit"
-        class="group flex items-center px-2"
+        class="group flex w-full items-center px-2"
         aria-label="Starter Kits"
       >
         <Icon
@@ -56,22 +58,41 @@ const { activeCategory = '/' } = Astro.props;
       </a>
     </li>
     <li
-      class="group relative flex pr-1"
-      data-active={activeCategory === '/ui-kit' && 'on'}
+      class="group relative flex"
+      data-active={activeCategory === '/ui-component' && 'on'}
     >
       <span
-        class="absolute inset-0 -z-10 scale-75 rounded-3xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100"
+        class="absolute inset-0 -z-10 scale-75 rounded-xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
       ></span>
       <a
-        href="/ui-kit"
-        class="group flex items-center px-2"
-        aria-label="UI Kits"
+        href="/ui-component"
+        class="group flex w-full items-center px-2"
+        aria-label="UI Libraries"
+      >
+        <Icon
+          name="tabler:package"
+          class="h-4 w-4 text-zinc-400 group-hover:text-zinc-600 group-data-[active='on']:text-zinc-600 dark:group-hover:text-zinc-100 dark:group-data-[active='on']:text-zinc-100"
+        />
+        <span class="ml-2 block whitespace-nowrap">UI Components</span>
+      </a>
+    </li>
+    <li
+      class="group relative flex"
+      data-active={activeCategory === '/design-kit' && 'on'}
+    >
+      <span
+        class="absolute inset-0 -z-10 scale-75 rounded-xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
+      ></span>
+      <a
+        href="/design-kit"
+        class="group flex w-full items-center px-2"
+        aria-label="Design Kits"
       >
         <Icon
           name="tabler:brush"
           class="h-4 w-4 text-zinc-400 group-hover:text-zinc-600 group-data-[active='on']:text-zinc-600 dark:group-hover:text-zinc-100 dark:group-data-[active='on']:text-zinc-100"
         />
-        <span class="ml-2 block">UI Kits</span>
+        <span class="ml-2 block whitespace-nowrap">Design Kits</span>
       </a>
     </li>
   </ul>

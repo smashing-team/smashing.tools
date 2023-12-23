@@ -1,10 +1,10 @@
 ---
 import CategorySwitcher from '@/components/CategorySwitcher.astro';
 import CommandMenu from '@/components/react/CommandMenu';
-import type { CategorySlugs } from '@/consts';
+import type { CategoryPaths } from '@/consts';
 
 interface Props {
-  activeCategory: CategorySlugs;
+  activeCategory: CategoryPaths;
 }
 
 const { activeCategory } = Astro.props;

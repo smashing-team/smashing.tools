@@ -1,9 +1,9 @@
 
   <a href="https://github.com/smashing-team/smashing.tools">
-   <img src="https://raw.githubusercontent.com/smashing-team/.github/main/profile/organization-promo.png" alt="Logo">
+   <img src="https://repository-images.githubusercontent.com/727660019/a7a54d3e-9aeb-4cd5-b53c-891a97721edb" alt="Logo">
   </a>
   <p align="center">
-    <a href="https://smashing.team">Website</a>
+    <a href="https://smashing.tools">Website</a>
     ·
     <a href="https://github.com/smashing-team/smashing.tools/issues">Issues</a>
     ·
@@ -32,7 +32,6 @@ smashing.tools/
     │   ├── components/ # Mix of React and Astro components for UI versatility.
     │   ├── content/ # Static content in Markdown for Astro-powered site.
     │   ├── layouts/ # Layout templates defining UI structure.
-    │   ├── lib/ # Integration and management of external libraries.
     │   ├── pages/ # Astro hybrid pages with static and dynamic content.
     │   ├── plugins/ # Astro plugins for added functionality.
     │   ├── styles/ # TailwindCSS styling for visual theme and design.

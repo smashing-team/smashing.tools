@@ -18,9 +18,10 @@ const activeCategory = CATEGORIES.find((cat) => cat.category === category);
 if (!activeCategory) return Astro.redirect('/404');
 
 const starterKitItems = (await getCollection('starter-kit')) || [];
-const uiKitItems = (await getCollection('ui-kit')) || [];
+const designKitItems = (await getCollection('design-kit')) || [];
+const uiComponentItems = (await getCollection('ui-component')) || [];
 
-const allItems = [...starterKitItems, ...uiKitItems];
+const allItems = [...starterKitItems, ...designKitItems, ...uiComponentItems];
 
 let items = allItems;
 
@@ -54,9 +55,12 @@ const facets = getFacets(
   // eslint-disable-next-line no-nested-ternary
   activeCategory.slug === '/'
     ? allItems
-    : activeCategory.category === 'starter-kit'
+    : // eslint-disable-next-line no-nested-ternary
+      activeCategory.category === 'starter-kit'
       ? starterKitItems
-      : uiKitItems,
+      : activeCategory.category === 'design-kit'
+        ? designKitItems
+        : uiComponentItems,
   activeCategory.slug,
   filteredFacets,
   searchParam,

@@ -1,0 +1,34 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+import ToolLayout from '../../layouts/ToolLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('ui-component');
+  return posts.map((post, index) => ({
+    params: { slug: post.slug },
+    props: {
+      ...post,
+      prevSlug: posts[index - 1]?.slug || posts[posts.length - 1]?.slug,
+      nextSlug: posts[index + 1]?.slug || posts[0]?.slug,
+    },
+  }));
+}
+type Props = CollectionEntry<'ui-component'> & {
+  prevSlug?: CollectionEntry<'ui-component'>['slug'];
+  nextSlug?: CollectionEntry<'ui-component'>['slug'];
+};
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+
+<ToolLayout
+  {...post.data}
+  slug={post.slug}
+  collection="ui-component"
+  prevSlug={post.prevSlug}
+  nextSlug={post.nextSlug}
+>
+  <Content />
+</ToolLayout>

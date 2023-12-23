@@ -19,7 +19,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={handleClick}
-      className="flex h-11 w-11 items-center justify-center"
+      className="flex h-11 w-11 items-center justify-center rounded-2xl transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
       aria-label="Toggle theme"
     >
       {theme === 'light' ? (
