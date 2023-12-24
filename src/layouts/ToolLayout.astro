@@ -7,6 +7,7 @@ import { twMerge } from 'tailwind-merge';
 
 import CommandMenu from '@/components/react/CommandMenu';
 import { HeroSlider } from '@/components/react/HeroSlider';
+import { ModeToggle } from '@/components/react/ModeToggle';
 import { NavigateKeys } from '@/components/react/NavigateKeys';
 import { ThemeToggle } from '@/components/react/ThemeToggle';
 import { getAllFilters } from '@/utils/reader';
@@ -83,7 +84,7 @@ const allFilters = getAllFilters();
             /></a
           >
           <div class="grow"></div>
-          <ThemeToggle client:only />
+          <ModeToggle align="end" client:only />
         </div>
       </div>
       <header class="px-4">

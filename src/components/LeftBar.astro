@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon';
 
-import { ThemeToggle } from '@/components/react/ThemeToggle';
+import { ModeToggle } from '@/components/react/ModeToggle';
 
 import smashingLogo from '../../public/logo.svg';
 ---
@@ -62,5 +62,5 @@ import smashingLogo from '../../public/logo.svg';
   >
     <Icon name="tabler:bookmarks" class="h-5 w-5" />
   </a>
-  <ThemeToggle client:only />
+  <ModeToggle client:only />
 </div>

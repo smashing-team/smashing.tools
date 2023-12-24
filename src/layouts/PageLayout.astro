@@ -1,6 +1,6 @@
 ---
 import CommandMenu from '@/components/react/CommandMenu';
-import { ThemeToggle } from '@/components/react/ThemeToggle';
+import { ModeToggle } from '@/components/react/ModeToggle';
 
 import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
@@ -33,7 +33,7 @@ export const prerender = false;
             /></a
           >
           <div class="grow"></div>
-          <ThemeToggle client:only />
+          <ModeToggle align="end" client:only />
         </div>
       </div>
       <div class="hidden" data-pagefind-ignore>

@@ -1,5 +1,6 @@
 import * as defaultTheme from 'tailwindcss/defaultTheme';
 import tailwindTypeography from '@tailwindcss/typography';
+import tailwindAnimate from 'tailwindcss-animate';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -21,5 +22,5 @@ export default {
       },
     },
   },
-  plugins: [tailwindTypeography],
+  plugins: [tailwindTypeography, tailwindAnimate],
 };

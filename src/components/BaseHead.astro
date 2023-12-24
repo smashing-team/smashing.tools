@@ -73,23 +73,28 @@ const image = slug
     if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
       return localStorage.getItem('theme');
     }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
   };
 
-  if (theme() === 'light') {
-    document.documentElement.classList.remove('dark');
-  } else {
-    document.documentElement.classList.add('dark');
-  }
-
-  document.addEventListener('astro:after-swap', (ev) => {
+  const applyTheme = () => {
     if (theme() === 'light') {
       document.documentElement.classList.remove('dark');
     } else {
       document.documentElement.classList.add('dark');
     }
+  };
+
+  applyTheme();
+
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', (event) => {
+      applyTheme();
+    });
+
+  document.addEventListener('astro:after-swap', (ev) => {
+    applyTheme();
   });
 </script>

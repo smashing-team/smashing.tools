@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 
 import Facet from '@/components/Facet.astro';
 import FacetSection from '@/components/FacetSection.astro';
-import { ThemeToggle } from '@/components/react/ThemeToggle';
+import { ModeToggle } from '@/components/react/ModeToggle';
 import type { Facets } from '@/utils/facets';
 
 interface Props {
@@ -43,7 +43,7 @@ const filtered = facetEntries.some(([_, values]) =>
         >
           <Icon name="tabler:bookmarks" class="h-5 w-5" />
         </a>
-        <ThemeToggle client:only />
+        <ModeToggle align="end" client:only />
         <button
           id="mobile-menu-close-button"
           aria-label="Close menu"

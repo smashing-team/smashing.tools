@@ -48,7 +48,7 @@
       ],
       "settings": {
         "tailwindcss": {
-          "callees": ["twMerge"]
+          "callees": ["twMerge", "cn"]
         }
       },
       "parserOptions": {
