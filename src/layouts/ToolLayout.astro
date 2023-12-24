@@ -9,7 +9,7 @@ import CommandMenu from '@/components/react/CommandMenu';
 import { HeroSlider } from '@/components/react/HeroSlider';
 import { ModeToggle } from '@/components/react/ModeToggle';
 import { NavigateKeys } from '@/components/react/NavigateKeys';
-import { ThemeToggle } from '@/components/react/ThemeToggle';
+import type { CategorySlugs } from '@/consts';
 import { getAllFilters } from '@/utils/reader';
 
 import type keystaticConfig from '../../keystatic.config';
@@ -22,9 +22,12 @@ type StarterKitEntry = Entry<
 type DesignKitEntry = Entry<
   (typeof keystaticConfig)['collections']['designKit']
 >;
+type UiComponentEntry = Entry<
+  (typeof keystaticConfig)['collections']['uiComponent']
+>;
 
-type Props = (StarterKitEntry | DesignKitEntry) & {
-  collection: 'starter-kit' | 'design-kit';
+type Props = (StarterKitEntry & DesignKitEntry & UiComponentEntry) & {
+  collection: CategorySlugs;
   slug?: string;
   prevSlug?: string;
   nextSlug?: string;
