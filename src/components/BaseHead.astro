@@ -55,6 +55,12 @@ const image = slug
   data-domain="smashing.tools"
   src="https://plausible.io/js/script.js"></script>
 <!-- Pagefind -->
+<script>
+  import posthog from 'posthog-js';
+  posthog.init('phc_E3rtqCjr6XI8mSHI0JrGhPn2Vuye71I3rkOQ2j9FhhY', {
+    api_host: 'https://us.posthog.com',
+  });
+</script>
 <script is:inline>
   (async () => {
     const pagefind = await import('/pagefind/pagefind.js');
