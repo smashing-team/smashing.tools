@@ -20,7 +20,7 @@ export const CATEGORIES = [
   {
     category: 'ui-component',
     slug: '/ui-component',
-    title: 'UI Components',
+    title: 'UI Component',
   },
 ] as const;
 
