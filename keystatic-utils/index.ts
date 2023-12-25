@@ -222,6 +222,8 @@ export const features = fields.multiselect({
     { label: 'CLI', value: 'CLI' },
     { label: 'Storage', value: 'Storage' },
     { label: 'Notifications', value: 'Notifications' },
+    { label: 'Feature flags', value: 'Feature flags' },
+    { label: 'Onboarding', value: 'Onboarding' },
     {
       label: 'AI',
       value: 'AI',
