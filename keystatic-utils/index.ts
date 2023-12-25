@@ -249,6 +249,8 @@ export const uiComponents = fields.multiselect({
   label: 'UI Components',
   options: [
     { label: 'shadcn/ui', value: 'shadcn/ui' },
+    { label: 'Radix Primitives', value: 'Radix Primitives' },
+    { label: 'Radix UI', value: 'Radix UI' },
     { label: 'Tailwind UI', value: 'Tailwind UI' },
     { label: 'Chakra', value: 'Chakra' },
     { label: 'Mantine', value: 'Mantine' },
