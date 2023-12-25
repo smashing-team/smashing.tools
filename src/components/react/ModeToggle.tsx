@@ -13,6 +13,9 @@ export function ModeToggle({
 }: {
   align?: 'center' | 'start' | 'end';
 }) {
+  if (typeof localStorage === 'undefined') {
+    return <div className="h-11 w-11"></div>;
+  }
   const [theme, setThemeState] = React.useState(
     localStorage.getItem('theme') ?? 'system',
   );

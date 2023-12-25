@@ -46,6 +46,8 @@ const {
   maker,
   attrs,
   url,
+  repositoryUrl,
+  previewUrl,
   slug,
 } = Astro.props;
 
@@ -56,8 +58,16 @@ const heroSliderImages = (heroSlider || [])
   });
 
 const hasDarkLogo = !!logoDark;
-const fullUrl = new URL(url);
-fullUrl.searchParams.append('ref', 'smashing.tools');
+
+const websiteUrl = new URL(url);
+websiteUrl.searchParams.append('ref', 'smashing.tools');
+
+const repoUrl = repositoryUrl ? new URL(repositoryUrl) : undefined;
+repoUrl?.searchParams.append('ref', 'smashing.tools');
+
+const prevUrl = previewUrl ? new URL(previewUrl) : undefined;
+prevUrl?.searchParams.append('ref', 'smashing.tools');
+
 const publisherData = await getEntry('profiles', publisher);
 const makerData = maker && (await getEntry('profiles', maker));
 const allFilters = getAllFilters();
@@ -87,7 +97,7 @@ const allFilters = getAllFilters();
             /></a
           >
           <div class="grow"></div>
-          <ModeToggle align="end" client:only />
+          <ModeToggle align="end" client:load />
         </div>
       </div>
       <header class="px-4">
@@ -196,11 +206,12 @@ const allFilters = getAllFilters();
             <ul
               data-pagefind-ignore
               role="list"
-              class="mt-4 flex gap-10 text-base font-medium leading-7 text-zinc-700"
+              class="mt-4 flex items-center gap-4 text-base font-medium leading-7"
             >
               <li>
                 <a
-                  href={fullUrl.toString()}
+                  target="_blank"
+                  href={websiteUrl.toString()}
                   class="flex items-center rounded-3xl bg-zinc-50 px-4 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
                 >
                   <Icon
@@ -210,6 +221,44 @@ const allFilters = getAllFilters();
                    Website
                 </a>
               </li>
+              {
+                repoUrl && (
+                  <li>
+                    <a
+                      target="_blank"
+                      href={repoUrl.toString()}
+                      class="flex items-center rounded-3xl px-4 py-3 text-base font-semibold hover:bg-zinc-100/75  dark:hover:bg-white/5"
+                    >
+                      <Icon
+                        name="tabler:brand-github"
+                        class="relative -left-0.5 mr-1.5 h-5 w-5"
+                      />
+                      Repository
+                    </a>
+                  </li>
+                )
+              }
+              {
+                prevUrl && (
+                  <li>
+                    <a
+                      target="_blank"
+                      href={prevUrl.toString()}
+                      class="flex items-center rounded-3xl px-4 py-3 text-base font-semibold hover:bg-zinc-100/75  dark:hover:bg-white/5"
+                    >
+                      <Icon
+                        name={
+                          prevUrl.toString().includes('figma')
+                            ? 'tabler:brand-figma'
+                            : 'tabler:external-link'
+                        }
+                        class="relative -left-0.5 mr-1.5 h-5 w-5"
+                      />
+                      Preview
+                    </a>
+                  </li>
+                )
+              }
             </ul>
           </section>
         </div>

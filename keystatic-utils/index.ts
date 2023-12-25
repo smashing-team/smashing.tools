@@ -70,6 +70,8 @@ export const compatibility = fields.multiselect({
     { label: 'Figma Components', value: 'Figma Components' },
     { label: 'Figma Variables', value: 'Figma Variables' },
     { label: 'Figma Variants', value: 'Figma Variants' },
+    { label: 'Framer Library', value: 'Framer Library' },
+    { label: 'React Library', value: 'React Library' },
     { label: 'Dark mode', value: 'Dark mode' },
   ],
 });
