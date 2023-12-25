@@ -143,6 +143,8 @@ export const framework = fields.multiselect({
     { label: 'RedwoodJS', value: 'RedwoodJS' },
     { label: 'SvelteKit', value: 'SvelteKit' },
     { label: 'Laravel', value: 'Laravel' },
+    { label: 'Flutter', value: 'Flutter' },
+    { label: 'React Native', value: 'React Native' },
   ],
 });
 
@@ -170,6 +172,8 @@ export const runtime = fields.multiselect({
     { label: 'Node.js', value: 'Node.js' },
     { label: 'Bun', value: 'Bun' },
     { label: 'Deno', value: 'Deno' },
+    { label: 'Apple', value: 'Apple' },
+    { label: 'Android', value: 'Android' },
   ],
 });
 
@@ -179,11 +183,16 @@ export const language = fields.multiselect({
     { label: 'JavaScript', value: 'JavaScript' },
     { label: 'TypeScript', value: 'TypeScript' },
     { label: 'Python', value: 'Python' },
+    { label: 'Swift', value: 'Swift' },
+    { label: 'Kotlin', value: 'Kotlin' },
+    { label: '.NET', value: '.NET' },
     { label: 'Ruby', value: 'Ruby' },
+    { label: 'Dart', value: 'Dart' },
     { label: 'Go', value: 'Go' },
     { label: 'C#', value: 'C#' },
     { label: 'Java', value: 'Java' },
     { label: 'Rust', value: 'Rust' },
+    { label: 'PHP', value: 'PHP' },
   ],
   defaultValue: ['TypeScript'],
 });
@@ -208,6 +217,10 @@ export const features = fields.multiselect({
     { label: 'Payments', value: 'Payments' },
     { label: 'SEO', value: 'SEO' },
     { label: 'Testing', value: 'Testing' },
+    { label: 'Realtime', value: 'Realtime' },
+    { label: 'SDK', value: 'SDK' },
+    { label: 'CLI', value: 'CLI' },
+    { label: 'Storage', value: 'Storage' },
     { label: 'Notifications', value: 'Notifications' },
     {
       label: 'AI',
