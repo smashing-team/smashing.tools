@@ -142,6 +142,7 @@ export const framework = fields.multiselect({
     { label: 'Blitz', value: 'Blitz' },
     { label: 'RedwoodJS', value: 'RedwoodJS' },
     { label: 'SvelteKit', value: 'SvelteKit' },
+    { label: 'Laravel', value: 'Laravel' },
   ],
 });
 
