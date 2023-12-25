@@ -1,5 +1,5 @@
 ---
-import { MagicWandIcon } from '@radix-ui/react-icons';
+import { BookmarkIcon } from '@radix-ui/react-icons';
 import { getCollection } from 'astro:content';
 
 import GridList from '@/components/GridList.astro';
@@ -30,10 +30,10 @@ export const prerender = false;
   <div class="mb-6 flex">
     <div>
       <span class="text-2xl font-semibold">Bookmarks</span>
-      <span class="text-sm text-gray-500" id="bookmark-count"
+      <span class="text-sm text-zinc-500" id="bookmark-count"
         >({allItems.length})</span
       >
-      <p class="mt-2 text-sm text-gray-500">
+      <p class="mt-2 text-sm text-zinc-500">
         These are the bookmarks you've saved. Stored in your browser's 🍪
         cookies.
       </p>
@@ -44,11 +44,11 @@ export const prerender = false;
       <GridList full withoutPadding items={allItems} />
     ) : (
       <div class="flex flex-col items-center">
-        <span class="mb-6 mt-10 inline-flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 ring-8 ring-slate-50 dark:bg-slate-200 dark:ring-slate-300">
-          <MagicWandIcon className="h-7 w-7 text-slate-500" />
+        <span class="mb-6 mt-10 inline-flex h-14 w-14 items-center justify-center rounded-full bg-zinc-100 ring-8 ring-zinc-50 dark:bg-zinc-800 dark:ring-zinc-900">
+          <BookmarkIcon className="h-7 w-7 text-zinc-500" />
         </span>
         <>
-          <p class="text-slate-500">You haven't bookmarked.</p>
+          <p class="text-zinc-500">You haven't bookmarked yet.</p>
           <a class="text-indigo-600 underline dark:text-indigo-400" href="/">
             Explore the tools!
           </a>
