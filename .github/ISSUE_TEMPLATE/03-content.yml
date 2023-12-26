@@ -12,15 +12,15 @@ body:
       label: Category
       description: Select the category of the content
       options:
-        - starter kit
-        - design kit
-        - web components library
+        - Starter Kit
+        - Design Kit
+        - UI Library
     validations:
       required: true
   - type: input
     attributes:
       label: Content Name
-      description: Name of the content you're providing feedback on
+      description: The slug and title of the content you're providing feedback on
     validations:
       required: true
   - type: textarea
