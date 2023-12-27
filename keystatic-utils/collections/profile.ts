@@ -15,7 +15,7 @@ export const profile = collection({
     }),
     avatar: fields.image({
       label: 'Avatar',
-      directory: 'public/avatar',
+      publicPath: './',
       description:
         'Avatar of the author. The image should be 1:1 ratio (e.g. 500x500) for best results.',
       validation: {

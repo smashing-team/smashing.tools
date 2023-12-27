@@ -31,7 +31,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
     items.map(async (item) => {
       const isChecked = bookmarks.some((bookmark) => bookmark.id === item.id);
       const hasDarkLogo = !!item.data.logoDark;
-      const maker = await getEntry('profiles', item.data.maker);
+      const maker = await getEntry('profiles', item.data.maker.id);
 
       return (
         <li class="col-span-1">
@@ -54,26 +54,25 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
                     'h-12 w-12 shrink-0',
                     hasDarkLogo && 'block dark:hidden',
                   )}
-                  src={`/logo/${item.slug}/${item.data.logo}`}
+                  src={item.data.logo}
                   alt={item.data.name}
-                  width={200}
-                  height={200}
+                  width={48}
+                  height={48}
                 />
-                {hasDarkLogo && (
+                {item.data.logoDark && (
                   <Image
                     class="hidden h-12 w-12 shrink-0 dark:block"
-                    src={`/logo/${item.slug}/${item.data.logoDark}`}
+                    src={item.data.logoDark}
                     alt={item.data.name}
-                    width={200}
-                    height={200}
                   />
                 )}
-                <img
+                <Image
+                  widths={[20, maker.data.avatar.width]}
                   class="absolute -bottom-2 -right-2 inline-block h-5 w-5 rounded-full bg-white ring-2 ring-white dark:bg-zinc-900 dark:ring-zinc-900 dark:group-hover:ring-zinc-800"
-                  src={`/avatar/${maker.id}/${maker.data.avatar}`}
+                  src={maker.data.avatar}
                   alt={maker.data.name}
-                  width={18}
-                  height={18}
+                  width={20}
+                  height={20}
                 />
               </div>
               <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
