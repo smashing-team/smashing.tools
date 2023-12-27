@@ -28,7 +28,7 @@ export const baseSchema = {
   }),
   logo: fields.image({
     label: 'Logo',
-    directory: 'public/logo',
+    publicPath: './',
     description:
       'Logo of the tool. The image should be 1:1 ratio (e.g. 200x200) for best results.',
     validation: {
@@ -37,7 +37,7 @@ export const baseSchema = {
   }),
   logoDark: fields.image({
     label: 'Logo for Dark mode',
-    directory: 'public/logo',
+    publicPath: './',
     description:
       'It will be used when the background is dark. The image should be 1:1 ratio (e.g. 200x200) for best results.',
   }),
@@ -285,7 +285,7 @@ export const heroSlider = fields.blocks(
         image: fields.image({
           label:
             'Choose an image. The image should be 16:10 ratio (e.g. 800x500) for best results.',
-          directory: 'public/hero',
+          publicPath: './',
         }),
       }),
     },

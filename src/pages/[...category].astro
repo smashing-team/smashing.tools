@@ -38,9 +38,8 @@ if (activeCategory.category) {
 if (Object.values(searchParam).length) {
   items = items.filter((item) => {
     for (const key in searchParam) {
-      // TODO: type error
-      // @ts-ignore
       if (
+        // @ts-ignore
         !searchParam[key]?.every((el) => item.data.attrs?.[key]?.includes(el))
       ) {
         return false;

@@ -4,12 +4,18 @@ import { useEffect, useState } from 'react';
 
 const AUTO_DELAY = 1000 * 5;
 const DRAG_BUFFER = 10;
+type AstroImages = {
+  src: string;
+  width: number;
+  height: number;
+  format: 'png' | 'jpg' | 'jpeg' | 'tiff' | 'webp' | 'gif' | 'svg' | 'avif';
+}[];
 
 const Images = ({
   images,
   imgIndex,
 }: {
-  images: string[];
+  images: AstroImages;
   imgIndex: number;
 }) => {
   return (
@@ -19,7 +25,7 @@ const Images = ({
           <motion.div
             key={idx}
             style={{
-              backgroundImage: `url(${imgSrc})`,
+              backgroundImage: `url(${imgSrc.src})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -39,7 +45,7 @@ const Dots = ({
   imgIndex,
   setImgIndex,
 }: {
-  images: string[];
+  images: AstroImages;
   imgIndex: number;
   setImgIndex: Dispatch<SetStateAction<number>>;
 }) => {
@@ -63,7 +69,7 @@ const Dots = ({
   );
 };
 
-export const HeroSlider = ({ images = [] }: { images: string[] }) => {
+export const HeroSlider = ({ images = [] }: { images: AstroImages }) => {
   const [imgIndex, setImgIndex] = useState(0);
 
   const dragX = useMotionValue(0);

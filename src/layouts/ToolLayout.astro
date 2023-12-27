@@ -1,7 +1,6 @@
 ---
-import type { Entry } from '@keystatic/core/reader';
 import { Image } from 'astro:assets';
-import { getEntry } from 'astro:content';
+import { type CollectionEntry, getEntry } from 'astro:content';
 import { Icon } from 'astro-icon';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,21 +11,12 @@ import { NavigateKeys } from '@/components/react/NavigateKeys';
 import { type CategorySlugs, getCategoryTitle } from '@/consts';
 import { getAllFilters } from '@/utils/reader';
 
-import type keystaticConfig from '../../keystatic.config';
 import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
 
-type StarterKitEntry = Entry<
-  (typeof keystaticConfig)['collections']['starterKit']
->;
-type DesignKitEntry = Entry<
-  (typeof keystaticConfig)['collections']['designKit']
->;
-type UiComponentEntry = Entry<
-  (typeof keystaticConfig)['collections']['uiComponent']
->;
-
-type Props = (StarterKitEntry & DesignKitEntry & UiComponentEntry) & {
+type Props = (CollectionEntry<'starter-kit'>['data'] &
+  CollectionEntry<'design-kit'>['data'] &
+  CollectionEntry<'ui-component'>['data']) & {
   collection: CategorySlugs;
   slug?: string;
   prevSlug?: string;
@@ -54,7 +44,7 @@ const {
 const heroSliderImages = (heroSlider || [])
   ?.filter((image) => image.discriminant === 'heroSlider')
   .map((slide) => {
-    return `/hero/${slug}/${slide.value.image}`;
+    return slide.value.image;
   });
 
 const hasDarkLogo = !!logoDark;
@@ -68,8 +58,8 @@ repoUrl?.searchParams.append('ref', 'smashing.tools');
 const prevUrl = previewUrl ? new URL(previewUrl) : undefined;
 prevUrl?.searchParams.append('ref', 'smashing.tools');
 
-const publisherData = await getEntry('profiles', publisher);
-const makerData = maker && (await getEntry('profiles', maker));
+const publisherData = await getEntry('profiles', publisher.id);
+const makerData = await getEntry('profiles', maker.id);
 const allFilters = getAllFilters();
 ---
 
@@ -109,16 +99,16 @@ const allFilters = getAllFilters();
             <Image
               data-pagefind-meta="image[src], image_alt[alt]"
               class={twMerge('w-full', hasDarkLogo && 'block dark:hidden')}
-              src={`/logo/${slug}/${logo}`}
+              src={logo}
               alt={name}
               width={200}
               height={200}
             />
             {
-              hasDarkLogo && (
+              logoDark && (
                 <Image
                   class="hidden w-full dark:block"
-                  src={`/logo/${slug}/${logoDark}`}
+                  src={logoDark}
                   alt={name}
                   width={200}
                   height={200}
@@ -155,7 +145,7 @@ const allFilters = getAllFilters();
               </span>
               {
                 Object.entries(attrs).map(([key, value]) => {
-                  return value.map((v: string) => {
+                  return value?.map((v: string) => {
                     return (
                       <span class="inline-flex items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
                         {allFilters[`${key}|${v}`]}
@@ -171,11 +161,9 @@ const allFilters = getAllFilters();
                 makerData && (
                   <div class="mt-6 flex items-center">
                     <div>
-                      <img
+                      <Image
                         class="inline-block h-9 w-9 rounded-full"
-                        src={`/avatar/${makerData!.id}/${
-                          makerData!.data.avatar
-                        }`}
+                        src={makerData.data.avatar}
                         alt={makerData!.data.name}
                       />
                     </div>
@@ -192,11 +180,9 @@ const allFilters = getAllFilters();
               }
               <div class="mt-6 flex items-center">
                 <div>
-                  <img
+                  <Image
                     class="inline-block h-7 w-7 rounded-full"
-                    src={`/avatar/${publisherData!.id}/${
-                      publisherData!.data.avatar
-                    }`}
+                    src={publisherData.data.avatar}
                     alt={publisherData!.data.name}
                   />
                 </div>

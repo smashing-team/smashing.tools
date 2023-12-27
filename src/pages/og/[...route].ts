@@ -10,21 +10,29 @@ const [starterKits, designKits, uiComponents] = await Promise.all([
 const collectionEntries = [...starterKits, ...designKits, ...uiComponents];
 
 const pages = Object.fromEntries(
-  collectionEntries.map(({ slug, data }) => [slug, data]),
-) as {
-  [k: string]: { name: string; headline: string; logo: string };
-};
+  collectionEntries.map(({ slug, collection, data }) => [
+    slug,
+    { ...data, collection },
+  ]),
+);
 
 export const { getStaticPaths, GET } = OGImageRoute({
   param: 'route',
   pages,
   getImageOptions: (path, page) => {
-    const item = page as { name: string; headline: string; logo: string };
+    const item = page as {
+      name: string;
+      collection: string;
+      headline: string;
+      logo: { src: string };
+    };
     return {
       title: item.name,
       description: item.headline,
       logo: {
-        path: `./public/logo/${path}/${item.logo}`,
+        path: `./src/content/${item.collection}/${path}/logo.${item.logo.src
+          .split('.')
+          .pop()}`,
         size: [200],
       },
       font: {

@@ -33,32 +33,8 @@ export function getAllFilters() {
     });
     return filters;
   });
-  // const starterKitFields =
-  //   keystaticConfig.collections.starterKit.schema.attrs.fields;
-  // const uiComponentFields =
-  //   keystaticConfig.collections.uiComponent.schema.attrs.fields;
 
   return filters;
-
-  // return {[key]: {name: string, label: string}
-
-  // const filters = {
-  //   ...designKitFields,
-  //   ...starterKitFields,
-  //   ...uiComponentFields,
-  // };
-
-  // return Object.entries(filters).map(([key, value]) => {
-  //   return {
-  //     name: key,
-  //     options: value.options.map((option) => {
-  //       return {
-  //         name: option,
-  //         label: option,
-  //       };
-  //     }),
-  //   };
-  // });
 }
 
 export function getStarterKits() {
