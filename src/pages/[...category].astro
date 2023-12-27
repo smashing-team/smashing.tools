@@ -22,7 +22,6 @@ const designKitItems = (await getCollection('design-kit')) || [];
 const uiComponentItems = (await getCollection('ui-component')) || [];
 
 const allItems = [...starterKitItems, ...designKitItems, ...uiComponentItems];
-
 let items = allItems;
 
 items.sort((a, b) => {
@@ -39,6 +38,8 @@ if (Object.values(searchParam).length) {
   items = items.filter((item) => {
     for (const key in searchParam) {
       if (
+        // @ts-ignore
+        item.data.attrs?.[key] &&
         // @ts-ignore
         !searchParam[key]?.every((el) => item.data.attrs?.[key]?.includes(el))
       ) {
