@@ -1,33 +1,50 @@
-body:
-  - attributes:
-      description: If any of these required steps are not taken, we may not be able to review your issue. Help us to help you!
-      label: Bug Report Checklist
-      options:
-        - label: I have tried restarting my IDE and the issue persists.
-          required: true
-        - label: I have pulled the latest `main` branch of the repository.
-          required: true
-        - label: I have [searched for related issues](https://github.com/smashing-team/smashing-tools/issues?q=is%3Aissue) and found none that matched my issue.
-          required: true
-    type: checkboxes
-  - attributes:
-      description: What did you expect to happen?
-      label: Expected
-    type: textarea
-    validations:
-      required: true
-  - attributes:
-      description: What happened instead?
-      label: Actual
-    type: textarea
-    validations:
-      required: true
-  - attributes:
-      description: Any additional info you'd like to provide.
-      label: Additional Info
-    type: textarea
-description: Report a bug trying to run the code
+name: 🐞 Bug Report
+description: Report a bug or issue with smashing.tools
+title: "🐞 Bug: <short description>"
 labels:
   - "type: bug"
-name: 🐛 Bug
-title: "🐛 Bug: <short description of the bug>"
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for reporting a bug. Please provide detailed information to help us understand and address the issue."
+  - type: checkboxes
+    attributes:
+      label: Preliminary Checklist
+      description: Please check before submitting the issue.
+      options:
+        - label: I have checked existing bug reports and none matches my issue.
+          required: true
+  - type: input
+    attributes:
+      label: Bug Title
+      description: A concise title for the bug
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Bug Description
+      description: Detailed description of the bug
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the bug
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: Describe what you expected to happen
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Actual Behavior
+      description: Describe what actually happened
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional Information
+      description: Any additional information, screenshots, or context that might be helpful
