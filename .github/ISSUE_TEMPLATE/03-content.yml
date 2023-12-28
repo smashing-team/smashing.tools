@@ -17,19 +17,9 @@ body:
         - UI Library
     validations:
       required: true
-  - type: input
-    attributes:
-      label: Content Name
-      description: The slug and title of the content you're providing feedback on
-    validations:
-      required: true
   - type: textarea
     attributes:
       label: Feedback Description
       description: Describe your feedback or the issue with the content
     validations:
       required: true
-  - type: textarea
-    attributes:
-      label: Additional Information
-      description: Any additional information or context that might be helpful

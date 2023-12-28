@@ -44,7 +44,3 @@ body:
       description: Describe what actually happened
     validations:
       required: true
-  - type: textarea
-    attributes:
-      label: Additional Information
-      description: Any additional information, screenshots, or context that might be helpful

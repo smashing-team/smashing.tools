@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 
 import GridList from '@/components/GridList.astro';
-import { getFacets } from '@/utils/facets';
+import { getFacets, uniqueFilters } from '@/utils/facets';
 import Query from '@/utils/query';
 
 import { CATEGORIES } from '../consts';
@@ -22,7 +22,6 @@ const designKitItems = (await getCollection('design-kit')) || [];
 const uiComponentItems = (await getCollection('ui-component')) || [];
 
 const allItems = [...starterKitItems, ...designKitItems, ...uiComponentItems];
-
 let items = allItems;
 
 items.sort((a, b) => {
@@ -37,7 +36,11 @@ if (activeCategory.category) {
 
 if (Object.values(searchParam).length) {
   items = items.filter((item) => {
+    // eslint-disable-next-line guard-for-in
     for (const key in searchParam) {
+      if (!uniqueFilters.includes(key)) {
+        return true;
+      }
       if (
         // @ts-ignore
         !searchParam[key]?.every((el) => item.data.attrs?.[key]?.includes(el))

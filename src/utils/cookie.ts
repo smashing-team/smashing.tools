@@ -2,15 +2,11 @@
 export const setCookie = (
   cookieKey: string,
   cookieValue: string,
-  expirationDays?: number,
+  expirationDays: number = 365 * 10,
 ) => {
-  let expiryDate = '';
-
-  if (expirationDays) {
-    const date = new Date();
-    date.setTime(date.getTime() + (expirationDays || 30) * 24 * 60 * 60 * 1000);
-    expiryDate = `; expires=${date.toUTCString()}`;
-  }
+  const date = new Date();
+  date.setTime(date.getTime() + (expirationDays || 30) * 24 * 60 * 60 * 1000);
+  const expiryDate = `; expires=${date.toUTCString()}`;
 
   document.cookie = `${cookieKey}=${cookieValue || ''}${expiryDate}; path=/`;
 };
