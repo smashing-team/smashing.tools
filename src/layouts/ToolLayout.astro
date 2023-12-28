@@ -131,6 +131,7 @@ const allFilters = getAllFilters();
             >
               {headline}
             </p>
+
             <div class="mt-4 flex flex-wrap gap-2">
               <span
                 class={twMerge(
@@ -283,6 +284,13 @@ const allFilters = getAllFilters();
             prevHref={prevSlug && `/${collection}/${prevSlug}`}
             nextHref={nextSlug && `/${collection}/${nextSlug}`}
           />
+          <a
+            href={`https://github.com/smashing-team/smashing.tools/issues/new?assignees=&labels=type%3A+content+feedback&projects=&template=03-content.yml&title=%F0%9F%93%9D+Content+Feedback%3A+${name}`}
+            class="mt-2 text-xs text-zinc-400 no-underline hover:underline dark:text-zinc-500"
+            target="_blank"
+          >
+            Something not right about this content? Let us know!
+          </a>
         </article>
       </main>
     </div>

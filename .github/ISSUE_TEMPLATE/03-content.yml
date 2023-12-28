@@ -7,16 +7,6 @@ body:
   - type: markdown
     attributes:
       value: "Thank you for taking the time to provide feedback on our content. Please fill out the following fields to help us understand and address the issue or suggestion."
-  - type: dropdown
-    attributes:
-      label: Category
-      description: Select the category of the content
-      options:
-        - Starter Kit
-        - Design Kit
-        - UI Library
-    validations:
-      required: true
   - type: textarea
     attributes:
       label: Feedback Description
