@@ -18,7 +18,7 @@ const allFilters = [
 ] as const;
 
 // get unique filters from allFilters
-const uniqueFilters = [...new Set(allFilters)];
+export const uniqueFilters = [...new Set(allFilters)];
 
 const getFiltersByCategory = (selectedCategory: CategoryPaths) => {
   switch (selectedCategory) {
