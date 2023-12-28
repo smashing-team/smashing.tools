@@ -4,6 +4,7 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import { Icon } from 'astro-icon';
 
 import GridList from '@/components/GridList.astro';
+import ProfileHeaderGradient from '@/components/ProfileHeaderGradient.astro';
 import CommandMenu from '@/components/react/CommandMenu';
 import { ModeToggle } from '@/components/react/ModeToggle';
 
@@ -43,6 +44,7 @@ const publishedItems = allItems.filter(
   </head>
 
   <body>
+    <ProfileHeaderGradient />
     <div class="mx-auto h-full w-full max-w-2xl px-8">
       <div
         data-pagefind-ignore

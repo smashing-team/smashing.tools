@@ -4,6 +4,7 @@ import { type CollectionEntry, getEntry } from 'astro:content';
 import { Icon } from 'astro-icon';
 import { twMerge } from 'tailwind-merge';
 
+import HeaderGradient from '@/components/HeaderGradient.astro';
 import CommandMenu from '@/components/react/CommandMenu';
 import { HeroSlider } from '@/components/react/HeroSlider';
 import { ModeToggle } from '@/components/react/ModeToggle';
@@ -69,6 +70,7 @@ const allFilters = getAllFilters();
   </head>
 
   <body>
+    <HeaderGradient />
     <div class="mx-auto h-full w-full max-w-2xl">
       <div
         data-pagefind-ignore
