@@ -129,6 +129,13 @@ const allFilters = getAllFilters();
             >
               {headline}
             </p>
+            <a
+              href={`https://github.com/smashing-team/smashing.tools/issues/new?assignees=&labels=type%3A+content+feedback&projects=&template=03-content.yml&title=%F0%9F%93%9D+Content+Feedback%3A+${name}`}
+              class="mt-2 text-xs text-zinc-400 dark:text-zinc-500"
+              target="_blank"
+            >
+              Experiencing an issue? Please report it on our issue page. Thanks!
+            </a>
             <div class="mt-4 flex flex-wrap gap-2">
               <span
                 class={twMerge(
@@ -167,14 +174,14 @@ const allFilters = getAllFilters();
                         alt={makerData!.data.name}
                       />
                     </div>
-                    <div class="ml-2">
+                    <a class="ml-2" href={`/profile/${makerData.id}`}>
                       <p class="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-500">
                         Created by
                       </p>
                       <p class="text-xs font-medium group-hover:text-zinc-900 dark:text-zinc-400">
                         {makerData!.data.name}
                       </p>
-                    </div>
+                    </a>
                   </div>
                 )
               }
@@ -186,7 +193,7 @@ const allFilters = getAllFilters();
                     alt={publisherData!.data.name}
                   />
                 </div>
-                <div class="ml-2">
+                <a class="ml-2" href={`/profile/${publisherData.id}`}>
                   <p
                     class="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-500"
                   >
@@ -197,7 +204,7 @@ const allFilters = getAllFilters();
                   >
                     {publisherData!.data.name}
                   </p>
-                </div>
+                </a>
               </div>
             </div>
           </div>
