@@ -13,7 +13,7 @@
 
 ## **About**
 
-smashing.tools is an open-source platform designed for individuals to share their developed products and UI libraries. The project allows contributors to open pull requests by adding new markdown files while sharing their creations.
+smashing.tools is an open-source platform that hosts tools in categories like Starter Kits, Design Kits, and UI Components. The platform statically showcases these products, helping developers choose the tools they'll use when starting a project.
 
 ## **Vision**
 
@@ -21,7 +21,7 @@ At smashing.tools, our vision is to be the go-to platform for developers seeking
 
 ## Socials
 
-- **Twitter:** Follow us at [@SmashingTools](https://twitter.com/smashingtools) for the latest updates.
+- **Twitter:** Follow us at [@smashingtools](https://twitter.com/smashingtools) for the latest updates.
 - **Discord:** Join our [smashing.tools Discord Server](https://discord.gg/8ugeaKPrsU) to engage with our community.
 
 ## **Technologies**
