@@ -1,19 +1,21 @@
-
   <a href="https://github.com/smashing-team/smashing.tools">
    <img src="https://repository-images.githubusercontent.com/727660019/a7a54d3e-9aeb-4cd5-b53c-891a97721edb" alt="Logo">
   </a>
   <p align="center">
     <a href="https://smashing.tools">Website</a>
     ·
+    <a href="https://twitter.com/smashingtools">Twitter</a>
+    ·
     <a href="https://github.com/smashing-team/smashing.tools/issues">Issues</a>
     ·
     <a href="https://github.com/orgs/smashing-team/discussions">Discussions</a>
   </p>
 
+**Smashing.Tools** is an open-source platform designed for individuals to share their developed products and UI libraries. The project allows contributors to open pull requests by adding new markdown files while sharing their creations.
 
-## **About**
+## **Vision**
 
-Smashing.Tools is an open-source platform designed for individuals to share their developed products and UI libraries. The project allows contributors to open pull requests by adding new markdown files while sharing their creations.
+At **Smashing Tools**, our vision is to be the go-to platform for developers seeking comprehensive and detailed starting resources for their projects. We focus on providing an array of meticulously chosen **Starter Kits**, **Design Kits**, and **UI Components**, enabling developers to initiate projects with ease and confidence. Our platform is dedicated to simplifying the early stages of development, ensuring a seamless and productive start for every project.
 
 ## **Technologies**
 

@@ -31,7 +31,3 @@ body:
       description: Describe your proposed solution or idea for the feature
     validations:
       required: true
-  - type: textarea
-    attributes:
-      label: Additional Information
-      description: Any additional information or context about the feature request
