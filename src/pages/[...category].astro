@@ -39,8 +39,6 @@ if (Object.values(searchParam).length) {
     for (const key in searchParam) {
       if (
         // @ts-ignore
-        item.data.attrs?.[key] &&
-        // @ts-ignore
         !searchParam[key]?.every((el) => item.data.attrs?.[key]?.includes(el))
       ) {
         return false;
