@@ -98,6 +98,10 @@ const profile = defineCollection({
     z.object({
       name: z.string().min(1).max(100),
       avatar: image(),
+      twitter: z.string().optional(),
+      github: z.string().optional(),
+      website: z.string().optional(),
+      bio: z.string().optional(),
     }),
 });
 
