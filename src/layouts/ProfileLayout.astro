@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { type CollectionEntry, getCollection } from 'astro:content';
+import { Icon } from 'astro-icon';
 
 import GridList from '@/components/GridList.astro';
 import CommandMenu from '@/components/react/CommandMenu';
@@ -13,7 +14,7 @@ type Props = CollectionEntry<'profiles'>['data'] & {
   slug: CollectionEntry<'profiles'>['id'];
 };
 
-const { name, slug, avatar } = Astro.props;
+const { name, slug, avatar, twitter, github, website, bio } = Astro.props;
 
 const starterKitItems =
   (await getCollection('starter-kit', (item) =>
@@ -78,23 +79,85 @@ const publishedItems = allItems.filter(
               height={200}
             />
           </div>
-          <div class="mt-6 text-left">
+          <div class="mt-6 flex flex-col space-y-2 text-left">
             <p
               class="text-2xl font-medium text-zinc-900 dark:text-zinc-50"
               data-pagefind-meta="name"
             >
               {name}
             </p>
+            {
+              bio && (
+                <p
+                  class="text-base text-zinc-500 dark:text-zinc-400"
+                  data-pagefind-meta="headline"
+                >
+                  {bio}
+                </p>
+              )
+            }
+            <div class="flex items-center gap-4">
+              {
+                twitter && (
+                  <a
+                    href={`https://twitter.com/${twitter}`}
+                    class="inline-flex items-center gap-1 text-sm text-zinc-500 hover:underline dark:text-zinc-400"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                      <>
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+                      </>
+                    </svg>
+                    {twitter}
+                  </a>
+                )
+              }
+              {
+                github && (
+                  <a
+                    href={`https://github.com/${github}`}
+                    class="inline-flex items-center gap-1 text-sm text-zinc-500 hover:underline dark:text-zinc-400"
+                  >
+                    <Icon name="tabler:brand-github" class="h-4 w-4" />
+                    {github}
+                  </a>
+                )
+              }
+              {
+                website && (
+                  <a
+                    target="_blank"
+                    href={`${website}`}
+                    class="inline-flex items-center gap-1 text-sm text-zinc-500 hover:underline dark:text-zinc-400"
+                  >
+                    {website}
+                  </a>
+                )
+              }
+            </div>
           </div>
         </div>
       </header>
       <main class="mt-4">
         {
           creatorItems.length ? (
-            <div>
-              <h1 class="mb-4 text-zinc-500 first-letter:uppercase dark:text-zinc-400">
-                Creator
-              </h1>
+            <div class="mb-10">
+              <h2 class="mb-4 text-lg text-zinc-700 dark:text-zinc-100">
+                Discover tools crafted by {name}
+              </h2>
               <GridList full withoutPadding items={creatorItems} />
             </div>
           ) : null
@@ -102,9 +165,9 @@ const publishedItems = allItems.filter(
         {
           publishedItems.length ? (
             <div>
-              <h1 class="mb-4 text-zinc-500 first-letter:uppercase dark:text-zinc-400">
-                Publisher
-              </h1>
+              <h2 class="mb-4 text-lg text-zinc-700 dark:text-zinc-100">
+                Explore tools published by {name}
+              </h2>
               <GridList full withoutPadding items={publishedItems} />
             </div>
           ) : null

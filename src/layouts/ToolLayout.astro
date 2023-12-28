@@ -159,46 +159,50 @@ const allFilters = getAllFilters();
             <div data-people class="flex items-center space-x-6">
               {
                 makerData && (
-                  <div class="mt-6 flex items-center">
-                    <div>
-                      <Image
-                        class="inline-block h-9 w-9 rounded-full"
-                        src={makerData.data.avatar}
-                        alt={makerData!.data.name}
-                      />
+                  <a class="group" href={`/profile/${makerData.id}`}>
+                    <div class="mt-6 flex items-center">
+                      <div>
+                        <Image
+                          class="inline-block h-9 w-9 rounded-full"
+                          src={makerData.data.avatar}
+                          alt={makerData!.data.name}
+                        />
+                      </div>
+                      <div class="ml-2">
+                        <p class="text-[10px] font-medium text-zinc-500 transition-colors group-hover:text-zinc-700 dark:group-hover:text-zinc-400">
+                          Crafted by
+                        </p>
+                        <p class="text-xs font-medium text-zinc-400 transition-colors group-hover:text-zinc-950 group-hover:underline dark:group-hover:text-zinc-50">
+                          {makerData!.data.name}
+                        </p>
+                      </div>
                     </div>
-                    <a class="ml-2" href={`/profile/${makerData.id}`}>
-                      <p class="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-500">
-                        Created by
-                      </p>
-                      <p class="text-xs font-medium group-hover:text-zinc-900 dark:text-zinc-400">
-                        {makerData!.data.name}
-                      </p>
-                    </a>
-                  </div>
+                  </a>
                 )
               }
-              <div class="mt-6 flex items-center">
-                <div>
-                  <Image
-                    class="inline-block h-7 w-7 rounded-full"
-                    src={publisherData.data.avatar}
-                    alt={publisherData!.data.name}
-                  />
+              <a class="group" href={`/profile/${publisherData.id}`}>
+                <div class="mt-6 flex items-center">
+                  <div>
+                    <Image
+                      class="inline-block h-7 w-7 rounded-full"
+                      src={publisherData.data.avatar}
+                      alt={publisherData!.data.name}
+                    />
+                  </div>
+                  <div class="ml-2">
+                    <p
+                      class="text-[10px] font-medium text-zinc-500 transition-colors group-hover:text-zinc-700 dark:group-hover:text-zinc-400"
+                    >
+                      Published by
+                    </p>
+                    <p
+                      class="text-xs font-medium text-zinc-400 transition-colors group-hover:text-zinc-950 group-hover:underline dark:group-hover:text-zinc-50"
+                    >
+                      {publisherData!.data.name}
+                    </p>
+                  </div>
                 </div>
-                <a class="ml-2" href={`/profile/${publisherData.id}`}>
-                  <p
-                    class="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-500"
-                  >
-                    Published by
-                  </p>
-                  <p
-                    class="text-xs font-medium group-hover:text-zinc-900 dark:text-zinc-400"
-                  >
-                    {publisherData!.data.name}
-                  </p>
-                </a>
-              </div>
+              </a>
             </div>
           </div>
           <section class="mt-8">
