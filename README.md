@@ -11,6 +11,8 @@
     <a href="https://github.com/orgs/smashing-team/discussions">Discussions</a>
   </p>
 
+## **About**
+
 **Smashing.Tools** is an open-source platform designed for individuals to share their developed products and UI libraries. The project allows contributors to open pull requests by adding new markdown files while sharing their creations.
 
 ## **Vision**
