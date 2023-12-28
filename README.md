@@ -4,8 +4,6 @@
   <p align="center">
     <a href="https://smashing.tools">Website</a>
     ·
-    <a href="https://twitter.com/smashingtools">Twitter</a>
-    ·
     <a href="https://github.com/smashing-team/smashing.tools/issues">Issues</a>
     ·
     <a href="https://github.com/orgs/smashing-team/discussions">Discussions</a>
@@ -18,6 +16,11 @@
 ## **Vision**
 
 At **Smashing Tools**, our vision is to be the go-to platform for developers seeking comprehensive and detailed starting resources for their projects. We focus on providing an array of meticulously chosen **Starter Kits**, **Design Kits**, and **UI Components**, enabling developers to initiate projects with ease and confidence. Our platform is dedicated to simplifying the early stages of development, ensuring a seamless and productive start for every project.
+
+## Stay Connected
+
+- **Twitter:** Follow us at [@SmashingTools](https://twitter.com/smashingtools) for the latest updates.
+- **Discord:** Join our [Smashing Tools Discord Server](https://discord.gg/8ugeaKPrsU) to engage with our community.
 
 ## **Technologies**
 
