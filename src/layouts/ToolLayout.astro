@@ -167,14 +167,14 @@ const allFilters = getAllFilters();
                         alt={makerData!.data.name}
                       />
                     </div>
-                    <div class="ml-2">
+                    <a class="ml-2" href={`/profile/${makerData.id}`}>
                       <p class="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-500">
                         Created by
                       </p>
                       <p class="text-xs font-medium group-hover:text-zinc-900 dark:text-zinc-400">
                         {makerData!.data.name}
                       </p>
-                    </div>
+                    </a>
                   </div>
                 )
               }
@@ -186,7 +186,7 @@ const allFilters = getAllFilters();
                     alt={publisherData!.data.name}
                   />
                 </div>
-                <div class="ml-2">
+                <a class="ml-2" href={`/profile/${publisherData.id}`}>
                   <p
                     class="text-[10px] font-medium text-zinc-500 group-hover:text-zinc-700 dark:text-zinc-500"
                   >
@@ -197,7 +197,7 @@ const allFilters = getAllFilters();
                   >
                     {publisherData!.data.name}
                   </p>
-                </div>
+                </a>
               </div>
             </div>
           </div>

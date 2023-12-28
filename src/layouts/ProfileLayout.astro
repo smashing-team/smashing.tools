@@ -1,0 +1,115 @@
+---
+import { Image } from 'astro:assets';
+import { type CollectionEntry, getCollection } from 'astro:content';
+
+import GridList from '@/components/GridList.astro';
+import CommandMenu from '@/components/react/CommandMenu';
+import { ModeToggle } from '@/components/react/ModeToggle';
+
+import smashingLogo from '../../public/logo.svg';
+import BaseHead from '../components/BaseHead.astro';
+
+type Props = CollectionEntry<'profiles'>['data'] & {
+  slug: CollectionEntry<'profiles'>['id'];
+};
+
+const { name, slug, avatar } = Astro.props;
+
+const starterKitItems =
+  (await getCollection('starter-kit', (item) =>
+    [item.data.publisher.id, item.data.maker.id].includes(slug),
+  )) || [];
+const designKitItems =
+  (await getCollection('design-kit', (item) =>
+    [item.data.publisher.id, item.data.maker.id].includes(slug),
+  )) || [];
+const uiComponentItems =
+  (await getCollection('ui-component', (item) =>
+    [item.data.publisher.id, item.data.maker.id].includes(slug),
+  )) || [];
+
+const allItems = [...starterKitItems, ...designKitItems, ...uiComponentItems];
+
+const creatorItems = allItems.filter((item) => item.data.maker.id === slug);
+const publishedItems = allItems.filter(
+  (item) => item.data.publisher.id === slug,
+);
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={name} description={'headline'} slug={slug} />
+  </head>
+
+  <body>
+    <div class="mx-auto h-full w-full max-w-2xl px-8">
+      <div
+        data-pagefind-ignore
+        id="tool-layout-header"
+        class="fixed left-0 top-0 z-50 w-full p-2 px-4"
+      >
+        <div
+          class="mx-auto mt-2 flex w-full max-w-2xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
+        >
+          <a href="/" class="absolute z-[975]">
+            <img
+              class="mx-auto h-8 w-8 dark:text-white"
+              src={smashingLogo.src}
+              alt="smashing.tools"
+              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+            /></a
+          >
+          <div class="grow"></div>
+          <ModeToggle align="end" client:load />
+        </div>
+      </div>
+      <header>
+        <div class="hidden" data-pagefind-ignore>
+          <CommandMenu client:idle />
+        </div>
+        <div class="relative z-10 mx-auto pb-4 pt-24">
+          <div class="relative block w-24 overflow-hidden">
+            <Image
+              data-pagefind-meta="image[src], image_alt[alt]"
+              class="w-full rounded-full"
+              src={avatar}
+              alt={name}
+              width={200}
+              height={200}
+            />
+          </div>
+          <div class="mt-6 text-left">
+            <p
+              class="text-2xl font-medium text-zinc-900 dark:text-zinc-50"
+              data-pagefind-meta="name"
+            >
+              {name}
+            </p>
+          </div>
+        </div>
+      </header>
+      <main class="mt-4">
+        {
+          creatorItems.length ? (
+            <div>
+              <h1 class="mb-4 text-zinc-500 first-letter:uppercase dark:text-zinc-400">
+                Creator
+              </h1>
+              <GridList full withoutPadding items={creatorItems} />
+            </div>
+          ) : null
+        }
+        {
+          publishedItems.length ? (
+            <div>
+              <h1 class="mb-4 text-zinc-500 first-letter:uppercase dark:text-zinc-400">
+                Publisher
+              </h1>
+              <GridList full withoutPadding items={publishedItems} />
+            </div>
+          ) : null
+        }
+      </main>
+    </div>
+  </body>
+</html>
