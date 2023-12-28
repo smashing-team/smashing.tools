@@ -1,0 +1,178 @@
+---
+import { Image } from 'astro:assets';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import { Icon } from 'astro-icon';
+
+import GridList from '@/components/GridList.astro';
+import CommandMenu from '@/components/react/CommandMenu';
+import { ModeToggle } from '@/components/react/ModeToggle';
+
+import smashingLogo from '../../public/logo.svg';
+import BaseHead from '../components/BaseHead.astro';
+
+type Props = CollectionEntry<'profiles'>['data'] & {
+  slug: CollectionEntry<'profiles'>['id'];
+};
+
+const { name, slug, avatar, twitter, github, website, bio } = Astro.props;
+
+const starterKitItems =
+  (await getCollection('starter-kit', (item) =>
+    [item.data.publisher.id, item.data.maker.id].includes(slug),
+  )) || [];
+const designKitItems =
+  (await getCollection('design-kit', (item) =>
+    [item.data.publisher.id, item.data.maker.id].includes(slug),
+  )) || [];
+const uiComponentItems =
+  (await getCollection('ui-component', (item) =>
+    [item.data.publisher.id, item.data.maker.id].includes(slug),
+  )) || [];
+
+const allItems = [...starterKitItems, ...designKitItems, ...uiComponentItems];
+
+const creatorItems = allItems.filter((item) => item.data.maker.id === slug);
+const publishedItems = allItems.filter(
+  (item) => item.data.publisher.id === slug,
+);
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={name} description={'headline'} slug={slug} />
+  </head>
+
+  <body>
+    <div class="mx-auto h-full w-full max-w-2xl px-8">
+      <div
+        data-pagefind-ignore
+        id="tool-layout-header"
+        class="fixed left-0 top-0 z-50 w-full p-2 px-4"
+      >
+        <div
+          class="mx-auto mt-2 flex w-full max-w-2xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
+        >
+          <a href="/" class="absolute z-[975]">
+            <img
+              class="mx-auto h-8 w-8 dark:text-white"
+              src={smashingLogo.src}
+              alt="smashing.tools"
+              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
+            /></a
+          >
+          <div class="grow"></div>
+          <ModeToggle align="end" client:load />
+        </div>
+      </div>
+      <header>
+        <div class="hidden" data-pagefind-ignore>
+          <CommandMenu client:idle />
+        </div>
+        <div class="relative z-10 mx-auto pb-4 pt-24">
+          <div class="relative block w-24 overflow-hidden">
+            <Image
+              data-pagefind-meta="image[src], image_alt[alt]"
+              class="w-full rounded-full"
+              src={avatar}
+              alt={name}
+              width={200}
+              height={200}
+            />
+          </div>
+          <div class="mt-6 flex flex-col space-y-2 text-left">
+            <p
+              class="text-2xl font-medium text-zinc-900 dark:text-zinc-50"
+              data-pagefind-meta="name"
+            >
+              {name}
+            </p>
+            {
+              bio && (
+                <p
+                  class="text-base text-zinc-500 dark:text-zinc-400"
+                  data-pagefind-meta="headline"
+                >
+                  {bio}
+                </p>
+              )
+            }
+            <div class="flex items-center gap-4">
+              {
+                twitter && (
+                  <a
+                    href={`https://twitter.com/${twitter}`}
+                    class="inline-flex items-center gap-1 text-sm text-zinc-500 hover:underline dark:text-zinc-400"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                      <>
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+                      </>
+                    </svg>
+                    {twitter}
+                  </a>
+                )
+              }
+              {
+                github && (
+                  <a
+                    href={`https://github.com/${github}`}
+                    class="inline-flex items-center gap-1 text-sm text-zinc-500 hover:underline dark:text-zinc-400"
+                  >
+                    <Icon name="tabler:brand-github" class="h-4 w-4" />
+                    {github}
+                  </a>
+                )
+              }
+              {
+                website && (
+                  <a
+                    target="_blank"
+                    href={`${website}`}
+                    class="inline-flex items-center gap-1 text-sm text-zinc-500 hover:underline dark:text-zinc-400"
+                  >
+                    {website}
+                  </a>
+                )
+              }
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="mt-4">
+        {
+          creatorItems.length ? (
+            <div class="mb-10">
+              <h2 class="mb-4 text-lg text-zinc-700 dark:text-zinc-100">
+                Discover tools crafted by {name}
+              </h2>
+              <GridList full withoutPadding items={creatorItems} />
+            </div>
+          ) : null
+        }
+        {
+          publishedItems.length ? (
+            <div>
+              <h2 class="mb-4 text-lg text-zinc-700 dark:text-zinc-100">
+                Explore tools published by {name}
+              </h2>
+              <GridList full withoutPadding items={publishedItems} />
+            </div>
+          ) : null
+        }
+      </main>
+    </div>
+  </body>
+</html>

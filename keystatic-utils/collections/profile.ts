@@ -22,5 +22,22 @@ export const profile = collection({
         isRequired: true,
       },
     }),
+    twitter: fields.text({
+      label: 'X (formerly Twitter)',
+    }),
+    github: fields.text({
+      label: 'GitHub',
+    }),
+    website: fields.url({
+      label: 'Website',
+    }),
+    bio: fields.text({
+      label: 'Bio',
+      multiline: false,
+      validation: {
+        length: { max: 160 },
+      },
+      description: 'A short description of the author. max 160 characters.',
+    }),
   },
 });
