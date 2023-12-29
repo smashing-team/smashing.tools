@@ -1,6 +1,6 @@
 export const SITE_TITLE = 'smashing.tools';
 export const SITE_DESCRIPTION =
-  'Curated list of starter tools for your next project';
+  'Curated list of ui kits, ui components, design kits for your next project';
 export const CATEGORIES = [
   {
     category: undefined,

@@ -60,6 +60,50 @@ const { activeCategory = '/', facets } = Astro.props;
       </header>
       <main class="lg:relative lg:mb-10 lg:ml-[400px]">
         <div class="relative lg:ml-4">
+          <div
+            class="mx-4 mb-4 mt-0 hidden flex-wrap items-start justify-between gap-4 lg:mt-8 lg:flex xl:flex-row"
+          >
+            <div>
+              <h1
+                class="max-w-lg text-xl font-medium tracking-tight lg:text-2xl"
+              >
+                A curated collection of the best starter kits,<br
+                  class="hidden sm:block"
+                />ui components & design kits for developers.
+              </h1>
+              <p
+                class="mt-4 hidden max-w-lg items-baseline font-mono text-sm tracking-tighter text-zinc-400 lg:block lg:max-w-xs"
+              >
+                Press <kbd
+                  class="rounded-full border-b-2 border-t border-t-zinc-100 px-2 py-1 shadow-inner shadow-white/5 dark:border-t-zinc-800"
+                  >⌘ + D</kbd
+                >
+                 to bookmark
+              </p>
+            </div>
+            <a
+              href="/submission"
+              aria-label="Submission guidelines"
+              class="inline-flex h-full animate-background-shine cursor-pointer items-center justify-center rounded-full border border-zinc-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-4 py-3 text-sm font-medium text-slate-300 backdrop-blur-3xl delay-1000"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="relative -left-0.5 mr-1 h-5 w-5 dark:text-zinc-300"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+                  d="M4 4h6v6h-6zm10 0h6v6h-6zm-10 10h6v6h-6zm10 3h6m-3 -3v6"
+                ></path></svg
+              >
+               Submit a tool
+            </a>
+          </div>
           <slot />
         </div>
       </main>
