@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to Smashing.tools! For an overview and technical insights of our project, please refer to the README file accessible from the GitHub page. We eagerly await your contributions and wish you great success.
+Welcome to smashing.tools! For an overview and technical insights of our project, please refer to the README file accessible from the GitHub page. We eagerly await your contributions and wish you great success.
 
 ## Getting Started
 
@@ -29,21 +29,6 @@ After installation, to run the project locally:
 1. Start the project: `pnpm dev`.
 2. Open your browser and navigate to `http://localhost:3000`.
 
-## **Folder Structure**
-
-```
-smashing.tools/
-  ├── src/
-    │   ├── components/ # Mix of React and Astro components for UI versatility.
-    │   ├── content/ # Static content in Markdown for Astro-powered site.
-    │   ├── layouts/ # Layout templates defining UI structure.
-    │   ├── pages/ # Astro hybrid pages with static and dynamic content.
-    │   ├── plugins/ # Astro plugins for added functionality.
-    │   ├── styles/ # TailwindCSS styling for visual theme and design.
-    │   ├── types/ # TypeScript definitions for type safety and consistency.
-    │   ├── utils/ # Utility functions and helpers for common functionality.
-```
-
 ## Contributing
 
 ### How to Contribute
@@ -64,3 +49,7 @@ smashing.tools/
 ### Code of Conduct
 
 We are committed to fostering a welcoming and respectful community. Please refer to our [Code of Conduct](https://github.com/smashing-team/smashing.tools/blob/main/CODE_OF_CONDUCT.md) for guidelines on expected behavior.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/smashing-team/smashing.tools/blob/contributing/LICENSE) file for details.
