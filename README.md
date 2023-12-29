@@ -3,11 +3,6 @@
   </a>
 
   <p align="center">
-[![Latest release](https://img.shields.io/github/v/release/smashing-team/smashing.tools?include_prereleases&sort=semver)](https://github.com/smashing-team/smashing.tools/releases)
-[![Discord](https://img.shields.io/discord/1181215311605809182?label=discord)](https://discord.gg/8ugeaKPrsU)
-[![Twitter Follow](https://img.shields.io/twitter/follow/smashingtools?style=social)](https://twitter.com/smashingtools)
-  </p>
-  <p align="center">
     <a href="https://smashing.tools">Website</a>
     ·
     <a href="https://github.com/orgs/smashing-team/projects/1">Roadmap</a>
@@ -41,7 +36,7 @@ At smashing.tools, our vision is to be the go-to platform for developers seeking
 
 ### **Contributing**
 
-Thank you for considering contributing to Smashing.Tools! Before submitting your contributions, please review our [guidelines here](https://github.com/smashing-team/smashing.tools/blob/main/CONTRIBUTING.md). This guide contains detailed information on how you can contribute, code formatting, and more.
+Thank you for considering contributing to Smashing.Tools! Before submitting your contributions, please review our [guidelines here](https://github.com/smashing-team/smashing.tools/blob/main/README.md). This guide contains detailed information on how you can contribute, code formatting, and more.
 
 You can find more information by following the link and easily submit your contributions.
 
