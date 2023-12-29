@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to smashing.tools! For an overview and technical insights of our project, please refer to the README file accessible from the GitHub page. We eagerly await your contributions and wish you great success.
+Welcome to smashing.tools! For an overview and technical insights of our project, please refer to the README file accessible from the [GitHub page](https://github.com/smashing-team/smashing.tools/blob/contributing/README.md). We eagerly await your contributions and wish you great success.
 
 ## Getting Started
 
