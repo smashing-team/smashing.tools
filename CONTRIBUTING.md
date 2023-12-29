@@ -2,17 +2,17 @@
 
 ## Introduction
 
-Welcome to the smashing.tools! We're excited that you're interested in contributing. This document is intended to guide you through the contribution process and explain our code of conduct. Whether you're fixing a bug, adding a feature, or improving documentation, your contributions are highly appreciated!
+Welcome to Smashing.tools! For an overview and technical insights of our project, please refer to the README file accessible from the GitHub page. We eagerly await your contributions and wish you great success.
 
 ## Getting Started
 
 ### Prerequisites
 
+Before you begin, ensure you have the following installed:
 - Node [v18.0.0](https://nodejs.org/en/download/)
 - Pnpm [v8.12.0](https://pnpm.io/installation)
 - [Git](https://git-scm.com/downloads)
 
-Before you begin, ensure you have the following installed:
 
 ### Installation
 
@@ -28,6 +28,21 @@ To set up the project for development:
 After installation, to run the project locally:
 1. Start the project: `pnpm dev`.
 2. Open your browser and navigate to `http://localhost:3000`.
+
+## **Folder Structure**
+
+```
+smashing.tools/
+  ├── src/
+    │   ├── components/ # Mix of React and Astro components for UI versatility.
+    │   ├── content/ # Static content in Markdown for Astro-powered site.
+    │   ├── layouts/ # Layout templates defining UI structure.
+    │   ├── pages/ # Astro hybrid pages with static and dynamic content.
+    │   ├── plugins/ # Astro plugins for added functionality.
+    │   ├── styles/ # TailwindCSS styling for visual theme and design.
+    │   ├── types/ # TypeScript definitions for type safety and consistency.
+    │   ├── utils/ # Utility functions and helpers for common functionality.
+```
 
 ## Contributing
 

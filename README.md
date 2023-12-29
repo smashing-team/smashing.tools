@@ -33,28 +33,6 @@ At smashing.tools, our vision is to be the go-to platform for developers seeking
 - **KeyStatic:** A simple static site generator ideal for lightweight and fast-loading web pages.
 - **Netlify:** A cloud hosting service that automates deployment for web projects.
 
-## **Folder Structure**
-
-```
-smashing.tools/
-  ├── src/
-    │   ├── components/ # Mix of React and Astro components for UI versatility.
-    │   ├── content/ # Static content in Markdown for Astro-powered site.
-    │   ├── layouts/ # Layout templates defining UI structure.
-    │   ├── pages/ # Astro hybrid pages with static and dynamic content.
-    │   ├── plugins/ # Astro plugins for added functionality.
-    │   ├── styles/ # TailwindCSS styling for visual theme and design.
-    │   ├── types/ # TypeScript definitions for type safety and consistency.
-    │   ├── utils/ # Utility functions and helpers for common functionality.
-```
-
-### **Getting Started**
-
-- Clone the repository: `git clone git@github.com:smashing-team/smashing.tools.git 'smashing-tools'`
-- Navigate to the project directory: `cd smashing-tools`
-- Install the required packages using Pnpm: `pnpm install`
-- Start the project: `pnpm dev`
-
 ### **Contributing**
 
 Thank you for considering contributing to Smashing.Tools! Before submitting your contributions, please review our [guidelines here](https://github.com/smashing-team/smashing.tools/blob/main/README.md). This guide contains detailed information on how you can contribute, code formatting, and more.
