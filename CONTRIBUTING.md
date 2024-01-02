@@ -35,9 +35,8 @@ To run the project locally:
 1. **Find a Task**: Look for open issues in the 'Issues' tab on GitHub.
 2. **Create a Branch**: In your fork, create a branch for your changes: `git checkout -b [your-branch-name]`.
 3. **Make Changes**: Code, debug, or update documentation as needed.
-4. **Adhere to Standards**: Ensure your work follows the project's coding guidelines.
-5. **Commit Your Changes**: Commit your changes in a descriptive manner: `git commit -m "[your-commit-message]"`.
-6. **Push Your Changes**: Push your changes to your fork: `git push origin [your-branch-name]`.
+4. **Commit Your Changes**: Commit your changes in a descriptive manner: `git commit -m "[your-commit-message]"`.
+5. **Push Your Changes**: Push your changes to your fork: `git push origin [your-branch-name]`.
 
 ### Pull Request Process
 
