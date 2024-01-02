@@ -1,15 +1,15 @@
-# Contributing to Smashing.tools
+# Contributing to smashing.tools
 
 ## Introduction
 
-Welcome to Smashing.tools! For an overview and technical details of our project, please visit our [README file on GitHub](https://github.com/smashing-team/smashing.tools/blob/contributing/README.md). We eagerly await your contributions and are excited about your participation.
+Welcome to smashing.tools! For an overview and technical details of our project, please visit our [README file on GitHub](https://github.com/smashing-team/smashing.tools/blob/contributing/README.md). We eagerly await your contributions and are excited about your participation.
 
 ## Getting Started
 
 ### Prerequisites
 
 Before you begin, ensure you have installed:
-- [Node v18.0.0](https://nodejs.org/en/download/)
+- [Node v20.10.0](https://nodejs.org/en/download/)
 - [Pnpm v8.12.0](https://pnpm.io/installation)
 - [Git](https://git-scm.com/downloads)
 
@@ -26,13 +26,9 @@ To set up the development environment, follow these steps:
 
 To run the project locally:
 1. Start the project with `pnpm dev`.
-2. Open your browser and navigate to `http://localhost:3000`.
+2. Open your browser and navigate to `http://localhost:4321`.
 
 ## Contributing
-
-### Conventional Commits
-
-Our project embraces Conventional Commits standards to enhance the clarity and maintainability of our codebase. It's important that your commit messages adhere to these standards. For more information and examples of Conventional Commits, please refer to this [link](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13).
 
 ### How to Contribute
 
@@ -40,7 +36,7 @@ Our project embraces Conventional Commits standards to enhance the clarity and m
 2. **Create a Branch**: In your fork, create a branch for your changes: `git checkout -b [your-branch-name]`.
 3. **Make Changes**: Code, debug, or update documentation as needed.
 4. **Adhere to Standards**: Ensure your work follows the project's coding guidelines.
-5. **Commit Your Changes**: Commit your changes in a descriptive manner, following the Conventional Commits format: `git commit -m "[commit type]: [short description]"`.
+5. **Commit Your Changes**: Commit your changes in a descriptive manner: `git commit -m "[your-commit-message]"`.
 6. **Push Your Changes**: Push your changes to your fork: `git push origin [your-branch-name]`.
 
 ### Pull Request Process
@@ -55,4 +51,4 @@ Our community is committed to fostering a respectful and inclusive environment. 
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE file](https://github.com/smashing-team/smashing.tools/blob/contributing/LICENSE) for details.
+This project is licensed under the MIT License. See the [LICENSE file](https://github.com/smashing-team/smashing.tools/blob/main/LICENSE) for details.
