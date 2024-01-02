@@ -1,8 +1,11 @@
-  <a href="https://github.com/smashing-team/smashing.tools">
-   <img src="https://repository-images.githubusercontent.com/727660019/a7a54d3e-9aeb-4cd5-b53c-891a97721edb" alt="Logo">
-  </a>
+  <kbd>
+    <a href="https://github.com/smashing-team/smashing.tools">
+       <img src="https://raw.githubusercontent.com/smashing-team/smashing.tools/main/public/github-repo-promo.png" alt="Promo">
+    </a>
+  </kbd>
+  <div>&nbsp;</div>
 
-  <p align="center">
+<p align="center">
     <a href="https://smashing.tools">Website</a>
     ·
     <a href="https://github.com/orgs/smashing-team/projects/1">Roadmap</a>
