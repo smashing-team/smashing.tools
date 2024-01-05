@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { type CollectionEntry, getEntry } from 'astro:content';
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
 
 import Header from '@/components/Header.astro';
@@ -208,7 +208,7 @@ const allFilters = getAllFilters();
                     name="tabler:external-link"
                     class="relative -left-0.5 mr-1.5 h-5 w-5 text-zinc-400 dark:text-zinc-800"
                   />
-                   Website
+                  Website
                 </a>
               </li>
               {

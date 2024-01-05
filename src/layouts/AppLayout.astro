@@ -1,5 +1,5 @@
 ---
-import Icon from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 
 import AllFacets from '@/components/AllFacets.astro';
 import LeftBar from '@/components/LeftBar.astro';
@@ -80,7 +80,7 @@ const { activeCategory = '/', facets } = Astro.props;
                   class="rounded-full border-b-2 border-t border-t-zinc-100 px-2 py-1 shadow-inner shadow-white/5 dark:border-t-zinc-800"
                   >⌘ + D</kbd
                 >
-                 to bookmark smashing.tools
+                to bookmark smashing.tools
               </p>
             </div>
             <div
@@ -98,7 +98,7 @@ const { activeCategory = '/', facets } = Astro.props;
                 href="https://plausible.io/smashing.tools?period=all"
                 target="_blank"
                 ><Icon name="tabler:trending-up" class="mr-1 h-4 w-4" />
-                 Analytics</a
+                Analytics</a
               >
             </div>
           </div>

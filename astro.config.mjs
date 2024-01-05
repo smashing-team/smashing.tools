@@ -7,6 +7,7 @@ import netlify from '@astrojs/netlify/functions';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 import robotsTxt from 'astro-robots-txt';
+import icon from 'astro-icon';
 import pagefind from './src/plugins/pagefind.ts';
 
 function getSiteUrl() {
@@ -42,8 +43,15 @@ export default defineConfig({
     markdoc(),
     keystatic(),
     robotsTxt({
-      policy: [{ userAgent: '*', allow: '/', disallow: ['/bookmarks'] }],
+      policy: [
+        {
+          userAgent: '*',
+          allow: '/',
+          disallow: ['/bookmarks'],
+        },
+      ],
     }),
+    icon(),
   ],
   devToolbar: {
     enabled: false,
