@@ -49,5 +49,7 @@ export default defineConfig({
   prefetch: {
     defaultStrategy: 'viewport',
   },
-  adapter: netlify(),
+  adapter: netlify({
+    imageCDN: false,
+  }),
 });
