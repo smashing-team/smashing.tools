@@ -3,6 +3,7 @@ import {
   MagnifyingGlassIcon,
   TwitterLogoIcon,
 } from '@radix-ui/react-icons';
+import { navigate } from 'astro:transitions/client';
 import * as React from 'react';
 
 import {
@@ -41,7 +42,7 @@ const CommandMenu = () => {
         searches.results.map((r) => r.data()),
       );
 
-      setResults(searchesResult);
+      setResults(searchesResult.slice(0, 5));
     };
 
     pagefind();
@@ -91,10 +92,7 @@ const CommandMenu = () => {
             </CommandEmpty>
           ) : (
             results?.map((res, index) => (
-              <CommandItem
-                key={index}
-                onSelect={() => window.open(res.url, '_blank')}
-              >
+              <CommandItem key={index} onSelect={() => navigate(res.url)}>
                 <a
                   className="flex w-full flex-col items-start overflow-hidden px-2"
                   href={res.url}

@@ -1,4 +1,6 @@
 ---
+import Icon from 'astro-icon';
+
 import AllFacets from '@/components/AllFacets.astro';
 import LeftBar from '@/components/LeftBar.astro';
 import MobileMenu from '@/components/MobileMenu.astro';
@@ -69,7 +71,7 @@ const { activeCategory = '/', facets } = Astro.props;
               >
                 A curated collection of the best starter kits,<br
                   class="hidden sm:block"
-                />ui components & design kits for developers.
+                />UI components & design kits for developers.
               </h1>
               <p
                 class="mt-4 hidden max-w-lg items-baseline font-mono text-sm tracking-tighter text-zinc-400 lg:block lg:max-w-xs"
@@ -78,31 +80,27 @@ const { activeCategory = '/', facets } = Astro.props;
                   class="rounded-full border-b-2 border-t border-t-zinc-100 px-2 py-1 shadow-inner shadow-white/5 dark:border-t-zinc-800"
                   >⌘ + D</kbd
                 >
-                 to bookmark
+                 to bookmark smashing.tools
               </p>
             </div>
-            <a
-              href="/submission/"
-              aria-label="Submission guidelines"
-              class="inline-flex h-full animate-background-shine cursor-pointer items-center justify-center rounded-full border border-zinc-800 bg-[linear-gradient(110deg,#000,45%,#4D4B4B,55%,#000)] bg-[length:250%_100%] px-4 py-3 text-sm font-medium text-slate-300 backdrop-blur-3xl delay-1000"
+            <div
+              class="mr-4 inline-flex items-center space-x-3 text-sm font-medium"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="relative -left-0.5 mr-1 h-5 w-5 dark:text-zinc-300"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                stroke-width="2"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
-                  d="M4 4h6v6h-6zm10 0h6v6h-6zm-10 10h6v6h-6zm10 3h6m-3 -3v6"
-                ></path></svg
+              <a
+                class="flex items-center hover:underline"
+                title="Bookmarks"
+                href="/bookmarks/"
+                ><Icon name="tabler:bookmarks" class="mr-1 h-4 w-4" /> Bookmarks</a
               >
-               Submit a tool
-            </a>
+              <a
+                class="flex items-center hover:underline"
+                title="Analytics"
+                href="https://plausible.io/smashing.tools?period=all"
+                target="_blank"
+                ><Icon name="tabler:trending-up" class="mr-1 h-4 w-4" />
+                 Analytics</a
+              >
+            </div>
           </div>
           <slot />
         </div>

@@ -3,7 +3,6 @@ import { designKit } from 'keystatic-utils/collections/designKit';
 import { profile } from 'keystatic-utils/collections/profile';
 import { starterKit } from 'keystatic-utils/collections/starterKit';
 import { uiComponent } from 'keystatic-utils/collections/uiComponent';
-import { submission } from 'keystatic-utils/singletons/submission';
 
 export default config({
   ui: {
@@ -16,7 +15,6 @@ export default config({
     navigation: {
       Tools: ['starterKit', 'designKit', 'uiComponent'],
       People: ['profile'],
-      ...(process.env.NODE_ENV !== 'production' && { Pages: ['submission'] }),
     },
   },
   storage: {
@@ -31,8 +29,5 @@ export default config({
     designKit,
     uiComponent,
     profile,
-  },
-  singletons: {
-    submission,
   },
 });

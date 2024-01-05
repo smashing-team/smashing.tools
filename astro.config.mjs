@@ -41,7 +41,9 @@ export default defineConfig({
     pagefind(),
     markdoc(),
     keystatic(),
-    robotsTxt(),
+    robotsTxt({
+      policy: [{ userAgent: '*', allow: '/', disallow: ['/bookmarks'] }],
+    }),
   ],
   devToolbar: {
     enabled: false,

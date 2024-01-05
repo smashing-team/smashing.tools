@@ -1,9 +1,8 @@
 ---
+import Header from '@/components/Header.astro';
 import ProfileHeaderGradient from '@/components/ProfileHeaderGradient.astro';
 import CommandMenu from '@/components/react/CommandMenu';
-import { ModeToggle } from '@/components/react/ModeToggle';
 
-import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
@@ -18,26 +17,7 @@ export const prerender = false;
   <body data-pagefind-ignore>
     <ProfileHeaderGradient />
     <div class="mx-auto h-full w-full max-w-2xl">
-      <div
-        data-pagefind-ignore
-        id="tool-layout-header"
-        class="fixed left-0 top-0 z-50 w-full p-2 px-4"
-      >
-        <div
-          class="mx-auto mt-2 flex w-full max-w-2xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
-        >
-          <a href="/" class="absolute z-[975]">
-            <img
-              class="mx-auto h-8 w-8 dark:text-white"
-              src={smashingLogo.src}
-              alt="smashing.tools"
-              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
-            /></a
-          >
-          <div class="grow"></div>
-          <ModeToggle align="end" client:load />
-        </div>
-      </div>
+      <Header />
       <div class="hidden" data-pagefind-ignore>
         <CommandMenu client:idle />
       </div>
