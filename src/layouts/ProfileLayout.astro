@@ -57,7 +57,7 @@ const description =
         <div
           class="mx-auto mt-2 flex w-full max-w-2xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
         >
-          <a href="/" class="absolute z-[975]">
+          <a href="/" title="Homepage" class="absolute z-[975]">
             <img
               class="mx-auto h-8 w-8 dark:text-white"
               src={smashingLogo.src}
@@ -85,12 +85,12 @@ const description =
             />
           </div>
           <div class="mt-6 flex flex-col space-y-2 text-left">
-            <p
+            <h1
               class="text-2xl font-medium text-zinc-900 dark:text-zinc-50"
               data-pagefind-meta="name"
             >
               {name}
-            </p>
+            </h1>
             {
               bio && (
                 <p
