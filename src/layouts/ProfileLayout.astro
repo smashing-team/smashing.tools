@@ -36,11 +36,14 @@ const creatorItems = allItems.filter((item) => item.data.maker.id === slug);
 const publishedItems = allItems.filter(
   (item) => item.data.publisher.id === slug,
 );
+const description =
+  bio ||
+  `${name}'s profile on smashing.tools. Find tools crafted and published by ${name}.`;
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={name} description={'headline'} slug={slug} />
+    <BaseHead title={name} description={description} slug={slug} />
   </head>
 
   <body>
