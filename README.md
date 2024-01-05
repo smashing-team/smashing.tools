@@ -8,8 +8,6 @@
 <p align="center">
     <a href="https://smashing.tools">Website</a>
     ·
-    <a href="https://github.com/orgs/smashing-team/projects/1">Roadmap</a>
-    ·
     <a href="https://github.com/smashing-team/smashing.tools/issues">Issues</a>
     ·
     <a href="https://github.com/orgs/smashing-team/discussions">Discussions</a>
