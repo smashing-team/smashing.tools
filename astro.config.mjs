@@ -22,7 +22,7 @@ function getSiteUrl() {
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
-  trailingSlash: 'never',
+  trailingSlash: 'always',
   site: getSiteUrl(),
   image: {
     service: {
@@ -32,7 +32,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      filter: (page) => page !== `https://smashing.tools/bookmarks`,
+      filter: (page) => page !== `https://smashing.tools/bookmarks/`,
     }),
     tailwind({
       applyBaseStyles: false,

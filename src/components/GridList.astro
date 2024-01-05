@@ -77,7 +77,7 @@ const bookmarks = (Astro.cookies.get('bookmarks')?.json() || []) as IBookmark[];
               </div>
               <h2 class="mt-4 font-sans text-base text-zinc-900 dark:text-white">
                 <a
-                  href={`/${item.collection}/${item.slug}`}
+                  href={`/${item.collection}/${item.slug}/`}
                   class="flex items-center space-x-2 font-medium"
                 >
                   <span class="absolute -inset-px rounded-3xl" />

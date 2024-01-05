@@ -162,7 +162,7 @@ const allFilters = getAllFilters();
             <div data-people class="flex items-center space-x-6">
               {
                 makerData && (
-                  <a class="group" href={`/profile/${makerData.id}`}>
+                  <a class="group" href={`/profile/${makerData.id}/`}>
                     <div class="mt-6 flex items-center">
                       <div>
                         <Image
@@ -183,7 +183,7 @@ const allFilters = getAllFilters();
                   </a>
                 )
               }
-              <a class="group" href={`/profile/${publisherData.id}`}>
+              <a class="group" href={`/profile/${publisherData.id}/`}>
                 <div class="mt-6 flex items-center">
                   <div>
                     <Image
@@ -281,8 +281,8 @@ const allFilters = getAllFilters();
           <slot data-pagefind-meta="content" />
           <NavigateKeys
             client:load
-            prevHref={prevSlug && `/${collection}/${prevSlug}`}
-            nextHref={nextSlug && `/${collection}/${nextSlug}`}
+            prevHref={prevSlug && `/${collection}/${prevSlug}/`}
+            nextHref={nextSlug && `/${collection}/${nextSlug}/`}
           />
           <a
             href={`https://github.com/smashing-team/smashing.tools/issues/new?assignees=&labels=type%3A+content+feedback&projects=&template=03-content.yml&title=%F0%9F%93%9D+Content+Feedback%3A+${name}`}
