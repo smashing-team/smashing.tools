@@ -1,18 +1,18 @@
 ---
-import { Image } from 'astro:assets';
-import { type CollectionEntry, getEntry } from 'astro:content';
-import { Icon } from 'astro-icon/components';
-import { twMerge } from 'tailwind-merge';
+import { Image } from "astro:assets";
+import { type CollectionEntry, getEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import { twMerge } from "tailwind-merge";
 
-import Header from '@/components/Header.astro';
-import HeaderGradient from '@/components/HeaderGradient.astro';
-import CommandMenu from '@/components/react/CommandMenu';
-import { HeroSlider } from '@/components/react/HeroSlider';
-import { NavigateKeys } from '@/components/react/NavigateKeys';
-import { type CategorySlugs, getCategoryTitle } from '@/consts';
-import { getAllFilters } from '@/utils/reader';
+import Header from "@/components/Header.astro";
+import HeaderGradient from "@/components/HeaderGradient.astro";
+import CommandMenu from "@/components/react/CommandMenu";
+import { HeroSlider } from "@/components/react/HeroSlider";
+import { NavigateKeys } from "@/components/react/NavigateKeys";
+import { type CategorySlugs, getCategoryTitle } from "@/consts";
+import { getAllFilters } from "@/utils/reader";
 
-import BaseHead from '../components/BaseHead.astro';
+import BaseHead from "../components/BaseHead.astro";
 
 type Props = (CollectionEntry<"starter-kit">["data"] &
   CollectionEntry<"design-kit">["data"] &
@@ -62,9 +62,11 @@ const publisherData = await getEntry("profiles", publisher.id);
 const makerData = await getEntry("profiles", maker.id);
 const allFilters = getAllFilters();
 
-const tags = Object.entries(attrs).slice(0, 4);
-const otherTags = Object.entries(attrs).slice(5);
+const allTags = Object.entries(attrs).map(([key, value]) => value?.map((v) => [key, v])).flat()
 
+const tags = allTags.slice(0, 6);
+const otherTags = allTags.slice(6);
+const hasMoreTags = otherTags.length > 0;
 ---
 
 <html lang="en">
@@ -131,33 +133,31 @@ const otherTags = Object.entries(attrs).slice(5);
                 {getCategoryTitle(collection)}
               </span>
               {
-                tags
-                  .map(([key, value]) => {
-                    return value?.map((v: string) => {
-                      return (
-                        <span class="inline-flex items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
-                          {allFilters[`${key}|${v}`]}
-                        </span>
-                      );
-                    });
-                  })
+                   tags?.map(([key, value]) => {
+                    return (
+                      <span class="inline-flex items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
+                        {allFilters[`${key}|${value}`]}
+                      </span>
+                    );
+                })
               }
-              <span
-                class="load-more-tags text-xs font-medium text-zinc-400 cursor-pointer hover:underline px-1 py-1"
-              >
-                +{otherTags.length} more
-              </span>
+              {
+                hasMoreTags && (
+                  <span class="load-more-tags text-xs font-medium text-zinc-400 cursor-pointer hover:underline px-1 py-1">
+                    +{otherTags.length} more
+                  </span>
+                )
+              }
               <div class="hidden flex-wrap gap-2 other-tags">
                 {
-                  otherTags.map(([key, value]) => {
-                    return value?.map((v: string) => {
-                      return (
-                        <span class="inline-flex items-center cursor-pointer rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
-                          {allFilters[`${key}|${v}`]}
-                        </span>
-                      );
-                    });
-                  })
+                  hasMoreTags &&
+                       otherTags?.map(([key, value]) => {
+                        return (
+                          <span class="inline-flex items-center cursor-pointer rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
+                            {allFilters[`${key}|${value}`]}
+                          </span>
+                        );
+                    })
                 }
               </div>
             </div>
@@ -301,17 +301,16 @@ const otherTags = Object.entries(attrs).slice(5);
         </article>
       </main>
     </div>
-  </body><script is:inline>
-  
-  document.addEventListener('astro:page-load', () => {
-    const loadMoreTags = document.querySelector('.load-more-tags');
-    const otherTags = document.querySelector('.other-tags');
-    loadMoreTags.addEventListener('click', () => {
-      loadMoreTags.classList.add('hidden');
-      otherTags.classList.remove('hidden');
-      otherTags.classList.add('contents');
-    });
-  });
-  
-  </script>
+    <script is:inline>
+      document.addEventListener("astro:page-load", () => {
+        const loadMoreTags = document.querySelector(".load-more-tags");
+        const otherTags = document.querySelector(".other-tags");
+        loadMoreTags.addEventListener("click", () => {
+          loadMoreTags.classList.add("hidden");
+          otherTags.classList.remove("hidden");
+          otherTags.classList.add("contents");
+        });
+      });
+    </script>
+  </body>
 </html>
