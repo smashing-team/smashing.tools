@@ -1,23 +1,23 @@
 ---
-import { Image } from 'astro:assets';
-import { type CollectionEntry, getEntry } from 'astro:content';
-import { Icon } from 'astro-icon';
-import { twMerge } from 'tailwind-merge';
+import { Image } from "astro:assets";
+import { type CollectionEntry, getEntry } from "astro:content";
+import { Icon } from "astro-icon";
+import { twMerge } from "tailwind-merge";
 
-import HeaderGradient from '@/components/HeaderGradient.astro';
-import CommandMenu from '@/components/react/CommandMenu';
-import { HeroSlider } from '@/components/react/HeroSlider';
-import { ModeToggle } from '@/components/react/ModeToggle';
-import { NavigateKeys } from '@/components/react/NavigateKeys';
-import { type CategorySlugs, getCategoryTitle } from '@/consts';
-import { getAllFilters } from '@/utils/reader';
+import HeaderGradient from "@/components/HeaderGradient.astro";
+import CommandMenu from "@/components/react/CommandMenu";
+import { HeroSlider } from "@/components/react/HeroSlider";
+import { ModeToggle } from "@/components/react/ModeToggle";
+import { NavigateKeys } from "@/components/react/NavigateKeys";
+import { type CategorySlugs, getCategoryTitle } from "@/consts";
+import { getAllFilters } from "@/utils/reader";
 
-import smashingLogo from '../../public/logo.svg';
-import BaseHead from '../components/BaseHead.astro';
+import smashingLogo from "../../public/logo.svg";
+import BaseHead from "../components/BaseHead.astro";
 
-type Props = (CollectionEntry<'starter-kit'>['data'] &
-  CollectionEntry<'design-kit'>['data'] &
-  CollectionEntry<'ui-component'>['data']) & {
+type Props = (CollectionEntry<"starter-kit">["data"] &
+  CollectionEntry<"design-kit">["data"] &
+  CollectionEntry<"ui-component">["data"]) & {
   collection: CategorySlugs;
   slug?: string;
   prevSlug?: string;
@@ -43,7 +43,7 @@ const {
 } = Astro.props;
 
 const heroSliderImages = (heroSlider || [])
-  ?.filter((image) => image.discriminant === 'heroSlider')
+  ?.filter((image) => image.discriminant === "heroSlider")
   .map((slide) => {
     return slide.value.image;
   });
@@ -51,17 +51,21 @@ const heroSliderImages = (heroSlider || [])
 const hasDarkLogo = !!logoDark;
 
 const websiteUrl = new URL(url);
-websiteUrl.searchParams.append('ref', 'smashing.tools');
+websiteUrl.searchParams.append("ref", "smashing.tools");
 
 const repoUrl = repositoryUrl ? new URL(repositoryUrl) : undefined;
-repoUrl?.searchParams.append('ref', 'smashing.tools');
+repoUrl?.searchParams.append("ref", "smashing.tools");
 
 const prevUrl = previewUrl ? new URL(previewUrl) : undefined;
-prevUrl?.searchParams.append('ref', 'smashing.tools');
+prevUrl?.searchParams.append("ref", "smashing.tools");
 
-const publisherData = await getEntry('profiles', publisher.id);
-const makerData = await getEntry('profiles', maker.id);
+const publisherData = await getEntry("profiles", publisher.id);
+const makerData = await getEntry("profiles", maker.id);
 const allFilters = getAllFilters();
+
+const tags = Object.entries(attrs).slice(0, 4);
+const otherTags = Object.entries(attrs).slice(5);
+
 ---
 
 <html lang="en">
@@ -100,7 +104,7 @@ const allFilters = getAllFilters();
           <div class="relative block w-24 overflow-hidden">
             <Image
               data-pagefind-meta="image[src], image_alt[alt]"
-              class={twMerge('w-full', hasDarkLogo && 'block dark:hidden')}
+              class={twMerge("w-full", hasDarkLogo && "block dark:hidden")}
               src={logo}
               alt={name}
               width={200}
@@ -135,28 +139,47 @@ const allFilters = getAllFilters();
             <div class="mt-4 flex flex-wrap gap-2">
               <span
                 class={twMerge(
-                  'inline-flex items-center rounded-lg bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20',
-                  collection === 'ui-component' &&
-                    'dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/30 bg-blue-50 text-blue-700 ring-blue-700/10',
-                  collection === 'design-kit' &&
-                    'dark:bg-purple-400/10 dark:text-purple-400 dark:ring-purple-400/30 bg-purple-50 text-purple-700 ring-purple-700/10',
-                  collection === 'starter-kit' &&
-                    'dark:bg-yellow-400/10 dark:text-yellow-500 dark:ring-yellow-400/20 bg-yellow-50 text-yellow-800 ring-yellow-600/20',
+                  "inline-flex items-center rounded-lg bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20",
+                  collection === "ui-component" &&
+                    "dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/30 bg-blue-50 text-blue-700 ring-blue-700/10",
+                  collection === "design-kit" &&
+                    "dark:bg-purple-400/10 dark:text-purple-400 dark:ring-purple-400/30 bg-purple-50 text-purple-700 ring-purple-700/10",
+                  collection === "starter-kit" &&
+                    "dark:bg-yellow-400/10 dark:text-yellow-500 dark:ring-yellow-400/20 bg-yellow-50 text-yellow-800 ring-yellow-600/20",
                 )}
               >
                 {getCategoryTitle(collection)}
               </span>
               {
-                Object.entries(attrs).map(([key, value]) => {
-                  return value?.map((v: string) => {
-                    return (
-                      <span class="inline-flex items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
-                        {allFilters[`${key}|${v}`]}
-                      </span>
-                    );
-                  });
-                })
+                tags
+                  .map(([key, value]) => {
+                    return value?.map((v: string) => {
+                      return (
+                        <span class="inline-flex items-center rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
+                          {allFilters[`${key}|${v}`]}
+                        </span>
+                      );
+                    });
+                  })
               }
+              <span
+                class="load-more-tags text-xs font-medium text-zinc-400 cursor-pointer hover:underline px-1 py-1"
+              >
+                +{otherTags.length} more
+              </span>
+              <div class="hidden flex-wrap gap-2 other-tags">
+                {
+                  otherTags.map(([key, value]) => {
+                    return value?.map((v: string) => {
+                      return (
+                        <span class="inline-flex items-center cursor-pointer rounded-full bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20">
+                          {allFilters[`${key}|${v}`]}
+                        </span>
+                      );
+                    });
+                  })
+                }
+              </div>
             </div>
 
             <div data-people class="flex items-center space-x-6">
@@ -254,9 +277,9 @@ const allFilters = getAllFilters();
                     >
                       <Icon
                         name={
-                          prevUrl.toString().includes('figma')
-                            ? 'tabler:brand-figma'
-                            : 'tabler:external-link'
+                          prevUrl.toString().includes("figma")
+                            ? "tabler:brand-figma"
+                            : "tabler:external-link"
                         }
                         class="relative -left-0.5 mr-1.5 h-5 w-5"
                       />
@@ -294,5 +317,17 @@ const allFilters = getAllFilters();
         </article>
       </main>
     </div>
-  </body>
+  </body><script is:inline>
+  
+  document.addEventListener('astro:page-load', () => {
+    const loadMoreTags = document.querySelector('.load-more-tags');
+    const otherTags = document.querySelector('.other-tags');
+    loadMoreTags.addEventListener('click', () => {
+      loadMoreTags.classList.add('hidden');
+      otherTags.classList.remove('hidden');
+      otherTags.classList.add('contents');
+    });
+  });
+  
+  </script>
 </html>
