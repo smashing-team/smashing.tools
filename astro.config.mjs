@@ -7,6 +7,7 @@ import netlify from '@astrojs/netlify/functions';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 import robotsTxt from 'astro-robots-txt';
+import icon from 'astro-icon';
 import pagefind from './src/plugins/pagefind.ts';
 
 function getSiteUrl() {
@@ -22,6 +23,7 @@ function getSiteUrl() {
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
+  trailingSlash: 'always',
   site: getSiteUrl(),
   image: {
     service: {
@@ -31,9 +33,7 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
+      filter: (page) => page !== `https://smashing.tools/bookmarks/`,
     }),
     tailwind({
       applyBaseStyles: false,
@@ -42,7 +42,16 @@ export default defineConfig({
     pagefind(),
     markdoc(),
     keystatic(),
-    robotsTxt(),
+    robotsTxt({
+      policy: [
+        {
+          userAgent: '*',
+          allow: '/',
+          disallow: ['/bookmarks'],
+        },
+      ],
+    }),
+    icon(),
   ],
   devToolbar: {
     enabled: false,
@@ -50,5 +59,7 @@ export default defineConfig({
   prefetch: {
     defaultStrategy: 'viewport',
   },
-  adapter: netlify(),
+  adapter: netlify({
+    imageCDN: false,
+  }),
 });

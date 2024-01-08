@@ -1,14 +1,13 @@
 ---
 import { Image } from 'astro:assets';
 import { type CollectionEntry, getCollection } from 'astro:content';
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 
 import GridList from '@/components/GridList.astro';
+import Header from '@/components/Header.astro';
 import ProfileHeaderGradient from '@/components/ProfileHeaderGradient.astro';
 import CommandMenu from '@/components/react/CommandMenu';
-import { ModeToggle } from '@/components/react/ModeToggle';
 
-import smashingLogo from '../../public/logo.svg';
 import BaseHead from '../components/BaseHead.astro';
 
 type Props = CollectionEntry<'profiles'>['data'] & {
@@ -36,36 +35,20 @@ const creatorItems = allItems.filter((item) => item.data.maker.id === slug);
 const publishedItems = allItems.filter(
   (item) => item.data.publisher.id === slug,
 );
+const description =
+  bio ||
+  `${name}'s profile on smashing.tools. Find tools crafted and published by ${name}.`;
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={name} description={'headline'} slug={slug} />
+    <BaseHead title={name} description={description} slug={slug} />
   </head>
 
   <body>
     <ProfileHeaderGradient />
     <div class="mx-auto h-full w-full max-w-2xl px-8">
-      <div
-        data-pagefind-ignore
-        id="tool-layout-header"
-        class="fixed left-0 top-0 z-50 w-full p-2 px-4"
-      >
-        <div
-          class="mx-auto mt-2 flex w-full max-w-2xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
-        >
-          <a href="/" class="absolute z-[975]">
-            <img
-              class="mx-auto h-8 w-8 dark:text-white"
-              src={smashingLogo.src}
-              alt="smashing.tools"
-              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
-            /></a
-          >
-          <div class="grow"></div>
-          <ModeToggle align="end" client:load />
-        </div>
-      </div>
+      <Header />
       <header>
         <div class="hidden" data-pagefind-ignore>
           <CommandMenu client:idle />
@@ -82,12 +65,12 @@ const publishedItems = allItems.filter(
             />
           </div>
           <div class="mt-6 flex flex-col space-y-2 text-left">
-            <p
+            <h1
               class="text-2xl font-medium text-zinc-900 dark:text-zinc-50"
               data-pagefind-meta="name"
             >
               {name}
-            </p>
+            </h1>
             {
               bio && (
                 <p

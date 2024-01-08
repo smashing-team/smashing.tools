@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 
 import type { CategoryPaths } from '@/consts';
 
@@ -12,7 +12,7 @@ const { activeCategory = '/' } = Astro.props;
 
 <section class="mt-1 lg:mt-3">
   <div
-    class="mx-auto mb-2 h-px w-full max-w-md bg-gradient-to-r from-zinc-200/0 via-zinc-300 to-zinc-200/0 dark:via-zinc-700 lg:hidden"
+    class="mx-auto mb-2 h-px w-full max-w-md bg-gradient-to-r from-zinc-200/0 via-zinc-300 to-zinc-200/0 lg:hidden dark:via-zinc-700"
   >
   </div>
   <ul
@@ -46,7 +46,7 @@ const { activeCategory = '/' } = Astro.props;
         class="absolute inset-0 -z-10 scale-75 rounded-xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
       ></span>
       <a
-        href="/starter-kit"
+        href="/starter-kit/"
         class="group flex w-full items-center px-2"
         aria-label="Starter Kits"
       >
@@ -65,7 +65,7 @@ const { activeCategory = '/' } = Astro.props;
         class="absolute inset-0 -z-10 scale-75 rounded-xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
       ></span>
       <a
-        href="/ui-component"
+        href="/ui-component/"
         class="group flex w-full items-center px-2"
         aria-label="UI Components"
       >
@@ -84,7 +84,7 @@ const { activeCategory = '/' } = Astro.props;
         class="absolute inset-0 -z-10 scale-75 rounded-xl bg-zinc-500/10 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 group-data-[active='on']:scale-100 group-data-[active='on']:opacity-100 dark:bg-zinc-800"
       ></span>
       <a
-        href="/design-kit"
+        href="/design-kit/"
         class="group flex w-full items-center px-2"
         aria-label="Design Kits"
       >

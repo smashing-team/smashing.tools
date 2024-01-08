@@ -2,13 +2,14 @@
 
 ## Introduction
 
-Welcome to smashing.tools! For an overview and technical details of our project, please visit our [README file on GitHub](https://github.com/smashing-team/smashing.tools/blob/contributing/README.md). We eagerly await your contributions and are excited about your participation.
+Welcome to smashing.tools! For an overview and technical details of our project, please visit our [README file on GitHub](https://github.com/smashing-team/smashing.tools/blob/main/README.md). We eagerly await your contributions and are excited about your participation.
 
 ## Getting Started
 
 ### Prerequisites
 
 Before you begin, ensure you have installed:
+
 - [Node v20.10.0](https://nodejs.org/en/download/)
 - [Pnpm v8.12.0](https://pnpm.io/installation)
 - [Git](https://git-scm.com/downloads)
@@ -16,6 +17,7 @@ Before you begin, ensure you have installed:
 ### Installation
 
 To set up the development environment, follow these steps:
+
 1. Fork the GitHub repository.
 2. Clone your fork to your local machine: `git clone [your fork's URL]`.
 3. Navigate to the cloned directory: `cd [repository name]`.
@@ -25,6 +27,7 @@ To set up the development environment, follow these steps:
 ## Usage
 
 To run the project locally:
+
 1. Start the project with `pnpm dev`.
 2. Open your browser and navigate to `http://localhost:4321`.
 

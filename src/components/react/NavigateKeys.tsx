@@ -11,6 +11,7 @@ type Props = {
 export function NavigateKeys({ prevHref, nextHref }: Props) {
   const prevLinkRef = useRef<HTMLAnchorElement>(null);
   const nextLinkRef = useRef<HTMLAnchorElement>(null);
+
   useEffect(() => {
     const keydownHandler = (event: KeyboardEvent) => {
       if (

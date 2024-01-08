@@ -1,19 +1,18 @@
 ---
-import { Image } from "astro:assets";
-import { type CollectionEntry, getEntry } from "astro:content";
-import { Icon } from "astro-icon";
-import { twMerge } from "tailwind-merge";
+import { Image } from 'astro:assets';
+import { type CollectionEntry, getEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import { twMerge } from 'tailwind-merge';
 
-import HeaderGradient from "@/components/HeaderGradient.astro";
-import CommandMenu from "@/components/react/CommandMenu";
-import { HeroSlider } from "@/components/react/HeroSlider";
-import { ModeToggle } from "@/components/react/ModeToggle";
-import { NavigateKeys } from "@/components/react/NavigateKeys";
-import { type CategorySlugs, getCategoryTitle } from "@/consts";
-import { getAllFilters } from "@/utils/reader";
+import Header from '@/components/Header.astro';
+import HeaderGradient from '@/components/HeaderGradient.astro';
+import CommandMenu from '@/components/react/CommandMenu';
+import { HeroSlider } from '@/components/react/HeroSlider';
+import { NavigateKeys } from '@/components/react/NavigateKeys';
+import { type CategorySlugs, getCategoryTitle } from '@/consts';
+import { getAllFilters } from '@/utils/reader';
 
-import smashingLogo from "../../public/logo.svg";
-import BaseHead from "../components/BaseHead.astro";
+import BaseHead from '../components/BaseHead.astro';
 
 type Props = (CollectionEntry<"starter-kit">["data"] &
   CollectionEntry<"design-kit">["data"] &
@@ -76,26 +75,7 @@ const otherTags = Object.entries(attrs).slice(5);
   <body>
     <HeaderGradient />
     <div class="mx-auto h-full w-full max-w-2xl">
-      <div
-        data-pagefind-ignore
-        id="tool-layout-header"
-        class="fixed left-0 top-0 z-50 w-full p-2 px-4"
-      >
-        <div
-          class="mx-auto mt-2 flex w-full max-w-2xl items-center gap-3 rounded-full bg-zinc-600/5 px-4 py-1 backdrop-blur-sm dark:bg-zinc-200/5"
-        >
-          <a href="/" class="absolute z-[975]">
-            <img
-              class="mx-auto h-8 w-8 dark:text-white"
-              src={smashingLogo.src}
-              alt="smashing.tools"
-              sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
-            /></a
-          >
-          <div class="grow"></div>
-          <ModeToggle align="end" client:load />
-        </div>
-      </div>
+      <Header />
       <header class="px-4">
         <div class="hidden" data-pagefind-ignore>
           <CommandMenu client:idle />
@@ -182,10 +162,14 @@ const otherTags = Object.entries(attrs).slice(5);
               </div>
             </div>
 
-            <div data-people class="flex items-center space-x-6">
+            <div
+              data-people
+              class="flex items-center space-x-6"
+              data-pagefind-ignore
+            >
               {
                 makerData && (
-                  <a class="group" href={`/profile/${makerData.id}`}>
+                  <a class="group" href={`/profile/${makerData.id}/`}>
                     <div class="mt-6 flex items-center">
                       <div>
                         <Image
@@ -206,7 +190,7 @@ const otherTags = Object.entries(attrs).slice(5);
                   </a>
                 )
               }
-              <a class="group" href={`/profile/${publisherData.id}`}>
+              <a class="group" href={`/profile/${publisherData.id}/`}>
                 <div class="mt-6 flex items-center">
                   <div>
                     <Image
@@ -247,7 +231,7 @@ const otherTags = Object.entries(attrs).slice(5);
                     name="tabler:external-link"
                     class="relative -left-0.5 mr-1.5 h-5 w-5 text-zinc-400 dark:text-zinc-800"
                   />
-                   Website
+                  Website
                 </a>
               </li>
               {
@@ -304,8 +288,8 @@ const otherTags = Object.entries(attrs).slice(5);
           <slot data-pagefind-meta="content" />
           <NavigateKeys
             client:load
-            prevHref={prevSlug && `/${collection}/${prevSlug}`}
-            nextHref={nextSlug && `/${collection}/${nextSlug}`}
+            prevHref={prevSlug && `/${collection}/${prevSlug}/`}
+            nextHref={nextSlug && `/${collection}/${nextSlug}/`}
           />
           <a
             href={`https://github.com/smashing-team/smashing.tools/issues/new?assignees=&labels=type%3A+content+feedback&projects=&template=03-content.yml&title=%F0%9F%93%9D+Content+Feedback%3A+${name}`}
