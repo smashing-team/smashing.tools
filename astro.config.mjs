@@ -20,6 +20,9 @@ function getSiteUrl() {
   return 'https://smashing.tools';
 }
 
+// eslint-disable-next-line no-console
+console.log('ENV DEBUG', process.env);
+
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
