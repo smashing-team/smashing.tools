@@ -1,6 +1,10 @@
+import * as defaultTheme from "tailwindcss/defaultTheme";
 import type { Config } from "tailwindcss";
+import tailwindTypeography from "@tailwindcss/typography";
+import tailwindAnimate from "tailwindcss-animate";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,13 +12,43 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontFamily: {
+        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        mono: ["var(--font-roboto-mono)", ...defaultTheme.fontFamily.mono],
+      },
+      screens: {
+        "3xl": "2000px",
+      },
+      spacing: {
+        18: "4.5rem",
+        112: "28rem",
+        120: "30rem",
+      },
+      animation: {
+        "background-shine": "background-shine 2s linear infinite",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "background-shine": {
+          from: {
+            backgroundPosition: "0 0",
+          },
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindTypeography, tailwindAnimate],
 };
 export default config;
