@@ -44,6 +44,7 @@ export default function RootLayout({
             </Suspense>
             {children}
           </div>
+          <div className="pointer-events-none bg-white dark:bg-black fixed bottom-0 left-0 h-32 [mask-image:linear-gradient(transparent,#000000)] w-full "></div>
         </ThemeProvider>
         <DebugIndicator {...metadata} />
       </body>

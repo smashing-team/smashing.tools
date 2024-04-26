@@ -54,15 +54,6 @@ export function GridItemTool({
                 alt={item.entry.name}
               />
             )}
-            {/* {maker && (
-              <Image
-                className="absolute -bottom-2 -right-2 inline-block size-5 rounded-full bg-white ring-2 ring-white dark:bg-zinc-900 dark:ring-zinc-900 dark:group-hover:ring-zinc-800"
-                src={maker.data.avatar}
-                alt={maker.data.name}
-                width={20}
-                height={20}
-              />
-            )} */}
           </div>
           <h2 className="mt-4 font-sans text-base text-zinc-900 dark:text-white">
             <Link

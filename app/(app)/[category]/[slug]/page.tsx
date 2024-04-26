@@ -219,13 +219,15 @@ export default async function ToolDetail({
                     <Link
                       target="_blank"
                       href={item.buyLink.toString()}
-                      className="group flex items-center rounded-3xl px-4 py-3 text-base font-semibold outline-dashed outline-2 outline-offset-2 outline-blue-700 hover:bg-zinc-100/75 dark:outline-white  dark:hover:bg-white/5"
+                      className="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500"
                     >
-                      <IconShoppingCart className="relative -left-0.5 mr-1.5 size-5" />
-                      Buy now
-                      <div className="w-0 translate-x-full pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100">
-                        <IconArrowRight className="relative -left-0.5 mr-1.5 size-5" />
-                      </div>
+                      <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+                      <span className="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+                      <span className="relative text-white flex items-center">
+                        <IconShoppingCart className="relative -left-0.5 mr-1.5 size-5" />{" "}
+                        Buy now
+                        <IconArrowRight className="ml-1.5 size-5" />
+                      </span>
                     </Link>
                   </li>
                 )}
@@ -250,13 +252,15 @@ export default async function ToolDetail({
                 <Link
                   target="_blank"
                   href={item.buyLink.toString()}
-                  className="group mx-auto my-8 flex w-full items-center justify-center rounded-3xl px-4 py-3 text-base font-semibold no-underline outline-dashed outline-2 outline-offset-2 outline-blue-700 hover:bg-zinc-100/75 dark:outline-white dark:hover:bg-white/5"
+                  className="relative flex mb-4 no-underline items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500"
                 >
-                  <IconShoppingCart className="relative -left-0.5 mr-1.5 size-5" />
-                  Buy now
-                  <div className="w-0 translate-x-full pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100">
-                    <IconArrowRight className="relative -left-0.5 mr-1.5 size-5" />
-                  </div>
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+                  <span className="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
+                  <span className="relative text-white flex items-center">
+                    <IconShoppingCart className="relative -left-0.5 mr-1.5 size-5" />{" "}
+                    Buy now
+                    <IconArrowRight className="ml-1.5 size-5" />
+                  </span>
                 </Link>
               </div>
             )}

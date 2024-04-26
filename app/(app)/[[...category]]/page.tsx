@@ -13,7 +13,7 @@ import { notFound } from "next/navigation";
 
 type Props = {
   params: { category: Array<string> };
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | Array<string> | undefined };
 };
 
 export async function generateMetadata(
@@ -41,14 +41,14 @@ export default async function Home({
     return notFound();
   }
 
-  // Filterin items based on activeCategory
+  // Filtering items based on activeCategory
   if (activeCategory?.category) {
     items = items.filter(
       (item) => item.collection === activeCategory.collection
     );
   }
 
-  // Filterin items based on searchParams
+  // Filtering items based on searchParams
   if (Object.values(searchParams).length) {
     items = items.filter((item) => {
       for (const key in searchParams) {
