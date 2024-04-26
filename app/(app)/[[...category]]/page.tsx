@@ -7,7 +7,6 @@ import { CATEGORIES } from "@/consts";
 import { getFacets, uniqueFilters } from "@/utils/facets";
 import { constructMetadata } from "@/utils/metadata";
 import { getAllItems } from "@/utils/reader";
-import { IconInfoCircle } from "@tabler/icons-react";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -120,18 +119,6 @@ export default async function Home({
         <FiltersDrawer facets={facets} />
       </div>
       <GridList items={items} activeCategory={activeCategory} />
-      <p className="mx-4 mt-4 flex pb-8 align-top text-xs text-zinc-500">
-        <IconInfoCircle className="mr-1 size-4 shrink-0" />
-        <span>
-          <span className="font-semibold">Affiliate Link Disclosure</span>
-          <br />
-          Some of the links on this website are affiliate links, which means
-          that if you click on them and make a purchase, we may receive a
-          commission. This helps support smashing.tools and allows us to
-          continue to provide quality content and recommendations. Thank you for
-          your support!
-        </span>
-      </p>
     </div>
   );
 }

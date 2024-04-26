@@ -239,7 +239,7 @@ export default async function ToolDetail({
           {heroSliderImages.length > 0 && (
             <HeroSlider images={heroSliderImages} />
           )}
-          <article className="prose prose-zinc relative mx-auto size-full max-w-full mt-8 px-8 pb-24 dark:prose-invert">
+          <article className="prose prose-zinc relative mx-auto size-full max-w-full mt-8 px-8 pb-8 dark:prose-invert">
             {/* @ts-ignore */}
             <DocumentRenderer document={await item.content()} />
             {/* <NavigateKeys
