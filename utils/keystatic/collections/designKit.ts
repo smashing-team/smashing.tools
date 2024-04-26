@@ -11,7 +11,7 @@ import {
 
 export const designKit = collection({
   previewUrl:
-    process.env.NODE_ENV !== "production" ? "/design-kit/{slug}/" : undefined,
+    process.env.NODE_ENV !== "production" ? "/design-kit/{slug}" : undefined,
   label: "Design Kits",
   slugField: "name",
   entryLayout: "form",

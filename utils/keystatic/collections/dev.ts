@@ -8,8 +8,7 @@ import {
 } from "../index";
 
 export const dev = collection({
-  previewUrl:
-    process.env.NODE_ENV !== "production" ? "/dev/{slug}/" : undefined,
+  previewUrl: process.env.NODE_ENV !== "production" ? "/dev/{slug}" : undefined,
   label: "Dev Tools",
   slugField: "name",
   entryLayout: "form",

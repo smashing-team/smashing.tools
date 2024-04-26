@@ -16,13 +16,13 @@ export function ModeToggle({
   align = "start",
 }: {
   align?: "center" | "start" | "end";
-}) {  
+}) {
   const { setTheme, theme } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className="flex size-11 shrink-0 items-center justify-center rounded-3xl transition-colors hover:bg-white dark:hover:bg-zinc-500/50">
+        <button className="flex size-11 shrink-0 items-center justify-center rounded-3xl transition-colors hover:bg-white dark:hover:bg-white/10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="size-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"

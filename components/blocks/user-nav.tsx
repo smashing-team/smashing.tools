@@ -12,8 +12,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/dropdown-menu";
 import { useRouter } from "next/navigation";
+import { type User } from "@supabase/supabase-js";
+import { signout } from "@/server/actions/signout";
 
-export function UserNav({ user }: { user: any }) {
+export function UserNav({ user }: { user: User }) {
   const router = useRouter();
   return (
     <DropdownMenu>
@@ -22,10 +24,13 @@ export function UserNav({ user }: { user: any }) {
           variant="ghost"
           className="relative size-8 shrink-0 rounded-full"
         >
-          <Avatar className="size-8">
-            <AvatarImage src={user?.avatar_url} alt={user?.user_name} />
+          <Avatar className="size-8 shadow-md">
+            <AvatarImage
+              src={user?.user_metadata.avatar_url}
+              alt={user?.user_metadata.user_name}
+            />
             <AvatarFallback className="text-xs">
-              {user?.full_name
+              {user?.user_metadata.full_name
                 .split(" ")
                 .map((name: string) => name[0])
                 .join("")}
@@ -37,22 +42,22 @@ export function UserNav({ user }: { user: any }) {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">
-              {user?.full_name}
+              {user?.user_metadata.full_name}
             </p>
-            <p className="text-xs leading-none text-zinc-600">{user?.email}</p>
+            <p className="text-xs leading-none text-zinc-400">{user?.email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem
             onSelect={() => {
-              router.push("/bookmarks/");
+              router.push("/bookmarks");
             }}
           >
             Bookmarks
           </DropdownMenuItem>
           <DropdownMenuItem
             onSelect={() => {
-              router.push("/settings/");
+              router.push("/settings");
             }}
           >
             Settings
@@ -61,7 +66,7 @@ export function UserNav({ user }: { user: any }) {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onSelect={() => {
-            router.push("/api/auth/signout/");
+            signout();
           }}
         >
           Log out

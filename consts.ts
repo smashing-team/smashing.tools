@@ -5,41 +5,57 @@ export const EMAIL_FROM = "smashing.tools <hi@smashing.tools>";
 export const NEWSLETTER_CONFIRM_RESEND_INTERVAL_MINUTES = 2;
 export const CATEGORIES = [
   {
-    category: undefined,
+    category: null,
     slug: "/",
     title: "All tools",
+    seoTitle: "smashing.tools",
+    collection: "all",
   },
   {
     category: "starter-kit",
     slug: "/starter-kit",
     title: "Starter Kit",
+    seoTitle: "Starter kits - smashing.tools",
+    collection: "starterKit",
   },
   {
     category: "design-kit",
     slug: "/design-kit",
     title: "Design Kit",
+    seoTitle: "Design kits - smashing.tools",
+    collection: "designKit",
   },
   {
     category: "ui-component",
     slug: "/ui-component",
     title: "UI Component",
+    seoTitle: "UI components - smashing.tools",
+    collection: "uiComponent",
   },
   {
     category: "ai",
     slug: "/ai",
     title: "AI Tool",
+    seoTitle: "AI tools - smashing.tools",
+    collection: "ai",
   },
   {
     category: "dev",
     slug: "/dev",
     title: "Dev Tool",
+    seoTitle: "Dev tools - smashing.tools",
+    collection: "dev",
   },
   {
     category: "post",
     slug: "/post",
     title: "Post",
+    seoTitle: "Posts - smashing.tools",
+    collection: "post",
   },
 ] as const;
+
+export type CATEGORY = (typeof CATEGORIES)[number];
 
 export type CategoryPaths =
   | "/"
@@ -58,7 +74,14 @@ export type CategorySlugs =
   | "post"
   | "dev";
 
-export function getCategoryTitle(category: CategorySlugs) {
+export type CategoryKeys =
+  | "starterKit"
+  | "designKit"
+  | "uiComponent"
+  | "ai"
+  | "dev";
+
+export function getCategoryTitle(category: string) {
   return CATEGORIES.find((c) => c.category === category)?.title ?? "";
 }
 

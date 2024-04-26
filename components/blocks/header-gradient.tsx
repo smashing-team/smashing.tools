@@ -2,12 +2,12 @@ import React from "react";
 
 export function HeaderGradient(): React.ReactElement {
   return (
-    <div className="absolute inset-0 -z-10 mx-0 max-w-none overflow-hidden">
+    <div className="fixed inset-0 -z-10 mx-0 max-w-none overflow-hidden">
       <div className="absolute left-1/2 top-[-14.5px] ml-[-41.5rem] h-[25rem] w-[80rem] dark:[mask-image:linear-gradient(white,transparent)]">
         <div className="absolute inset-0 bg-gradient-to-r from-sky-600 to-emerald-600 opacity-40 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:from-sky-700/30 dark:to-emerald-500/30 dark:opacity-100">
           <svg
             aria-hidden="true"
-            className="absolute -inset-y-1/2 inset-x-0 h-[200%] w-full skew-x-[18deg] fill-white/10 stroke-black/50 mix-blend-overlay dark:fill-black/20"
+            className="absolute -inset-y-1/2 inset-x-0 h-[200%] w-full skew-x-[18deg] fill-white/10 stroke-black/40 mix-blend-overlay dark:fill-black/20"
           >
             <defs>
               <pattern

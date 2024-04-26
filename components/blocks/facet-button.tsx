@@ -1,7 +1,9 @@
-import React from 'react';
-import { twMerge } from 'tailwind-merge';
+"use client";
 
-import Query from '@/utils/query';
+import React, { useCallback } from "react";
+import { twMerge } from "tailwind-merge";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   slug: string;
@@ -18,9 +20,30 @@ const FacetButton: React.FC<Props> = ({
   selected = false,
   disabled = false,
 }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string | undefined, unset?: boolean) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (value === null || unset) {
+        params.delete(name, value);
+      } else if (value) {
+        params.append(name, value);
+      }
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   const handleClick = () => {
     if (!disabled) {
-      Query.toggle(slug, value);
+      router.push(pathname + "?" + createQueryString(slug, value, selected), {
+        scroll: false,
+      });
     }
   };
 
@@ -31,10 +54,10 @@ const FacetButton: React.FC<Props> = ({
         data-value={value}
         disabled={disabled}
         className={twMerge(
-          'inline-flex items-center rounded-full bg-white px-3 py-1 ring-1 ring-inset ring-zinc-200 hover:bg-zinc-100 dark:bg-zinc-950/40 dark:text-zinc-200 dark:ring-zinc-800 dark:hover:bg-zinc-800',
+          "inline-flex items-center rounded-full bg-white px-3 py-1 ring-1 ring-inset ring-zinc-200 hover:bg-zinc-100 dark:bg-zinc-950/40 dark:text-zinc-200 dark:ring-zinc-800 dark:hover:bg-zinc-800",
           selected &&
-            'bg-zinc-100 text-zinc-600 ring-zinc-300 dark:bg-zinc-800 dark:ring-zinc-700',
-          disabled && 'cursor-not-allowed opacity-20',
+            "bg-zinc-100 text-zinc-600 ring-zinc-300 dark:bg-zinc-800 dark:ring-zinc-700",
+          disabled && "cursor-not-allowed opacity-20"
         )}
         onClick={handleClick}
       >

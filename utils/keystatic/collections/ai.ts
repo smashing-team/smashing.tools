@@ -9,7 +9,7 @@ import {
 } from "../index";
 
 export const ai = collection({
-  previewUrl: process.env.NODE_ENV !== "production" ? "/ai/{slug}/" : undefined,
+  previewUrl: process.env.NODE_ENV !== "production" ? "/ai/{slug}" : undefined,
   label: "AI Tools",
   slugField: "name",
   entryLayout: "form",

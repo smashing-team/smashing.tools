@@ -18,7 +18,7 @@ import {
 
 export const starterKit = collection({
   previewUrl:
-    process.env.NODE_ENV !== "production" ? "/starter-kit/{slug}/" : undefined,
+    process.env.NODE_ENV !== "production" ? "/starter-kit/{slug}" : undefined,
   label: "Starter Kits",
   slugField: "name",
   path: "content/starter-kit/*",

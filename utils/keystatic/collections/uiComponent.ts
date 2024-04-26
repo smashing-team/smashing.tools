@@ -14,7 +14,7 @@ import {
 
 export const uiComponent = collection({
   previewUrl:
-    process.env.NODE_ENV !== "production" ? "/ui-component/{slug}/" : undefined,
+    process.env.NODE_ENV !== "production" ? "/ui-component/{slug}" : undefined,
   label: "UI Components",
   slugField: "name",
   entryLayout: "form",

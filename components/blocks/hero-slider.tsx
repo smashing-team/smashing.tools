@@ -1,21 +1,17 @@
+"use client";
+
 import { motion, MotionConfig, useMotionValue } from "framer-motion";
 import type { Dispatch, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 
 const AUTO_DELAY = 1000 * 5;
 const DRAG_BUFFER = 10;
-type AstroImages = {
-  src: string;
-  width: number;
-  height: number;
-  format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif";
-}[];
 
 const Images = ({
   images,
   imgIndex,
 }: {
-  images: AstroImages;
+  images: string[];
   imgIndex: number;
 }) => {
   return (
@@ -25,14 +21,14 @@ const Images = ({
           <motion.div
             key={idx}
             style={{
-              backgroundImage: `url(${imgSrc.src})`,
+              backgroundImage: `url(${imgSrc})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
             animate={{
               scale: imgIndex === idx ? 1 : 0.75,
             }}
-            className="aspect-[16/10] w-full shrink-0 rounded-3xl  object-cover"
+            className="aspect-[16/10] w-full shrink-0 rounded-4xl bg-transparent object-cover"
           />
         );
       })}
@@ -45,7 +41,7 @@ const Dots = ({
   imgIndex,
   setImgIndex,
 }: {
-  images: AstroImages;
+  images: string[];
   imgIndex: number;
   setImgIndex: Dispatch<SetStateAction<number>>;
 }) => {
@@ -59,8 +55,8 @@ const Dots = ({
             onClick={() => setImgIndex(idx)}
             className={`size-3 rounded-full transition-colors ${
               idx === imgIndex
-                ? "bg-neutral-200 dark:bg-neutral-50"
-                : "bg-neutral-500 dark:bg-neutral-500"
+                ? "bg-neutral-500 dark:bg-neutral-50"
+                : "bg-neutral-200 dark:bg-neutral-500"
             }`}
           />
         );
@@ -69,7 +65,7 @@ const Dots = ({
   );
 };
 
-export const HeroSlider = ({ images = [] }: { images: AstroImages }) => {
+export const HeroSlider = ({ images = [] }: { images: string[] }) => {
   const [imgIndex, setImgIndex] = useState(0);
 
   const dragX = useMotionValue(0);
@@ -107,7 +103,7 @@ export const HeroSlider = ({ images = [] }: { images: AstroImages }) => {
 
   return (
     <MotionConfig transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}>
-      <div className="relative mx-2 mt-4 overflow-hidden rounded-3xl bg-white dark:bg-neutral-950 lg:mx-0">
+      <div className="relative mx-2 mt-4 overflow-hidden rounded-3xl bg-transparent lg:mx-0">
         <motion.div
           drag="x"
           dragConstraints={{
@@ -128,7 +124,9 @@ export const HeroSlider = ({ images = [] }: { images: AstroImages }) => {
 
         {/* <GradientEdges /> */}
       </div>
-      <Dots images={images} imgIndex={imgIndex} setImgIndex={setImgIndex} />
+      {images.length > 1 && (
+        <Dots images={images} imgIndex={imgIndex} setImgIndex={setImgIndex} />
+      )}
     </MotionConfig>
   );
 };

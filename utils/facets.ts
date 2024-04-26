@@ -1,9 +1,9 @@
 import type { CategoryPaths } from "@/consts";
 
-// import type { AllItems } from '../pages/[...category].astro';
-type AllItems = any;
 import {
+  AllItems,
   getAIFilters,
+  getAllItems,
   getDesignKitFilters,
   getDevFilters,
   getStarterKitFilters,
@@ -64,7 +64,9 @@ export function getFacets(
   items: AllItems,
   activeCategory: CategoryPaths,
   filterredFacets?: Facets,
-  searchParams: Record<string, (string | number)[]> = {}
+  searchParams: {
+    [key: string]: string | string[] | undefined;
+  } = {}
 ) {
   const facets: Facets = {};
 
@@ -73,9 +75,13 @@ export function getFacets(
       if (!facets[key]) facets[key] = [];
 
       // @ts-ignore <-- this is fine and safe
-      if (item.data.attrs?.[key]) {
+      if (item.entry.attrs?.[key]) {
         // @ts-ignore <-- this is fine and safe
-        const existingFilter = item.data.attrs[key];
+        const existingFilter = item.entry.attrs[key];
+
+        const check = Array.isArray(searchParams[key])
+          ? searchParams[key]
+          : [searchParams[key]];
         // array values
         if (Array.isArray(existingFilter)) {
           existingFilter.forEach((value) => {
@@ -87,7 +93,7 @@ export function getFacets(
               facets[key]?.push({
                 value,
                 count: 1,
-                checked: Boolean(searchParams[key]?.includes(value)),
+                checked: Boolean(check?.includes(value)),
                 disabled: false,
               });
             }
@@ -102,7 +108,7 @@ export function getFacets(
             facets[key]?.push({
               value: existingFilter,
               count: 1,
-              checked: Boolean(searchParams[key]?.includes(existingFilter)),
+              checked: Boolean(check?.includes(existingFilter)),
               disabled: false,
             });
           }

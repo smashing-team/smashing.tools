@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useCallback } from "react";
 
 import {
   Select,
@@ -8,31 +10,53 @@ import {
   SelectValue,
 } from "@/components/select";
 import type { Facets } from "@/utils/facets";
-import Query from "@/utils/query";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { IconCurrencyDollar } from "@tabler/icons-react";
 
 export function PricingFilter({
   facets,
-  currentUrl,
 }: {
   facets: Facets;
-  currentUrl: string;
 }): React.ReactElement {
-  const searchParams = Query.parseSearchParam(currentUrl);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string | null) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      if (value === null) {
+        params.delete(name);
+      } else {
+        params.set(name, value);
+      }
+
+      return params.toString();
+    },
+    [searchParams]
+  );
+
   return (
     <Select
       onValueChange={(value) => {
         if (value === "free+paid") {
-          Query.remove("pricing");
-        } else Query.set("pricing", value);
+          router.push(pathname + "?" + createQueryString("pricing", null));
+        } else {
+          router.push(pathname + "?" + createQueryString("pricing", value));
+        }
       }}
       defaultValue={
-        !searchParams.pricing
+        !searchParams.get("pricing")
           ? "free+paid"
-          : (searchParams.pricing[0] as string)
+          : searchParams.get("pricing") ?? "free+paid"
       }
     >
-      <SelectTrigger className="w-[150px]">
-        <SelectValue placeholder="Free + Paid" />
+      <SelectTrigger className="w-[164px] shadow-[rgba(0,_0,_0,_0.15)_0px_20px_40px_-12px] pr-4 hover:bg-zinc-50">
+        <div className="flex items-center">
+          <IconCurrencyDollar className="size-4 ml-1 mr-2 text-zinc-400" />
+          <SelectValue placeholder="Free + Paid" />
+        </div>
       </SelectTrigger>
       <SelectContent>
         <SelectItem key="free+paid" value="free+paid">
