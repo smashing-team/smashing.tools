@@ -42,7 +42,8 @@ export async function GridItemPost({ item }: { item: TPost }) {
       <div className="group relative rounded-2xl border border-sky-200/50 bg-sky-100/50 dark:border-transparent dark:bg-sky-900/20 shadow-[rgba(0,_0,_0,_0.15)_0px_20px_40px_-12px]">
         <div
           className={cn(
-            "absolute -inset-px rounded-2xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.sky.200),theme(colors.sky.200),theme(colors.sky.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.sky.950)]",
+            "absolute -inset-px rounded-2xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.sky.200),theme(colors.sky.200),theme(colors.sky.500))_border-box] group-hover:opacity-100",
+            "dark:[--quick-links-hover-bg:#022f3f]",
             "dark:[background:linear-gradient(var(--quick-links-hover-bg,theme(colors.sky.50)),var(--quick-links-hover-bg,theme(colors.sky.50)))_padding-box,linear-gradient(to_top,theme(colors.sky.800),theme(colors.sky.800),theme(colors.sky.500))_border-box]"
           )}
         ></div>

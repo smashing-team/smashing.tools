@@ -19,7 +19,8 @@ export function GridItemTool({
       <div className="group relative rounded-2xl border border-zinc-200 bg-white/50 dark:border-transparent dark:bg-zinc-800/30 shadow-[rgba(0,_0,_0,_0.15)_0px_20px_40px_-12px]">
         <div
           className={cn(
-            "absolute -inset-px rounded-2xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.300),theme(colors.zinc.300),theme(colors.zinc.500))_border-box] group-hover:opacity-100 dark:[--quick-links-hover-bg:theme(colors.zinc.800)]",
+            "absolute -inset-px rounded-2xl border-2 border-transparent opacity-0 transition-all [background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.300),theme(colors.zinc.300),theme(colors.zinc.500))_border-box] group-hover:opacity-100",
+            "dark:[--quick-links-hover-bg:theme(colors.zinc.800)]",
             "dark:[background:linear-gradient(var(--quick-links-hover-bg,theme(colors.zinc.50)),var(--quick-links-hover-bg,theme(colors.neutral.50)))_padding-box,linear-gradient(to_top,theme(colors.zinc.700),theme(colors.zinc.700),theme(colors.zinc.500))_border-box]"
           )}
         ></div>
