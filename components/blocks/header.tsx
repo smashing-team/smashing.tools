@@ -4,6 +4,7 @@ import { ModeToggle } from "@/components/blocks/mode-toggle";
 import { UserNav } from "@/components/blocks/user-nav";
 import { buttonVariants } from "@/components/button";
 import { useUser } from "@/components/providers/user";
+import { cn } from "@/utils/cn";
 import { IconLogin } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,7 +42,14 @@ export function Header() {
           {user ? (
             <UserNav user={user} />
           ) : (
-            <Link className={buttonVariants()} title="Login" href="/join">
+            <Link
+              className={cn(
+                buttonVariants(),
+                "shadow-[rgba(0,_0,_0,_0.15)_0px_20px_40px_-12px]"
+              )}
+              title="Login"
+              href="/join"
+            >
               <IconLogin className="me-2 size-4" />
               Sign in
             </Link>

@@ -29,10 +29,10 @@ export function Intro() {
       <div className="inline-block">
         <Link href="/">
           <Image
-            className="size-12"
+            className="size-16"
             src="/logo.svg"
-            width={40}
-            height={40}
+            width={80}
+            height={80}
             alt="Logo of smashing.tools"
             sizes="(min-width: 1024px) 20rem, (min-width: 640px) 16rem, 12rem"
           />
@@ -121,16 +121,16 @@ export function Intro() {
           className="flex-none"
           target="_blank"
         >
-          GitHub
+          GitHub repository
         </IconLink>
-        <IconLink
+        {/* <IconLink
           href="/rss.xml"
           target="_blank"
           icon={FeedIcon}
           className="flex-none"
         >
           RSS
-        </IconLink>
+        </IconLink> */}
       </div>
     </>
   );

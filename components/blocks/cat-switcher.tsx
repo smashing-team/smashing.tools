@@ -2,15 +2,11 @@
 
 import {
   IconArtboard,
-  IconCode,
   IconComponents,
   IconLayoutGrid,
-  IconPackages,
-  IconRobot,
   IconRocket,
   IconTerminal2,
 } from "@tabler/icons-react";
-import React from "react";
 
 import {
   Select,
@@ -21,11 +17,11 @@ import {
 } from "@/components/select";
 import type { CategoryPaths } from "@/consts";
 import { cn } from "@/utils/cn";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const iconClass = cn(
-  "size-4 text-zinc-400 group-hover:text-black/70 group-data-[active='on']:text-black/70 dark:group-hover:text-black/70 dark:group-data-[active='on']:text-white"
+  "size-4 text-zinc-400 group-hover:text-black/70 group-data-[active='on']:text-black/70 dark:group-hover:text-white dark:group-data-[active='on']:text-white"
 );
 
 const tabs = [

@@ -3,7 +3,6 @@ import type { CategoryPaths } from "@/consts";
 import {
   AllItems,
   getAIFilters,
-  getAllItems,
   getDesignKitFilters,
   getDevFilters,
   getStarterKitFilters,

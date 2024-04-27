@@ -1,9 +1,9 @@
 import { JoinLayout } from "@/components/join/join-layout";
 import { ArticleItem } from "@/components/join/mdx";
 import { getAllItems } from "@/utils/reader";
+import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
-import Image from "next/image";
 
 export default async function Join() {
   const items = await getAllItems();

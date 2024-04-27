@@ -1,13 +1,13 @@
-import { HeaderGradient } from "@/components/blocks/header-gradient";
-import { getAllItems, reader } from "@/utils/reader";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import { IconBrandGithub } from "@tabler/icons-react";
-import Link from "next/link";
 import { GridList } from "@/components/blocks/grid-list";
+import { HeaderGradient } from "@/components/blocks/header-gradient";
 import { CATEGORIES } from "@/consts";
-import { Metadata } from "next/types";
 import { constructMetadata } from "@/utils/metadata";
+import { getAllItems, reader } from "@/utils/reader";
+import { IconBrandGithub } from "@tabler/icons-react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Metadata } from "next/types";
 
 export async function generateMetadata({
   params: { slug },
@@ -49,9 +49,9 @@ export default async function ProfileDetail({ params: { slug } }: Props) {
       <div className="mx-auto size-full px-4">
         <div>
           <div className="relative z-10 mx-auto pb-4 pt-8">
-            <div className="relative block w-24 overflow-hidden">
+            <div className="relative block w-24">
               <Image
-                className="w-full rounded-full"
+                className="w-full rounded-full shadow-[rgba(0,_0,_0,_0.15)_0px_20px_40px_-12px]"
                 src={item.avatar}
                 alt={item.name}
                 width={200}

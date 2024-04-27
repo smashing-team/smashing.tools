@@ -8,9 +8,9 @@ export function SignUpForm() {
         title="Login"
         href="/api/auth/signin/github"
       >
-        <Button className="hover:bg-zinc-800/70">
+        <Button size="lg" className="hover:bg-zinc-800/70">
           <svg
-            className="me-2 size-4"
+            className="me-2 size-5"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"

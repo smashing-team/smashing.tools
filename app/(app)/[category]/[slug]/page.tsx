@@ -3,7 +3,10 @@ import { DocumentRenderer } from "@keystatic/core/renderer";
 import Image from "next/image";
 
 import { HeroSlider } from "@/components/blocks/hero-slider";
+import { ToolTags } from "@/components/blocks/tool-tags";
+import { buttonVariants } from "@/components/button";
 import { CATEGORIES, CategoryKeys } from "@/consts";
+import { constructMetadata } from "@/utils/metadata";
 import { getAllFilters, reader } from "@/utils/reader";
 import {
   IconArrowRight,
@@ -14,11 +17,8 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { twMerge } from "tailwind-merge";
-import { ToolTags } from "@/components/blocks/tool-tags";
 import { Metadata } from "next/types";
-import { constructMetadata } from "@/utils/metadata";
-import { buttonVariants } from "@/components/button";
+import { twMerge } from "tailwind-merge";
 
 export async function generateMetadata({
   params: { category, slug },

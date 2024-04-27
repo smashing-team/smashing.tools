@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /settings/
+Disallow: /bookmarks/
+
+Sitemap: https://smashing.tools/sitemap.xml
