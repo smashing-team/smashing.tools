@@ -1,0 +1,33 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for smashing.tools
+title: "✨ Feature: <short description>"
+labels:
+  - "type: feature request"
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for suggesting a feature. Please provide detailed information to help us understand and evaluate your proposal."
+  - type: input
+    attributes:
+      label: Feature Title
+      description: A concise title for the proposed feature
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Feature Description
+      description: Detailed description of the feature or enhancement
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Problem or Need
+      description: Describe the problem or need that this feature addresses
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposed Solution
+      description: Describe your proposed solution or idea for the feature
+    validations:
+      required: true

@@ -1,0 +1,15 @@
+name: 📝 Content Feedback
+description: Provide feedback or report issues in Markdown-formatted content
+title: "📝 Content Feedback: <short description>"
+labels:
+  - "type: content feedback"
+body:
+  - type: markdown
+    attributes:
+      value: "Thank you for taking the time to provide feedback on our content. Please fill out the following fields to help us understand and address the issue or suggestion."
+  - type: textarea
+    attributes:
+      label: Feedback Description
+      description: Describe your feedback or the issue with the content
+    validations:
+      required: true
