@@ -67,8 +67,8 @@ export function UserNav({ user }: { user: User }) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
-          onSelect={() => {
-            signout();
+          onSelect={async () => {
+            await signout();
           }}
         >
           Log out

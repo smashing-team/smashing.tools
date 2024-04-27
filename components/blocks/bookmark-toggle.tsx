@@ -34,7 +34,7 @@ export function BookmarkToggle({
       data-bookmark
       disabled={disabled}
       onClick={async () => {
-        toggle(collection, slug, isChecked);
+        await toggle(collection, slug, isChecked);
       }}
       aria-label="Bookmark"
       className="group absolute right-2 top-2 z-50 flex size-12 items-center justify-center rounded-md text-zinc-500 opacity-100 transition-all hover:scale-110 group-hover:opacity-100 data-[checked=true]:opacity-100 dark:text-zinc-400 lg:opacity-0"
