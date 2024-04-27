@@ -1,10 +1,12 @@
 import { GridList } from "@/components/blocks/grid-list";
 import { HeaderGradientProtected } from "@/components/blocks/header-gradient-protected";
+import { buttonVariants } from "@/components/button";
 import { CATEGORIES } from "@/consts";
 import { constructMetadata } from "@/utils/metadata";
 import { getAllItems } from "@/utils/reader";
 import { createClient } from "@/utils/supabase/server";
-import { IconBookmarksFilled } from "@tabler/icons-react";
+import { IconArrowLeft, IconBookmarksFilled } from "@tabler/icons-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export const metadata = constructMetadata({
@@ -12,7 +14,7 @@ export const metadata = constructMetadata({
   description: "Your bookmarks on smashing.tools",
 });
 
-export default async function ProfileDetail() {
+export default async function BookmarksPage() {
   const supabase = createClient();
   const {
     data: { user },
@@ -58,20 +60,18 @@ export default async function ProfileDetail() {
             items={creatorItems}
           />
         ) : (
-          <div className="flex flex-col items-center">
-            <span className="mb-6 mt-10 inline-flex size-14 items-center justify-center rounded-full bg-zinc-100 ring-8 ring-zinc-50 dark:bg-zinc-800 dark:ring-zinc-900">
-              <IconBookmarksFilled className="size-7 text-zinc-500" />
+          <div className="flex flex-col items-center mb-12">
+            <span className="mb-6 mt-10 inline-flex size-14 items-center justify-center rounded-full bg-zinc-100 ring-8 ring-yellow-400 dark:bg-zinc-800 dark:ring-yellow-800">
+              <IconBookmarksFilled className="size-7 text-yellow-500 dark:text-yellow-500" />
             </span>
             <>
-              <p className="text-zinc-500">
+              <p className="text-zinc-500 mb-4">
                 You haven&apos;t bookmarked any tool yet.
               </p>
-              <a
-                className="text-indigo-600 underline dark:text-indigo-400"
-                href="/"
-              >
-                Explore the tools!
-              </a>
+              <Link href="/" className={buttonVariants({ variant: "outline" })}>
+                <IconArrowLeft className="size-4 mr-2" />
+                Back to home
+              </Link>
             </>
           </div>
         )}

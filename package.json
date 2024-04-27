@@ -10,6 +10,7 @@
     "prebuild": "supabase gen types typescript --linked --schema public > ./database.d.ts && eslint --fix ./database.d.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-ses": "^3.564.0",
     "@keystatic/core": "^0.5.12",
     "@keystatic/next": "^5.0.0",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -37,6 +38,7 @@
     "lucide-react": "^0.373.0",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
+    "nodemailer": "^6.9.13",
     "query-string": "^9.0.0",
     "react": "^18",
     "react-dom": "^18",
@@ -48,6 +50,7 @@
   },
   "devDependencies": {
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.14",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",

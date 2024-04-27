@@ -22,12 +22,12 @@
 - [x] robots.txt
 - [x] sitemap.xml
 - [x] 404 page recoloring
-- [ ] (protected) bookmark list page
-- [ ] (protected) settings page (aws ses for email)
+- [x] (protected) bookmark list page
+- [x] (protected) settings page (aws ses for email)
+- [x] review server action calls from client
 - [ ] add old widget page
 - [ ] remove logs
 - [ ] analytics (posthog, umami)
-- [ ] review server action calls from client
 - [ ] add bookmark buton to the tool page
 - [ ] **_/_**
 - [ ] bookmarks page filters by category
