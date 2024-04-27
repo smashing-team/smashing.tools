@@ -25,11 +25,12 @@ export function FiltersDrawer({
   const pathname = usePathname();
   const facetEntries = Object.entries(facets || {});
   const filtered = facetEntries.some(([_, values]) =>
-    values?.some((val) => val.checked)
+    values?.some((val) => val.checked && _ !== "pricing")
   );
   const filteredValueCount = facetEntries.reduce(
     (acc, [_, values]) =>
-      acc + (values?.filter((val) => val.checked).length || 0),
+      acc +
+      (values?.filter((val) => val.checked && _ !== "pricing").length || 0),
     0
   );
   return (
@@ -64,12 +65,12 @@ export function FiltersDrawer({
           )}
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="max-h-[90%] max-w-xl mx-auto">
+      <DrawerContent className="max-h-[90%] max-w-3xl mx-auto">
         <div className="h-full overflow-y-auto">
-          <div className="mx-auto max-w-sm md:max-w-lg">
-            <DrawerHeader>
-              <DrawerTitle>Filters</DrawerTitle>
-            </DrawerHeader>
+          <div className="mx-auto max-w-sm md:max-w-3xl">
+            {/* <DrawerHeader> */}
+            {/* <DrawerTitle>Filters</DrawerTitle> */}
+            {/* </DrawerHeader> */}
             <div className="p-4">
               {facetEntries?.map(([facet, values]) =>
                 facet !== "pricing" ? (
@@ -88,7 +89,7 @@ export function FiltersDrawer({
                 ) : null
               )}
             </div>
-            <DrawerFooter>
+            <DrawerFooter className="sticky bottom-0 w-full bg-white/70 dark:bg-white/5 backdrop-blur-sm border-t border-t-zinc-100 dark:border-t-transparent">
               <div className="flex items-center gap-2">
                 {filtered && (
                   <Button

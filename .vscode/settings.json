@@ -11,8 +11,7 @@
     "javascript",
     "javascriptreact",
     "typescript",
-    "typescriptreact",
-    "astro"
+    "typescriptreact"
   ],
   "files.associations": {
     "*.mdoc": "markdown"

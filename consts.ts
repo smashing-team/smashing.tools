@@ -1,6 +1,6 @@
 export const SITE_TITLE = "smashing.tools";
 export const SITE_DESCRIPTION =
-  "A curated collection of the best starter kits, UI components, design kits, AI & Dev tools.";
+  "Curated best starter kits, UI components, design kits, AI & Dev tools";
 export const EMAIL_FROM = "smashing.tools <hi@smashing.tools>";
 export const NEWSLETTER_CONFIRM_RESEND_INTERVAL_MINUTES = 2;
 export const CATEGORIES = [

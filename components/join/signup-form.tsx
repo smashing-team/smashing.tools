@@ -1,13 +1,12 @@
-import { Button } from '@/components/button';
+import { Button } from "@/components/button";
 
 export function SignUpForm() {
   return (
     <div className="flex items-center gap-4">
       <a
-        data-astro-prefetch="false"
         className="flex items-center"
         title="Login"
-        href="/api/auth/signin/github/"
+        href="/api/auth/signin/github"
       >
         <Button>
           <svg

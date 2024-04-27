@@ -6,6 +6,24 @@ import { IconBrandGithub } from "@tabler/icons-react";
 import Link from "next/link";
 import { GridList } from "@/components/blocks/grid-list";
 import { CATEGORIES } from "@/consts";
+import { Metadata } from "next/types";
+import { constructMetadata } from "@/utils/metadata";
+
+export async function generateMetadata({
+  params: { slug },
+}: Props): Promise<Metadata> {
+  const item = await reader.collections.profile.read(slug);
+
+  if (!item) {
+    return notFound();
+  }
+
+  return constructMetadata({
+    title: `${item?.name} - smashing.tools`,
+    description: `${item.name} - ${item.bio}`,
+    canonical: `profile/${slug}`,
+  });
+}
 
 type Props = {
   params: { slug: string };
@@ -45,7 +63,7 @@ export default async function ProfileDetail({ params: { slug } }: Props) {
                 {item.name}
               </h1>
               {item.bio && (
-                <p className="text-base text-zinc-500 dark:text-zinc-400">
+                <p className="text-base !mt-1 text-zinc-500 dark:text-zinc-400">
                   {item.bio}
                 </p>
               )}
@@ -101,7 +119,7 @@ export default async function ProfileDetail({ params: { slug } }: Props) {
             </div>
           </div>
         </div>
-        <main className="mt-4" data-pagefind-ignore>
+        <main className="mt-4">
           {creatorItems.length ? (
             <div className="mb-10">
               <h2 className="mb-4 text-lg text-zinc-700 dark:text-zinc-100 font-semibold  ">

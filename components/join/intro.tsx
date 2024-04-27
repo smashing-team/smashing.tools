@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { IconLink } from './icon-link';
-import { SignUpForm } from './signup-form';
+import { IconLink } from "./icon-link";
+import { SignUpForm } from "./signup-form";
 import Image from "next/image";
 
-function GitHubIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+function GitHubIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor" {...props}>
       <path d="M8 .198a8 8 0 0 0-8 8 7.999 7.999 0 0 0 5.47 7.59c.4.076.547-.172.547-.384 0-.19-.007-.694-.01-1.36-2.226.482-2.695-1.074-2.695-1.074-.364-.923-.89-1.17-.89-1.17-.725-.496.056-.486.056-.486.803.056 1.225.824 1.225.824.714 1.224 1.873.87 2.33.666.072-.518.278-.87.507-1.07-1.777-.2-3.644-.888-3.644-3.954 0-.873.31-1.586.823-2.146-.09-.202-.36-1.016.07-2.118 0 0 .67-.214 2.2.82a7.67 7.67 0 0 1 2-.27 7.67 7.67 0 0 1 2 .27c1.52-1.034 2.19-.82 2.19-.82.43 1.102.16 1.916.08 2.118.51.56.82 1.273.82 2.146 0 3.074-1.87 3.75-3.65 3.947.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.14.46.55.38A7.972 7.972 0 0 0 16 8.199a8 8 0 0 0-8-8Z" />
@@ -11,7 +11,7 @@ function GitHubIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   );
 }
 
-function FeedIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+function FeedIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (
     <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor" {...props}>
       <path
@@ -27,7 +27,7 @@ export function Intro() {
   return (
     <>
       <div className="inline-block">
-        <Link href="/" data-astro-prefetch="false">
+        <Link href="/">
           <Image
             className="size-12"
             src="/logo.svg"
@@ -60,7 +60,7 @@ export function Intro() {
                 <path d="M12 6a4 4 0 0 1 4 4v11a1 1 0 0 1 -1.514 .857l-4.486 -2.691l-4.486 2.691a1 1 0 0 1 -1.508 -.743l-.006 -.114v-11a4 4 0 0 1 4 -4h4z" />
                 <path d="M16 2a4 4 0 0 1 4 4v11a1 1 0 0 1 -2 0v-11a2 2 0 0 0 -2 -2h-5a1 1 0 0 1 0 -2h5z" />
               </svg>
-              Bookmarks.{' '}
+              Bookmarks.{" "}
             </dt>
             <dd className="inline">
               Save your favorite tools and resources to your personal
@@ -82,7 +82,7 @@ export function Intro() {
                 ></path>
                 <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 0 1-3 0V6.75Z"></path>
               </svg>
-              Newsletter.{' '}
+              Newsletter.{" "}
             </dt>
             <dd className="inline">
               Ability to subscribe to our weekly newsletter and receive updates
@@ -103,7 +103,7 @@ export function Intro() {
                   clipRule="evenodd"
                 />
               </svg>
-              And more...{' '}
+              And more...{" "}
             </dt>
             <dd className="inline">
               We are working on more features to make your experience better.

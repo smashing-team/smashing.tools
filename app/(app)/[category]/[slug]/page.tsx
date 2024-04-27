@@ -16,6 +16,30 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { ToolTags } from "@/components/blocks/tool-tags";
+import { Metadata } from "next/types";
+import { constructMetadata } from "@/utils/metadata";
+import { buttonVariants } from "@/components/button";
+
+export async function generateMetadata({
+  params: { category, slug },
+}: Props): Promise<Metadata> {
+  const activeCategory = CATEGORIES.find((c) => c.slug === `/${category}`)!;
+
+  const item = await reader.collections[
+    activeCategory.collection as CategoryKeys
+  ].read(slug);
+
+  if (!item) {
+    return notFound();
+  }
+
+  return constructMetadata({
+    title: `${item?.name} - smashing.tools`,
+    description: `${item.name} - ${item.headline}`,
+    image: `og/${slug}.png`,
+    canonical: `${category}/${slug}`,
+  });
+}
 
 type Props = {
   params: { category: string; slug: string };
@@ -89,16 +113,11 @@ export default async function ToolDetail({
               )}
             </div>
             <div className="mt-6 text-left">
-              <h1
-                className="text-2xl font-medium text-zinc-900 dark:text-zinc-50"
-                data-pagefind-meta="name"
-              >
-                {item.name}
+              <h1 className="text-2xl font-medium text-zinc-900 dark:text-zinc-50">
+                {item.name}{" "}
+                <span className="sr-only">by {makerData?.name}</span>
               </h1>
-              <p
-                data-pagefind-meta="headline"
-                className="mt-3 text-lg font-normal text-zinc-700 dark:text-zinc-200"
-              >
+              <p className="mt-1.5 text-lg font-normal text-zinc-700 dark:text-zinc-200">
                 {item.headline}
               </p>
 
@@ -140,7 +159,7 @@ export default async function ToolDetail({
                         <p className="text-[10px] font-medium text-zinc-500 transition-colors group-hover:text-zinc-700 dark:group-hover:text-zinc-400">
                           Crafted by
                         </p>
-                        <p className="text-xs font-medium text-zinc-400 transition-colors group-hover:text-zinc-950 group-hover:underline dark:group-hover:text-zinc-50">
+                        <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-colors group-hover:text-zinc-950 group-hover:underline dark:group-hover:text-zinc-50">
                           {makerData.name}
                         </p>
                       </div>
@@ -154,15 +173,15 @@ export default async function ToolDetail({
                         className="inline-block size-7 rounded-full"
                         src={publisherData!.avatar}
                         alt={publisherData!.name}
-                        width={28}
-                        height={28}
+                        width={36}
+                        height={36}
                       />
                     </div>
                     <div className="ml-2">
                       <p className="text-[10px] font-medium text-zinc-500 transition-colors group-hover:text-zinc-700 dark:group-hover:text-zinc-400">
                         Published by
                       </p>
-                      <p className="text-xs font-medium text-zinc-400 transition-colors group-hover:text-zinc-950 group-hover:underline dark:group-hover:text-zinc-50">
+                      <p className="text-xs font-medium text-zinc-700 dark:text-zinc-300 transition-colors group-hover:text-zinc-950 group-hover:underline dark:group-hover:text-zinc-50">
                         {publisherData!.name}
                       </p>
                     </div>
@@ -172,7 +191,6 @@ export default async function ToolDetail({
             </div>
             <section className="mt-8">
               <ul
-                data-pagefind-ignore
                 role="list"
                 className="mt-4 flex items-center gap-4 text-base font-medium leading-7"
               >
@@ -180,7 +198,7 @@ export default async function ToolDetail({
                   <Link
                     target="_blank"
                     href={websiteUrl.toString()}
-                    className="flex items-center rounded-3xl bg-zinc-50 px-4 py-3 text-base font-semibold text-zinc-900 shadow-sm ring-1 ring-inset ring-zinc-300 hover:bg-zinc-100/75 dark:ring-zinc-100 dark:hover:bg-white/95"
+                    className="flex items-center rounded-3xl bg-zinc-50 px-5 h-12 text-base font-medium text-zinc-900 ring-inset border border-zinc-300 hover:bg-zinc-100/75 dark:border-zinc-100 dark:hover:bg-white/95 shadow-xl"
                   >
                     <IconExternalLink className="relative -left-0.5 mr-1.5 size-5 text-zinc-400 dark:text-zinc-800" />
                     Website
@@ -191,26 +209,10 @@ export default async function ToolDetail({
                     <Link
                       target="_blank"
                       href={repoUrl.toString()}
-                      className="flex items-center rounded-3xl px-4 py-3 text-base font-semibold hover:bg-zinc-100/75  dark:hover:bg-white/5"
+                      className={buttonVariants({ variant: "link" })}
                     >
                       <IconBrandGithub className="relative -left-0.5 mr-1.5 size-5" />
                       Repository
-                    </Link>
-                  </li>
-                )}
-                {prevUrl && (
-                  <li>
-                    <Link
-                      target="_blank"
-                      href={prevUrl.toString()}
-                      className="flex items-center rounded-3xl px-4 py-3 text-base font-semibold hover:bg-zinc-100/75  dark:hover:bg-white/5"
-                    >
-                      {prevUrl.toString().includes("figma") ? (
-                        <IconBrandFigma className="relative -left-0.5 mr-1.5 size-5" />
-                      ) : (
-                        <IconExternalLink className="relative -left-0.5 mr-1.5 size-5" />
-                      )}
-                      Preview
                     </Link>
                   </li>
                 )}
@@ -219,15 +221,31 @@ export default async function ToolDetail({
                     <Link
                       target="_blank"
                       href={item.buyLink.toString()}
-                      className="relative inline-flex items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500"
+                      className="relative inline-flex items-center justify-center px-5 h-12 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group hover:ring-1 hover:ring-purple-500"
                     >
-                      <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>
+                      <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700 pointer-events-none"></span>
                       <span className="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
                       <span className="relative text-white flex items-center">
                         <IconShoppingCart className="relative -left-0.5 mr-1.5 size-5" />{" "}
                         Buy now
                         <IconArrowRight className="ml-1.5 size-5" />
                       </span>
+                    </Link>
+                  </li>
+                )}
+                {prevUrl && (
+                  <li>
+                    <Link
+                      target="_blank"
+                      href={prevUrl.toString()}
+                      className={buttonVariants({ variant: "link" })}
+                    >
+                      {prevUrl.toString().includes("figma") ? (
+                        <IconBrandFigma className="relative -left-0.5 mr-1.5 size-5" />
+                      ) : (
+                        <IconExternalLink className="relative -left-0.5 mr-1.5 size-5" />
+                      )}
+                      Preview
                     </Link>
                   </li>
                 )}

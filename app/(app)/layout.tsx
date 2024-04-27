@@ -57,9 +57,9 @@ export default function RootLayout({
               </span>
             </p>
           </div>
-          <div className="pointer-events-none bg-white dark:bg-black fixed bottom-0 left-0 h-32 [mask-image:linear-gradient(transparent,#000000)] w-full "></div>
+          <div className="pointer-events-none bg-white dark:bg-black fixed bottom-0 left-0 h-28 [mask-image:linear-gradient(transparent,#000000)] w-full "></div>
         </ThemeProvider>
-        <DebugIndicator {...metadata} />
+        <DebugIndicator />
       </body>
     </html>
   );

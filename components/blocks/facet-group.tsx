@@ -12,18 +12,18 @@ const FilterSection: React.FC<Props> = ({ title, children }) => {
   return (
     <section className="mb-4">
       <div className="relative">
-        <div className="absolute inset-0 flex items-center" aria-hidden="true">
+        {/* <div className="absolute inset-0 flex items-center" aria-hidden="true">
           <div className="w-full border-t border-zinc-100 dark:border-zinc-600/10"></div>
-        </div>
+        </div> */}
         <div className="relative flex justify-start">
-          <span className=" bg-white pr-2 text-sm font-semibold text-zinc-500 first-letter:uppercase  dark:bg-zinc-950 dark:text-zinc-400">
+          <span className="bg-white pr-2 text-sm font-semibold text-zinc-700 first-letter:uppercase dark:bg-zinc-950 dark:text-zinc-300">
             {getFilterLabel(title)}
           </span>
         </div>
       </div>
       <ul
         role="list"
-        className="mt-1 flex flex-wrap gap-0.5 text-base font-medium leading-7 text-slate-700 lg:flex-row"
+        className="mt-2 flex flex-wrap gap-0.5 text-base font-medium leading-7 text-slate-700 lg:flex-row"
       >
         {children}
       </ul>

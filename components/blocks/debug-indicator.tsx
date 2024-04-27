@@ -1,25 +1,10 @@
-import { constructMetadata } from "@/utils/metadata";
-import Link from "next/link";
-import React from "react";
-
-type PageMetaData = ReturnType<typeof constructMetadata>;
-
-export function DebugIndicator(props: PageMetaData): React.ReactElement {
+export function DebugIndicator() {
   if (process.env.NODE_ENV !== "development") {
     return <></>;
   }
 
   return (
-    <div className="fixed hover:bg-zinc-800 hover:text-white opacity-15 hover:opacity-100 bottom-0 right-0 z-50 flex items-center gap-4 justify-center rounded-tl-lg p-3 font-mono text-xs">
-      <div>
-        <strong>og:</strong>{" "}
-        <Link href={props.openGraph?.images.toString()} target="_blank">
-          {props.openGraph?.images.toString()}
-        </Link>
-      </div>
-      <div>
-        <strong>canonical:</strong> {props.alternates?.canonical?.toString()}
-      </div>
+    <div className="fixed hover:bg-zinc-800 hover:text-white opacity-40 hover:opacity-100 bottom-0 right-0 z-50 flex items-center gap-4 justify-center rounded-tl-lg p-3 font-mono text-xs tracking-tight">
       <strong>
         <div className="block sm:hidden">xs</div>
         <div className="hidden sm:block md:hidden lg:hidden xl:hidden 2xl:hidden 3xl:hidden">

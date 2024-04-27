@@ -5,23 +5,24 @@ import { Metadata } from "next";
 export function constructMetadata({
   title = SITE_TITLE,
   description = SITE_DESCRIPTION,
-  image = `${getBaseUrl()}/og.png`,
-  canonical = getBaseUrl(),
+  image = `og.png`,
+  canonical,
 }: {
   title?: string;
   description?: string;
   canonical?: string;
   image?: string | null;
 } = {}) {
+  const canonicalUrl = canonical
+    ? new URL(`${getBaseUrl()}/${canonical}`)
+    : getBaseUrl();
   return {
     title,
     description,
     applicationName: "smashing.tools",
-    keywords:
-      "smashing tools, design tools, development tools, starter kits, design kits, ui components, ai tools, dev tools",
     robots: "index, follow",
     alternates: {
-      canonical,
+      canonical: canonicalUrl,
       types: {
         "application/rss+xml": [{ url: "/rss.xml", title: "RSS" }],
       },
@@ -39,7 +40,9 @@ export function constructMetadata({
     openGraph: {
       title,
       description,
-      images: image ? new URL(image) : [],
+      type: "website",
+      url: canonicalUrl,
+      images: image ? new URL(`${getBaseUrl()}/${image}`) : [],
     },
     twitter: {
       title,

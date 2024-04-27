@@ -28,6 +28,8 @@ export function UserNav({ user }: { user: User }) {
             <AvatarImage
               src={user?.user_metadata.avatar_url}
               alt={user?.user_metadata.user_name}
+              width={44}
+              height={44}
             />
             <AvatarFallback className="text-xs">
               {user?.user_metadata.full_name

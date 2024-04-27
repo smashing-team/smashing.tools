@@ -1,11 +1,13 @@
 "use client";
 
 import {
-  IconBrush,
+  IconArtboard,
   IconCode,
+  IconComponents,
   IconLayoutGrid,
-  IconPackage,
+  IconPackages,
   IconRobot,
+  IconRocket,
   IconTerminal2,
 } from "@tabler/icons-react";
 import React from "react";
@@ -38,7 +40,7 @@ const tabs = [
     name: "Starter Kits",
     href: "/starter-kit",
     category: "/starter-kit",
-    icon: <IconCode className={iconClass} />,
+    icon: <IconRocket className={iconClass} />,
     classes: "bg-yellow-600/20 dark:bg-yellow-700",
     textClasses: 'dark:group-data-[active="on"]:text-red-500',
   },
@@ -46,7 +48,7 @@ const tabs = [
     name: "Design Kits",
     href: "/design-kit",
     category: "/design-kit",
-    icon: <IconBrush className={iconClass} />,
+    icon: <IconArtboard className={iconClass} />,
     classes: "bg-purple-600/20 dark:bg-purple-800",
     textClasses: 'dark:group-data-[active="on"]text-yellow-800',
   },
@@ -54,7 +56,7 @@ const tabs = [
     name: "UI Components",
     href: "/ui-component",
     category: "/ui-component",
-    icon: <IconPackage className={iconClass} />,
+    icon: <IconComponents className={iconClass} />,
     classes: "bg-blue-600/20 dark:bg-blue-800",
     textClasses: 'dark:group-data-[active="on"]text-yellow-800',
   },
@@ -62,7 +64,27 @@ const tabs = [
     name: "AI tools",
     href: "/ai",
     category: "/ai",
-    icon: <IconRobot className={iconClass} />,
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={iconClass}
+      >
+        <path d="M12 8V4H8" />
+        <rect width="16" height="12" x="4" y="8" rx="2" />
+        <path d="M2 14h2" />
+        <path d="M20 14h2" />
+        <path d="M15 13v2" />
+        <path d="M9 13v2" />
+      </svg>
+    ),
     classes: "bg-red-600/20 dark:bg-red-800",
     textClasses: 'dark:group-data-[active="on"]text-yellow-800',
   },
