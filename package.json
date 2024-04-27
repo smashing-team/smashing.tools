@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prebuild": "supabase gen types typescript --linked --schema public > ./database.d.ts && eslint --fix ./database.d.ts"
   },
   "dependencies": {
     "@keystatic/core": "^0.5.12",

@@ -1,18 +1,15 @@
+"use client";
+
 import { ModeToggle } from "@/components/blocks/mode-toggle";
 import { UserNav } from "@/components/blocks/user-nav";
 import { buttonVariants } from "@/components/button";
-import { createClient } from "@/utils/supabase/server";
+import { useUser } from "@/components/providers/user";
 import { IconLogin } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
-export async function Header() {
-  const supabase = createClient();
-  const {
-    data: { user },
-    error,
-  } = await supabase.auth.getUser();
+export function Header() {
+  const { user } = useUser();
 
   return (
     <header className="mt-5 min-h-16">

@@ -1,11 +1,11 @@
+import { BookmarkToggle } from "@/components/blocks/bookmark-toggle";
 import { getCategoryTitle } from "@/consts";
+import { cn } from "@/utils/cn";
 import { AllItems } from "@/utils/reader";
-import { BookmarkIcon } from "lucide-react";
-import React from "react";
-import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/utils/cn";
+import React from "react";
+import { twMerge } from "tailwind-merge";
 
 export function GridItemTool({
   item,
@@ -25,16 +25,7 @@ export function GridItemTool({
           )}
         ></div>
 
-        <button
-          data-collection={item.collection}
-          data-value={item.slug}
-          data-checked={isChecked.toString()}
-          data-bookmark
-          aria-label="Bookmark"
-          className="group absolute right-2 top-2 z-50 flex size-12 items-center justify-center rounded-md text-zinc-500 opacity-100 transition-all hover:scale-110 group-hover:opacity-100 data-[checked=true]:opacity-100 dark:text-zinc-400 lg:opacity-0"
-        >
-          <BookmarkIcon />
-        </button>
+        <BookmarkToggle collection={item.collection} slug={item.slug} />
 
         <div className="relative overflow-hidden rounded-md p-6">
           <div className="relative inline-block">

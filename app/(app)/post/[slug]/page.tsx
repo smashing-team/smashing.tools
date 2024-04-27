@@ -1,33 +1,24 @@
 import { HeaderGradient } from "@/components/blocks/header-gradient";
-import { DocumentRenderer } from "@keystatic/core/renderer";
-import Image from "next/image";
-
 import { HeroSlider } from "@/components/blocks/hero-slider";
-import { CATEGORIES, CategoryKeys } from "@/consts";
-import { getAllFilters, reader } from "@/utils/reader";
+import { constructMetadata } from "@/utils/metadata";
+import { reader } from "@/utils/reader";
+import { DocumentRenderer } from "@keystatic/core/renderer";
 import {
   IconArrowRight,
-  IconBrandFigma,
-  IconBrandGithub,
+  IconConfetti,
   IconExternalLink,
   IconShoppingCart,
 } from "@tabler/icons-react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { twMerge } from "tailwind-merge";
-import { ToolTags } from "@/components/blocks/tool-tags";
 import { Metadata } from "next/types";
-import { constructMetadata } from "@/utils/metadata";
-import { buttonVariants } from "@/components/button";
+import { twMerge } from "tailwind-merge";
 
 export async function generateMetadata({
-  params: { category, slug },
+  params: { slug },
 }: Props): Promise<Metadata> {
-  const activeCategory = CATEGORIES.find((c) => c.slug === `/${category}`)!;
-
-  const item = await reader.collections[
-    activeCategory.collection as CategoryKeys
-  ].read(slug);
+  const item = await reader.collections.post.read(slug);
 
   if (!item) {
     return notFound();
@@ -36,31 +27,37 @@ export async function generateMetadata({
   return constructMetadata({
     title: `${item?.name} - smashing.tools`,
     description: `${item.name} - ${item.headline}`,
-    image: `og?category=${category}&slug=${slug}`,
-    canonical: `${category}/${slug}`,
+    canonical: `post/${slug}`,
   });
 }
 
 type Props = {
-  params: { category: string; slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: { slug: string };
 };
-export default async function ToolDetail({
-  params: { category, slug },
-  searchParams,
-}: Props) {
-  const activeCategory = CATEGORIES.find((c) => c.slug === `/${category}`)!;
-
-  const item = await reader.collections[
-    activeCategory.collection as CategoryKeys
-  ].read(slug);
+export default async function PostDetail({ params: { slug } }: Props) {
+  const item = await reader.collections.post.read(slug);
 
   if (!item) {
     return notFound();
   }
 
-  const publisherData = await reader.collections.profile.read(item.publisher);
-  const makerData = await reader.collections.profile.read(item.maker);
+  let relatedItem;
+
+  if (item.designKit) {
+    relatedItem = await reader.collections.designKit.read(item.designKit);
+  } else if (item.uiComponent) {
+    relatedItem = await reader.collections.uiComponent.read(item.uiComponent);
+  } else if (item.starterKit) {
+    relatedItem = await reader.collections.starterKit.read(item.starterKit);
+  } else if (item.dev) {
+    relatedItem = await reader.collections.dev.read(item.dev);
+  } else if (item.ai) {
+    relatedItem = await reader.collections.ai.read(item.ai);
+  }
+
+  if (!relatedItem) {
+    return notFound();
+  }
 
   const heroSliderImages = (item.heroSlider || [])
     ?.filter((image) => image.discriminant === "heroSlider")
@@ -68,22 +65,13 @@ export default async function ToolDetail({
       return slide.value.image;
     }) as string[];
 
-  const hasDarkLogo = !!item.logoDark;
+  const hasDarkLogo = !!relatedItem.logoDark;
+  const buyUrl = relatedItem.buyLink;
+  const publisherData = await reader.collections.profile.read(item.publisher);
+  const makerData = await reader.collections.profile.read(relatedItem.maker);
 
-  const websiteUrl = new URL(item.url);
-  websiteUrl.searchParams.append("ref", "smashing.tools");
-
-  // @ts-ignore
-  const repoUrl = item?.repositoryUrl ? new URL(item.repositoryUrl) : undefined;
-  repoUrl?.searchParams.append("ref", "smashing.tools");
-
-  // @ts-ignore
-  const prevUrl = item.previewUrl ? new URL(item.previewUrl) : undefined;
-  prevUrl?.searchParams.append("ref", "smashing.tools");
-
-  const allTags = (Object.entries(item.attrs) as [string, string[]][])
-    .map(([key, value]) => value?.map((v) => [key, v]))
-    .flat();
+  const readmore = new URL(item.readmoreUrl || "");
+  readmore.searchParams.append("ref", "smashing.tools");
 
   return (
     <div>
@@ -97,16 +85,16 @@ export default async function ToolDetail({
                   "w-full",
                   hasDarkLogo && "block dark:hidden"
                 )}
-                src={item.logo}
-                alt={item.name}
+                src={relatedItem.logo}
+                alt={relatedItem.name}
                 width={200}
                 height={200}
               />
-              {item.logoDark && (
+              {relatedItem.logoDark && (
                 <Image
                   className="hidden w-full dark:block"
-                  src={item.logoDark}
-                  alt={item.name}
+                  src={relatedItem.logoDark}
+                  alt={relatedItem.name}
                   width={200}
                   height={200}
                 />
@@ -123,27 +111,21 @@ export default async function ToolDetail({
               <div className="mt-4 flex flex-wrap gap-2">
                 <span
                   className={twMerge(
-                    "inline-flex items-center rounded-lg bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ring-zinc-500/10 dark:bg-zinc-400/10 dark:text-zinc-400 dark:ring-zinc-400/20",
-                    activeCategory.category === "ui-component" &&
-                      "dark:bg-blue-400/10 dark:text-blue-400 dark:ring-blue-400/30 bg-blue-50 text-blue-700 ring-blue-700/10",
-                    activeCategory.category === "design-kit" &&
-                      "dark:bg-purple-400/10 dark:text-purple-400 dark:ring-purple-400/30 bg-purple-50 text-purple-700 ring-purple-700/10",
-                    activeCategory.category === "starter-kit" &&
-                      "dark:bg-yellow-400/10 dark:text-yellow-500 dark:ring-yellow-400/20 bg-yellow-50 text-yellow-800 ring-yellow-600/20",
-                    activeCategory.category === "ai" &&
-                      "dark:bg-red-400/10 dark:text-red-500 dark:ring-red-400/20 bg-red-50 text-red-800 ring-red-600/20",
-                    activeCategory.category === "dev" &&
-                      "dark:bg-green-400/10 dark:text-green-500 dark:ring-green-400/20 bg-green-50 text-green-800 ring-green-600/20"
+                    "inline-flex items-center rounded-lg bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ",
+                    "bg-yellow-400 text-yellow-950 ring-yellow-500"
                   )}
                 >
-                  {activeCategory.title}
+                  <IconConfetti className="mr-1 size-3.5" />
+                  {item.postType}
                 </span>
-                <ToolTags allTags={allTags} allFilters={getAllFilters()} />
               </div>
 
               <div data-people className="flex items-center space-x-6">
                 {makerData && (
-                  <Link className="group" href={`/profile/${item.maker}`}>
+                  <Link
+                    className="group"
+                    href={`/profile/${relatedItem.maker}`}
+                  >
                     <div className="mt-6 flex items-center">
                       <div>
                         <Image
@@ -196,58 +178,13 @@ export default async function ToolDetail({
                 <li>
                   <Link
                     target="_blank"
-                    href={websiteUrl.toString()}
+                    href={readmore.toString() || relatedItem.url.toString()}
                     className="flex items-center rounded-3xl bg-zinc-50 dark:bg-white px-5 h-12 text-base font-medium text-zinc-900 ring-inset border border-zinc-300 hover:bg-zinc-100/75 dark:border-zinc-100 dark:hover:bg-white/90 shadow-xl"
                   >
                     <IconExternalLink className="relative -left-0.5 mr-1.5 size-5 text-zinc-400 dark:text-zinc-800" />
-                    Website
+                    Read more
                   </Link>
                 </li>
-                {item.buyLink && (
-                  <li>
-                    <Link
-                      target="_blank"
-                      href={item.buyLink.toString()}
-                      className="relative inline-flex items-center justify-center px-5 h-12 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group"
-                    >
-                      <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700 pointer-events-none"></span>
-                      <span className="absolute bottom-0 right-0 block w-64 h-64 mb-32 mr-4 transition duration-500 origin-bottom-left transform rotate-45 translate-x-24 bg-pink-500 rounded-full opacity-30 group-hover:rotate-90 ease"></span>
-                      <span className="relative text-white flex items-center">
-                        <IconShoppingCart className="relative -left-0.5 mr-1.5 size-5" />{" "}
-                        Buy now
-                        <IconArrowRight className="ml-1.5 size-5" />
-                      </span>
-                    </Link>
-                  </li>
-                )}
-                {repoUrl && (
-                  <li>
-                    <Link
-                      target="_blank"
-                      href={repoUrl.toString()}
-                      className={buttonVariants({ variant: "link" })}
-                    >
-                      <IconBrandGithub className="relative -left-0.5 mr-1.5 size-5" />
-                      Repository
-                    </Link>
-                  </li>
-                )}
-                {prevUrl && (
-                  <li>
-                    <Link
-                      target="_blank"
-                      href={prevUrl.toString()}
-                      className={buttonVariants({ variant: "link" })}
-                    >
-                      {prevUrl.toString().includes("figma") ? (
-                        <IconBrandFigma className="relative -left-0.5 mr-1.5 size-5" />
-                      ) : (
-                        <IconExternalLink className="relative -left-0.5 mr-1.5 size-5" />
-                      )}
-                      Preview
-                    </Link>
-                  </li>
-                )}
               </ul>
             </section>
           </div>
@@ -259,16 +196,11 @@ export default async function ToolDetail({
           <article className="prose prose-zinc relative mx-auto size-full max-w-full mt-8 px-4 pb-8 dark:prose-invert">
             {/* @ts-ignore */}
             <DocumentRenderer document={await item.content()} />
-            {/* <NavigateKeys
-              client:load
-              prevHref={prevSlug && `/${collection}/${prevSlug}/`}
-              nextHref={nextSlug && `/${collection}/${nextSlug}/`}
-            /> */}
-            {item.buyLink && (
+            {buyUrl && (
               <div>
                 <Link
                   target="_blank"
-                  href={item.buyLink.toString()}
+                  href={buyUrl.toString()}
                   className="relative flex mb-4 no-underline items-center justify-center p-4 px-5 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out rounded-full shadow-xl group"
                 >
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-700"></span>

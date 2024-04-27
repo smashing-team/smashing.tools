@@ -16,7 +16,10 @@ const roboto_mono = Roboto_Mono({
   display: "swap",
 });
 
-export const metadata = constructMetadata();
+export const metadata = constructMetadata({
+  title: "Join - smashing.tools",
+  canonical: "/join",
+});
 
 export default function RootLayout({
   children,
@@ -26,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${roboto_mono.variable}`}
+      className={`${inter.variable} ${roboto_mono.variable} bg-zinc-950`}
       suppressHydrationWarning
     >
       <body>
@@ -38,7 +41,6 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        <DebugIndicator {...metadata} />
       </body>
     </html>
   );

@@ -25,40 +25,30 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 const iconClass = cn(
-  "size-4 text-zinc-400 group-hover:text-zinc-600 group-data-[active='on']:text-zinc-600 dark:group-hover:text-zinc-100 dark:group-data-[active='on']:text-white"
+  "size-4 text-zinc-400 group-hover:text-black/70 group-data-[active='on']:text-black/70 dark:group-hover:text-black/70 dark:group-data-[active='on']:text-white"
 );
 
 const tabs = [
-  // {
-  //   name: "Home",
-  //   href: "/",
-  //   category: "/",
-  //   icon: <IconLayoutGrid className={iconClass} />,
-  //   classes: "",
-  // },
   {
     name: "Starter Kits",
     href: "/starter-kit",
     category: "/starter-kit",
     icon: <IconRocket className={iconClass} />,
-    classes: "bg-yellow-600/20 dark:bg-yellow-700",
-    textClasses: 'dark:group-data-[active="on"]:text-red-500',
+    classes: "bg-yellow-500/50 dark:bg-yellow-700",
   },
   {
     name: "Design Kits",
     href: "/design-kit",
     category: "/design-kit",
     icon: <IconArtboard className={iconClass} />,
-    classes: "bg-purple-600/20 dark:bg-purple-800",
-    textClasses: 'dark:group-data-[active="on"]text-yellow-800',
+    classes: "bg-purple-500/50 dark:bg-purple-800",
   },
   {
     name: "UI Components",
     href: "/ui-component",
     category: "/ui-component",
     icon: <IconComponents className={iconClass} />,
-    classes: "bg-blue-600/20 dark:bg-blue-800",
-    textClasses: 'dark:group-data-[active="on"]text-yellow-800',
+    classes: "bg-blue-500/50 dark:bg-blue-800",
   },
   {
     name: "AI tools",
@@ -85,16 +75,14 @@ const tabs = [
         <path d="M9 13v2" />
       </svg>
     ),
-    classes: "bg-red-600/20 dark:bg-red-800",
-    textClasses: 'dark:group-data-[active="on"]text-yellow-800',
+    classes: "bg-red-500/50 dark:bg-red-800",
   },
   {
     name: "Dev tools",
     href: "/dev",
     category: "/dev",
     icon: <IconTerminal2 className={iconClass} />,
-    classes: "bg-green-600/20 dark:bg-green-800",
-    textClasses: 'dark:group-data-[active="on"]text-yellow-800',
+    classes: "bg-green-500/50 dark:bg-green-800",
   },
 ];
 
@@ -102,27 +90,12 @@ export function CatSwitcher({
   activeCategory,
 }: {
   activeCategory: CategoryPaths;
-}): React.ReactElement {
+}) {
   const router = useRouter();
 
   return (
     <div>
       <div className="lg:hidden">
-        {/* <label htmlFor="tabs" className="sr-only">
-          Select a tab
-        </label> */}
-        {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-        {/* <select
-          id="tabs"
-          name="tabs"
-          className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-          defaultValue={activeCategory}
-        >
-          {tabs.map((tab) => (
-            <option key={tab.name}>{tab.name}</option>
-          ))}
-        </select> */}
-
         <Select
           key="category-switcher"
           defaultValue={activeCategory}
@@ -164,7 +137,6 @@ export function CatSwitcher({
               data-active={tab.category === activeCategory ? "on" : "off"}
               className={cn(
                 "group relative flex items-center rounded-2xl px-3 py-2 text-sm font-medium"
-                // tab.textClasses,
               )}
               aria-current={
                 tab.category === activeCategory ? "page" : undefined

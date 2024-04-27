@@ -7,10 +7,19 @@
 - [x] home page category navigation
 - [x] home page facet filters
 - [x] small ui improvements
-- [ ] generate metadata for sub pages
+- [x] post pages
+- [x] generate metadata for sub pages
+  - [x] homepage
+  - [x] tool page
+  - [x] profile page
+  - [x] post page
+  - [x] login page
+- [x] generate og images
+- [ ] keep Bookmarks in the session? (investigate nextjs server session)
+- [ ] bookmarks page & bookmark item (bookmarking via supabase api (server actions))
 - [ ] cache the items?
-- [ ] keep Bookmarks in the session?
-- [ ] generate og images
-- [ ] post pages
 - [ ] settings page (aws ses for email)
-- [ ] bookmarks page (bookmarking via supabase api (server actions))
+- [ ] sitemap
+- [ ] analytics (posthog, umami)
+- [ ] rss feed
+- [ ] search?

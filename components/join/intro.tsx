@@ -1,7 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { IconLink } from "./icon-link";
 import { SignUpForm } from "./signup-form";
-import Image from "next/image";
 
 function GitHubIcon(props: React.ComponentPropsWithoutRef<"svg">) {
   return (

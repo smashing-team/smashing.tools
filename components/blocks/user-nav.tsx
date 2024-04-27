@@ -11,9 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/dropdown-menu";
-import { useRouter } from "next/navigation";
+import { signout } from "@/server/actions";
 import { type User } from "@supabase/supabase-js";
-import { signout } from "@/server/actions/signout";
+import { useRouter } from "next/navigation";
 
 export function UserNav({ user }: { user: User }) {
   const router = useRouter();

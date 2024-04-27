@@ -4,8 +4,8 @@
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": [
-    "source.addMissingImports",
-    "source.fixAll.eslint"
+    "source.fixAll.eslint",
+    "source.organizeImports"
   ],
   "eslint.validate": [
     "javascript",
