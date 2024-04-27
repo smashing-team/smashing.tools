@@ -15,11 +15,24 @@
   - [x] post page
   - [x] login page
 - [x] generate og images
-- [ ] keep Bookmarks in the session? (investigate nextjs server session)
-- [ ] bookmarks page & bookmark item (bookmarking via supabase api (server actions))
-- [ ] cache the items?
-- [ ] settings page (aws ses for email)
-- [ ] sitemap
+- [x] new promo images
+- [x] keep Bookmarks in the session? (investigate nextjs server session) resolved with useContext
+- [x] bookmark item (bookmarking via supabase api (server actions))
+- [x] manifest
+- [x] robots.txt
+- [x] sitemap.xml
+- [x] 404 page recoloring
+- [ ] (protected) bookmark list page
+- [ ] (protected) settings page (aws ses for email)
+- [ ] add old widget page
+- [ ] remove logs
 - [ ] analytics (posthog, umami)
-- [ ] rss feed
+- [ ] review server action calls from client
+- [ ] add bookmark buton to the tool page
+- [ ] **_/_**
+- [ ] bookmarks page filters by category
+- [ ] bookmarks page small row view
+- [ ] sitemap head tag?
+- [ ] rss feed?
+- [ ] cache the items?
 - [ ] search?
