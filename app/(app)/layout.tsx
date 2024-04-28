@@ -28,9 +28,6 @@ export default async function RootLayout({
     bookmarks = data ? data : [];
   }
 
-  console.log("---------USER-BOOKMARKS---------------");
-  console.log(bookmarks);
-  console.log("-------------------------------------");
   return (
     <html
       lang="en"

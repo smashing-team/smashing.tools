@@ -78,7 +78,6 @@ export const sendConfirmationEmail = async (
     "Confirm newsletter subscription",
     html
   );
-  console.log("sendEmailResult", sendEmailResult);
 
   return sendEmailResult;
 };
@@ -93,7 +92,6 @@ export const canResendConfirmationEmail = (
     };
   }
 
-  // eslint-disable-next-line no-param-reassign
   lastSentDate = new Date(lastSentDate);
 
   const canResend =

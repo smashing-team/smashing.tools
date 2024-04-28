@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 import { CATEGORIES, CategoryKeys } from "@/utils/consts";
 import { getAllItems, reader } from "@/utils/reader";
 import { ImageResponse } from "next/og";
@@ -74,9 +72,6 @@ export async function GET(
   );
 
   const bg = arrayBufferToBase64(ogBG);
-  console.log("--------------------");
-  console.log(SpaceGrotesk);
-  console.log("--------------------");
 
   return new ImageResponse(
     (
@@ -88,11 +83,6 @@ export async function GET(
         }}
       >
         <div tw="flex items-start justify-start h-full">
-          {/* <img
-            style={{ objectFit: "cover" }}
-            tw="absolute inset-0 w-full h-full"
-            src={"https://smashing.tools/og-bg.png"}
-          /> */}
           <div tw="flex flex-col justify-between w-full h-full p-20">
             <div
               style={{

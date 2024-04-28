@@ -8,7 +8,7 @@ export const metadata = constructMetadata({
   canonical: "/join",
 });
 
-export default function RootLayout({
+export default function JoinLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

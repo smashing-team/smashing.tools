@@ -2,16 +2,6 @@ import { updateSession } from "@/utils/supabase/middleware";
 import { type NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-  console.log("------------------------------------------------");
-  console.log("------------------------------------------------");
-  console.log("------------------------------------------------");
-  console.log("------------------------------------------------");
-  console.log("--------------------MIDDLEWARE------------------");
-  console.log("------------------------------------------------");
-  console.log("------------------------------------------------");
-  console.log("------------------------------------------------");
-  console.log("------------------------------------------------");
-  console.log("------------------------------------------------");
   return await updateSession(request);
 }
 
@@ -24,6 +14,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * Feel free to modify this pattern to include more paths.
      */
-    "/((?!_next/static|og-image|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|og-image|_not-found|widget|manifest.webmanifest|robots.txt|sitemap.xml|join|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|txt|xml|jpeg|gif|webp)$).*)",
   ],
 };
