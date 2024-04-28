@@ -54,6 +54,7 @@ export type TPost = Awaited<
 export async function getAllItems() {
   console.log("---------debug------------");
   console.log("process.cwd()", process.cwd());
+  console.log("process.env", process.env);
   console.log("---------debug------------");
   const starterKitItems = (await reader.collections.starterKit.all()) || [];
   const designKitItems = (await reader.collections.designKit.all()) || [];
