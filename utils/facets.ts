@@ -1,19 +1,11 @@
+import { KEYSTATIC, TTools } from "@/server/keystatic";
 import type { CategoryPaths } from "@/utils/consts";
 
-import {
-  AllItems,
-  getAIFilters,
-  getDesignKitFilters,
-  getDevFilters,
-  getStarterKitFilters,
-  getUIComponentFilters,
-} from "./reader";
-
-const starterKitFilters = getStarterKitFilters();
-const designKitFilters = getDesignKitFilters();
-const uiComponentFilters = getUIComponentFilters();
-const aiFilters = getAIFilters();
-const devFilters = getDevFilters();
+const starterKitFilters = KEYSTATIC.filters.starterKit();
+const designKitFilters = KEYSTATIC.filters.designKit();
+const uiComponentFilters = KEYSTATIC.filters.uiComponent();
+const aiFilters = KEYSTATIC.filters.ai();
+const devFilters = KEYSTATIC.filters.dev();
 
 const allFilters = [
   ...starterKitFilters,
@@ -60,7 +52,7 @@ export type Facets = Partial<
 >;
 
 export function getFacets(
-  items: AllItems,
+  items: TTools,
   activeCategory: CategoryPaths,
   filterredFacets?: Facets,
   searchParams: {

@@ -5,9 +5,9 @@ import Image from "next/image";
 import { HeroSlider } from "@/components/blocks/hero-slider";
 import { ToolTags } from "@/components/blocks/tool-tags";
 import { buttonVariants } from "@/components/button";
+import { KEYSTATIC } from "@/server/keystatic";
 import { CATEGORIES, CategoryKeys } from "@/utils/consts";
 import { constructMetadata } from "@/utils/metadata";
-import { getAllFilters, reader } from "@/utils/reader";
 import {
   IconArrowRight,
   IconBrandFigma,
@@ -25,9 +25,9 @@ export async function generateMetadata({
 }: Props): Promise<Metadata> {
   const activeCategory = CATEGORIES.find((c) => c.slug === `/${category}`)!;
 
-  const item = await reader.collections[
-    activeCategory.collection as CategoryKeys
-  ].read(slug);
+  const item = await KEYSTATIC.entry[activeCategory.collection as CategoryKeys](
+    slug
+  );
 
   if (!item) {
     return notFound();
@@ -51,16 +51,16 @@ export default async function ToolDetail({
 }: Props) {
   const activeCategory = CATEGORIES.find((c) => c.slug === `/${category}`)!;
 
-  const item = await reader.collections[
-    activeCategory.collection as CategoryKeys
-  ].read(slug);
+  const item = await KEYSTATIC.entry[activeCategory.collection as CategoryKeys](
+    slug
+  );
 
   if (!item) {
     return notFound();
   }
 
-  const publisherData = await reader.collections.profile.read(item.publisher);
-  const makerData = await reader.collections.profile.read(item.maker);
+  const publisherData = await KEYSTATIC.entry.profile(item.publisher);
+  const makerData = await KEYSTATIC.entry.profile(item.maker);
 
   const heroSliderImages = (item.heroSlider || [])
     ?.filter((image) => image.discriminant === "heroSlider")
@@ -138,7 +138,10 @@ export default async function ToolDetail({
                 >
                   {activeCategory.title}
                 </span>
-                <ToolTags allTags={allTags} allFilters={getAllFilters()} />
+                <ToolTags
+                  allTags={allTags}
+                  allFilters={KEYSTATIC.filters.all()}
+                />
               </div>
 
               <div data-people className="flex items-center space-x-6">

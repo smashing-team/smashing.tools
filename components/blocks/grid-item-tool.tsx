@@ -1,7 +1,7 @@
 import { BookmarkToggle } from "@/components/blocks/bookmark-toggle";
+import { TTools } from "@/server/keystatic";
 import { cn } from "@/utils/cn";
 import { getCategoryTitle } from "@/utils/consts";
-import { AllItems } from "@/utils/reader";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -10,9 +10,8 @@ import { twMerge } from "tailwind-merge";
 export function GridItemTool({
   item,
 }: {
-  item: AllItems[number];
+  item: TTools[number];
 }): React.ReactElement {
-  const isChecked = false;
   const hasDarkLogo = false;
   return (
     <li className="col-span-1">

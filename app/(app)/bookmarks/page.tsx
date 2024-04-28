@@ -1,9 +1,9 @@
 import { GridList } from "@/components/blocks/grid-list";
 import { HeaderGradientProtected } from "@/components/blocks/header-gradient-protected";
 import { buttonVariants } from "@/components/button";
+import { KEYSTATIC } from "@/server/keystatic";
 import { CATEGORIES } from "@/utils/consts";
 import { constructMetadata } from "@/utils/metadata";
-import { getAllItems } from "@/utils/reader";
 import { createClient } from "@/utils/supabase/server";
 import { IconArrowLeft, IconBookmarksFilled } from "@tabler/icons-react";
 import Link from "next/link";
@@ -26,7 +26,7 @@ export default async function BookmarksPage() {
 
   const bookmarksResponse = await supabase.from("bookmark").select("*");
   const bookmarks = !bookmarksResponse.error ? bookmarksResponse.data : [];
-  const allItems = await getAllItems();
+  const allItems = await KEYSTATIC.tools();
 
   const creatorItems = allItems.filter((item) =>
     bookmarks.find((bookmark) => bookmark.content_id === item.slug)

@@ -1,16 +1,16 @@
-import { getAllItems, reader } from "@/utils/reader";
+import { KEYSTATIC } from "@/server/keystatic";
 import { getBaseUrl } from "@/utils/url";
 import { MetadataRoute } from "next";
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
-  const allItems = (await getAllItems()).map((post) => {
+  const allItems = (await KEYSTATIC.tools()).map((post) => {
     return {
       url: `${getBaseUrl()}/${post.collectionSlug}/${post.slug}`,
       lastModified: post.entry.createdAt,
     };
   });
 
-  const allPosts = (await reader.collections.post.all()).map((post) => {
+  const allPosts = (await KEYSTATIC.posts()).map((post) => {
     return {
       url: `${getBaseUrl()}/post/${post.slug}`,
       lastModified: post.entry.createdAt,

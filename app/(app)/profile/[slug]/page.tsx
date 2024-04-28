@@ -1,8 +1,8 @@
 import { GridList } from "@/components/blocks/grid-list";
 import { HeaderGradient } from "@/components/blocks/header-gradient";
+import { KEYSTATIC } from "@/server/keystatic";
 import { CATEGORIES } from "@/utils/consts";
 import { constructMetadata } from "@/utils/metadata";
-import { getAllItems, reader } from "@/utils/reader";
 import { IconBrandGithub } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +12,7 @@ import { Metadata } from "next/types";
 export async function generateMetadata({
   params: { slug },
 }: Props): Promise<Metadata> {
-  const item = await reader.collections.profile.read(slug);
+  const item = await KEYSTATIC.entry.profile(slug);
 
   if (!item) {
     return notFound();
@@ -29,20 +29,18 @@ type Props = {
   params: { slug: string };
 };
 export default async function ProfileDetail({ params: { slug } }: Props) {
-  const item = await reader.collections.profile.read(slug);
+  const item = await KEYSTATIC.entry.profile(slug);
 
   if (!item) {
     return notFound();
   }
 
-  const allItems = await getAllItems();
+  const allItems = await KEYSTATIC.tools();
   const creatorItems = allItems.filter((item) => item.entry.maker === slug);
   const publishedItems = allItems.filter(
     (item) => item.entry.publisher === slug
   );
-  const description =
-    item.bio ||
-    `${item.name}'s profile on smashing.tools. Find tools crafted and published by ${item.name}.`;
+
   return (
     <div>
       <HeaderGradient />

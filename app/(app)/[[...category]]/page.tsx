@@ -3,10 +3,10 @@ import { FiltersDrawer } from "@/components/blocks/filters-drawer";
 import { GridList } from "@/components/blocks/grid-list";
 import { HeaderGradient } from "@/components/blocks/header-gradient";
 import { PricingFilter } from "@/components/blocks/pricing-filter";
+import { KEYSTATIC } from "@/server/keystatic";
 import { CATEGORIES, SITE_DESCRIPTION } from "@/utils/consts";
 import { getFacets, uniqueFilters } from "@/utils/facets";
 import { constructMetadata } from "@/utils/metadata";
-import { getAllItems } from "@/utils/reader";
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -33,7 +33,7 @@ export default async function Home({
   const activeCategory = CATEGORIES.find(
     (c) => c.slug === `/${category.join("/")}`
   )!;
-  let allItems = await getAllItems();
+  let allItems = await KEYSTATIC.tools();
   let items = allItems;
 
   if (!activeCategory) {

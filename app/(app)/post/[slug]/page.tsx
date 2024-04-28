@@ -1,7 +1,7 @@
 import { HeaderGradient } from "@/components/blocks/header-gradient";
 import { HeroSlider } from "@/components/blocks/hero-slider";
+import { KEYSTATIC } from "@/server/keystatic";
 import { constructMetadata } from "@/utils/metadata";
-import { reader } from "@/utils/reader";
 import { DocumentRenderer } from "@keystatic/core/renderer";
 import {
   IconArrowRight,
@@ -18,7 +18,7 @@ import { twMerge } from "tailwind-merge";
 export async function generateMetadata({
   params: { slug },
 }: Props): Promise<Metadata> {
-  const item = await reader.collections.post.read(slug);
+  const item = await KEYSTATIC.entry.post(slug);
 
   if (!item) {
     return notFound();
@@ -35,7 +35,7 @@ type Props = {
   params: { slug: string };
 };
 export default async function PostDetail({ params: { slug } }: Props) {
-  const item = await reader.collections.post.read(slug);
+  const item = await KEYSTATIC.entry.post(slug);
 
   if (!item) {
     return notFound();
@@ -44,15 +44,15 @@ export default async function PostDetail({ params: { slug } }: Props) {
   let relatedItem;
 
   if (item.designKit) {
-    relatedItem = await reader.collections.designKit.read(item.designKit);
+    relatedItem = await KEYSTATIC.entry.designKit(item.designKit);
   } else if (item.uiComponent) {
-    relatedItem = await reader.collections.uiComponent.read(item.uiComponent);
+    relatedItem = await KEYSTATIC.entry.uiComponent(item.uiComponent);
   } else if (item.starterKit) {
-    relatedItem = await reader.collections.starterKit.read(item.starterKit);
+    relatedItem = await KEYSTATIC.entry.starterKit(item.starterKit);
   } else if (item.dev) {
-    relatedItem = await reader.collections.dev.read(item.dev);
+    relatedItem = await KEYSTATIC.entry.dev(item.dev);
   } else if (item.ai) {
-    relatedItem = await reader.collections.ai.read(item.ai);
+    relatedItem = await KEYSTATIC.entry.ai(item.ai);
   }
 
   if (!relatedItem) {
@@ -67,8 +67,8 @@ export default async function PostDetail({ params: { slug } }: Props) {
 
   const hasDarkLogo = !!relatedItem.logoDark;
   const buyUrl = relatedItem.buyLink;
-  const publisherData = await reader.collections.profile.read(item.publisher);
-  const makerData = await reader.collections.profile.read(relatedItem.maker);
+  const publisherData = await KEYSTATIC.entry.profile(item.publisher);
+  const makerData = await KEYSTATIC.entry.profile(relatedItem.maker);
 
   const readmore = new URL(item.readmoreUrl || "");
   readmore.searchParams.append("ref", "smashing.tools");

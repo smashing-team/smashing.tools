@@ -1,12 +1,12 @@
 import { JoinLayout } from "@/components/join/join-layout";
 import { ArticleItem } from "@/components/join/mdx";
-import { getAllItems } from "@/utils/reader";
+import { KEYSTATIC } from "@/server/keystatic";
 import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
 export default async function Join() {
-  const items = await getAllItems();
+  const items = await KEYSTATIC.tools();
 
   return (
     <div className="flex min-h-full flex-col bg-zinc-950">

@@ -1,5 +1,5 @@
+import { KEYSTATIC } from "@/server/keystatic";
 import { CATEGORIES, CategoryKeys } from "@/utils/consts";
-import { getAllItems, reader } from "@/utils/reader";
 import { ImageResponse } from "next/og";
 import fs from "node:fs";
 import path from "node:path";
@@ -16,7 +16,7 @@ function arrayBufferToBase64(buffer: ArrayBuffer) {
 }
 
 export async function generateStaticParams() {
-  const allItems = await getAllItems();
+  const allItems = await KEYSTATIC.tools();
 
   return allItems.map((item) => ({
     category: item.collectionSlug,
@@ -36,9 +36,9 @@ export async function GET(
     });
   }
 
-  const item = await reader.collections[
-    activeCategory.collection as CategoryKeys
-  ].read(slug);
+  const item = await KEYSTATIC.entry[activeCategory.collection as CategoryKeys](
+    slug
+  );
 
   if (!item) {
     return new Response(`Failed to generate the image`, {

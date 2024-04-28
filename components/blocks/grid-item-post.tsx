@@ -1,5 +1,5 @@
+import { KEYSTATIC, TPosts } from "@/server/keystatic";
 import { cn } from "@/utils/cn";
-import { TPost, reader } from "@/utils/reader";
 import { IconConfetti } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import "dayjs/locale/en";
@@ -9,29 +9,25 @@ import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 dayjs.extend(relativeTime);
 
-export async function GridItemPost({ item }: { item: TPost }) {
+export async function GridItemPost({ item }: { item: TPosts[number] }) {
   let relatedItem;
 
   if (item.entry.designKit) {
-    relatedItem = await reader.collections.designKit.read(item.entry.designKit);
+    relatedItem = await KEYSTATIC.entry.designKit(item.entry.designKit);
   } else if (item.entry.uiComponent) {
-    relatedItem = await reader.collections.uiComponent.read(
-      item.entry.uiComponent
-    );
+    relatedItem = await KEYSTATIC.entry.uiComponent(item.entry.uiComponent);
   } else if (item.entry.starterKit) {
-    relatedItem = await reader.collections.starterKit.read(
-      item.entry.starterKit
-    );
+    relatedItem = await KEYSTATIC.entry.starterKit(item.entry.starterKit);
   } else if (item.entry.dev) {
-    relatedItem = await reader.collections.dev.read(item.entry.dev);
+    relatedItem = await KEYSTATIC.entry.dev(item.entry.dev);
   } else if (item.entry.ai) {
-    relatedItem = await reader.collections.ai.read(item.entry.ai);
+    relatedItem = await KEYSTATIC.entry.ai(item.entry.ai);
   }
 
   if (!relatedItem) return <></>;
 
   const maker = relatedItem.maker
-    ? await reader.collections.profile.read(relatedItem.maker)
+    ? await KEYSTATIC.entry.profile(relatedItem.maker)
     : undefined;
 
   const hasDarkLogo = !!relatedItem?.logoDark;

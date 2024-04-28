@@ -1,8 +1,8 @@
 import { GridItemPost } from "@/components/blocks/grid-item-post";
 import { GridItemTool } from "@/components/blocks/grid-item-tool";
+import { KEYSTATIC, TTools } from "@/server/keystatic";
 import { cn } from "@/utils/cn";
 import { CATEGORY } from "@/utils/consts";
-import { reader, type AllItems } from "@/utils/reader";
 
 export async function GridList({
   items,
@@ -13,13 +13,13 @@ export async function GridList({
 }: {
   withoutPadding?: boolean;
   full?: boolean;
-  items: AllItems;
+  items: TTools;
   activeCategory: CATEGORY;
   excludePosts?: boolean;
 }) {
   let posts = excludePosts
     ? []
-    : (await reader.collections.post.all()).map((item) => ({
+    : (await KEYSTATIC.posts()).map((item) => ({
         ...item,
         collection: "post",
         collectionSlug: "post",
