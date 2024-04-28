@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "types:check": "tsc --noEmit",
-    "types:gen": "supabase gen types typescript --linked --schema public > ./supabase/database.d.ts && eslint --fix ./supabase/database.d.ts"
+    "types:gen": "pnpm dlx supabase gen types typescript --linked --schema public > ./supabase/database.d.ts && eslint --fix ./supabase/database.d.ts"
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.564.0",
