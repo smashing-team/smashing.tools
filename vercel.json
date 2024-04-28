@@ -1,6 +1,6 @@
 {
   "functions": {
-     "**/*.tsx":  {
+     "**/*.js":  {
        "includeFiles": "static/content/*"
      }
   }
