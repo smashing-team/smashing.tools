@@ -1,0 +1,7 @@
+{
+  "functions": {
+     "**/*.tsx":  {
+       "includeFiles": "static/content/*"
+     }
+  }
+}
