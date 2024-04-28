@@ -1,20 +1,7 @@
-import { Inter, Roboto_Mono } from "next/font/google";
-import "../globals.css";
 import { ThemeProvider } from "@/components/providers/theme";
+import { inter, roboto_mono } from "@/fonts";
 import { constructMetadata } from "@/utils/metadata";
-import { DebugIndicator } from "@/components/blocks/debug-indicator";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const roboto_mono = Roboto_Mono({
-  subsets: ["latin"],
-  variable: "--font-roboto-mono",
-  display: "swap",
-});
+import "../globals.css";
 
 export const metadata = constructMetadata({
   title: "Join - smashing.tools",

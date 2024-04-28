@@ -101,7 +101,7 @@ export default async function PostDetail({ params: { slug } }: Props) {
               )}
             </div>
             <div className="mt-6 text-left">
-              <h1 className="text-2xl font-medium text-zinc-900 dark:text-zinc-50">
+              <h1 className="text-3xl font-semibold text-zinc-900 dark:text-zinc-50">
                 {item.name}
               </h1>
               <p className="mt-1.5 text-lg font-normal text-zinc-700 dark:text-zinc-200">

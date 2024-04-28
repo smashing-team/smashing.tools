@@ -1,4 +1,4 @@
-import type { CategoryPaths } from "@/consts";
+import type { CategoryPaths } from "@/utils/consts";
 
 import {
   AllItems,

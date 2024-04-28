@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { getFilterLabel } from "@/consts";
+import { getFilterLabel } from "@/utils/consts";
 interface Props {
   title: string;
   children: React.ReactNode;

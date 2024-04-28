@@ -1,6 +1,6 @@
 import { BookmarkToggle } from "@/components/blocks/bookmark-toggle";
-import { getCategoryTitle } from "@/consts";
 import { cn } from "@/utils/cn";
+import { getCategoryTitle } from "@/utils/consts";
 import { AllItems } from "@/utils/reader";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,7 +50,7 @@ export function GridItemTool({
           <h2 className="mt-4 font-sans text-base text-zinc-900 dark:text-white">
             <Link
               href={`/${item.collectionSlug}/${item.slug}`}
-              className="flex items-center space-x-2 font-medium"
+              className="flex items-center space-x-2 font-semibold text-lg"
             >
               <span className="absolute -inset-px rounded-md"></span>
               {item.entry.name}

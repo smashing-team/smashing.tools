@@ -1,6 +1,6 @@
 "use client";
 
-import { Tables } from "@/database";
+import { Tables } from "@/supabase/database";
 import { type User } from "@supabase/supabase-js";
 import { createContext, useContext } from "react";
 

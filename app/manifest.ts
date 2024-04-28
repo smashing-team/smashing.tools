@@ -1,4 +1,4 @@
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/utils/consts";
 import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {

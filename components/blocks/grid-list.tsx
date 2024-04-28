@@ -1,7 +1,7 @@
 import { GridItemPost } from "@/components/blocks/grid-item-post";
 import { GridItemTool } from "@/components/blocks/grid-item-tool";
-import { CATEGORY } from "@/consts";
 import { cn } from "@/utils/cn";
+import { CATEGORY } from "@/utils/consts";
 import { reader, type AllItems } from "@/utils/reader";
 
 export async function GridList({

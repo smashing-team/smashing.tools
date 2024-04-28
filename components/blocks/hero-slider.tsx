@@ -85,7 +85,7 @@ export const HeroSlider = ({ images = [] }: { images: string[] }) => {
     }, AUTO_DELAY);
 
     return () => clearInterval(intervalRef);
-  }, []);
+  }, [dragX, images.length]);
 
   if (images.length === 0) {
     return null;

@@ -25,6 +25,7 @@
 - [x] (protected) bookmark list page
 - [x] (protected) settings page (aws ses for email)
 - [x] review server action calls from client
+- [x] generate og images with generateStaticParams
 - [ ] add old widget page
 - [ ] remove logs
 - [ ] analytics (posthog, umami)

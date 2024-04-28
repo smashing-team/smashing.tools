@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 import {
   EMAIL_FROM,
   NEWSLETTER_CONFIRM_RESEND_INTERVAL_MINUTES,
-} from "@/consts";
+} from "@/utils/consts";
 
 export const sendEmail = async (
   fromAddress: string,

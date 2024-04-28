@@ -1,6 +1,6 @@
+import { CategorySlugs } from "@/utils/consts";
 import { fields } from "@keystatic/core";
 import { createdAt } from "./createdAt";
-import { CategorySlugs } from "@/consts";
 
 export const baseSchema = (categoryPath: CategorySlugs) => {
   return {

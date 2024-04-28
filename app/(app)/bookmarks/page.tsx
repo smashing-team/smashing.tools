@@ -1,7 +1,7 @@
 import { GridList } from "@/components/blocks/grid-list";
 import { HeaderGradientProtected } from "@/components/blocks/header-gradient-protected";
 import { buttonVariants } from "@/components/button";
-import { CATEGORIES } from "@/consts";
+import { CATEGORIES } from "@/utils/consts";
 import { constructMetadata } from "@/utils/metadata";
 import { getAllItems } from "@/utils/reader";
 import { createClient } from "@/utils/supabase/server";

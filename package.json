@@ -1,17 +1,18 @@
 {
-  "name": "smashing.tools-next",
+  "name": "smashing.tools",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "pnpm types:gen && next build",
     "start": "next start",
     "lint": "next lint",
-    "prebuild": "supabase gen types typescript --linked --schema public > ./database.d.ts && eslint --fix ./database.d.ts"
+    "types:check": "tsc --noEmit",
+    "types:gen": "supabase gen types typescript --linked --schema public > ./supabase/database.d.ts && eslint --fix ./supabase/database.d.ts"
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.564.0",
-    "@keystatic/core": "^0.5.12",
+    "@keystatic/core": "^0.5.13",
     "@keystatic/next": "^5.0.0",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -27,15 +28,14 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tabs": "^1.0.4",
     "@supabase/ssr": "^0.3.0",
-    "@supabase/supabase-js": "^2.42.6",
+    "@supabase/supabase-js": "^2.42.7",
     "@tabler/icons-react": "^3.2.0",
-    "@tailwindcss/typography": "^0.5.12",
+    "@tailwindcss/typography": "^0.5.13",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
     "dayjs": "^1.11.10",
     "framer-motion": "^11.1.7",
-    "lucide-react": "^0.373.0",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
     "nodemailer": "^6.9.13",
@@ -58,5 +58,12 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "volta": {
+    "node": "20.12.2"
+  },
+  "engines": {
+    "node": ">=20.12.2"
+  },
+  "packageManager": "pnpm@9.0.6+sha256.0624e30eff866cdeb363b15061bdb7fd9425b17bc1bb42c22f5f4efdea21f6b3"
 }

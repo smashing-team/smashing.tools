@@ -1,4 +1,4 @@
-import { SITE_DESCRIPTION, SITE_TITLE } from "@/consts";
+import { SITE_DESCRIPTION, SITE_TITLE } from "@/utils/consts";
 import { getBaseUrl } from "@/utils/url";
 import { Metadata } from "next";
 

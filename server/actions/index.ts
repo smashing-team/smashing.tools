@@ -5,9 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import "server-only";
 
-const supabase = createClient();
-
 async function userGuard() {
+  const supabase = createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -20,6 +19,7 @@ async function userGuard() {
 }
 
 export async function signout() {
+  const supabase = createClient();
   await supabase.auth.signOut();
   return redirect("/");
 }
@@ -51,6 +51,7 @@ export async function bookmarkToggle(
   slug: string,
   checked: boolean
 ) {
+  const supabase = createClient();
   const user = await userGuard();
 
   if (checked) {
@@ -72,6 +73,7 @@ export async function bookmarkToggle(
 }
 
 export async function resendConfirmation() {
+  const supabase = createClient();
   const user = await userGuard();
 
   if (!user.email) {
@@ -118,6 +120,7 @@ export async function resendConfirmation() {
 }
 
 export async function unsubscribe() {
+  const supabase = createClient();
   const user = await userGuard();
 
   if (!user.email) {
@@ -134,6 +137,7 @@ export async function unsubscribe() {
 }
 
 export async function subscribe() {
+  const supabase = createClient();
   const user = await userGuard();
 
   if (!user.email) {

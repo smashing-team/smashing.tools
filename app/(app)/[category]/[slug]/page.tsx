@@ -5,7 +5,7 @@ import Image from "next/image";
 import { HeroSlider } from "@/components/blocks/hero-slider";
 import { ToolTags } from "@/components/blocks/tool-tags";
 import { buttonVariants } from "@/components/button";
-import { CATEGORIES, CategoryKeys } from "@/consts";
+import { CATEGORIES, CategoryKeys } from "@/utils/consts";
 import { constructMetadata } from "@/utils/metadata";
 import { getAllFilters, reader } from "@/utils/reader";
 import {
@@ -36,7 +36,7 @@ export async function generateMetadata({
   return constructMetadata({
     title: `${item?.name} - smashing.tools`,
     description: `${item.name} - ${item.headline}`,
-    image: `og?category=${category}&slug=${slug}`,
+    image: `og-image/${category}/${slug}`,
     canonical: `${category}/${slug}`,
   });
 }
@@ -113,7 +113,7 @@ export default async function ToolDetail({
               )}
             </div>
             <div className="mt-6 text-left">
-              <h1 className="text-2xl font-medium text-zinc-900 dark:text-zinc-50">
+              <h1 className="text-3xl font-semibold text-zinc-900 dark:text-zinc-50">
                 {item.name}
               </h1>
               <p className="mt-1.5 text-lg font-normal text-zinc-700 dark:text-zinc-200">

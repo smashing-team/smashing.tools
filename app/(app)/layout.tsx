@@ -2,23 +2,12 @@ import { DebugIndicator } from "@/components/blocks/debug-indicator";
 import { Header } from "@/components/blocks/header";
 import { ThemeProvider } from "@/components/providers/theme";
 import UserProvider from "@/components/providers/user";
+import { inter, roboto_mono } from "@/fonts";
+import { Tables } from "@/supabase/database";
 import { constructMetadata } from "@/utils/metadata";
 import { createClient } from "@/utils/supabase/server";
 import { IconAffiliateFilled } from "@tabler/icons-react";
-import { Inter, Roboto_Mono } from "next/font/google";
 import "../globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const roboto_mono = Roboto_Mono({
-  subsets: ["latin"],
-  variable: "--font-roboto-mono",
-  display: "swap",
-});
 
 export const metadata = constructMetadata();
 
@@ -31,15 +20,16 @@ export default async function RootLayout({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const { data: bookmarks } = await supabase.from("bookmark").select("*");
 
-  console.log("-------------------------------------");
-  console.log("-------------------------------------");
+  let bookmarks: Tables<"bookmark">[] = [];
+
+  if (user) {
+    const { data } = await supabase.from("bookmark").select("*");
+    bookmarks = data ? data : [];
+  }
+
   console.log("---------USER-BOOKMARKS---------------");
   console.log(bookmarks);
-  console.log("-------------------------------------");
-  console.log("-------------------------------------");
-  console.log("-------------------------------------");
   console.log("-------------------------------------");
   return (
     <html

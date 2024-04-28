@@ -1,13 +1,12 @@
 import { cn } from "@/utils/cn";
 import { TPost, reader } from "@/utils/reader";
 import { IconConfetti } from "@tabler/icons-react";
-import React from "react";
-import Image from "next/image";
 import dayjs from "dayjs";
-import { twMerge } from "tailwind-merge";
 import "dayjs/locale/en";
 import relativeTime from "dayjs/plugin/relativeTime";
+import Image from "next/image";
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 dayjs.extend(relativeTime);
 
 export async function GridItemPost({ item }: { item: TPost }) {
@@ -80,7 +79,7 @@ export async function GridItemPost({ item }: { item: TPost }) {
           <h2 className="mt-4 font-sans text-base text-zinc-900 dark:text-white">
             <Link
               href={`/${item.collection}/${item.slug}`}
-              className="flex items-center space-x-2 font-medium"
+              className="flex items-center space-x-2 font-semibold text-lg"
             >
               <span className="absolute -inset-px rounded-3xl"></span>
               {item.entry.name}

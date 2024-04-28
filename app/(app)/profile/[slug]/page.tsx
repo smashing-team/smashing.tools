@@ -1,6 +1,6 @@
 import { GridList } from "@/components/blocks/grid-list";
 import { HeaderGradient } from "@/components/blocks/header-gradient";
-import { CATEGORIES } from "@/consts";
+import { CATEGORIES } from "@/utils/consts";
 import { constructMetadata } from "@/utils/metadata";
 import { getAllItems, reader } from "@/utils/reader";
 import { IconBrandGithub } from "@tabler/icons-react";

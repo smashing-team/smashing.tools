@@ -15,8 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/select";
-import type { CategoryPaths } from "@/consts";
 import { cn } from "@/utils/cn";
+import type { CategoryPaths } from "@/utils/consts";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
