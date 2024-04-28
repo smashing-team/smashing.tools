@@ -3,9 +3,5 @@ export const getBaseUrl = (): string => {
     return `http://localhost:${process.env.PORT ?? 3000}`;
   }
 
-  return (
-    process.env.NEXT_PUBLIC_HOST ||
-    process.env.VERCEL_URL ||
-    "https://smashing.tools"
-  );
+  return "https://smashing.tools";
 };
