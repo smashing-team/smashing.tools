@@ -1,3 +1,4 @@
+import { CSPostHogProvider } from "@/components/providers/posthog";
 import { inter, roboto_mono } from "@/fonts";
 import { constructMetadata } from "@/utils/metadata";
 import "../globals.css";
@@ -18,7 +19,9 @@ export default function WidgetLayout({
       className={`${inter.variable} ${roboto_mono.variable}`}
       suppressHydrationWarning
     >
-      <body>{children}</body>
+      <CSPostHogProvider>
+        <body>{children}</body>
+      </CSPostHogProvider>
     </html>
   );
 }

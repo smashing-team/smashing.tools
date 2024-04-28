@@ -1,3 +1,4 @@
+import { CSPostHogProvider } from "@/components/providers/posthog";
 import { ThemeProvider } from "@/components/providers/theme";
 import { inter, roboto_mono } from "@/fonts";
 import { constructMetadata } from "@/utils/metadata";
@@ -19,16 +20,18 @@ export default function JoinLayout({
       className={`${inter.variable} ${roboto_mono.variable} bg-zinc-950`}
       suppressHydrationWarning
     >
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
+      <CSPostHogProvider>
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </CSPostHogProvider>
     </html>
   );
 }
