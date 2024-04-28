@@ -52,6 +52,9 @@ export type TPost = Awaited<
 >[0] & { collection: string; collectionSlug: string };
 
 export async function getAllItems() {
+  console.log("---------debug------------");
+  console.log("process.cwd()", process.cwd());
+  console.log("---------debug------------");
   const starterKitItems = (await reader.collections.starterKit.all()) || [];
   const designKitItems = (await reader.collections.designKit.all()) || [];
   const uiComponentItems = (await reader.collections.uiComponent.all()) || [];
