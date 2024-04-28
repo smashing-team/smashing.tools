@@ -21,7 +21,7 @@ export const starterKit = collection({
     process.env.NODE_ENV !== "production" ? "/starter-kit/{slug}" : undefined,
   label: "Starter Kits",
   slugField: "name",
-  path: "content/starter-kit/*",
+  path: "static/content/starter-kit/*",
   entryLayout: "form",
   format: { contentField: "content" },
   schema: {

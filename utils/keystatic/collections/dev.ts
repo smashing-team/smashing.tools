@@ -12,7 +12,7 @@ export const dev = collection({
   label: "Dev Tools",
   slugField: "name",
   entryLayout: "form",
-  path: "content/dev/*",
+  path: "static/content/dev/*",
   format: { contentField: "content" },
   schema: {
     ...baseSchema("dev"),

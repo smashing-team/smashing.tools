@@ -5,7 +5,7 @@ export const profile = collection({
   slugField: "name",
   previewUrl:
     process.env.NODE_ENV !== "production" ? "/profile/{slug}" : undefined,
-  path: "content/profiles/**",
+  path: "static/content/profiles/**",
   schema: {
     name: fields.slug({
       name: {

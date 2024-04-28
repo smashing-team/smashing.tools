@@ -13,7 +13,7 @@ export const ai = collection({
   label: "AI Tools",
   slugField: "name",
   entryLayout: "form",
-  path: "content/ai/*",
+  path: "static/content/ai/*",
   format: { contentField: "content" },
   schema: {
     ...baseSchema("ai"),

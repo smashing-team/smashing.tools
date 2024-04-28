@@ -18,7 +18,7 @@ export const uiComponent = collection({
   label: "UI Components",
   slugField: "name",
   entryLayout: "form",
-  path: "content/ui-component/*",
+  path: "static/content/ui-component/*",
   format: { contentField: "content" },
   schema: {
     ...baseSchema("ui-component"),

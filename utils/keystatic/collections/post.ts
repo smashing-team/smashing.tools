@@ -8,7 +8,7 @@ export const post = collection({
   label: "Posts",
   slugField: "name",
   entryLayout: "content",
-  path: "content/post/*",
+  path: "static/content/post/*",
   format: { contentField: "content" },
   schema: {
     ...basePostSchema,

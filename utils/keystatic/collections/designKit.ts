@@ -15,7 +15,7 @@ export const designKit = collection({
   label: "Design Kits",
   slugField: "name",
   entryLayout: "form",
-  path: "content/design-kit/*",
+  path: "static/content/design-kit/*",
   format: { contentField: "content" },
   schema: {
     ...baseSchema("design-kit"),
