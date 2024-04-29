@@ -1,4 +1,4 @@
-// import { sendConfirmationEmail } from "@/utils/ses-client";
+import { sendConfirmationEmail } from "@/utils/ses";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { type NextRequest } from "next/server";
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
       .maybeSingle();
 
     if (!subInfo.error) {
-      // sendConfirmationEmail(data.user.email, subInfo.data?.verification_token!);
+      sendConfirmationEmail(data.user.email, subInfo.data?.verification_token!);
     }
   }
 
