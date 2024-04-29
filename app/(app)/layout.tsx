@@ -7,10 +7,8 @@ import { Tables } from "@/supabase/database";
 import { constructMetadata } from "@/utils/metadata";
 import { createClient } from "@/utils/supabase/server";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import { IconAffiliate } from "@tabler/icons-react";
 import Script from "next/script";
 
-import IconGithub from "@/components/icons/github";
 import IconNetlify from "@/components/icons/netlify";
 import IconNextjs from "@/components/icons/nextjs";
 import IconSupabase from "@/components/icons/supabase";
@@ -57,7 +55,7 @@ export default async function RootLayout({
                 <Header />
                 {children}
                 <div className="mx-4 mt-4 flex flex-col pb-20 align-top text-xs text-zinc-500">
-                  <div className="mb-8 items-center flex gap-4 pl-5">
+                  <div className="mb-4 items-center flex flex-wrap gap-4 pl-5">
                     <Link
                       href="https://nextjs.org"
                       target="_blank"
@@ -82,20 +80,12 @@ export default async function RootLayout({
                     >
                       Powered by <IconSupabase className="size-4 inline" />
                     </Link>
-                    <Link
-                      href="https://github.com/smashing-team/smashing.tools"
-                      target="_blank"
-                      rel="nofollow"
-                      className="items-center flex gap-1"
-                    >
-                      Open Source on <IconGithub className="size-4 inline" />
-                    </Link>
                   </div>
-                  <span className="font-semibold flex mb-1">
-                    <IconAffiliate className="mr-1 size-4 shrink-0" /> Affiliate
-                    Link Disclosure
-                  </span>
-                  <p className="pl-5">
+
+                  <p className="pl-5 pr-5">
+                    <span className="font-semibold flex mb-1">
+                      Affiliate Link Disclosure
+                    </span>
                     Some links on this website are affiliate links, meaning if
                     you click on them and make a purchase, we may receive a
                     commission. This supports smashing.tools, enabling us to
