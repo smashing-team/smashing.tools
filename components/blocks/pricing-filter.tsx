@@ -10,8 +10,8 @@ import {
   SelectValue,
 } from "@/components/select";
 import type { Facets } from "@/utils/facets";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { IconCurrencyDollar } from "@tabler/icons-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export function PricingFilter({
   facets,
@@ -54,7 +54,7 @@ export function PricingFilter({
     >
       <SelectTrigger className="w-[164px] shadow-[rgba(0,_0,_0,_0.15)_0px_20px_40px_-12px] pr-4 hover:bg-zinc-50">
         <div className="flex items-center">
-          <IconCurrencyDollar className="size-4 ml-1 mr-2 text-zinc-400" />
+          <IconCurrencyDollar className="size-4 lg:ml-1 mr-1.5 lg:mr-2 text-zinc-400" />
           <SelectValue placeholder="Free + Paid" />
         </div>
       </SelectTrigger>
