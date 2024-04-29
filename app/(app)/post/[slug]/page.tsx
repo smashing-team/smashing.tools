@@ -1,3 +1,4 @@
+import { BuyLink } from "@/components/blocks/buy-link";
 import { HeaderGradient } from "@/components/blocks/header-gradient";
 import { HeroSlider } from "@/components/blocks/hero-slider";
 import { KEYSTATIC } from "@/server/keystatic";
@@ -171,21 +172,17 @@ export default async function PostDetail({ params: { slug } }: Props) {
               </div>
             </div>
             <section className="mt-8">
-              <ul
-                role="list"
-                className="mt-4 flex items-center gap-4 text-base font-medium leading-7"
-              >
-                <li>
-                  <Link
-                    target="_blank"
-                    href={readmore.toString() || relatedItem.url.toString()}
-                    className="flex items-center rounded-3xl bg-zinc-50 dark:bg-white px-5 h-12 text-base font-medium text-zinc-900 ring-inset border border-zinc-300 hover:bg-zinc-100/75 dark:border-zinc-100 dark:hover:bg-white/90 shadow-xl"
-                  >
-                    <IconExternalLink className="relative -left-0.5 mr-1.5 size-5 text-zinc-400 dark:text-zinc-800" />
-                    Read more
-                  </Link>
-                </li>
-              </ul>
+              <div className="mt-4 flex items-center gap-4 text-base font-medium leading-7">
+                <Link
+                  target="_blank"
+                  href={readmore.toString() || relatedItem.url.toString()}
+                  className="flex items-center rounded-3xl bg-zinc-50 dark:bg-white px-5 h-12 text-base font-medium text-zinc-900 ring-inset border border-zinc-300 hover:bg-zinc-100/75 dark:border-zinc-100 dark:hover:bg-white/90 shadow-xl"
+                >
+                  <IconExternalLink className="relative -left-0.5 mr-1.5 size-5 text-zinc-400 dark:text-zinc-800" />
+                  Read more
+                </Link>
+                {relatedItem.buyLink && <BuyLink link={relatedItem.buyLink} />}
+              </div>
             </section>
           </div>
         </header>

@@ -54,10 +54,11 @@ Thank you for your contributions! We appreciate all the contributions from the c
 - [x] netlify deploy
 - [x] use Geist fonts
 - [ ] responsive fixes
+- [ ] refactor pages convert to components if needed
 - [ ] add bookmark buton to the tool page
 - [ ] bookmarks page filters by category
 - [ ] bookmarks page small row view
 - [ ] sitemap head tag?
 - [ ] rss feed?
-- [ ] cache the items?
+- [x] cache the items?
 - [ ] search?
