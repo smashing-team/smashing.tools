@@ -20,7 +20,7 @@ export default async function Join() {
               date={new Date(item!.entry.createdAt)}
             >
               <Link
-                href={`/${item!.collection}/${item!.slug}/`}
+                href={`/${item!.collectionSlug}/${item!.slug}/`}
                 className="relative flex flex-col pl-18 transition-transform hover:translate-x-2"
               >
                 <div className="flex text-lg font-semibold text-zinc-50">
