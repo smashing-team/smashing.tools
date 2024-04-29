@@ -7,12 +7,12 @@ const getReader = cache(() => createReader(process.cwd(), keystaticConfig));
 
 export const KEYSTATIC = {
   entry: {
-    starterKit: cache(getReader().collections.starterKit.readOrThrow),
-    uiComponent: cache(getReader().collections.uiComponent.readOrThrow),
-    designKit: cache(getReader().collections.designKit.readOrThrow),
-    ai: cache(getReader().collections.ai.readOrThrow),
-    dev: cache(getReader().collections.dev.readOrThrow),
-    post: cache(getReader().collections.post.readOrThrow),
+    starterKit: cache(getReader().collections.starterKit.read),
+    uiComponent: cache(getReader().collections.uiComponent.read),
+    designKit: cache(getReader().collections.designKit.read),
+    ai: cache(getReader().collections.ai.read),
+    dev: cache(getReader().collections.dev.read),
+    post: cache(getReader().collections.post.read),
     profile: cache(getReader().collections.profile.read),
   },
   tools: cache(async () => {
@@ -22,16 +22,8 @@ export const KEYSTATIC = {
     const uiComponentItems = await reader.collections.uiComponent.all();
     const aiItems = await reader.collections.ai.all();
     const devItems = await reader.collections.dev.all();
-    // const postItems = (await reader.collections.post.all()) || [];
-
-    // TODO: Add post items and populate post related data
-    // TODO: limit the number of items to show
 
     const allItems = [
-      // ...postItems.map((item) => ({
-      //   ...item,
-      //   collection: "post",
-      // })),
       ...starterKitItems.map((item) => ({
         ...item,
         collection: "starterKit",
