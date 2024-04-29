@@ -90,7 +90,7 @@ export async function GridItemPost({ item }: { item: TPosts[number] }) {
               <span
                 className={cn(
                   "inline-flex items-center rounded-lg bg-zinc-50 px-2 py-1 text-xs font-medium text-zinc-600 ring-1 ring-inset ",
-                  "bg-yellow-400 text-yellow-950 ring-yellow-500"
+                  "bg-yellow-400/50 text-yellow-950 ring-yellow-500/50"
                 )}
               >
                 <IconConfetti className="mr-1 size-3.5" />
