@@ -1,6 +1,5 @@
+import { useId } from "react";
 import { Intro, IntroFooter } from "./intro";
-import { useId } from 'react';
-
 
 function Timeline() {
   const id = useId();
@@ -28,7 +27,7 @@ function Timeline() {
 
 function Glow() {
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden bg-zinc-900 lg:right-[calc(max(2rem,50%-38rem)+40rem)] lg:min-w-[32rem]">
+    <div className="absolute inset-0 -z-10 overflow-hidden bg-zinc-950 lg:bg-zinc-900 lg:right-[calc(max(2rem,50%-38rem)+40rem)] lg:min-w-[32rem]">
       <div className="absolute inset-x-0 bottom-0 h-px bg-white mix-blend-overlay lg:left-auto lg:top-0 lg:h-auto lg:w-px" />
     </div>
   );
