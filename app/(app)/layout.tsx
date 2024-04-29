@@ -3,7 +3,6 @@ import { Header } from "@/components/blocks/header";
 import { CSPostHogProvider } from "@/components/providers/posthog";
 import { ThemeProvider } from "@/components/providers/theme";
 import UserProvider from "@/components/providers/user";
-import { inter, roboto_mono } from "@/fonts";
 import { Tables } from "@/supabase/database";
 import { constructMetadata } from "@/utils/metadata";
 import { createClient } from "@/utils/supabase/server";
@@ -11,6 +10,8 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { IconAffiliateFilled } from "@tabler/icons-react";
 import Script from "next/script";
 
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import "../globals.css";
 
 export const metadata = constructMetadata();
@@ -35,7 +36,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${roboto_mono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
       <UserProvider user={user} bookmarks={bookmarks}>

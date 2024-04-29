@@ -1,7 +1,7 @@
-import * as defaultTheme from "tailwindcss/defaultTheme";
-import type { Config } from "tailwindcss";
 import tailwindTypeography from "@tailwindcss/typography";
+import type { Config } from "tailwindcss";
 import tailwindAnimate from "tailwindcss-animate";
+import * as defaultTheme from "tailwindcss/defaultTheme";
 
 const config: Config = {
   darkMode: "class",
@@ -13,8 +13,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
-        mono: ["var(--font-roboto-mono)", ...defaultTheme.fontFamily.mono],
+        sans: ["var(--font-geist-sans)", ...defaultTheme.fontFamily.sans],
+        mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
       },
       screens: {
         "3xl": "2000px",

@@ -51,6 +51,9 @@ Thank you for your contributions! We appreciate all the contributions from the c
 
 ##  smashing.tools-next
 
+- [x] netlify deploy
+- [x] use Geist fonts
+- [ ] responsive fixes
 - [ ] add bookmark buton to the tool page
 - [ ] bookmarks page filters by category
 - [ ] bookmarks page small row view

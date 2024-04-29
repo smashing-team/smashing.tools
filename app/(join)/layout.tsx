@@ -1,7 +1,8 @@
 import { CSPostHogProvider } from "@/components/providers/posthog";
 import { ThemeProvider } from "@/components/providers/theme";
-import { inter, roboto_mono } from "@/fonts";
 import { constructMetadata } from "@/utils/metadata";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import "../globals.css";
 
 export const metadata = constructMetadata({
@@ -17,7 +18,7 @@ export default function JoinLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${roboto_mono.variable} bg-zinc-950`}
+      className={`${GeistSans.variable} ${GeistMono.variable} bg-zinc-950`}
       suppressHydrationWarning
     >
       <CSPostHogProvider>
