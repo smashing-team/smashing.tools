@@ -20,6 +20,15 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next/types";
 import { twMerge } from "tailwind-merge";
 
+export async function generateStaticParams() {
+  const allItems = await KEYSTATIC.tools();
+
+  return allItems.map((item) => ({
+    category: item.collectionSlug,
+    slug: item.slug,
+  }));
+}
+
 export async function generateMetadata({
   params: { category, slug },
 }: Props): Promise<Metadata> {
