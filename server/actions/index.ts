@@ -24,28 +24,6 @@ export async function signout() {
   return redirect("/");
 }
 
-export async function signIn() {
-  const redirectTo =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000/api/auth/callback"
-      : "https://smashing.tools/api/auth/callback";
-
-  const supabase = createClient();
-
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: "github",
-    options: {
-      redirectTo,
-    },
-  });
-
-  if (error) {
-    return redirect("/join");
-  }
-
-  return redirect(data.url);
-}
-
 export async function bookmarkToggle(
   collection: string,
   slug: string,
