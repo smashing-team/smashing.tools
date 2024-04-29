@@ -62,4 +62,5 @@ Thank you for your contributions! We appreciate all the contributions from the c
 - [ ] sitemap head tag?
 - [ ] rss feed?
 - [x] cache the items?
+- [ ] optimistic ui for bookmarking action
 - [ ] search?
