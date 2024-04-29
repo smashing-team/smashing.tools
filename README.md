@@ -53,6 +53,7 @@ Thank you for your contributions! We appreciate all the contributions from the c
 
 - [x] netlify deploy
 - [x] use Geist fonts
+- [ ] add footer notice nextjs, netlify, supabase
 - [ ] responsive fixes
 - [ ] refactor pages convert to components if needed
 - [ ] add bookmark buton to the tool page
