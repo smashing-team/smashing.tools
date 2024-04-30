@@ -28,12 +28,12 @@ At smashing.tools, our vision is to be the go-to platform for developers seeking
 
 ## **Technologies**
 
-- **Astro:** A tool used for building modern web applications through static site generation.
-- **TailwindCSS:** A utility-first CSS framework used to create customizable UI components quickly.
-- **React:** A popular JavaScript library for building user interfaces.
-- **Pagefind:** A simple and fast search engine for static websites.
-- **KeyStatic:** A simple static site generator ideal for lightweight and fast-loading web pages.
-- **Netlify:** A cloud hosting service that automates deployment for web projects.
+- Built with **Next.js 14, App router**
+- Deployed on **Netlify**
+- Styled with **TailwindCSS**
+- Content management with **KeyStatic**
+- Powered by **Supabase**
+- Searchable by **Pagefind**
 
 ### **Contributing**
 
@@ -48,20 +48,3 @@ Thank you for your contributions! We appreciate all the contributions from the c
 <a href="https://github.com/smashing-team/smashing.tools/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=smashing-team/smashing.tools" />
 </a>
-
-##  smashing.tools-next
-
-- [x] netlify deploy
-- [x] use Geist fonts
-- [x] add opacity to grid items' tags
-- [ ] add footer notice nextjs, netlify, supabase
-- [ ] responsive fixes
-- [ ] refactor pages convert to components if needed
-- [ ] add bookmark buton to the tool page
-- [ ] bookmarks page filters by category
-- [ ] bookmarks page small row view
-- [ ] sitemap head tag?
-- [ ] rss feed?
-- [x] cache the items?
-- [ ] optimistic ui for bookmarking action
-- [ ] search?
