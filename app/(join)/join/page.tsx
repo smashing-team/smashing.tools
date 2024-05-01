@@ -16,11 +16,11 @@ export default async function Join() {
             <ArticleItem
               key={item!.slug}
               slug={item!.slug}
-              collection={item?.collection!}
+              collection={item?.collectionSlug!}
               date={new Date(item!.entry.createdAt)}
             >
               <Link
-                href={`/${item!.collectionSlug}/${item!.slug}/`}
+                href={`/${item!.collectionSlug}/${item!.slug}`}
                 className="relative flex flex-col pl-18 transition-transform hover:translate-x-2"
               >
                 <div className="flex text-lg font-semibold text-zinc-50">
